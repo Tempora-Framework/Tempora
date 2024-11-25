@@ -1,0 +1,12 @@
+:root {
+	--text-color: #000;
+}
+
+* {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+	margin: 0;
+	color: var(--text-color);
+}

@@ -1,0 +1,24 @@
+{
+	"name": "skywors/mvc-template",
+	"authors": [
+		{
+			"name": "Erick Paoletti",
+			"email": "erick.paoletti@gmail.com"
+		}
+	],
+	"require": {
+		"php": "^8.3",
+		"vlucas/phpdotenv": "^5.6"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "11.4.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"App\\": "src/"
+		}
+	},
+	"scripts": {
+		"test": "phpunit --configuration phpunit.xml --do-not-cache-result --colors=always --display-deprecations tests"
+	}
+}
