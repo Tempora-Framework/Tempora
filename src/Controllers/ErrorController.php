@@ -12,6 +12,8 @@ class ErrorController {
 
 		require Path::LAYOUT . "/header.php";
 
+		include Path::LAYOUT . "/navbar.php";
+
 		require Path::LAYOUT . "/error/error.php";
 
 		include Path::LAYOUT . "/footer.php";

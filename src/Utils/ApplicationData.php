@@ -2,6 +2,9 @@
 
 namespace App\Utils;
 
+use App\Configs\Database;
+use PDO;
+
 class ApplicationData {
 
 	/**
@@ -18,10 +21,10 @@ class ApplicationData {
 		$stmt = DATABASE->prepare(query: $query);
 
 		if ($datas) {
-			foreach ($datas as $index => $value) {
+			foreach (array_keys($datas) as $key) {
 				$stmt->bindParam(
-					param: ":" . $index,
-					var: $value
+					param: $key,
+					var: $datas[$key]
 				);
 			}
 		}
@@ -36,22 +39,14 @@ class ApplicationData {
 	}
 
 	/**
-	 * Return every users
-	 *
-	 * @param mixed $path
+	 * Return every users uid
 	 *
 	 * @return array
 	 */
 	public static function getUsers() : array {
-		$users[1] = [
-			"name" => "Lui",
-			"surname" => "Labas"
-		];
-		$users[2] = [
-			"name" => "Lautre",
-			"surname" => "Ici"
-		];
-
-		return $users;
+		return ApplicationData::request(
+			query: "SELECT uid FROM " . Database::USERS,
+			returnType: PDO::FETCH_COLUMN
+		);
 	}
 }

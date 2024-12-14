@@ -1,4 +1,19 @@
 {
+	"MAIN_NAME": "Prenom",
+	"MAIN_SURNAME": "Nom de famille",
+	"MAIN_EMAIL": "Email",
+	"MAIN_PASSWORD": "Mot de passe",
+
+	"NAVBAR_HOME": "Accueil",
+	"NAVBAR_LOGIN": "Connexion",
+	"NAVBAR_REGISTER": "Créer un compte",
+	"NAVBAR_DISCONNECT": "Déconnexion",
+
+	"LOGIN_SUBMIT": "Se connecter",
+
+	"REGISTER_PASSWORD_CONFIRM": "Confirmer le mot de passe",
+	"REGISTER_SUBMIT": "Créer le compte",
+
 	"NAME": "App $[name]",
 	"OTHER_NAME": "Application"
 }
