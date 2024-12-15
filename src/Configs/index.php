@@ -1,5 +1,7 @@
 <?php
 
+use App\Configs\Path;
+use App\Utils\System;
 use Dotenv\Dotenv;
 use App\Models\Repositories\ErrorRepository;
 use App\Models\Entities\Database;
@@ -17,7 +19,13 @@ Dotenv::createImmutable(paths: BASE_DIR)->load();
 date_default_timezone_set(timezoneId: $_ENV["TIMEZONE"]);
 define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
 
+// Languages
 setcookie("LANG", isset($_COOKIE["LANG"]) ? $_COOKIE["LANG"] : $_ENV["DEFAULT_LANG"], time() + 60*60*24*30);
+
+if (!in_array($_COOKIE["LANG"] . ".json", System::getFiles(Path::PUBLIC . "/langs"))) {
+	setcookie("LANG", $_ENV["DEFAULT_LANG"], time() + 60*60*24*30);
+	System::redirect();
+}
 
 // Errors
 if ($_ENV["DEBUG"] == 1) {

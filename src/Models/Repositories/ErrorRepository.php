@@ -11,7 +11,7 @@ class ErrorRepository {
 	/**
 	 * Catch and store exception
 	 *
-	 * @param Throwable $exception Exception
+	 * @param Throwable $exception
 	 *
 	 * @return void
 	 */
@@ -30,7 +30,7 @@ class ErrorRepository {
 
 		file_put_contents(filename: $logFile, data: $errorMessage, flags: FILE_APPEND);
 
-		System::redirect(path: "/error");
+		System::redirect(url: "/error");
 	}
 
 	/**

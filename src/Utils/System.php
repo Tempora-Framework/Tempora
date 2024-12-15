@@ -9,13 +9,13 @@ class System {
 	/**
 	 * Header rewrite function
 	 *
-	 * @param string $path
+	 * @param string $url URL to redirect, null for refresh
 	 *
 	 * @return void
 	 */
-	public static function redirect(string $path) : void {
-		if (isset($path)) {
-			header("Location: " . $path);
+	public static function redirect(string $url = null) : void {
+		if (isset($url)) {
+			header("Location: " . $url);
 		} else {
 			header("Refresh: 0");
 		}
@@ -55,5 +55,16 @@ class System {
 		} while ($uidChecked === $uid);
 
 		return $uid;
+	}
+
+	/**
+	 * Get path files
+	 *
+	 * @param string $path Directory path
+	 *
+	 * @return array
+	 */
+	public static function getFiles(string $path) : array {
+		return array_diff(scandir($path), array('.', '..'));
 	}
 }

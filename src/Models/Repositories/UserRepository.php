@@ -74,7 +74,14 @@ class UserRepository {
 		return new Exception("Unknown user");
 	}
 
-	public static function getRoles(string $uid) {
+	/**
+	 * Get user's role(s)
+	 *
+	 * @param string $uid User's UID
+	 *
+	 * @return array
+	 */
+	public static function getRoles(string $uid) : array {
 		return ApplicationData::request(
 			query: "SELECT id_role FROM " . Database::USER_ROLE . " WHERE uid_user = :uid",
 			datas: [

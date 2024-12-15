@@ -10,6 +10,6 @@ class DisconnectController {
 
 		unset($_SESSION["user"]);
 
-		System::redirect(path: "/");
+		System::redirect(url: "/");
 	}
 }

@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Models\Entities\User;
 use App\Models\Repositories\UserRepository;
+use App\Utils\Lang;
 use App\Utils\System;
 use Exception;
 
@@ -23,13 +24,13 @@ class RegisterEvent {
 					$uid = $userRepo->create();
 
 					if ($uid instanceof Exception) {
-						echo "no";
+						echo Lang::translate(key: "REGISTER_ALREADY_EXIST", options: ["email" => htmlspecialchars(string: $_POST["email"])]);
 					} else {
 						$_SESSION["user"]["uid"] = $uid;
-						System::redirect(path: "/");
+						System::redirect(url: "/");
 					}
 				} else {
-					echo "no";
+					echo Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD");
 				}
 			}
 		}

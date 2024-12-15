@@ -7,8 +7,8 @@ class Lang {
 	/**
 	 * Lang function
 	 *
-	 * @param string $key
-	 * @param array $options
+	 * @param string $key Language's key out of language's file
+	 * @param array $options Line replace text
 	 *
 	 * @return string
 	 */
@@ -29,5 +29,23 @@ class Lang {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Format language name
+	 *
+	 * @param string $name Language identifiant
+	 *
+	 * @return string
+	 */
+	public static function nameFormat(string $name) : string {
+		switch ($name) {
+			case "fr_FR":
+				return "Français";
+			case "en_UK":
+				return "English";
+			default:
+				return "";
+		}
 	}
 }

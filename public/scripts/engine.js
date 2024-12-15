@@ -3,7 +3,7 @@
  *
  * @param {*} element
  *
- * @returns
+ * @return {boolean}
  */
 function isElementExist(element) {
 	return (typeof(element) != "undefined" && element != null) ? true : false;
@@ -34,17 +34,32 @@ async function callApi(path = "/api", type = "get", settings = null) {
 	})
 }
 
+/**
+ * Return cookie value
+ *
+ * @param {string} name
+ *
+ * @return {string}
+ */
 function getCookie(name) {
 	let cookieValue = document.cookie
-	.split("; ")
-	.find(
-		row => row.startsWith(name + "=")
-	)
-	?.split("=")[1];
+		.split("; ")
+		.find(
+			row => row.startsWith(name + "=")
+		)
+		?.split("=")[1];
 
 	return cookieValue;
 }
 
+/**
+ * Lang function
+ *
+ * @param {string} key
+ * @param {array} options
+ *
+ * @return {string}
+ */
 async function translate(key, options = null) {
 	let datas = await callApi("/langs/" + getCookie("LANG") + ".json");
 
@@ -57,4 +72,16 @@ async function translate(key, options = null) {
 	}
 
 	return result;
+}
+
+langSelection = document.getElementById("lang_selection");
+if (isElementExist(langSelection)) {
+	langSelection.addEventListener("change", () => {
+		let date = new Date();
+		date.setTime(date.getTime() + (60*60*24*30));
+		let expires = "expires=" + date.toUTCString();
+		document.cookie = "LANG=" + langSelection.value + ";" + expires + ";path=/";
+
+		window.location.reload();
+	})
 }

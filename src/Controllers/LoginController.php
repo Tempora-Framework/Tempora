@@ -4,12 +4,9 @@ namespace App\Controllers;
 
 use App\Configs\Path;
 use App\Events\LoginEvent;
-use App\Utils\Permission;
 
 class LoginController {
 	public function render() : void {
-		Permission::check(login: false);
-
 		LoginEvent::implement();
 
 		require Path::LAYOUT . "/header.php";

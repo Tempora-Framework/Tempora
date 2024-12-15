@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Models\Entities\User;
 use App\Models\Repositories\UserRepository;
+use App\Utils\Lang;
 use App\Utils\System;
 use Exception;
 
@@ -19,10 +20,10 @@ class LoginEvent {
 				$uid = $userRepo->verifyPassword();
 
 				if ($uid instanceof Exception) {
-					echo "no";
+					echo Lang::translate(key: "LOGIN_WRONG_CREDENTIALS");
 				} else {
 					$_SESSION["user"]["uid"] = $uid;
-					System::redirect(path: "/");
+					System::redirect(url: "/");
 				}
 			}
 		}
