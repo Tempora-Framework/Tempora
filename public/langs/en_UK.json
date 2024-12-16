@@ -3,6 +3,7 @@
 	"MAIN_SURNAME": "Surname",
 	"MAIN_EMAIL": "Email",
 	"MAIN_PASSWORD": "Password",
+	"MAIN_ERROR": "Error",
 
 	"NAVBAR_HOME": "Home",
 	"NAVBAR_DASHBOARD": "Dashboard",
@@ -16,5 +17,10 @@
 	"REGISTER_PASSWORD_CONFIRM": "Confirm password",
 	"REGISTER_SUBMIT": "Create account",
 	"REGISTER_UNIDENTICAL_PASSWORD": "The passwords you entered do not match.",
-	"REGISTER_ALREADY_EXIST": "Account \"$[email]\" already exist."
+	"REGISTER_ALREADY_EXIST": "Account \"$[email]\" already exist.",
+
+	"ERROR_SERVER": "Server error.",
+	"ERROR_DATABASE": "Database error.",
+	"ERROR_404": "Unknown pages.",
+	"ERROR_403": "Unauthorised access."
 }

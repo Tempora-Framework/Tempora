@@ -2,6 +2,8 @@
 
 namespace App\Models\Repositories;
 
+use App\Controllers\ErrorController;
+use App\Utils\Lang;
 use ErrorException;
 use Throwable;
 use App\Utils\System;
@@ -30,7 +32,8 @@ class ErrorRepository {
 
 		file_put_contents(filename: $logFile, data: $errorMessage, flags: FILE_APPEND);
 
-		System::redirect(url: "/error");
+		$controller = new ErrorController();
+		$controller->render(message: Lang::translate(key: "ERROR_SERVER"));
 	}
 
 	/**

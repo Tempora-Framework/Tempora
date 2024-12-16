@@ -4,6 +4,8 @@ namespace App;
 
 use App\Controllers\ErrorController;
 use App\Models\Repositories\UserRepository;
+use App\Utils\Lang;
+use Exception;
 
 class Router {
 	protected array $routes = [];
@@ -69,8 +71,7 @@ class Router {
 				exit;
 			}
 		}
-		define(constant_name: "TITLE", value: $this->routes["/error"][1]);
 		$controller = new ErrorController();
-		$controller->render(errorCode: $errorCode);
+		$controller->render(errorCode: $errorCode, message: Lang::translate(key: "ERROR_" . $errorCode));
 	}
 }

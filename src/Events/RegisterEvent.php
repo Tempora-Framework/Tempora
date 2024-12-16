@@ -24,13 +24,13 @@ class RegisterEvent {
 					$uid = $userRepo->create();
 
 					if ($uid instanceof Exception) {
-						echo Lang::translate(key: "REGISTER_ALREADY_EXIST", options: ["email" => htmlspecialchars(string: $_POST["email"])]);
+						setcookie("NOTIFICATION", Lang::translate(key: "REGISTER_ALREADY_EXIST", options: ["email" => htmlspecialchars(string: $_POST["email"])]), time() + 60*60*24*30);
 					} else {
 						$_SESSION["user"]["uid"] = $uid;
 						System::redirect(url: "/");
 					}
 				} else {
-					echo Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD");
+					setcookie("NOTIFICATION", Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD"), time() + 60*60*24*30);
 				}
 			}
 		}

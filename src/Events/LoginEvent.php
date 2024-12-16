@@ -20,7 +20,7 @@ class LoginEvent {
 				$uid = $userRepo->verifyPassword();
 
 				if ($uid instanceof Exception) {
-					echo Lang::translate(key: "LOGIN_WRONG_CREDENTIALS");
+					setcookie("NOTIFICATION", Lang::translate(key: "LOGIN_WRONG_CREDENTIALS"), time() + 60*60*24*30);
 				} else {
 					$_SESSION["user"]["uid"] = $uid;
 					System::redirect(url: "/");

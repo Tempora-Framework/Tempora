@@ -6,7 +6,6 @@
 ?>
 
 <nav>
-
 	<div class="item">
 		<a href="/"><?= Lang::translate(key: "NAVBAR_HOME") ?></a>
 	</div>

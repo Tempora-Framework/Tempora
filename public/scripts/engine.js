@@ -74,14 +74,65 @@ async function translate(key, options = null) {
 	return result;
 }
 
+/**
+ * Display notification
+ *
+ * @param {string} message
+ */
+function setNotification(message) {
+	let div = document.createElement("div");
+	let p = document.createElement("p");
+
+	div.className = "main_notification";
+	div.id = "main_notification";
+	p.textContent = message;
+	div.append(p);
+
+	document.body.appendChild(div);
+
+	setCookie("NOTIFICATION", 60*60);
+}
+
+/**
+ * Set cookie
+ *
+ * @param {string} name
+ * @param {string} value
+ * @param {number} time
+ */
+function setCookie(name, time, value = "") {
+	let date = new Date();
+	date.setTime(date.getTime() + time);
+	let expires = "expires=" + date.toUTCString();
+	document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+// Events
+
+// Lang selection
 langSelection = document.getElementById("lang_selection");
 if (isElementExist(langSelection)) {
 	langSelection.addEventListener("change", () => {
-		let date = new Date();
-		date.setTime(date.getTime() + (60*60*24*30));
-		let expires = "expires=" + date.toUTCString();
-		document.cookie = "LANG=" + langSelection.value + ";" + expires + ";path=/";
-
+		setCookie("LANG", 60*60*24*30, langSelection.value);
 		window.location.reload();
 	})
 }
+
+// Notifications
+let notification = decodeURIComponent(getCookie("NOTIFICATION"));
+if (notification) {
+	if (notification !== "undefined") {
+		setNotification(notification);
+	}
+}
+
+setInterval(() => {
+	let DOMnotification = document.getElementById("main_notification");
+	if (isElementExist(DOMnotification)) {
+		setTimeout(
+			() => {
+				DOMnotification.remove();
+			}, 5000
+		)
+	}
+}, 1000);

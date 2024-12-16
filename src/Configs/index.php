@@ -1,6 +1,8 @@
 <?php
 
 use App\Configs\Path;
+use App\Controllers\ErrorController;
+use App\Utils\Lang;
 use App\Utils\System;
 use Dotenv\Dotenv;
 use App\Models\Repositories\ErrorRepository;
@@ -52,6 +54,13 @@ $database = new Database(
 );
 $databaseRepo = new DatabaseRepository(database: $database);
 define(constant_name: "DATABASE", value: $databaseRepo->createConnection());
+
+if (DATABASE instanceof Exception) {
+	define(constant_name: "TITLE", value: Lang::translate(key: "MAIN_ERROR"));
+	$controller = new ErrorController();
+	$controller->render(message: Lang::translate(key: "ERROR_DATABASE"));
+	exit;
+}
 
 // Routes
 require BASE_DIR . "/src/routes/index.php";

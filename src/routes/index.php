@@ -2,6 +2,7 @@
 
 use App\Configs\Role;
 use App\Router;
+use App\Utils\Lang;
 
 $router = new Router;
 
@@ -15,31 +16,29 @@ $router->add(
 $router->add(
 	url: "/dashboard",
 	controller: $controllersPath . "DashboardController",
+	title: APP_NAME . " - " . Lang::translate(key: "DASHBOARD_TITLE"),
 	needLoginToBe: true,
-	accessRoles: [Role::ADMINISTRATOR]
+	accessRoles: [
+		Role::ADMINISTRATOR
+	]
 );
 
 // Sessions
 $router->add(
 	url: "/login",
 	controller: $controllersPath . "LoginController",
+	title: APP_NAME . " - " . Lang::translate(key: "LOGIN_TITLE"),
 	needLoginToBe: false
 );
 $router->add(
 	url: "/register",
 	controller: $controllersPath . "RegisterController",
+	title: APP_NAME . " - " . Lang::translate(key: "REGISTER_TITLE"),
 	needLoginToBe: false);
 $router->add(
 	url: "/disconnect",
 	controller: $controllersPath . "DisconnectController",
 	needLoginToBe: true
-);
-
-// Errors
-$router->add(
-	url: "/error",
-	controller: $controllersPath . "ErrorController",
-	title: APP_NAME . " - Erreur"
 );
 
 // API
