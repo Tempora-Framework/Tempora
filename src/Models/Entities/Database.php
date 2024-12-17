@@ -26,7 +26,7 @@ class Database {
 	 * @param string $driver
 	 * @param string $charset
 	 */
-	public function __construct(string $hostname = "127.0.0.1", string $port = "3306", string $dbname = "", string $username = "", string $password = "", string $driver = null, string $charset = null) {
+	public function __construct(string $hostname = "127.0.0.1", string $port = "3306", string $dbname = null, string $username = null, string $password = null, string $driver = null, string $charset = null) {
 		$this->hostname = $hostname;
 		$this->port = $port;
 		$this->dbname = $dbname;

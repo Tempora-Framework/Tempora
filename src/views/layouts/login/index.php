@@ -2,9 +2,9 @@
 	use App\Utils\Lang;
 ?>
 
-<h1>Login</h1>
+<form class="login" method="POST">
+	<h1><?= Lang::translate("LOGIN_TITLE") ?></h1>
 
-<form method="POST">
 	<input
 		type="text"
 		name="email"

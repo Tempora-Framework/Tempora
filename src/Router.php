@@ -5,7 +5,6 @@ namespace App;
 use App\Controllers\ErrorController;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Lang;
-use Exception;
 
 class Router {
 	protected array $routes = [];
@@ -22,7 +21,12 @@ class Router {
 	 * @return void
 	 */
 	public function add($url, $controller, $title = APP_NAME, $needLoginToBe = null, $accessRoles = []) : void {
-		$this->routes[$url] = [$controller, $title, $needLoginToBe, $accessRoles];
+		$this->routes[$url] = [
+			$controller,
+			$title,
+			$needLoginToBe,
+			$accessRoles
+		];
 	}
 
 	/**

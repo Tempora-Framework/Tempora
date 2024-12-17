@@ -3,13 +3,13 @@
 namespace App\Models\Entities;
 
 class User {
-	public string $uid;
-	public string $name;
-	public string $surname;
-	public string $email;
-	public string $password;
+	public ?string $uid;
+	public ?string $name;
+	public ?string $surname;
+	public ?string $email;
+	public ?string $password;
 
-	function __construct(string $uid = "", string $name = "", string $surname = "", string $email = "", string $password = "") {
+	function __construct(string $uid = null, string $name = null, string $surname = null, string $email = null, string $password = null) {
 		$this->uid = $uid;
 		$this->name = $name;
 		$this->surname = $surname;

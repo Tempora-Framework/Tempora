@@ -11,20 +11,20 @@ class ApplicationData {
 	 * Database request
 	 *
 	 * @param string $query
-	 * @param array $datas
+	 * @param array $data
 	 * @param int $returnType
 	 * @param bool $singleValue
 	 *
 	 * @return mixed
 	 */
-	public static function request(string $query, array $datas = null, int $returnType = null, bool $singleValue = false) : mixed {
+	public static function request(string $query, array $data = null, int $returnType = null, bool $singleValue = false) : mixed {
 		$stmt = DATABASE->prepare(query: $query);
 
-		if ($datas) {
-			foreach (array_keys($datas) as $key) {
+		if ($data) {
+			foreach (array_keys($data) as $key) {
 				$stmt->bindParam(
 					param: $key,
-					var: $datas[$key]
+					var: $data[$key]
 				);
 			}
 		}

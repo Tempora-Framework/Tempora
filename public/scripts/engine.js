@@ -61,9 +61,9 @@ function getCookie(name) {
  * @return {string}
  */
 async function translate(key, options = null) {
-	let datas = await callApi("/langs/" + getCookie("LANG") + ".json");
+	let data = await callApi("/langs/" + getCookie("LANG") + ".json");
 
-	let result = datas[key] || "Missing entry";
+	let result = data[key] || "Missing entry";
 
 	if (options) {
 		for (const [index, option] of Object.entries(options)) {

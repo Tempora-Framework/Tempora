@@ -2,9 +2,9 @@
 	use App\Utils\Lang;
 ?>
 
-<h1>Register</h1>
+<form class="register" method="POST">
+	<h1><?= Lang::translate("REGISTER_TITLE") ?></h1>
 
-<form method="POST">
 	<input
 		type="text"
 		name="name"

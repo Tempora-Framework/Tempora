@@ -33,7 +33,7 @@ class UserRepository {
 		try {
 			ApplicationData::request(
 				query: "INSERT INTO " . Database::USERS . " (uid, name, surname, email, password) VALUES (:uid, :name, :surname, :email, :password)",
-				datas: [
+				data: [
 					"uid" => $this->user->uid,
 					"name" => $this->user->name,
 					"surname" => $this->user->surname,
@@ -56,7 +56,7 @@ class UserRepository {
 	public function verifyPassword() : Exception | string {
 		$userData = ApplicationData::request(
 			query: "SELECT uid, password FROM " . Database::USERS . " WHERE email = :email",
-			datas: [
+			data: [
 				"email" => $this->user->email
 			],
 			returnType: PDO::FETCH_ASSOC,
@@ -84,7 +84,7 @@ class UserRepository {
 	public static function getRoles(string $uid) : array {
 		return ApplicationData::request(
 			query: "SELECT id_role FROM " . Database::USER_ROLE . " WHERE uid_user = :uid",
-			datas: [
+			data: [
 				"uid" => $uid
 			],
 			returnType: PDO::FETCH_COLUMN

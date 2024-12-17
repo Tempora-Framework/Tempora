@@ -34,18 +34,18 @@ class System {
 		$char = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
 		$uid = "";
 		$uidChecked = null;
-		$randomByte = random_bytes($size);
+		$randomByte = random_bytes(length: $size);
 
 		do {
-			foreach (str_split($randomByte) as $byte) {
-				$random = ord($byte) % strlen($char);
+			foreach (str_split(string: $randomByte) as $byte) {
+				$random = ord(character: $byte) % strlen(string: $char);
 				$uid .= $char[$random];
 			}
 
 			if (!empty($table)) {
 				$uidChecked = ApplicationData::request(
 					query: "SELECT uid FROM " . $table . " WHERE uid = :uid",
-					datas: [
+					data: [
 						"uid" => $uid
 					],
 					returnType: PDO::FETCH_COLUMN,

@@ -56,7 +56,6 @@ $databaseRepo = new DatabaseRepository(database: $database);
 define(constant_name: "DATABASE", value: $databaseRepo->createConnection());
 
 if (DATABASE instanceof Exception) {
-	define(constant_name: "TITLE", value: Lang::translate(key: "MAIN_ERROR"));
 	$controller = new ErrorController();
 	$controller->render(message: Lang::translate(key: "ERROR_DATABASE"));
 	exit;
