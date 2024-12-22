@@ -36,6 +36,9 @@
 <?php } ?>
 
 	<div class="item">
+		<?php include Path::COMPONENTS . "/actions/theme_button.php"; ?>
+	</div>
+	<div class="item">
 		<?php include Path::COMPONENTS . "/actions/lang_selection.php"; ?>
 	</div>
 </nav>

@@ -42,7 +42,7 @@ class Lang {
 		switch ($name) {
 			case "fr_FR":
 				return "Français";
-			case "en_UK":
+			case "en_GB":
 				return "English";
 			default:
 				return "";

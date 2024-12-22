@@ -5,6 +5,9 @@
 	"MAIN_EMAIL": "Email",
 	"MAIN_PASSWORD": "Password",
 	"MAIN_ERROR": "Error",
+	"MAIN_THEME_LIGHT": "Light theme",
+	"MAIN_THEME_DARK": "Dark theme",
+	"MAIN_NO_SCRIPT": "Your browser does not support JavaScript or it is disabled. Please enable JavaScript to use this site.",
 
 	"NAVBAR_HOME": "Home",
 	"NAVBAR_DASHBOARD": "Dashboard",

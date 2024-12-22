@@ -2,13 +2,33 @@
    Variables
    ============================================== */
 
-:root {
-	--text-color: #000000;
+/* Global theme
+   ============================================== */
 
+:root {
 	--notification-background-color: #ff0000;
-	--form-background-color: #383852;
 
 	--border-radius: 9px;
+}
+
+/* Light theme
+   ============================================== */
+
+[data-theme="light"] {
+	--background-color: #ffffff;
+	--form-background-color: #8f8fca;
+
+	--text-color: #000000;
+}
+
+/* Dark theme
+   ============================================== */
+
+[data-theme="dark"] {
+	--background-color: #1d1d1d;
+	--form-background-color: #383852;
+
+	--text-color: #ffffff;
 }
 
 /* ==============================================
@@ -23,6 +43,8 @@
 body {
 	margin: 0;
 	color: var(--text-color);
+	background-color: var(--background-color);
+	transition: 200ms;
 }
 
 /* ==============================================
@@ -56,6 +78,13 @@ nav a {
 /* ==============================================
    Notifications
    ============================================== */
+
+.no_script {
+	background-color: var(--notification-background-color);
+	border-radius: var(--border-radius);
+	padding: 10px;
+	width: fit-content;
+}
 
 .main_notification {
 	background-color: var(--notification-background-color);

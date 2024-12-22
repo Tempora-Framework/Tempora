@@ -7,5 +7,6 @@
 	</footer>
 
 	<script src="/scripts/engine.js"></script>
+	<script src="/scripts/theme.js"></script>
 </body>
 </html>

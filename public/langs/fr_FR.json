@@ -5,6 +5,9 @@
 	"MAIN_EMAIL": "Email",
 	"MAIN_PASSWORD": "Mot de passe",
 	"MAIN_ERROR": "Erreur",
+	"MAIN_THEME_LIGHT": "Thème clair",
+	"MAIN_THEME_DARK": "Thème sombre",
+	"MAIN_NO_SCRIPT": "Votre navigateur ne supporte pas JavaScript ou il est désactivé. Veuillez activer JavaScript pour utiliser ce site.",
 
 	"NAVBAR_HOME": "Accueil",
 	"NAVBAR_DASHBOARD": "Tableau de bord",
