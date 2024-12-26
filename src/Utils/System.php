@@ -15,9 +15,9 @@ class System {
 	 */
 	public static function redirect(string $url = null) : void {
 		if (isset($url)) {
-			header("Location: " . $url);
+			header(header: "Location: " . $url);
 		} else {
-			header("Refresh: 0");
+			header(header: "Refresh: 0");
 		}
 		exit;
 	}
@@ -44,7 +44,7 @@ class System {
 
 			if (!empty($table)) {
 				$uidChecked = ApplicationData::request(
-					query: "SELECT uid FROM " . $table . " WHERE uid = :uid",
+					query: "SELECT uid FROM `" . $table . "` WHERE uid = :uid",
 					data: [
 						"uid" => $uid
 					],
@@ -65,6 +65,19 @@ class System {
 	 * @return array
 	 */
 	public static function getFiles(string $path) : array {
-		return array_diff(scandir($path), array('.', '..'));
+		return array_diff(scandir(directory: $path), array('.', '..'));
+	}
+
+	/**
+	 * Implement scripts
+	 *
+	 * @param array $scripts
+	 *
+	 * @return void
+	 */
+	public static function implementScripts(array $scripts = []) : void {
+		foreach ($scripts as $script) {
+			echo "<script src=\"" . $script . "\"></script>";
+		}
 	}
 }

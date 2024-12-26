@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Configs\Path;
 use App\Events\RegisterEvent;
+use App\Utils\System;
 
 class RegisterController {
 	public function render() : void {
@@ -14,6 +15,8 @@ class RegisterController {
 		require Path::LAYOUT . "/navbar.php";
 
 		require Path::LAYOUT . "/register/index.php";
+
+		System::implementScripts(scripts: ["/scripts/engine.js", "/scripts/theme.js"]);
 
 		include Path::LAYOUT . "/footer.php";
 	}

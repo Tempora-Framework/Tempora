@@ -10,10 +10,10 @@ class ApplicationData {
 	/**
 	 * Database request
 	 *
-	 * @param string $query
-	 * @param array $data
-	 * @param int $returnType
-	 * @param bool $singleValue
+	 * @param string $query SQL query
+	 * @param array $data Data to bind
+	 * @param int $returnType Specified type to get return value
+	 * @param bool $singleValue Does the return type should be a single value
 	 *
 	 * @return mixed
 	 */

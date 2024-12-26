@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Configs\Path;
 use App\Events\LoginEvent;
+use App\Utils\System;
 
 class LoginController {
 	public function render() : void {
@@ -14,6 +15,8 @@ class LoginController {
 		require Path::LAYOUT . "/navbar.php";
 
 		require Path::LAYOUT . "/login/index.php";
+
+		System::implementScripts(scripts: ["/scripts/engine.js", "/scripts/theme.js"]);
 
 		include Path::LAYOUT . "/footer.php";
 	}
