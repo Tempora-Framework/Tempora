@@ -15,6 +15,7 @@
 	"NAVBAR_REGISTER": "Create account",
 	"NAVBAR_DISCONNECT": "Logout",
 
+	"LOGIN_TITLE": "Login",
 	"LOGIN_SUBMIT": "Login",
 	"LOGIN_WRONG_CREDENTIALS": "Incorrect identifiant or password.",
 
@@ -22,6 +23,8 @@
 	"REGISTER_SUBMIT": "Create account",
 	"REGISTER_UNIDENTICAL_PASSWORD": "The passwords you entered do not match.",
 	"REGISTER_ALREADY_EXIST": "Account \"$[email]\" already exist.",
+
+	"DASHBOARD_TITLE": "Dashboard",
 
 	"ERROR_SERVER": "Server error.",
 	"ERROR_DATABASE": "Database error.",

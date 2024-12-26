@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?= TITLE ?></title>
+	<title><?= isset($GLOBALS["title"]) ? $GLOBALS["title"] : APP_NAME . " - " . Lang::translate("MAIN_ERROR")?></title>
 	<link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>

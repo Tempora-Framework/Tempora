@@ -3,7 +3,7 @@
 namespace App\Models\Entities;
 
 class API {
-	public array $data;
+	private array $data;
 
 	/**
 	 * API construct
@@ -12,5 +12,9 @@ class API {
 	 */
 	public function __construct(array $data) {
 		$this->data = $data;
+	}
+
+	public function __get($var) : mixed {
+		return $this->$var;
 	}
 }

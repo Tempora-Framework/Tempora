@@ -16,6 +16,7 @@ define(constant_name: "BASE_DIR", value: __DIR__ . "/../..");
 require BASE_DIR . "/vendor/autoload.php";
 
 // Configurations
+session_name(name: "SESSION");
 session_start();
 Dotenv::createImmutable(paths: BASE_DIR)->load();
 date_default_timezone_set(timezoneId: $_ENV["TIMEZONE"]);

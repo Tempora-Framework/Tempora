@@ -64,14 +64,14 @@ class UserRepository {
 		);
 
 		if ($userData != null) {
-			if (password_verify($this->user->password, $userData["password"])) {
+			if (password_verify(password: $this->user->password, hash: $userData["password"])) {
 				return $userData["uid"];
 			} else {
-				return new Exception("Wrong password");
+				return new Exception(message: "Wrong password");
 			}
 		}
 
-		return new Exception("Unknown user");
+		return new Exception(message: "Unknown user");
 	}
 
 	/**

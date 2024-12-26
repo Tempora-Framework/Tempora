@@ -6,7 +6,6 @@ use App\Controllers\ErrorController;
 use App\Utils\Lang;
 use ErrorException;
 use Throwable;
-use App\Utils\System;
 
 class ErrorRepository {
 

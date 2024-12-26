@@ -41,12 +41,14 @@ class Router {
 			$url = mb_substr(string: $url, start: 0, length: -1);
 		}
 
+		$title = APP_NAME;
+		global $title;
 		$errorCode = 404;
 		$view = $this->routes[$url][0] ?? null;
 		if ($view) {
 			// Page accessible anytime for everyone
 			if ($this->routes[$url][2] === null) {
-				define(constant_name: "TITLE", value: $this->routes[$url][1]);
+				$GLOBALS["title"] = $this->routes[$url][1];
 				$controller = new $view;
 				$controller->render();
 				exit;
@@ -59,7 +61,7 @@ class Router {
 					!empty(array_intersect($this->routes[$url][3], UserRepository::getRoles(uid: $_SESSION["user"]["uid"])))
 					|| $this->routes[$url][3] === []
 				) {
-					define(constant_name: "TITLE", value: $this->routes[$url][1]);
+					$GLOBALS["title"] = $this->routes[$url][1];
 					$controller = new $view;
 					$controller->render();
 					exit;
@@ -69,7 +71,7 @@ class Router {
 
 			// User is not connected and need to not be connected
 			if ($this->routes[$url][2] == false && !isset($_SESSION["user"])) {
-				define(constant_name: "TITLE", value: $this->routes[$url][1]);
+				$GLOBALS["title"] = $this->routes[$url][1];
 				$controller = new $view;
 				$controller->render();
 				exit;
