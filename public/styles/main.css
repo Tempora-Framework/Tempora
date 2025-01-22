@@ -6,8 +6,10 @@
    ============================================== */
 
 :root {
+	/* Background color */
 	--notification-background-color: #ff0000;
 
+	/* Border */
 	--border-radius: 9px;
 }
 
@@ -15,9 +17,11 @@
    ============================================== */
 
 [data-theme="light"] {
+	/* Background color */
 	--background-color: #ffffff;
 	--form-background-color: #8f8fca;
 
+	/* Text color */
 	--text-color: #000000;
 }
 
@@ -25,9 +29,11 @@
    ============================================== */
 
 [data-theme="dark"] {
+	/* Background color */
 	--background-color: #1d1d1d;
 	--form-background-color: #383852;
 
+	/* Text color */
 	--text-color: #ffffff;
 }
 
@@ -44,6 +50,10 @@ body {
 	margin: 0;
 	color: var(--text-color);
 	background-color: var(--background-color);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
 	transition: 200ms;
 }
 
@@ -68,11 +78,11 @@ nav {
 	display: flex;
 	flex-direction: row;
 	gap: 20px;
-}
 
-nav a {
-	text-decoration: none;
-	color: var(--text-color);
+	a {
+		text-decoration: none;
+		color: var(--text-color);
+	}
 }
 
 /* ==============================================

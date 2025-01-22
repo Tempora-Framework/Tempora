@@ -1,22 +1,25 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Accounts;
 
 use App\Configs\Path;
 use App\Events\LoginEvent;
-use App\Utils\System;
+use App\Factories\NavbarFactory;
 
 class LoginController {
 	public function render() : void {
 		LoginEvent::implement();
 
+		$scripts = [
+			"/scripts/engine.js",
+			"/scripts/theme.js"
+		];
+
 		require Path::LAYOUT . "/header.php";
 
-		require Path::LAYOUT . "/navbar.php";
+		new NavbarFactory();
 
 		require Path::LAYOUT . "/login/index.php";
-
-		System::implementScripts(scripts: ["/scripts/engine.js", "/scripts/theme.js"]);
 
 		include Path::LAYOUT . "/footer.php";
 	}

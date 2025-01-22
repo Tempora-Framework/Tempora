@@ -2,6 +2,7 @@
 
 use App\Configs\Path;
 use App\Controllers\ErrorController;
+use App\Factories\RouterFactory;
 use App\Utils\Lang;
 use App\Utils\System;
 use Dotenv\Dotenv;
@@ -23,10 +24,10 @@ date_default_timezone_set(timezoneId: $_ENV["TIMEZONE"]);
 define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
 
 // Languages
-setcookie("LANG", isset($_COOKIE["LANG"]) ? $_COOKIE["LANG"] : $_ENV["DEFAULT_LANG"], time() + 60*60*24*30);
+setcookie(name: "LANG", value: isset($_COOKIE["LANG"]) ? $_COOKIE["LANG"] : $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
 
 if (!in_array($_COOKIE["LANG"] . ".json", System::getFiles(Path::PUBLIC . "/langs"))) {
-	setcookie("LANG", $_ENV["DEFAULT_LANG"], time() + 60*60*24*30);
+	setcookie(name: "LANG", value: $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
 	System::redirect();
 }
 
@@ -63,4 +64,4 @@ if (DATABASE instanceof Exception) {
 }
 
 // Routes
-require BASE_DIR . "/src/routes/index.php";
+$router = new RouterFactory();

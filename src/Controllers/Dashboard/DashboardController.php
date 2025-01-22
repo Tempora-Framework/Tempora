@@ -1,19 +1,22 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
 use App\Configs\Path;
-use App\Utils\System;
+use App\Factories\NavbarFactory;
 
 class DashboardController {
 	public function render() : void {
+		$scripts = [
+			"/scripts/engine.js",
+			"/scripts/theme.js"
+		];
+
 		require Path::LAYOUT . "/header.php";
 
-		require Path::LAYOUT . "/navbar.php";
+		new NavbarFactory();
 
 		require Path::LAYOUT . "/dashboard/index.php";
-
-		System::implementScripts(scripts: ["/scripts/engine.js", "/scripts/theme.js"]);
 
 		include Path::LAYOUT . "/footer.php";
 	}

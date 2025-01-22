@@ -1,3 +1,11 @@
+let dataLang = [];
+let isDataLangLoaded = false;
+
+(async () => {
+	dataLang = await callApi("/langs/" + getCookie("LANG") + ".json");
+	isDataLangLoaded = true;
+})();
+
 /**
  * Check if element already in DOM
  *
@@ -42,14 +50,12 @@ async function callApi(path = "/api", type = "get", settings = null) {
  * @return {string}
  */
 function getCookie(name) {
-	let cookieValue = document.cookie
+	return document.cookie
 		.split("; ")
 		.find(
 			row => row.startsWith(name + "=")
 		)
 		?.split("=")[1];
-
-	return cookieValue;
 }
 
 /**
@@ -61,9 +67,18 @@ function getCookie(name) {
  * @return {string}
  */
 async function translate(key, options = null) {
-	let data = await callApi("/langs/" + getCookie("LANG") + ".json");
+	if (!isDataLangLoaded) {
+		await new Promise(resolve => {
+			const checkInterval = setInterval(() => {
+				if (isDataLangLoaded) {
+					clearInterval(checkInterval);
+					resolve();
+				}
+			}, 10);
+		});
+	}
 
-	let result = data[key] || "Missing entry";
+	let result = dataLang[key] || "Missing entry";
 
 	if (options) {
 		for (const [index, option] of Object.entries(options)) {
@@ -136,3 +151,10 @@ setInterval(() => {
 		)
 	}
 }, 1000);
+
+const DOMnotification = document.getElementById("main_notification");
+if (isElementExist(DOMnotification)) {
+	DOMnotification.addEventListener("click", () => {
+		DOMnotification.remove();
+	})
+}

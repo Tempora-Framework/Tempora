@@ -3,17 +3,20 @@
 namespace App\Controllers;
 
 use App\Configs\Path;
-use App\Utils\System;
+use App\Factories\NavbarFactory;
 
 class IndexController {
 	public function render() : void {
+		$scripts = [
+			"/scripts/engine.js",
+			"/scripts/theme.js"
+		];
+
 		require Path::LAYOUT . "/header.php";
 
-		require Path::LAYOUT . "/navbar.php";
+		new NavbarFactory();
 
 		require Path::LAYOUT . "/index/index.php";
-
-		System::implementScripts(scripts: ["/scripts/engine.js", "/scripts/theme.js"]);
 
 		include Path::LAYOUT . "/footer.php";
 	}

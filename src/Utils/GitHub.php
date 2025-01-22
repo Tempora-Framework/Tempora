@@ -12,10 +12,10 @@ class GitHub {
 	public static function getBranch() : string {
 		$fname = sprintf(format: BASE_DIR . "/.git/HEAD");
 		$data = file_get_contents(filename: $fname);
-		$ar  = explode(separator: "/", string: $data);
+		$ar = explode(separator: "/", string: $data);
 		$ar = array_reverse(array: $ar);
 
-		return  trim (string: "" . @$ar[0]);
+		return trim(string: "" . @$ar[0]);
 	}
 
 	/**

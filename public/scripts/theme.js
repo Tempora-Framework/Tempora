@@ -1,3 +1,8 @@
+/**
+ * Get local settings
+ *
+ * @returns
+ */
 function calculateSettingAsThemeString({localStorageTheme, systemSettingDark}) {
 	if (localStorageTheme !== null) {
 		return localStorageTheme;
@@ -10,14 +15,26 @@ function calculateSettingAsThemeString({localStorageTheme, systemSettingDark}) {
 	return "light";
 }
 
+/**
+ * Update theme button
+ *
+ * @returns
+ */
 async function updateButton({isDark}) {
 	const text = isDark ? await translate("MAIN_THEME_LIGHT") : await translate("MAIN_THEME_DARK");
 
 	let button = document.getElementById("theme_button");
 
-	button.textContent = text;
+	if (isElementExist(button)) {
+		button.textContent = text;
+	}
 }
 
+/**
+ * Set theme
+ *
+ * @returns
+ */
 function updateThemeOnHtmlEl({theme}) {
 	document.querySelector("html").setAttribute("data-theme", theme);
 }
@@ -31,12 +48,14 @@ let currentThemeSetting = calculateSettingAsThemeString({localStorageTheme, syst
 updateButton({isDark: currentThemeSetting === "dark"});
 updateThemeOnHtmlEl({theme: currentThemeSetting});
 
-button.addEventListener("click", () => {
-	const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
+if (isElementExist(button)) {
+	button.addEventListener("click", () => {
+		const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
 
-	localStorage.setItem("theme", newTheme);
-	updateButton({isDark: newTheme === "dark"});
-	updateThemeOnHtmlEl({theme: newTheme});
+		localStorage.setItem("theme", newTheme);
+		updateButton({isDark: newTheme === "dark"});
+		updateThemeOnHtmlEl({theme: newTheme});
 
-	currentThemeSetting = newTheme;
-});
+		currentThemeSetting = newTheme;
+	});
+}
