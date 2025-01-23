@@ -17,7 +17,7 @@ class RegisterController {
 
 		require Path::LAYOUT . "/header.php";
 
-		new NavbarFactory();
+		(new NavbarFactory())->render();
 
 		require Path::LAYOUT . "/register/index.php";
 

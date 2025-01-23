@@ -2,7 +2,6 @@
 
 use App\Configs\Path;
 use App\Controllers\ErrorController;
-use App\Factories\RouterFactory;
 use App\Utils\Lang;
 use App\Utils\System;
 use Dotenv\Dotenv;
@@ -62,6 +61,3 @@ if (DATABASE instanceof Exception) {
 	$controller->render(message: Lang::translate(key: "ERROR_DATABASE"));
 	exit;
 }
-
-// Routes
-$router = new RouterFactory();
