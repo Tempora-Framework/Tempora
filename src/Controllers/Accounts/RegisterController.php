@@ -7,7 +7,7 @@ use App\Events\RegisterEvent;
 use App\Factories\NavbarFactory;
 
 class RegisterController {
-	public function render() : void {
+	public function render(): void {
 		RegisterEvent::implement();
 
 		$scripts = [

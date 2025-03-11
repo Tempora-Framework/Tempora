@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Repositories;
+namespace App\Models\Services;
 
 use App\Controllers\ErrorController;
 use App\Utils\Lang;
 use ErrorException;
 use Throwable;
 
-class ErrorRepository {
+class ErrorService {
 
 	/**
 	 * Catch and store exception
@@ -16,7 +16,7 @@ class ErrorRepository {
 	 *
 	 * @return void
 	 */
-	public static function handle(Throwable $exception) : void {
+	public static function handle(Throwable $exception): void {
 		$errorFolder = BASE_DIR . "/logs";
 		$logFile = $errorFolder . "/" . date(format: "Y-m-d") . ".log";
 
@@ -40,7 +40,7 @@ class ErrorRepository {
 	 *
 	 * @return void
 	 */
-	public static function shutdown() : void {
+	public static function shutdown(): void {
 		$error = error_get_last();
 		if ($error != NULL) {
 			$exception = new ErrorException(message: $error["message"], code: 0, severity: $error["type"], filename: $error["file"], line: $error["line"]);

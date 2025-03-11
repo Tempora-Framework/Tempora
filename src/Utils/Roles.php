@@ -11,7 +11,7 @@ class Roles {
 	 *
 	 * @return bool
 	 */
-	public static function check(array $userRoles, array $allowRoles) : bool {
+	public static function check(array $userRoles, array $allowRoles): bool {
 		if (!empty(array_intersect($userRoles, $allowRoles))) {
 			return true;
 		}

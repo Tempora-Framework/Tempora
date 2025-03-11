@@ -13,7 +13,7 @@ class System {
 	 *
 	 * @return void
 	 */
-	public static function redirect(string $url = null) : void {
+	public static function redirect(string $url = null): void {
 		if (isset($url)) {
 			header(header: "Location: " . $url);
 		} else {
@@ -30,7 +30,7 @@ class System {
 	 *
 	 * @return string
 	 */
-	public static function uidGen(int $size = 16, string $table = null) : string {
+	public static function uidGen(int $size = 16, string $table = null): string {
 		$char = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
 		$uid = "";
 		$uidChecked = null;
@@ -64,7 +64,7 @@ class System {
 	 *
 	 * @return array
 	 */
-	public static function getFiles(string $path) : array {
+	public static function getFiles(string $path): array {
 		return array_diff(scandir(directory: $path), array(".", ".."));
 	}
 }

@@ -64,7 +64,7 @@ class RouterFactory extends Router {
 	 *
 	 * @return void
 	 */
-	public function render(string $url) : void {
+	public function render(string $url): void {
 		parent::render(url: $url);
 	}
 }

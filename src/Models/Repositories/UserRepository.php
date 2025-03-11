@@ -26,7 +26,7 @@ class UserRepository {
 	 *
 	 * @return Exception | string
 	 */
-	public function create() : Exception | string {
+	public function create(): Exception | string {
 		$this->user->uid = System::uidGen(size: 16, table: Database::USERS);
 		$this->user->password = password_hash(password: $this->user->password, algo: PASSWORD_BCRYPT);
 
@@ -53,7 +53,7 @@ class UserRepository {
 	 *
 	 * @return Exception | string
 	 */
-	public function verifyPassword() : Exception | string {
+	public function verifyPassword(): Exception | string {
 		$userData = ApplicationData::request(
 			query: "SELECT uid, password FROM " . Database::USERS . " WHERE email = :email",
 			data: [
@@ -81,7 +81,7 @@ class UserRepository {
 	 *
 	 * @return array
 	 */
-	public static function getRoles(string $uid) : array {
+	public static function getRoles(string $uid): array {
 		return ApplicationData::request(
 			query: "SELECT id_role FROM " . Database::USER_ROLE . " WHERE uid_user = :uid",
 			data: [

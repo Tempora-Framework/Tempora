@@ -7,7 +7,7 @@ use App\Events\LoginEvent;
 use App\Factories\NavbarFactory;
 
 class LoginController {
-	public function render() : void {
+	public function render(): void {
 		LoginEvent::implement();
 
 		$scripts = [

@@ -6,7 +6,7 @@ use App\Configs\Path;
 use App\Factories\NavbarFactory;
 
 class DashboardController {
-	public function render() : void {
+	public function render(): void {
 		$scripts = [
 			"/scripts/engine.js",
 			"/scripts/theme.js"

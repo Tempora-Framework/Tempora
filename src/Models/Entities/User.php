@@ -17,11 +17,11 @@ class User {
 		$this->password = $password;
 	}
 
-	public function __set($var, $value) : void {
+	public function __set($var, $value): void {
 		$this->$var = $value;
 	}
 
-	public function __get($var) : mixed {
+	public function __get($var): mixed {
 		return $this->$var;
 	}
 }

@@ -36,7 +36,7 @@ class Database {
 		$this->charset = $charset;
 	}
 
-	public function __get($var) : mixed {
+	public function __get($var): mixed {
 		return $this->$var;
 	}
 }

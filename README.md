@@ -6,10 +6,10 @@
 
 ```html
 <VirtualHost *:80>
-        ServerName php-mvc-template.local
-        DocumentRoot /var/www/PHP-MVC-Template/public
+        ServerName tempora.local
+        DocumentRoot /var/www/Tempora/public
 
-        <Directory /var/www/PHP-MVC-Template/public>
+        <Directory /var/www/Tempora/public>
                 DirectoryIndex /index.php
                 FallbackResource /index.php
         </Directory>
@@ -19,9 +19,9 @@
 ### Nginx minimal configuration
 
 ```nginx
-server_name php-mvc-template.local;
+server_name tempora.local;
 
-root /var/www/php-mvc-template/public;
+root /var/www/Tempora/public;
 
 index /index.php;
 ```

@@ -20,7 +20,7 @@ class Navbar {
 	 *
 	 * @return void
 	 */
-	public function add(string $title, string $url, string $class, string $icon = "", bool $needLoginToBe = null, array $accessRoles = []) : void {
+	public function add(string $title, string $url, string $class, string $icon = "", bool $needLoginToBe = null, array $accessRoles = []): void {
 		array_push(
 			$this->navbar,
 			[
@@ -39,7 +39,7 @@ class Navbar {
 	 *
 	 * @return void
 	 */
-	public function render() : void {
+	public function render(): void {
 		echo "<nav>";
 
 		foreach ($this->navbar as $element) {

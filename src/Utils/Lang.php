@@ -12,7 +12,7 @@ class Lang {
 	 *
 	 * @return string
 	 */
-	public static function translate(string $key, array $options = null) : string {
+	public static function translate(string $key, array $options = null): string {
 		$file = file_get_contents(filename: BASE_DIR . "/public/langs/" . $_COOKIE["LANG"] . ".json");
 		$json = json_decode(json: $file);
 
@@ -38,7 +38,7 @@ class Lang {
 	 *
 	 * @return string
 	 */
-	public static function nameFormat(string $name) : string {
+	public static function nameFormat(string $name): string {
 		switch ($name) {
 			case "fr_FR":
 				return "Français";

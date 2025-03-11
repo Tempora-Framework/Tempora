@@ -9,7 +9,7 @@ use App\Utils\System;
 use Exception;
 
 class LoginEvent {
-	public static function implement() : void {
+	public static function implement(): void {
 		if ($_SERVER["REQUEST_METHOD"] === "POST") {
 			if (
 				isset($_POST["email"])

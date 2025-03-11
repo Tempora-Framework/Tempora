@@ -17,7 +17,7 @@ class ApplicationData {
 	 *
 	 * @return mixed
 	 */
-	public static function request(string $query, array $data = null, int $returnType = null, bool $singleValue = false) : mixed {
+	public static function request(string $query, array $data = null, int $returnType = null, bool $singleValue = false): mixed {
 		$stmt = DATABASE->prepare(query: $query);
 
 		if ($data) {
@@ -43,7 +43,7 @@ class ApplicationData {
 	 *
 	 * @return array
 	 */
-	public static function getUsers() : array {
+	public static function getUsers(): array {
 		return ApplicationData::request(
 			query: "SELECT uid FROM " . Database::USERS,
 			returnType: PDO::FETCH_COLUMN

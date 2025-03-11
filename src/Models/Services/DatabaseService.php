@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Repositories;
+namespace App\Models\Services;
 
 use App\Models\Entities\Database;
 use Exception;
 use PDO;
 
-class DatabaseRepository {
+class DatabaseService {
 	private $database;
 
 	/**
@@ -23,7 +23,7 @@ class DatabaseRepository {
 	 *
 	 * @return PDO | Exception
 	 */
-	public function createConnection() : PDO | Exception {
+	public function createConnection(): PDO | Exception {
 		$hostname = $this->database->hostname;
 		$port = $this->database->port;
 		$dbname = $this->database->dbname;

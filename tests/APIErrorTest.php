@@ -6,10 +6,10 @@ final class APIErrorTest extends TestCase {
 
 	/**
 	 * Test EmptyArgs
-	 * 
+	 *
 	 * @return void
 	 */
-	public function testEmptyArgs() : void {
+	public function testEmptyArgs(): void {
 		$post = curl_init(url: "http://template.local/api");
 		curl_setopt(handle: $post, option: CURLOPT_RETURNTRANSFER, value: true);
 		curl_setopt(handle: $post, option: CURLOPT_POSTFIELDS, value: http_build_query(["ask" => ""]));

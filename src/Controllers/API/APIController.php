@@ -3,10 +3,10 @@
 namespace App\Controllers\API;
 
 use App\Models\Entities\API;
-use App\Models\Repositories\APIRepository;
+use App\Models\Services\APIService;
 
 class APIController {
-	public function render() : void {
+	public function render(): void {
 		header(header: "Content-Type: application/json");
 
 		switch ($_SERVER["REQUEST_METHOD"]) {
@@ -26,7 +26,7 @@ class APIController {
 				break;
 		}
 
-		$apiRepo = new APIRepository(api: $api);
+		$apiRepo = new APIService(api: $api);
 		echo $apiRepo->answer();
 	}
 }

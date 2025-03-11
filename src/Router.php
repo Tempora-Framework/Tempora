@@ -21,7 +21,7 @@ class Router {
 	 *
 	 * @return void
 	 */
-	public function add(string $url, string $controller, string $title = APP_NAME, bool $needLoginToBe = null, array $accessRoles = []) : void {
+	public function add(string $url, string $controller, string $title = APP_NAME, bool $needLoginToBe = null, array $accessRoles = []): void {
 		$this->routes[$url] = [
 			"controller" => $controller,
 			"title" => $title,
@@ -37,7 +37,7 @@ class Router {
 	 *
 	 * @return void
 	 */
-	public function render(string $url) : void {
+	public function render(string $url): void {
 		while (mb_substr(string: $url, start: -1) === "/") {
 			$url = mb_substr(string: $url, start: 0, length: -1);
 		}

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Repositories;
+namespace App\Models\Services;
 
 use App\Models\Entities\API;
 
-class APIRepository {
+class APIService {
 	private $api;
 
 	/**
@@ -21,7 +21,7 @@ class APIRepository {
 	*
 	* @return string
 	*/
-	public function answer() : string {
+	public function answer(): string {
 		return json_encode(value: $this->api->data);
 	}
 }

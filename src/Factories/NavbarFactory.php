@@ -40,7 +40,7 @@ class NavbarFactory extends Navbar {
 	 *
 	 * @return void
 	 */
-	public function render() : void {
+	public function render(): void {
 		parent::render();
 	}
 }
