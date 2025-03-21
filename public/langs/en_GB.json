@@ -19,6 +19,7 @@
 	"LOGIN_SUBMIT": "Login",
 	"LOGIN_WRONG_CREDENTIALS": "Incorrect identifiant or password.",
 
+	"REGISTER_TITLE": "Register",
 	"REGISTER_PASSWORD_CONFIRM": "Confirm password",
 	"REGISTER_SUBMIT": "Create account",
 	"REGISTER_UNIDENTICAL_PASSWORD": "The passwords you entered do not match.",

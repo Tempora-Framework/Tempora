@@ -2,86 +2,63 @@
 
 namespace App;
 
-use App\Controllers\ErrorController;
 use App\Models\Repositories\UserRepository;
-use App\Utils\Lang;
 use App\Utils\Roles;
 
 class Router {
-	protected array $routes = [];
+	private $clientUrl;
+	private	$controllersPath = "App\Controllers\\";
 
-	/**
-	 * Create routeur's routes
-	 *
-	 * @param string $url Access URL
-	 * @param string $controller View's controller
-	 * @param string $title View's title
-	 * @param bool $needLoginToBe Does user have to be connected or have to be disconnected, null for no restrictions
-	 * @param array $accessRoles Roles that can render view
-	 *
-	 * @return void
-	 */
-	public function add(string $url, string $controller, string $title = APP_NAME, bool $needLoginToBe = null, array $accessRoles = []): void {
-		$this->routes[$url] = [
-			"controller" => $controller,
-			"title" => $title,
-			"needLoginToBe" => $needLoginToBe,
-			"accessRoles" => $accessRoles
-		];
+	public function __construct(string $url) {
+		$this->clientUrl = $url;
 	}
 
-	/**
-	 * Render route's view
-	 *
-	 * @param string $url Access URL
-	 *
-	 * @return void
-	 */
-	public function render(string $url): void {
-		while (mb_substr(string: $url, start: -1) === "/") {
-			$url = mb_substr(string: $url, start: 0, length: -1);
+	public function check(string $url, string $controller, string $method = "GET", array $pageData = []): void {
+		if ($_SERVER["REQUEST_METHOD"] == $method) {
+			$this->render(url: $url, controller: $controller, pageData: $pageData);
+		}
+	}
+
+	private function render(string $url, string $controller, array $pageData): void {
+		while (mb_substr(string: $this->clientUrl, start: -1) === "/") {
+			$this->clientUrl = mb_substr(string: $this->clientUrl, start: 0, length: -1);
 		}
 
-		$title = APP_NAME;
-		global $title;
-		$errorCode = 404;
-		$view = $this->routes[$url]["controller"] ?? null;
+		$urlParts = explode(separator: "/", string: $url);
+		$clientUrlParts = explode(separator: "/", string: $this->clientUrl);
 
-		if ($view) {
-			// Page accessible anytime for everyone
-			if ($this->routes[$url]["needLoginToBe"] === null) {
-				$GLOBALS["title"] = $this->routes[$url]["title"];
-				$controller = new $view;
-				$controller->render();
-				exit;
-			}
+		// Safe gate
+		if (count(value: $urlParts) != count(value: $clientUrlParts))
+			return;
+		if (isset($pageData["page_needLoginToBe"])) {
+			if (isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === false)
+				return;
+			if (!isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === true)
+				return;
+		}
+		if (
+			isset($pageData["page_accessRoles"])
+			&& $pageData["page_needLoginToBe"] === true
+			&& !Roles::check(userRoles: UserRepository::getRoles(uid: $_SESSION["user"]["uid"]), allowRoles: $pageData["page_accessRoles"])
+		)
+			return;
 
-			// User is connected and need to be connected
-			if ($this->routes[$url]["needLoginToBe"] === true && isset($_SESSION["user"])) {
-				// User got necessary permissions
-				if (
-					$this->routes[$url]["accessRoles"] === []
-					|| Roles::check(userRoles: UserRepository::getRoles(uid: $_SESSION["user"]["uid"]), allowRoles: $this->routes[$url]["accessRoles"])
-				) {
-					$GLOBALS["title"] = $this->routes[$url]["title"];
-					$controller = new $view;
-					$controller->render();
-					exit;
+		for ($i = 0; $i < count(value: $clientUrlParts); $i++) {
+			if (mb_substr(string: $urlParts[$i], start: 0, length: 1) != "$") {
+				if ($urlParts[$i] != $clientUrlParts[$i]) {
+					return;
 				}
-
-				$errorCode = 403;
-			}
-
-			// User is not connected and need to not be connected
-			if ($this->routes[$url]["needLoginToBe"] === false && !isset($_SESSION["user"])) {
-				$GLOBALS["title"] = $this->routes[$url]["title"];
-				$controller = new $view;
-				$controller->render();
-				exit;
+			} else {
+				$pageData[ltrim(string: $urlParts[$i], characters: "$")] = $clientUrlParts[$i];
 			}
 		}
 
-		$controller = new ErrorController();
-		$controller->render(errorCode: $errorCode, message: Lang::translate(key: "ERROR_" . $errorCode));
+		(new ($this->controllersPath . $controller))->render(pageData: $pageData);
+
+		exit;
+	}
+
+	public function error(array $pageData): void {
+		(new ($this->controllersPath . "ErrorController"))->render(pageData: $pageData);
 	}
 }

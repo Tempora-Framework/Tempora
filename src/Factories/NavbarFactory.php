@@ -23,15 +23,21 @@ class NavbarFactory extends Navbar {
 
 		parent::add(
 			title: Lang::translate(key: "NAVBAR_LOGIN"),
-			url:"/login",
+			url: "/login",
 			class: "button",
 			needLoginToBe: false,
 		);
 		parent::add(
 			title: Lang::translate(key: "NAVBAR_REGISTER"),
-			url:"/register",
+			url: "/register",
 			class: "button",
 			needLoginToBe: false,
+		);
+		parent::add(
+			title: Lang::translate(key: "NAVBAR_DISCONNECT"),
+			url: "/disconnect",
+			class: "button",
+			needLoginToBe: true,
 		);
 	}
 

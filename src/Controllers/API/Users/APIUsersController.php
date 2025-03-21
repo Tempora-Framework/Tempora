@@ -7,7 +7,7 @@ use App\Models\Services\APIService;
 use App\Utils\ApplicationData;
 
 class APIUsersController {
-	public function render(): void {
+	public function render(array $pageData): void {
 		header(header: "Content-Type: application/json");
 
 		switch ($_SERVER["REQUEST_METHOD"]) {

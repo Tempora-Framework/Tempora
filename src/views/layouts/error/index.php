@@ -2,9 +2,9 @@
 	use App\Configs\Path;
 ?>
 
-<h1><?= ERROR_CODE ?></h1>
+<h1><?= $pageData["error_code"] ?></h1>
 
-<p><?= EXCEPTION ?></p>
+<p><?= $pageData["error_message"] ?></p>
 
 <?php
 	$backPath = "/";

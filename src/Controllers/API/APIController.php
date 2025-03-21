@@ -6,7 +6,7 @@ use App\Models\Entities\API;
 use App\Models\Services\APIService;
 
 class APIController {
-	public function render(): void {
+	public function render(array $pageData): void {
 		header(header: "Content-Type: application/json");
 
 		switch ($_SERVER["REQUEST_METHOD"]) {

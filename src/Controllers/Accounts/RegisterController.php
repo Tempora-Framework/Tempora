@@ -3,13 +3,10 @@
 namespace App\Controllers\Accounts;
 
 use App\Configs\Path;
-use App\Events\RegisterEvent;
 use App\Factories\NavbarFactory;
 
 class RegisterController {
-	public function render(): void {
-		RegisterEvent::implement();
-
+	public function render(array $pageData): void {
 		$scripts = [
 			"/scripts/engine.js",
 			"/scripts/theme.js"

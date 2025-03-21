@@ -69,6 +69,13 @@ define(constant_name: "DATABASE", value: $databaseRepo->createConnection());
 
 if (DATABASE instanceof Exception) {
 	$controller = new ErrorController();
-	$controller->render(message: Lang::translate(key: "ERROR_DATABASE"));
+	$controller->render(
+		pageData: [
+			"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
+			"error_code" => 500,
+			"error_message" => Lang::translate(key: "ERROR_DATABASE")
+		]
+	);
+
 	exit;
 }
