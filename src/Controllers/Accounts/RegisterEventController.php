@@ -9,9 +9,10 @@ use App\Utils\System;
 use Exception;
 
 class RegisterEventController {
-	public static function render(array $pageData): void {
+	public function render(array $pageData): void {
 		if (
-			isset($_POST["name"])
+			System::checkCSRF()
+			&& isset($_POST["name"])
 			&& isset($_POST["surname"])
 			&& isset($_POST["email"])
 			&& isset($_POST["password"])
@@ -32,6 +33,15 @@ class RegisterEventController {
 				setcookie("NOTIFICATION", Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD"), time() + 60*60*24*30);
 			}
 		}
-		System::redirect(url: "/register");
+
+		$_SESSION["page_data"] = [
+			"form_name" => $_POST["name"],
+			"form_surname" => $_POST["surname"],
+			"form_email" => $_POST["email"],
+			"form_password" => $_POST["password"],
+			"form_password_confirm" => $_POST["password_confirm"]
+		];
+
+		System::redirect();
 	}
 }

@@ -22,6 +22,23 @@ class System {
 		exit;
 	}
 
+	public static function createCSRF(): string {
+		if (!isset($_SESSION["csrf"])) {
+			$_SESSION["csrf"] = bin2hex(string: random_bytes(length: 50));
+		}
+
+		return "<input type=\"hidden\" name=\"page_csrf\" value=\"" . $_SESSION["csrf"] . "\">";
+	}
+
+	public static function checkCSRF(): bool {
+		if (!isset($_SESSION['csrf']) || !isset($_POST['page_csrf']))
+			return false;
+		if ($_SESSION['csrf'] != $_POST['page_csrf'])
+			return false;
+
+		return true;
+	}
+
 	/**
 	 * UID function generator
 	 *

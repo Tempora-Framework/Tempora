@@ -1,45 +1,48 @@
 <?php
 	use App\Utils\Lang;
+	use App\Utils\System;
 ?>
 
 <form class="register" method="POST">
+	<?= System::createCSRF(); ?>
+
 	<h1><?= Lang::translate(key: "REGISTER_TITLE") ?></h1>
 
 	<input
 		type="text"
 		name="name"
-		value="<?= $_POST["name"] ?? "" ?>"
+		value="<?= $pageData["form_name"] ?? "" ?>"
 		placeholder="<?= Lang::translate(key: "MAIN_NAME") ?>"
-		require
+		required
 		autofocus
 	>
 	<input
 		type="text"
 		name="surname"
-		value="<?= $_POST["surname"] ?? "" ?>"
+		value="<?= $pageData["form_surname"] ?? "" ?>"
 		placeholder="<?= Lang::translate(key: "MAIN_SURNAME") ?>"
-		require
+		required
 	>
 	<input
 		type="text"
 		name="email"
-		value="<?= $_POST["email"] ?? "" ?>"
+		value="<?= $pageData["form_email"] ?? "" ?>"
 		placeholder="<?= Lang::translate(key: "MAIN_EMAIL") ?>"
-		require
+		required
 	>
 	<input
 		type="password"
 		name="password"
-		value="<?= $_POST["password"] ?? "" ?>"
+		value="<?= $pageData["form_password"] ?? "" ?>"
 		placeholder="<?= Lang::translate(key: "MAIN_PASSWORD") ?>"
-		require
+		required
 	>
 	<input
 		type="password"
 		name="password_confirm"
-		value="<?= $_POST["password_confirm"] ?? "" ?>"
+		value="<?= $pageData["form_password_confirm"] ?? "" ?>"
 		placeholder="<?= Lang::translate(key: "REGISTER_PASSWORD_CONFIRM") ?>"
-		require
+		required
 	>
 
 	<button type="submit"><?= Lang::translate(key: "REGISTER_SUBMIT") ?></button>

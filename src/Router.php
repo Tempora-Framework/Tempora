@@ -13,12 +13,31 @@ class Router {
 		$this->clientUrl = $url;
 	}
 
+	/**
+	 * Add new route
+	 *
+	 * @param string $url
+	 * @param string $controller
+	 * @param string $method
+	 * @param array $pageData
+	 *
+	 * @return void
+	 */
 	public function check(string $url, string $controller, string $method = "GET", array $pageData = []): void {
 		if ($_SERVER["REQUEST_METHOD"] == $method) {
 			$this->render(url: $url, controller: $controller, pageData: $pageData);
 		}
 	}
 
+	/**
+	 * Render view
+	 *
+	 * @param string $url
+	 * @param string $controller
+	 * @param array $pageData
+	 *
+	 * @return void
+	 */
 	private function render(string $url, string $controller, array $pageData): void {
 		while (mb_substr(string: $this->clientUrl, start: -1) === "/") {
 			$this->clientUrl = mb_substr(string: $this->clientUrl, start: 0, length: -1);
@@ -51,6 +70,14 @@ class Router {
 			} else {
 				$pageData[ltrim(string: $urlParts[$i], characters: "$")] = $clientUrlParts[$i];
 			}
+		}
+
+		if (isset($_SESSION["page_data"])) {
+			foreach ($_SESSION["page_data"] as $key => $data) {
+				$pageData[$key] = $data;
+			}
+
+			unset($_SESSION["page_data"]);
 		}
 
 		(new ($this->controllersPath . $controller))->render(pageData: $pageData);
