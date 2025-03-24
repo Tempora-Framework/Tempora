@@ -4,7 +4,7 @@
 ?>
 
 <form class="register" method="POST">
-	<?= System::createCSRF(); ?>
+	<?= System::createCSRF() ?>
 
 	<h1><?= Lang::translate(key: "REGISTER_TITLE") ?></h1>
 

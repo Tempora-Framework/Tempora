@@ -8,12 +8,17 @@
 	"MAIN_THEME_LIGHT": "Thème clair",
 	"MAIN_THEME_DARK": "Thème sombre",
 	"MAIN_NO_SCRIPT": "Votre navigateur ne supporte pas JavaScript ou il est désactivé. Veuillez activer JavaScript pour utiliser ce site.",
+	"MAIN_SAVE": "Sauvegarder",
+	"MAIN_OLD_PASSWORD": "Mot de passe actuel",
+	"MAIN_NEW_PASSWORD": "Nouveau mot de passe",
+	"MAIN_CONFIRM": "Confirmer",
 
 	"NAVBAR_HOME": "Accueil",
 	"NAVBAR_DASHBOARD": "Tableau de bord",
 	"NAVBAR_LOGIN": "Connexion",
 	"NAVBAR_REGISTER": "Créer un compte",
 	"NAVBAR_DISCONNECT": "Déconnexion",
+	"NAVBAR_ACCOUNT": "Compte",
 
 	"LOGIN_TITLE": "Connexion",
 	"LOGIN_SUBMIT": "Se connecter",
@@ -24,6 +29,8 @@
 	"REGISTER_SUBMIT": "Créer le compte",
 	"REGISTER_UNIDENTICAL_PASSWORD": "Les mots de passe saisis ne correspondent pas.",
 	"REGISTER_ALREADY_EXIST": "Le compte \"$[email]\" existe déjà.",
+
+	"ACCOUNT_TITLE": "Compte",
 
 	"DASHBOARD_TITLE": "Tableau de bord",
 

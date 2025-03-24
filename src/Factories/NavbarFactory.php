@@ -11,6 +11,7 @@ class NavbarFactory extends Navbar {
 		parent::add(
 			title: Lang::translate(key: "NAVBAR_HOME"),
 			url: "/",
+			icon: "ri-home-2-line",
 			class: "button button_secondary"
 		);
 		parent::add(
@@ -18,7 +19,9 @@ class NavbarFactory extends Navbar {
 			url: "/dashboard",
 			class: "button button_secondary",
 			needLoginToBe: true,
-			accessRoles: [Role::ADMINISTRATOR]
+			accessRoles: [
+				Role::ADMINISTRATOR
+			]
 		);
 
 		parent::add(
@@ -32,6 +35,12 @@ class NavbarFactory extends Navbar {
 			url: "/register",
 			class: "button",
 			needLoginToBe: false,
+		);
+		parent::add(
+			title: Lang::translate(key: "NAVBAR_ACCOUNT"),
+			url: "/account",
+			class: "button",
+			needLoginToBe: true,
 		);
 		parent::add(
 			title: Lang::translate(key: "NAVBAR_DISCONNECT"),

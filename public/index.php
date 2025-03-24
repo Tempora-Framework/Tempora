@@ -52,6 +52,20 @@ $routeur->check(
 );
 
 $routeur->check(
+	url: '/account',
+	controller: "Accounts\AccountController",
+	pageData: [
+		"page_title" => APP_NAME . " - " . Lang::translate(key: "ACCOUNT_TITLE"),
+		"page_needLoginToBe" => true
+	]
+);
+$routeur->check(
+	url: '/account',
+	controller: "Accounts\AccountEventController",
+	method: "POST"
+);
+
+$routeur->check(
 	url: '/dashboard',
 	controller: "Dashboard\DashboardController",
 	pageData: [

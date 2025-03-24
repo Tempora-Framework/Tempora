@@ -8,6 +8,7 @@ CREATE TABLE `users` (
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `to_modify` tinyint(1) NOT NULL DEFAULT 0,
   `date_update` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `date_create` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`uid`),

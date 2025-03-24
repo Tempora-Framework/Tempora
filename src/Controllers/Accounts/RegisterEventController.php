@@ -32,15 +32,15 @@ class RegisterEventController {
 			} else {
 				setcookie("NOTIFICATION", Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD"), time() + 60*60*24*30);
 			}
-		}
 
-		$_SESSION["page_data"] = [
-			"form_name" => $_POST["name"],
-			"form_surname" => $_POST["surname"],
-			"form_email" => $_POST["email"],
-			"form_password" => $_POST["password"],
-			"form_password_confirm" => $_POST["password_confirm"]
-		];
+			$_SESSION["page_data"] = [
+				"form_name" => $_POST["name"],
+				"form_surname" => $_POST["surname"],
+				"form_email" => $_POST["email"],
+				"form_password" => $_POST["password"],
+				"form_password_confirm" => $_POST["password_confirm"]
+			];
+		}
 
 		System::redirect();
 	}

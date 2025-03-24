@@ -8,12 +8,17 @@
 	"MAIN_THEME_LIGHT": "Light theme",
 	"MAIN_THEME_DARK": "Dark theme",
 	"MAIN_NO_SCRIPT": "Your browser does not support JavaScript or it is disabled. Please enable JavaScript to use this site.",
+	"MAIN_SAVE": "Save",
+	"MAIN_OLD_PASSWORD": "Actual password",
+	"MAIN_NEW_PASSWORD": "New password",
+	"MAIN_CONFIRM": "Confirm",
 
 	"NAVBAR_HOME": "Home",
 	"NAVBAR_DASHBOARD": "Dashboard",
 	"NAVBAR_LOGIN": "Login",
 	"NAVBAR_REGISTER": "Create account",
 	"NAVBAR_DISCONNECT": "Logout",
+	"NAVBAR_ACCOUNT": "Account",
 
 	"LOGIN_TITLE": "Login",
 	"LOGIN_SUBMIT": "Login",
@@ -24,6 +29,8 @@
 	"REGISTER_SUBMIT": "Create account",
 	"REGISTER_UNIDENTICAL_PASSWORD": "The passwords you entered do not match.",
 	"REGISTER_ALREADY_EXIST": "Account \"$[email]\" already exist.",
+
+	"ACCOUNT_TITLE": "Account",
 
 	"DASHBOARD_TITLE": "Dashboard",
 

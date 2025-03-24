@@ -4,7 +4,7 @@
 ?>
 
 <form class="login" method="POST">
-	<?= System::createCSRF(); ?>
+	<?= System::createCSRF() ?>
 
 	<h1><?= Lang::translate(key: "LOGIN_TITLE") ?></h1>
 

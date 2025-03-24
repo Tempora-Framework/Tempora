@@ -114,11 +114,12 @@ nav {
    Pages
    ============================================== */
 
-/* Login/Register page
+/* Login/Register/Account page
    ============================================== */
 
 .login,
-.register {
+.register,
+.account {
 	display: flex;
 	flex-direction: column;
 	gap: 15px;

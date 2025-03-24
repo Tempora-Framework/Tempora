@@ -9,6 +9,7 @@
 
 	<title><?= $pageData["page_title"] ?? APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR") ?></title>
 	<link rel="stylesheet" href="/styles/main.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
 
 	<?php
 		if (isset($scripts)) {
