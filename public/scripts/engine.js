@@ -38,7 +38,7 @@ async function callApi(path = "/api", type = "get", settings = null) {
 	}).then((response) => {
 		return response.json();
 	}).catch((error) => {
-		console.log(error);
+		console.error(error);
 	})
 }
 

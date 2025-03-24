@@ -1,61 +1,23 @@
-/**
- * Get local settings
- *
- * @returns
- */
-function calculateSettingAsThemeString({localStorageTheme, systemSettingDark}) {
-	if (localStorageTheme !== null) {
-		return localStorageTheme;
-	}
+const themeButton = document.getElementById("theme_button");
+const html = document.documentElement;
+const themeList = ["light", "dark", "auto"];
+const themeIcon = ["ri-moon-line", "ri-time-line", "ri-sun-line"];
+const currentTheme = localStorage.getItem("theme") || "light";
 
-	if (systemSettingDark.matches) {
-		return "dark";
-	}
+html.setAttribute("data-theme", currentTheme);
+updateThemeButton(themeList.indexOf(currentTheme));
 
-	return "light";
-}
+themeButton.addEventListener("click", () => {
+	const themeIndex = (themeList.indexOf(html.getAttribute("data-theme")) + 1) % themeList.length;
+	const nextTheme = themeList[themeIndex];
 
-/**
- * Update theme button
- *
- * @returns
- */
-async function updateButton({isDark}) {
-	const text = isDark ? await translate("MAIN_THEME_LIGHT") : await translate("MAIN_THEME_DARK");
+	html.setAttribute("data-theme", nextTheme);
+	localStorage.setItem("theme", nextTheme);
 
-	let button = document.getElementById("theme_button");
+	updateThemeButton(themeIndex)
+});
 
-	if (isElementExist(button)) {
-		button.textContent = text;
-	}
-}
-
-/**
- * Set theme
- *
- * @returns
- */
-function updateThemeOnHtmlEl({theme}) {
-	document.querySelector("html").setAttribute("data-theme", theme);
-}
-
-const button = document.getElementById("theme_button");
-const localStorageTheme = localStorage.getItem("theme");
-const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-let currentThemeSetting = calculateSettingAsThemeString({localStorageTheme, systemSettingDark});
-
-updateButton({isDark: currentThemeSetting === "dark"});
-updateThemeOnHtmlEl({theme: currentThemeSetting});
-
-if (isElementExist(button)) {
-	button.addEventListener("click", () => {
-		const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
-
-		localStorage.setItem("theme", newTheme);
-		updateButton({isDark: newTheme === "dark"});
-		updateThemeOnHtmlEl({theme: newTheme});
-
-		currentThemeSetting = newTheme;
-	});
+async function updateThemeButton(themeIndex) {
+	themeButton.className = themeIcon[themeIndex];
+	themeButton.title = await translate("MAIN_THEME_" + themeList[(themeIndex + 1) % themeList.length].toUpperCase());
 }

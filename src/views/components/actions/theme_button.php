@@ -1,1 +1,1 @@
-<button id="theme_button"></button>
+<i class="ri-sun-line" id="theme_button"></i>
