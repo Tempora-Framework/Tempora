@@ -3,7 +3,8 @@
 namespace App\Configs;
 
 class Path {
-	const LAYOUT = BASE_DIR . "/src/views/layouts";
-	const COMPONENTS = BASE_DIR . "/src/views/components";
 	const PUBLIC = BASE_DIR . "/public";
+	const LAYOUT = BASE_DIR . "/src/views/layouts";
+	const COMPONENT_ACTIONS = BASE_DIR . "/src/views/components/actions";
+	const COMPONENT_FORMS = BASE_DIR . "/src/views/components/forms";
 }

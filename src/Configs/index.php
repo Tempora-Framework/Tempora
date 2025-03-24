@@ -36,7 +36,7 @@ define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
 // Languages
 setcookie(name: "LANG", value: $_COOKIE["LANG"] ?? $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
 
-if (!in_array($_COOKIE["LANG"] . ".json", System::getFiles(Path::PUBLIC . "/langs"))) {
+if (!in_array($_COOKIE["LANG"] . ".json", System::getFiles(path: Path::PUBLIC . "/langs"))) {
 	setcookie(name: "LANG", value: $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
 	System::redirect();
 }

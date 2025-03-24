@@ -2,4 +2,4 @@
 	use App\Configs\Path;
 ?>
 
-<?php include Path::COMPONENTS . "/forms/register_form.php"; ?>
+<?php include Path::COMPONENT_FORMS . "/register_form.php"; ?>

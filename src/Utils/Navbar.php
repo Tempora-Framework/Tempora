@@ -44,24 +44,24 @@ class Navbar {
 
 		foreach ($this->navbar as $element) {
 			if ($element["needLoginToBe"] === null) {
-				include Path::COMPONENTS . "/actions/navbar_item.php";
+				include Path::COMPONENT_ACTIONS . "/navbar_item.php";
 			} else {
 				if ($element["needLoginToBe"] === true and isset($_SESSION["user"])) {
 					if (
 						$element["accessRoles"] === []
 						|| Roles::check(userRoles: UserRepository::getRoles(uid: $_SESSION["user"]["uid"]), allowRoles: $element["accessRoles"])
 					) {
-						include Path::COMPONENTS . "/actions/navbar_item.php";
+						include Path::COMPONENT_ACTIONS . "/navbar_item.php";
 					}
 				}
 				if ($element["needLoginToBe"] === false and !isset($_SESSION["user"])) {
-					include Path::COMPONENTS . "/actions/navbar_item.php";
+					include Path::COMPONENT_ACTIONS . "/navbar_item.php";
 				}
 			}
 		}
 
-		include Path::COMPONENTS . "/actions/theme_button.php";
-		include Path::COMPONENTS . "/actions/lang_selection.php";
+		include Path::COMPONENT_ACTIONS . "/theme_button.php";
+		include Path::COMPONENT_ACTIONS . "/lang_selection.php";
 
 		echo "</nav>";
 	}

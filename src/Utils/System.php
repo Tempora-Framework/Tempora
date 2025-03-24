@@ -31,9 +31,9 @@ class System {
 	}
 
 	public static function checkCSRF(): bool {
-		if (!isset($_SESSION['csrf']) || !isset($_POST['page_csrf']))
+		if (!isset($_SESSION["csrf"]) || !isset($_POST["page_csrf"]))
 			return false;
-		if ($_SESSION['csrf'] != $_POST['page_csrf'])
+		if ($_SESSION["csrf"] != $_POST["page_csrf"])
 			return false;
 
 		return true;

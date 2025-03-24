@@ -7,7 +7,7 @@
 <select class="lang_selection" id="lang_selection">
 
 <?php
-	foreach (System::getFiles(Path::PUBLIC . "/langs") as $file) {
+	foreach (System::getFiles(path: Path::PUBLIC . "/langs") as $file) {
 		$file = str_replace(search: ".json", replace: "", subject: $file);
 		if ($file === $_COOKIE["LANG"]) {
 			echo "<option value=\"" . $file . "\" selected>" . Lang::nameFormat($file) . "</option>";

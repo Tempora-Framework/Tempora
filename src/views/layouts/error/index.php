@@ -8,5 +8,5 @@
 
 <?php
 	$backPath = "/";
-	include Path::COMPONENTS . "/actions/back_button.php";
+	include Path::COMPONENT_ACTIONS . "/back_button.php";
 ?>
