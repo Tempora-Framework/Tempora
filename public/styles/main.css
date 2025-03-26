@@ -24,7 +24,7 @@
 	--text-color: var(--dark-text-color);
 }
 
-[data-theme="auto"] {
+[data-theme="system"] {
 	@media (prefers-color-scheme: dark) {
 		--background-color: var(--dark-background-color);
 		--form-background-color: var(--dark-form-background-color);

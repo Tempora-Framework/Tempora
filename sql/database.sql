@@ -57,3 +57,15 @@ CREATE TABLE `user_role` (
   CONSTRAINT `user_role_roles_FK` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`),
   CONSTRAINT `user_role_users_FK` FOREIGN KEY (`uid_user`) REFERENCES `users` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Table structure for table `user_reset_password`
+--
+
+CREATE TABLE `user_reset_password` (
+  `uid_user` varchar(32) NOT NULL,
+  `link` varchar(64) NOT NULL,
+  `date_create` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`uid_user`),
+  CONSTRAINT `user_reset_password_users_FK` FOREIGN KEY (`uid_user`) REFERENCES `users` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

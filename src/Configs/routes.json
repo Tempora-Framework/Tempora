@@ -1,0 +1,78 @@
+{
+	"": {
+		"GET": {
+			"controller": "IndexController",
+			"title": ""
+		}
+	},
+
+	"/register": {
+		"GET": {
+			"controller": "Accounts/RegisterController",
+			"title": "",
+			"needLoginToBe": false
+		},
+		"POST": {
+			"controller": "Accounts/RegisterEventController"
+		}
+	},
+
+	"/login": {
+		"GET": {
+			"controller": "Accounts/LoginController",
+			"title": "",
+			"needLoginToBe": false
+		},
+		"POST": {
+			"controller": "Accounts/LoginEventController"
+		}
+	},
+
+	"/reset/$link": {
+		"GET": {
+			"controller": "Accounts/ResetController",
+			"title": "",
+			"needLoginToBe": false
+		}
+	},
+
+	"/disconnect": {
+		"GET": {
+			"controller": "Accounts/DisconnectController"
+		}
+	},
+
+	"/account": {
+		"GET": {
+			"controller": "Accounts/AccountController",
+			"title": "",
+			"needLoginToBe": true
+		},
+		"POST": {
+			"controller": "Accounts/AccountEventController"
+		}
+	},
+
+	"/dashboard": {
+		"GET": {
+			"controller": "Dashboard/DashboardController",
+			"title": "",
+			"needLoginToBe": true,
+			"accessRoles": [
+				"ADMINISTRATOR"
+			]
+		}
+	},
+
+	"/api": {
+		"GET": {
+			"controller": "API/APIController"
+		}
+	},
+
+	"/api/users": {
+		"GET": {
+			"controller": "API/Users/APIUsersController"
+		}
+	}
+}

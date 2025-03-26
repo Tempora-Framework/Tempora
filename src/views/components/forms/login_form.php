@@ -3,7 +3,7 @@
 	use App\Utils\System;
 ?>
 
-<form class="login" method="POST">
+<form method="POST">
 	<?= System::createCSRF() ?>
 
 	<h1><?= Lang::translate(key: "LOGIN_TITLE") ?></h1>

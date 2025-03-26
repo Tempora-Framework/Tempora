@@ -1,7 +1,7 @@
 const themeButton = document.getElementById("theme_button");
 const html = document.documentElement;
-const themeList = ["light", "dark", "auto"];
-const themeIcon = ["ri-moon-line", "ri-time-line", "ri-sun-line"];
+const themeList = ["light", "dark", "system"];
+const themeIcon = ["ri-sun-line", "ri-moon-line", "ri-progress-4-line"];
 const currentTheme = localStorage.getItem("theme") || "light";
 
 html.setAttribute("data-theme", currentTheme);
