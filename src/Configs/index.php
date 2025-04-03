@@ -1,13 +1,12 @@
 <?php
 
-use App\Configs\Path;
+use App\Enums\Path;
 use App\Controllers\ErrorController;
-use App\Models\Services\DatabaseService;
+use App\Models\Database;
 use App\Models\Services\ErrorService;
 use App\Utils\Lang;
 use App\Utils\System;
 use Dotenv\Dotenv;
-use App\Models\Entities\Database;
 
 // Paths
 define(constant_name: "BASE_DIR", value: __DIR__ . "/../..");
@@ -36,7 +35,7 @@ define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
 // Languages
 setcookie(name: "LANG", value: $_COOKIE["LANG"] ?? $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
 
-if (!in_array($_COOKIE["LANG"] . ".json", System::getFiles(path: Path::PUBLIC . "/langs"))) {
+if (!in_array($_COOKIE["LANG"] . ".json", System::getFiles(path: Path::PUBLIC->value . "/langs"))) {
 	setcookie(name: "LANG", value: $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
 	System::redirect();
 }
@@ -55,17 +54,8 @@ if ($_ENV["DEBUG"] == 1) {
 }
 
 //Database
-$database = new Database(
-	hostname: $_ENV["DATABASE_HOST"],
-	port: $_ENV["DATABASE_PORT"],
-	dbname: $_ENV["DATABASE_NAME"],
-	username: $_ENV["DATABASE_USER"],
-	password: $_ENV["DATABASE_PASSWORD"],
-	driver: $_ENV["DATABASE_DRIVER"],
-	charset: $_ENV["DATABASE_CHARSET"]
-);
-$databaseRepo = new DatabaseService(database: $database);
-define(constant_name: "DATABASE", value: $databaseRepo->createConnection());
+$database = new Database;
+define(constant_name: "DATABASE", value: $database());
 
 if (DATABASE instanceof Exception) {
 	$controller = new ErrorController();

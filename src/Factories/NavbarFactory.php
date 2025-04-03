@@ -2,7 +2,7 @@
 
 namespace App\Factories;
 
-use App\Configs\Role;
+use App\Enums\Role;
 use App\Utils\Lang;
 use App\Utils\Navbar;
 
@@ -20,7 +20,7 @@ class NavbarFactory extends Navbar {
 			class: "button button_secondary",
 			needLoginToBe: true,
 			accessRoles: [
-				Role::ADMINISTRATOR
+				Role::ADMINISTRATOR->value
 			]
 		);
 

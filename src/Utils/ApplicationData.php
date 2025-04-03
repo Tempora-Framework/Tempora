@@ -2,7 +2,7 @@
 
 namespace App\Utils;
 
-use App\Configs\Database;
+use App\Enums\Table;
 use PDO;
 
 class ApplicationData {
@@ -45,7 +45,7 @@ class ApplicationData {
 	 */
 	public static function getUsers(): array {
 		return ApplicationData::request(
-			query: "SELECT uid FROM " . Database::USERS,
+			query: "SELECT uid FROM " . Table::USERS->value,
 			returnType: PDO::FETCH_COLUMN
 		);
 	}

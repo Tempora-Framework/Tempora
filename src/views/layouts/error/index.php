@@ -1,5 +1,5 @@
 <?php
-	use App\Configs\Path;
+	use App\Enums\Path;
 ?>
 
 <h1><?= $pageData["error_code"] ?></h1>
@@ -8,5 +8,5 @@
 
 <?php
 	$backPath = "/";
-	include Path::COMPONENT_ACTIONS . "/back_button.php";
+	include Path::COMPONENT_ACTIONS->value . "/back_button.php";
 ?>

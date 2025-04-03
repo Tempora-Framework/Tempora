@@ -2,7 +2,7 @@
 
 namespace App\Utils;
 
-use App\Configs\Path;
+use App\Enums\Path;
 use App\Models\Repositories\UserRepository;
 
 class Navbar {
@@ -44,24 +44,24 @@ class Navbar {
 
 		foreach ($this->navbar as $element) {
 			if ($element["needLoginToBe"] === null) {
-				include Path::COMPONENT_ACTIONS . "/navbar_item.php";
+				include Path::COMPONENT_ACTIONS->value . "/navbar_item.php";
 			} else {
 				if ($element["needLoginToBe"] === true and isset($_SESSION["user"])) {
 					if (
 						$element["accessRoles"] === []
 						|| Roles::check(userRoles: UserRepository::getRoles(uid: $_SESSION["user"]["uid"]), allowRoles: $element["accessRoles"])
 					) {
-						include Path::COMPONENT_ACTIONS . "/navbar_item.php";
+						include Path::COMPONENT_ACTIONS->value . "/navbar_item.php";
 					}
 				}
 				if ($element["needLoginToBe"] === false and !isset($_SESSION["user"])) {
-					include Path::COMPONENT_ACTIONS . "/navbar_item.php";
+					include Path::COMPONENT_ACTIONS->value . "/navbar_item.php";
 				}
 			}
 		}
 
-		include Path::COMPONENT_ACTIONS . "/theme_button.php";
-		include Path::COMPONENT_ACTIONS . "/lang_selection.php";
+		include Path::COMPONENT_ACTIONS->value . "/theme_button.php";
+		include Path::COMPONENT_ACTIONS->value . "/lang_selection.php";
 
 		echo "</nav>";
 	}

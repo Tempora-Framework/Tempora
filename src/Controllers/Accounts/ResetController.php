@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Accounts;
 
-use App\Configs\Path;
+use App\Enums\Path;
 use App\Models\Entities\ResetPassword;
 use App\Models\Repositories\ResetPasswordRepository;
 use App\Utils\System;
@@ -19,10 +19,10 @@ class ResetController {
 			"/scripts/theme.js"
 		];
 
-		require Path::LAYOUT . "/header.php";
+		require Path::LAYOUT->value . "/header.php";
 
-		require Path::LAYOUT . "/reset/index.php";
+		require Path::LAYOUT->value . "/reset/index.php";
 
-		include Path::LAYOUT . "/footer.php";
+		include Path::LAYOUT->value . "/footer.php";
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Accounts;
 
-use App\Configs\Path;
+use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
 class RegisterController {
@@ -12,12 +12,12 @@ class RegisterController {
 			"/scripts/theme.js"
 		];
 
-		require Path::LAYOUT . "/header.php";
+		require Path::LAYOUT->value . "/header.php";
 
 		(new NavbarFactory())->render();
 
-		require Path::LAYOUT . "/register/index.php";
+		require Path::LAYOUT->value . "/register/index.php";
 
-		include Path::LAYOUT . "/footer.php";
+		include Path::LAYOUT->value . "/footer.php";
 	}
 }

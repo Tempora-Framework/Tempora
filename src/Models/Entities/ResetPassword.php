@@ -2,7 +2,7 @@
 
 namespace App\Models\Entities;
 
-use App\Configs\Database;
+use App\Enums\Table;
 use App\Utils\ApplicationData;
 use PDO;
 
@@ -16,7 +16,7 @@ class ResetPassword {
 		$this->email = $email;
 
 		$this->uid = ApplicationData::request(
-			query: "SELECT uid_user FROM " . Database::USER_RESET_PASSWORD . " WHERE link = :link",
+			query: "SELECT uid_user FROM " . Table::USER_RESET_PASSWORD->value . " WHERE link = :link",
 			data: [
 				"link" => $this->link
 			],

@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-use App\Configs\Database;
+use App\Enums\Table;
 use App\Models\Entities\Mail;
 use App\Models\Entities\ResetPassword;
 use App\Models\Services\MailService;
@@ -33,7 +33,7 @@ class ResetPasswordRepository {
 		$link = System::uidGen(size: 32);
 
 		ApplicationData::request(
-			query: "INSERT INTO " . Database::USER_RESET_PASSWORD . " (uid_user, link) VALUES (:uid, :link)",
+			query: "INSERT INTO " . Table::USER_RESET_PASSWORD->value . " (uid_user, link) VALUES (:uid, :link)",
 			data: [
 				"uid" => $this->resetPassword->uid,
 				"link" => $link,

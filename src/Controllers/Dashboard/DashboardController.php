@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Dashboard;
 
-use App\Configs\Path;
+use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
 class DashboardController {
@@ -12,12 +12,12 @@ class DashboardController {
 			"/scripts/theme.js"
 		];
 
-		require Path::LAYOUT . "/header.php";
+		require Path::LAYOUT->value . "/header.php";
 
 		(new NavbarFactory())->render();
 
-		require Path::LAYOUT . "/dashboard/index.php";
+		require Path::LAYOUT->value . "/dashboard/index.php";
 
-		include Path::LAYOUT . "/footer.php";
+		include Path::LAYOUT->value . "/footer.php";
 	}
 }

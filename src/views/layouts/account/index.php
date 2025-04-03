@@ -1,5 +1,5 @@
 <?php
-	use App\Configs\Path;
+	use App\Enums\Path;
 ?>
 
-<?php include Path::COMPONENT_FORMS . "/update_password_form.php"; ?>
+<?php include Path::COMPONENT_FORMS->value . "/update_password_form.php"; ?>

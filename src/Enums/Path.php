@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Enums;
+
+enum Path: string {
+	case PUBLIC = BASE_DIR . "/public";
+	case LAYOUT = BASE_DIR . "/src/views/layouts";
+	case COMPONENT_ACTIONS = BASE_DIR . "/src/views/components/actions";
+	case COMPONENT_FORMS = BASE_DIR . "/src/views/components/forms";
+}

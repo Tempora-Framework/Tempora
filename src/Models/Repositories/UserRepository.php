@@ -2,7 +2,7 @@
 
 namespace App\Models\Repositories;
 
-use App\Configs\Database;
+use App\Enums\Table;
 use App\Models\Entities\User;
 use App\Utils\ApplicationData;
 use App\Utils\System;
@@ -27,12 +27,12 @@ class UserRepository {
 	 * @return Exception | string
 	 */
 	public function create(): Exception | string {
-		$this->user->uid = System::uidGen(size: 16, table: Database::USERS);
+		$this->user->uid = System::uidGen(size: 16, table: Table::USERS->value);
 		$this->user->password = password_hash(password: $this->user->password, algo: PASSWORD_BCRYPT);
 
 		try {
 			ApplicationData::request(
-				query: "INSERT INTO " . Database::USERS . " (uid, name, surname, email, password, to_modify) VALUES (:uid, :name, :surname, :email, :password, :toModify)",
+				query: "INSERT INTO " . Table::USERS->value . " (uid, name, surname, email, password, to_modify) VALUES (:uid, :name, :surname, :email, :password, :toModify)",
 				data: [
 					"uid" => $this->user->uid,
 					"name" => $this->user->name,
@@ -58,7 +58,7 @@ class UserRepository {
 		$this->user->password = password_hash(password: $this->user->password, algo: PASSWORD_BCRYPT);
 
 		ApplicationData::request(
-			query: "UPDATE " . Database::USERS . " SET password = :password, to_modify = false WHERE uid = :uid",
+			query: "UPDATE " . Table::USERS->value . " SET password = :password, to_modify = false WHERE uid = :uid",
 			data: [
 				"uid" => $this->user->uid,
 				"password" => $this->user->password
@@ -73,7 +73,7 @@ class UserRepository {
 	 */
 	public function verifyPassword(): Exception | string {
 		$userData = ApplicationData::request(
-			query: "SELECT uid, password FROM " . Database::USERS . " WHERE email = :email",
+			query: "SELECT uid, password FROM " . Table::USERS->value . " WHERE email = :email",
 			data: [
 				"email" => $this->user->email
 			],
@@ -101,7 +101,7 @@ class UserRepository {
 	 */
 	public static function getInformations(string $uid): null | array {
 		return ApplicationData::request(
-			query: "SELECT * FROM " . Database::USERS . " WHERE uid = :uid",
+			query: "SELECT * FROM " . Table::USERS->value . " WHERE uid = :uid",
 			data: [
 				"uid" => $uid
 			],
@@ -119,7 +119,7 @@ class UserRepository {
 	 */
 	public static function getRoles(string $uid): array {
 		return ApplicationData::request(
-			query: "SELECT id_role FROM " . Database::USER_ROLE . " WHERE uid_user = :uid",
+			query: "SELECT id_role FROM " . Table::USER_ROLE->value . " WHERE uid_user = :uid",
 			data: [
 				"uid" => $uid
 			],
