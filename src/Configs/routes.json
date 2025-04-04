@@ -1,15 +1,14 @@
 {
 	"": {
 		"GET": {
-			"controller": "IndexController",
-			"title": ""
+			"controller": "IndexController"
 		}
 	},
 
 	"/register": {
 		"GET": {
 			"controller": "Accounts/RegisterController",
-			"title": "",
+			"title": "REGISTER_TITLE",
 			"needLoginToBe": false
 		},
 		"POST": {
@@ -20,7 +19,7 @@
 	"/login": {
 		"GET": {
 			"controller": "Accounts/LoginController",
-			"title": "",
+			"title": "LOGIN_TITLE",
 			"needLoginToBe": false
 		},
 		"POST": {
@@ -31,7 +30,7 @@
 	"/reset/$link": {
 		"GET": {
 			"controller": "Accounts/ResetController",
-			"title": "",
+			"title": "RESET_TITLE",
 			"needLoginToBe": false
 		}
 	},
@@ -45,7 +44,7 @@
 	"/account": {
 		"GET": {
 			"controller": "Accounts/AccountController",
-			"title": "",
+			"title": "ACCOUNT_TITLE",
 			"needLoginToBe": true
 		},
 		"POST": {
@@ -56,7 +55,7 @@
 	"/dashboard": {
 		"GET": {
 			"controller": "Dashboard/DashboardController",
-			"title": "",
+			"title": "DASHBOARD_TITLE",
 			"needLoginToBe": true,
 			"accessRoles": [
 				"ADMINISTRATOR"
@@ -66,13 +65,13 @@
 
 	"/api": {
 		"GET": {
-			"controller": "API/APIController"
+			"controller": "API/GETController"
 		}
 	},
 
 	"/api/users": {
 		"GET": {
-			"controller": "API/Users/APIUsersController"
+			"controller": "API/Users/GETUsersController"
 		}
 	}
 }

@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Accounts;
 
-use App\Models\Entities\User;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Lang;
 use App\Utils\System;
@@ -19,8 +18,14 @@ class RegisterEventController {
 			&& isset($_POST["password_confirm"])
 		) {
 			if ($_POST["password"] === $_POST["password_confirm"]) {
-				$user = new User(name: $_POST["name"], surname: $_POST["surname"], email: $_POST["email"], password: $_POST["password"]);
-				$userRepo = new UserRepository(user: $user);
+				$userRepo = new UserRepository;
+				$userRepo
+					->setName(name: $_POST["name"])
+					->setSurname(surname: $_POST["surname"])
+					->setEmail(email: $_POST["email"])
+					->setPassword(password: $_POST["password"])
+				;
+
 				$uid = $userRepo->create();
 
 				if ($uid instanceof Exception) {

@@ -2,49 +2,35 @@
 
 namespace App\Models\Services;
 
-use App\Models\Entities\Mail;
 use PHPMailer\PHPMailer\PHPMailer;
 
-class MailService {
-	private Mail $mail;
-
-	private PHPMailer $mailer;
+class MailService extends PHPMailer {
 
 	/**
-	 * User construct
+	 * Email construct
 	 *
-	 * @param Mail $mail
+	 * @param string $receiver
+	 * @param string $body
+	 * @param string $object
 	 */
-	public function __construct(Mail $mail) {
-		$this->mail = $mail;
+	public function __invoke(string $receiver, string $body, string $object = ""): void {
+		$this->isSMTP();
+		$this->isHTML(isHtml: true);
+		$this->SMTPAuth = true;
+		$this->SMTPSecure = "tls";
+		$this->CharSet = "UTF-8";
+		$this->Host = $_ENV["EMAIL_SMTP"];
+		$this->Port = $_ENV["EMAIL_SMTP_PORT"];
+		$this->SMTPAuth = true;
+		$this->Username = $_ENV["EMAIL_ADDRESS"];
+		$this->Password = $_ENV["EMAIL_PASSWORD"];
 
-		$this->mailer = new PHPMailer();
+		$this->setFrom(address: $this->Username, name: APP_NAME);
+		$this->AddAddress(address: $receiver);
 
-		$this->mailer->isSMTP();
-		$this->mailer->SMTPAuth = true;
-		$this->mailer->SMTPSecure = "tls";
-		$this->mailer->CharSet = "UTF-8";
-		$this->mailer->Host = $this->mail->host;
-		$this->mailer->Port = $this->mail->port;
-		$this->mailer->SMTPAuth = true;
-		$this->mailer->Username = $this->mail->address;
-		$this->mailer->Password = $this->mail->password;
+		$this->Subject = $object;
+		$this->Body = $body;
 
-		$this->mailer->isHTML(isHtml: true);
-	}
-
-	/**
-	 * Send email
-	 *
-	 * @return void
-	 */
-	public function send(): void {
-		$this->mailer->setFrom(address: $this->mail->address, name: APP_NAME);
-		$this->mailer->AddAddress(address: $this->mail->receiver);
-
-		$this->mailer->Subject = $this->mail->object;
-		$this->mailer->Body = $this->mail->body;
-
-		$this->mailer->send();
+		parent::send();
 	}
 }

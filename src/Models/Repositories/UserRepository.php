@@ -9,17 +9,7 @@ use App\Utils\System;
 use Exception;
 use PDO;
 
-class UserRepository {
-	private $user;
-
-	/**
-	 * User construct
-	 *
-	 * @param User $user
-	 */
-	public function __construct(User $user) {
-		$this->user = $user;
-	}
+class UserRepository extends User {
 
 	/**
 	 * Create user
@@ -27,26 +17,26 @@ class UserRepository {
 	 * @return Exception | string
 	 */
 	public function create(): Exception | string {
-		$this->user->uid = System::uidGen(size: 16, table: Table::USERS->value);
-		$this->user->password = password_hash(password: $this->user->password, algo: PASSWORD_BCRYPT);
+		$this->setUid(uid: System::uidGen(size: 16, table: Table::USERS->value));
+		$passwordHash = password_hash(password: $this->getPassword(), algo: PASSWORD_BCRYPT);
 
 		try {
 			ApplicationData::request(
 				query: "INSERT INTO " . Table::USERS->value . " (uid, name, surname, email, password, to_modify) VALUES (:uid, :name, :surname, :email, :password, :toModify)",
 				data: [
-					"uid" => $this->user->uid,
-					"name" => $this->user->name,
-					"surname" => $this->user->surname,
-					"email" => $this->user->email,
-					"password" => $this->user->password,
-					"toModify" => (int)$this->user->toModify
+					"uid" => $this->getUid(),
+					"name" => $this->getName(),
+					"surname" => $this->getSurname(),
+					"email" => $this->getEmail(),
+					"password" => $passwordHash,
+					"toModify" => (int)$this->getToModify()
 				]
 			);
 		} catch (Exception $exception) {
 			return $exception;
 		}
 
-		return $this->user->uid;
+		return $this->getUid();
 	}
 
 	/**
@@ -54,14 +44,14 @@ class UserRepository {
 	 *
 	 * @return void
 	 */
-	public function setPassword(): void {
-		$this->user->password = password_hash(password: $this->user->password, algo: PASSWORD_BCRYPT);
+	public function savePassword(): void {
+		$passwordHash = password_hash(password: $this->getPassword(), algo: PASSWORD_BCRYPT);
 
 		ApplicationData::request(
 			query: "UPDATE " . Table::USERS->value . " SET password = :password, to_modify = false WHERE uid = :uid",
 			data: [
-				"uid" => $this->user->uid,
-				"password" => $this->user->password
+				"uid" => $this->getUid(),
+				"password" => $passwordHash
 			]
 		);
 	}
@@ -75,14 +65,14 @@ class UserRepository {
 		$userData = ApplicationData::request(
 			query: "SELECT uid, password FROM " . Table::USERS->value . " WHERE email = :email",
 			data: [
-				"email" => $this->user->email
+				"email" => $this->getEmail()
 			],
 			returnType: PDO::FETCH_ASSOC,
 			singleValue: true
 		);
 
 		if ($userData != null) {
-			if (password_verify(password: $this->user->password, hash: $userData["password"])) {
+			if (password_verify(password: $this->getPassword(), hash: $userData["password"])) {
 				return $userData["uid"];
 			} else {
 				return new Exception(message: "Wrong password");

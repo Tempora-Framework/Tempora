@@ -3,13 +3,16 @@
 namespace App\Controllers\Accounts;
 
 use App\Enums\Path;
-use App\Models\Entities\ResetPassword;
 use App\Models\Repositories\ResetPasswordRepository;
 use App\Utils\System;
 
 class ResetController {
 	public function render(array $pageData): void {
-		$resetPasswordRepo = new ResetPasswordRepository(resetPassword: new ResetPassword(link: $pageData["link"]));
+		$resetPasswordRepo = new ResetPasswordRepository;
+		$resetPasswordRepo
+			->setLink(link: $pageData["link"])
+			->setUid()
+		;
 
 		if ($resetPasswordRepo->getUid() === null)
 			System::redirect(url: "/");

@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Accounts;
 
-use App\Models\Entities\User;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Lang;
 use App\Utils\System;
@@ -15,8 +14,12 @@ class LoginEventController {
 			&& isset($_POST["email"])
 			&& isset($_POST["password"])
 		) {
-			$user = new User(email: $_POST["email"], password: $_POST["password"]);
-			$userRepo = new UserRepository(user: $user);
+			$userRepo = new UserRepository;
+			$userRepo
+				->setEmail(email: $_POST["email"])
+				->setPassword(password: $_POST["password"])
+			;
+
 			$uid = $userRepo->verifyPassword();
 
 			if ($uid instanceof Exception) {

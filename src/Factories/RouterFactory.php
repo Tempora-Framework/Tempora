@@ -4,6 +4,7 @@ namespace App\Factories;
 
 use App\Router;
 use App\Utils\Lang;
+use App\Utils\Roles;
 
 class RouterFactory extends Router {
 	private $data;
@@ -15,9 +16,21 @@ class RouterFactory extends Router {
 
 		foreach ($this->data as $routeKey => $route) {
 			foreach ($route as $methodKey => $method) {
-				$pageData["title"] = $method["title"] ?? null;
-				$pageData["needLoginToBe"] = $method["needLoginToBe"] ?? null;
-				$pageData["accessRoles"] = $method["accessRoles"] ?? null;
+				if (isset($method["title"])) {
+					$pageData["page_title"] = APP_NAME . " - " . Lang::translate(key: $method["title"]);
+				} else {
+					$pageData["page_title"] = APP_NAME;
+				}
+
+				$pageData["page_needLoginToBe"] = $method["needLoginToBe"] ?? null;
+
+				if (isset($method["accessRoles"])) {
+					$pageData["page_accessRoles"] = [];
+
+					foreach ($method["accessRoles"] as $role) {
+						array_push($pageData["page_accessRoles"], Roles::getRoleByName(name: $role));
+					}
+				}
 
 				parent::check(url: $routeKey, controller: str_replace(search: "/", replace: "\\", subject: $method["controller"]), method: $methodKey, pageData: $pageData);
 			}

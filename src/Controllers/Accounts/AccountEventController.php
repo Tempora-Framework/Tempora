@@ -16,15 +16,22 @@ class AccountEventController {
 			&& isset($_POST["new_password"])
 			&& isset($_POST["new_password_confirm"])
 		) {
-			$userRepo = new UserRepository(user: new User(email: UserRepository::getInformations(uid: $_SESSION["user"]["uid"])["email"], password: $_POST["old_password"]));
+			$userRepo = new UserRepository;
+			$userRepo->setEmail(email: UserRepository::getInformations(uid: $_SESSION["user"]["uid"])["email"]);
+
 			if ($userRepo->verifyPassword() instanceof Exception) {
 				setcookie("NOTIFICATION", Lang::translate(key: "LOGIN_WRONG_CREDENTIALS"), time() + 60*60*24*30);
 				System::redirect();
 			}
 
 			if ($_POST["new_password"] === $_POST["new_password_confirm"]) {
-				$userRepo = new UserRepository(user: new User(uid: $_SESSION["user"]["uid"], password: $_POST["new_password"]));
-				$userRepo->setPassword();
+				$userRepo = new UserRepository;
+				$userRepo
+					->setUid(uid: $_SESSION["user"]["uid"])
+					->setPassword(password: $_POST["new_password"])
+				;
+
+				$userRepo->savePassword();
 
 				System::redirect(url: "/");
 			} else {

@@ -2,6 +2,8 @@
 
 namespace App\Utils;
 
+use App\Enums\Role;
+
 class Roles {
 	/**
 	 * Check for permissions
@@ -16,5 +18,15 @@ class Roles {
 			return true;
 		}
 		return false;
+	}
+
+	public static function getRoleByName(string $name): int {
+		foreach (Role::cases() as $case) {
+			if ($case->name === $name) {
+				return $case->value;
+			}
+		}
+
+		return 0;
 	}
 }
