@@ -30,15 +30,18 @@ class ResetPasswordRepository extends ResetPassword{
 		);
 
 		$mailService = new MailService;
-		$mailService(
-			receiver: $email, object: Lang::translate(key: "MAIL_RESET_PASSWORD_OBJECT"),
-			body: Lang::translate(
-				key: "MAIL_RESET_PASSWORD_BODY",
-				options: [
-					"domain" => $_SERVER["SERVER_NAME"],
-					"link" => $link
-				]
+		$mailService
+			->setReceiver(receiver: $email)
+			->setObject(object: Lang::translate(key: "MAIL_RESET_PASSWORD_OBJECT"))
+			->setBody(
+				body: Lang::translate(key: "MAIL_RESET_PASSWORD_BODY",
+					options: [
+						"domain" => $_SERVER["SERVER_NAME"],
+						"link" => $link
+					]
+				)
 			)
-		);
+			->send()
+		;
 	}
 }

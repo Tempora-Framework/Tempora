@@ -6,14 +6,14 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class MailService extends PHPMailer {
 
+	private string $receiver;
+	private string $body;
+	private string $object;
+
 	/**
 	 * Email construct
-	 *
-	 * @param string $receiver
-	 * @param string $body
-	 * @param string $object
 	 */
-	public function __invoke(string $receiver, string $body, string $object = ""): void {
+	public function __construct() {
 		$this->isSMTP();
 		$this->isHTML(isHtml: true);
 		$this->SMTPAuth = true;
@@ -26,11 +26,66 @@ class MailService extends PHPMailer {
 		$this->Password = $_ENV["EMAIL_PASSWORD"];
 
 		$this->setFrom(address: $this->Username, name: APP_NAME);
-		$this->AddAddress(address: $receiver);
+	}
 
-		$this->Subject = $object;
-		$this->Body = $body;
+	/**
+	 * Send mail
+	 *
+	 * @return void
+	 */
+	public function send(): void {
+		$this->AddAddress(address: $this->receiver);
+		$this->Subject = $this->object;
+		$this->Body = $this->body;
 
 		parent::send();
+	}
+
+	/**
+	 * Get the value of receiver
+	 */
+	public function getReceiver(): string {
+		return $this->receiver;
+	}
+
+	/**
+	 * Set the value of receiver
+	 */
+	public function setReceiver(string $receiver): self {
+		$this->receiver = $receiver;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of body
+	 */
+	public function getBody(): string {
+		return $this->body;
+	}
+
+	/**
+	 * Set the value of body
+	 */
+	public function setBody(string $body): self {
+		$this->body = $body;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of object
+	 */
+	public function getObject(): string {
+		return $this->object;
+	}
+
+	/**
+	 * Set the value of object
+	 */
+	public function setObject(string $object): self {
+		$this->object = $object;
+
+		return $this;
 	}
 }
