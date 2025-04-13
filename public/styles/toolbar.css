@@ -1,0 +1,78 @@
+/* ==============================================
+   Tempora Tool Bar
+   ============================================== */
+
+:root {
+	--toolbar-background-color: #464646;
+	--toolbar-background-hover-color: #353535;
+	--toolbar-text-color: #ffffff;
+}
+
+footer {
+	margin-bottom: 18px;
+}
+
+.tempora_toolbar {
+	width: -webkit-fill-available;
+	width: -moz-available;
+	height: fit-content;
+	background-color: var(--toolbar-background-color);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 0 10px;
+	display: flex;
+	flex-direction: row;
+	/* gap: 10px; */
+	color: var(--toolbar-text-color);
+
+	.tempora_toolbar_title {
+		font-weight: bold;
+		padding-right: 10px;
+	}
+
+	.tempora_toolbar_drop_container {
+		display: inline-block;
+	}
+
+	p {
+		padding: 0 10px;
+	}
+
+	table {
+		td {
+			color: var(--toolbar-text-color);
+			min-width: 200px;
+			vertical-align: top;
+			border-top: solid 1px var(--toolbar-background-color);
+		}
+	}
+
+	.tempora_toolbar_drop_element {
+		display: none;
+		position: absolute;
+		bottom: 100%;
+		min-width: 300px;
+		max-width: 500px;
+		background-color: var(--toolbar-background-hover-color);
+		overflow-y: scroll;
+		max-height: 500px;
+
+		p,
+		td {
+			user-select: text;
+		}
+
+		td:hover {
+			cursor: text;
+		}
+	}
+
+	.tempora_toolbar_drop_container:hover {
+		background-color: var(--toolbar-background-hover-color);
+	}
+
+	.tempora_toolbar_drop_container:hover .tempora_toolbar_drop_element {
+		display: block;
+	}
+}

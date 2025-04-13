@@ -17,9 +17,7 @@ class RouterFactory extends Router {
 		foreach ($this->data as $routeKey => $route) {
 			foreach ($route as $methodKey => $method) {
 				if (isset($method["title"])) {
-					$pageData["page_title"] = APP_NAME . " - " . Lang::translate(key: $method["title"]);
-				} else {
-					$pageData["page_title"] = APP_NAME;
+					$pageData["page_title"] = $method["title"];
 				}
 
 				$pageData["page_needLoginToBe"] = $method["needLoginToBe"] ?? null;

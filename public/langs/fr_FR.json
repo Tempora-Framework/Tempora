@@ -3,6 +3,7 @@
 	"MAIN_NAME": "Prénom",
 	"MAIN_SURNAME": "Nom de famille",
 	"MAIN_EMAIL": "Email",
+	"MAIN_ROLE": "Rôle",
 	"MAIN_PASSWORD": "Mot de passe",
 	"MAIN_ERROR": "Erreur",
 	"MAIN_THEME_LIGHT": "Passer au thème clair",
@@ -29,6 +30,11 @@
 	"LOGIN_SUBMIT": "Se connecter",
 	"LOGIN_WRONG_CREDENTIALS": "Identifiant ou mot de passe invalide.",
 
+	"LOGIN_RESET_TITLE": "Réinitialiser le mot de passe",
+	"LOGIN_RESET_PASSWORD": "Envoyer un email",
+
+	"RESET_TITLE": "Réinitialiser le mot de passe",
+
 	"REGISTER_TITLE": "Créer un compte",
 	"REGISTER_PASSWORD_CONFIRM": "Confirmer le mot de passe",
 	"REGISTER_SUBMIT": "Créer le compte",
@@ -42,5 +48,16 @@
 	"ERROR_SERVER": "Erreur serveur.",
 	"ERROR_DATABASE": "Erreur de base de donnée.",
 	"ERROR_404": "Page inconnue.",
-	"ERROR_403": "Accès non autorisé."
+	"ERROR_403": "Accès non autorisé.",
+
+	"TOOLBAR_TITLE": "Debug",
+	"TOOLBAR_LANG_TITLE": "Langues",
+	"TOOLBAR_MS_TITLE": "Temps de chargement",
+	"TOOLBAR_PAGEDATA_TITLE": "Données de la page",
+	"TOOLBAR_POST_TITLE": "POST",
+	"TOOLBAR_GET_TITLE": "GET",
+	"TOOLBAR_COOKIE_TITLE": "Cookies",
+	"TOOLBAR_SQL_TITLE": "Requètes SQL",
+	"TOOLBAR_USER_TITLE": "Utilisateur",
+	"TOOLBAR_HTTP_CODE_TITLE": "Code HTTP"
 }

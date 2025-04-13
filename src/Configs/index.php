@@ -32,6 +32,21 @@ Dotenv::createImmutable(paths: BASE_DIR)->load();
 date_default_timezone_set(timezoneId: $_ENV["TIMEZONE"]);
 define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
 
+// Debug
+define(constant_name: "DEBUG", value: $_ENV["DEBUG"]);
+
+if (DEBUG == 1) {
+	$toolbar = [];
+	global $toolbar;
+
+	$GLOBALS["toolbar"]["ms_count"] = microtime(as_float: true);
+	$GLOBALS["toolbar"]["sql_count"] = 0;
+	$GLOBALS["toolbar"]["sql_query"] = [];
+	$GLOBALS["toolbar"]["langs"] = [];
+	$GLOBALS["toolbar"]["lang_count"] = 0;
+	$GLOBALS["toolbar"]["lang_error_count"] = 0;
+}
+
 // Languages
 setcookie(name: "LANG", value: $_COOKIE["LANG"] ?? $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
 
@@ -41,7 +56,7 @@ if (!in_array($_COOKIE["LANG"] . ".json", System::getFiles(path: Path::PUBLIC->v
 }
 
 // Errors
-if ($_ENV["DEBUG"] == 1) {
+if (DEBUG == 1) {
 	ini_set(option: "display_errors", value: 1);
 	ini_set(option: "display_startup_errors", value: 1);
 	error_reporting(error_level: E_ALL);

@@ -29,6 +29,15 @@ class ApplicationData {
 			}
 		}
 
+		if (DEBUG == 1) {
+			$GLOBALS["toolbar"]["sql_count"]++;
+			$queryLog = $query;
+			foreach ($data as $key => $value) {
+				$queryLog = str_replace(search: ":" . $key, replace: $value, subject: $queryLog);
+			}
+			array_push($GLOBALS["toolbar"]["sql_query"], $queryLog);
+		}
+
 		$stmt->execute();
 
 		if ($returnType) {

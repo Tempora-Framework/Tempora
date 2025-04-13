@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Enums\Path;
 use App\Models\Repositories\UserRepository;
+use App\Utils\Lang;
 use App\Utils\Roles;
 
 class Router {
@@ -46,7 +48,7 @@ class Router {
 		$urlParts = explode(separator: "/", string: $url);
 		$clientUrlParts = explode(separator: "/", string: $this->clientUrl);
 
-		// Safe gate
+		// Safe gates
 		if (count(value: $urlParts) != count(value: $clientUrlParts))
 			return;
 		if (isset($pageData["page_needLoginToBe"])) {
@@ -80,12 +82,24 @@ class Router {
 			unset($_SESSION["page_data"]);
 		}
 
+		if (isset($pageData["page_title"])) {
+			$pageData["page_title"] = APP_NAME . " - " . Lang::translate(key: $pageData["page_title"]);
+		} else {
+			$pageData["page_title"] = APP_NAME;
+		}
+
 		(new ($this->controllersPath . $controller))->render(pageData: $pageData);
+
+		if (DEBUG == 1)
+			include Path::COMPONENT_TOOLBAR->value . "/toolbar.php";
 
 		exit;
 	}
 
 	public function error(array $pageData): void {
 		(new ($this->controllersPath . "ErrorController"))->render(pageData: $pageData);
+
+		if (DEBUG == 1)
+			include Path::COMPONENT_TOOLBAR->value . "/toolbar.php";
 	}
 }
