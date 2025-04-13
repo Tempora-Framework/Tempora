@@ -27,11 +27,25 @@
 		}
 	},
 
+	"/login/reset": {
+		"GET": {
+			"controller": "Accounts/LoginResetController",
+			"title": "LOGIN_RESET_TITLE",
+			"needLoginToBe": false
+		},
+		"POST": {
+			"controller": "Accounts/LoginResetEventController"
+		}
+	},
+
 	"/reset/$link": {
 		"GET": {
 			"controller": "Accounts/ResetController",
 			"title": "RESET_TITLE",
 			"needLoginToBe": false
+		},
+		"POST": {
+			"controller": "Accounts/ResetEventController"
 		}
 	},
 

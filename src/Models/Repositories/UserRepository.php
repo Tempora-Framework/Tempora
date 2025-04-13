@@ -83,6 +83,24 @@ class UserRepository extends User {
 	}
 
 	/**
+	 * Get uid with email
+	 *
+	 * @param string $email
+	 *
+	 * @return null | string
+	 */
+	public static function getUidByEmail(string $email): null | string {
+		return ApplicationData::request(
+			query: "SELECT uid FROM " . Table::USERS->value . " WHERE email = :email",
+			data: [
+				"email" => $email
+			],
+			returnType: PDO::FETCH_COLUMN,
+			singleValue: true
+		);
+	}
+
+	/**
 	 * Get user's informations
 	 *
 	 * @param string $uid

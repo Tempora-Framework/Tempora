@@ -6,12 +6,14 @@
 <form class="account" method="POST">
 	<?= System::createCSRF() ?>
 
+	<?php if (!isset($oldPassword) || $oldPassword != false) { ?>
 	<input
 		type="password"
 		name="old_password"
 		value="<?= $pageData["form_update_old_password"] ?? "" ?>"
 		placeholder="<?= Lang::translate(key: "MAIN_OLD_PASSWORD") ?>"
 	>
+	<?php } ?>
 	<input
 		type="password"
 		name="new_password"

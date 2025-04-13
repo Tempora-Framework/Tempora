@@ -3,6 +3,7 @@
 namespace App\Controllers\Accounts;
 
 use App\Enums\Path;
+use App\Factories\NavbarFactory;
 use App\Models\Repositories\ResetPasswordRepository;
 use App\Utils\System;
 
@@ -23,6 +24,8 @@ class ResetController {
 		];
 
 		require Path::LAYOUT->value . "/header.php";
+
+		(new NavbarFactory())->render();
 
 		require Path::LAYOUT->value . "/reset/index.php";
 

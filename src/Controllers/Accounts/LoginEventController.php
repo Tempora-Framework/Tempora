@@ -35,13 +35,6 @@ class LoginEventController {
 			}
 		}
 
-		if (
-			System::checkCSRF()
-			&& isset($_POST["reset_password"])
-		) {
-
-		}
-
 		System::redirect();
 	}
 }
