@@ -40,12 +40,15 @@ footer {
 	}
 
 	table {
+		border-collapse: collapse;
+		border-style: hidden;
+
 		td {
 			color: var(--toolbar-text-color);
-			min-width: 200px;
 			vertical-align: top;
-			border-top: solid 1px var(--toolbar-background-color);
+			border: solid 2px var(--toolbar-background-color);
 			font-size: 14px;
+			padding: 5px;
 		}
 	}
 
@@ -60,11 +63,13 @@ footer {
 		max-height: 500px;
 		padding: 10px;
 		border-radius: 9px 9px 0 0;
-		/* transform: translateX(-50%); */
 
 		p,
-		td {
+		td,
+		a {
 			user-select: text;
+			text-decoration: none;
+			color: var(--toolbar-text-color);
 		}
 
 		td:hover {
