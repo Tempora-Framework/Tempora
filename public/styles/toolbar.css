@@ -9,7 +9,7 @@
 }
 
 footer {
-	margin-bottom: 18px;
+	margin-bottom: 28px;
 }
 
 .tempora_toolbar {
@@ -17,18 +17,18 @@ footer {
 	width: -moz-available;
 	height: fit-content;
 	background-color: var(--toolbar-background-color);
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	left: 0;
 	padding: 0 10px;
 	display: flex;
 	flex-direction: row;
-	/* gap: 10px; */
 	color: var(--toolbar-text-color);
+	border-left: solid 4px red;
+	font-size: 14px;
 
 	.tempora_toolbar_title {
 		font-weight: bold;
-		padding-right: 10px;
 	}
 
 	.tempora_toolbar_drop_container {
@@ -36,7 +36,7 @@ footer {
 	}
 
 	p {
-		padding: 0 10px;
+		padding: 6px 10px;
 	}
 
 	table {
@@ -45,6 +45,7 @@ footer {
 			min-width: 200px;
 			vertical-align: top;
 			border-top: solid 1px var(--toolbar-background-color);
+			font-size: 14px;
 		}
 	}
 
@@ -57,6 +58,9 @@ footer {
 		background-color: var(--toolbar-background-hover-color);
 		overflow-y: scroll;
 		max-height: 500px;
+		padding: 10px;
+		border-radius: 9px 9px 0 0;
+		/* transform: translateX(-50%); */
 
 		p,
 		td {

@@ -50,7 +50,7 @@
 	"ERROR_404": "Page inconnue.",
 	"ERROR_403": "Accès non autorisé.",
 
-	"TOOLBAR_TITLE": "Debug",
+	"TOOLBAR_TITLE": "Mode débogage",
 	"TOOLBAR_LANG_TITLE": "Langues",
 	"TOOLBAR_MS_TITLE": "Temps de chargement",
 	"TOOLBAR_PAGEDATA_TITLE": "Données de la page",

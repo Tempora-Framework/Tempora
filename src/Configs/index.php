@@ -27,6 +27,7 @@ require $autoload;
 
 // Configurations
 session_name(name: "TEMPORA");
+ini_set(option: "session.gc_maxlifetime", value: 3600);
 session_start();
 Dotenv::createImmutable(paths: BASE_DIR)->load();
 date_default_timezone_set(timezoneId: $_ENV["TIMEZONE"]);
@@ -68,7 +69,7 @@ if (DEBUG == 1) {
 	register_shutdown_function(callback: [ErrorService::class, "shutdown"]);
 }
 
-//Database
+// Database
 $database = new Database;
 define(constant_name: "DATABASE", value: $database());
 

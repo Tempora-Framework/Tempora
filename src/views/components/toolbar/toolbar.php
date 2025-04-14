@@ -17,6 +17,15 @@
 			array_pop(array: $GLOBALS["toolbar"]["sql_query"]);
 		}
 	}
+
+	$httpCodeType = substr(http_response_code(), 0, 1);
+	$httpCodeColor = "";
+	if ($httpCodeType == 2)
+		$httpCodeColor = "lightgreen";
+	if ($httpCodeType == 3)
+		$httpCodeColor = "yellow";
+	if ($httpCodeType == 4 || $httpCodeType == 5)
+		$httpCodeColor = "red";
 ?>
 
 <link rel="stylesheet" href="/styles/main.css">
@@ -28,7 +37,7 @@
 
 	<p title="<?= Lang::translate(key: "TOOLBAR_MS_TITLE") ?>"><i class="ri-time-line"></i> <?= round(num: (microtime(as_float: true) - $GLOBALS["toolbar"]["ms_count"]) *1000, precision: 2) ?>ms</p>
 
-	<p title="<?= Lang::translate(key: "TOOLBAR_HTTP_CODE_TITLE") ?>"><i class="ri-code-line"></i> <?= http_response_code() ?></p>
+	<p title="<?= Lang::translate(key: "TOOLBAR_HTTP_CODE_TITLE") ?>" style="font-weight:bold;color:<?= $httpCodeColor ?>"><i class="ri-code-line"></i> <?= http_response_code() ?></p>
 
 	<?php if (isset($_SESSION["user"]["uid"])) { ?>
 		<div class="tempora_toolbar_drop_container">
@@ -36,19 +45,28 @@
 			<div class="tempora_toolbar_drop_element">
 				<table>
 					<tr>
-						<td>UID</td><td><?= $_SESSION["user"]["uid"] ?></td>
+						<td>UID</td>
+						<td><?= $_SESSION["user"]["uid"] ?></td>
 					</tr>
 					<tr>
-						<td><?= Lang::translate(key: "MAIN_EMAIL") ?></td><td><?= $userInfo["email"] ?></td>
+						<td>Session timeout</td>
+						<td><?= ini_get(option: "session.gc_maxlifetime") ?> s</td>
 					</tr>
 					<tr>
-						<td><?= Lang::translate(key: "MAIN_NAME") ?></td><td><?= $userInfo["name"] ?></td>
+						<td><?= Lang::translate(key: "MAIN_EMAIL") ?></td>
+						<td><?= $userInfo["email"] ?></td>
 					</tr>
 					<tr>
-						<td><?= Lang::translate(key: "MAIN_SURNAME") ?></td><td><?= $userInfo["surname"] ?></td>
+						<td><?= Lang::translate(key: "MAIN_NAME") ?></td>
+						<td><?= $userInfo["name"] ?></td>
 					</tr>
 					<tr>
-						<td><?= Lang::translate(key: "MAIN_ROLE") ?></td><td><?= join(array: $roleFormat, separator: ", ") ?></td>
+						<td><?= Lang::translate(key: "MAIN_SURNAME") ?></td>
+						<td><?= $userInfo["surname"] ?></td>
+					</tr>
+					<tr>
+						<td><?= Lang::translate(key: "MAIN_ROLE") ?></td>
+						<td><?= join(array: $roleFormat, separator: ", ") ?></td>
 					</tr>
 				</table>
 			</div>

@@ -50,7 +50,7 @@
 	"ERROR_404": "Unknown pages.",
 	"ERROR_403": "Unauthorised access.",
 
-	"TOOLBAR_TITLE": "Debug",
+	"TOOLBAR_TITLE": "Debug mode",
 	"TOOLBAR_LANG_TITLE": "Languages",
 	"TOOLBAR_MS_TITLE": "Loading time",
 	"TOOLBAR_PAGEDATA_TITLE": "Page data",
