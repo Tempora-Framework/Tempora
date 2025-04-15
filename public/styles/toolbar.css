@@ -43,6 +43,9 @@ footer {
 	table {
 		border-collapse: collapse;
 		border-style: hidden;
+		table-layout: fixed;
+		width: 100%;
+		word-wrap: break-word;
 
 		td {
 			color: var(--toolbar-text-color);
@@ -58,7 +61,8 @@ footer {
 		position: absolute;
 		bottom: 100%;
 		min-width: 300px;
-		max-width: 500px;
+		width: fit-content;
+		max-width: 600px;
 		background-color: var(--toolbar-background-hover-color);
 		overflow-y: scroll;
 		max-height: 500px;

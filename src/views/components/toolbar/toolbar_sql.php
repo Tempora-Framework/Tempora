@@ -6,11 +6,18 @@
 	<p class="tempora_toolbar_drop_hover_element" title="<?= Lang::translate(key: "TOOLBAR_SQL_TITLE") ?>"><i class="ri-database-2-line"></i> <?= $GLOBALS["toolbar"]["sql_count"] - $toolbarSQLCount ?></p>
 	<div class="tempora_toolbar_drop_element">
 		<table>
-			<?php foreach ($GLOBALS["toolbar"]["sql_query"] as $query) { ?>
+			<?php
+				foreach ($GLOBALS["toolbar"]["sql_query"] as $query) {
+					foreach ($query as $key => $value) {
+			?>
 				<tr>
-					<td><?= $query ?></td>
+					<td><?= $key ?></td>
+					<td><?= $value ?></td>
 				</tr>
-			<?php } ?>
+			<?php
+					}
+				}
+			?>
 		</table>
 	</div>
 </div>
