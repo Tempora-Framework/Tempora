@@ -1,20 +1,25 @@
 <?php
 	use App\Enums\Path;
+	use App\Utils\ElementBuilder\Select;
 	use App\Utils\Lang;
 	use App\Utils\System;
 ?>
 
-<select class="lang_selection" id="lang_selection">
-
 <?php
+	$options = [];
 	foreach (System::getFiles(path: Path::PUBLIC->value . "/langs") as $file) {
 		$file = str_replace(search: ".json", replace: "", subject: $file);
-		if ($file === $_COOKIE["LANG"]) {
-			echo "<option value=\"" . $file . "\" selected>" . Lang::nameFormat($file) . "</option>";
-		} else {
-			echo "<option value=\"" . $file . "\">" . Lang::nameFormat($file) . "</option>";
-		}
+		$options[$file] = Lang::nameFormat(name: $file);
 	}
-?>
 
-</select>
+	$select = new Select;
+	$select
+		->setClass(class: "lang_selection")
+		->setId(id: "lang_selection")
+
+		->setOptions(options: $options)
+		->setSelected(selected: $_COOKIE["LANG"])
+		->setTranslate(translate: false)
+	;
+	$select->build();
+?>

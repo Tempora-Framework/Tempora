@@ -8,8 +8,8 @@
 	<div class="tempora_toolbar_drop_element">
 		<table>
 			<tr>
-				<td>Version</td>
-				<td></td>
+				<td><i class="ri-time-line"></i> Tempora</td>
+				<td>v<?= TEMPORA_VERSION ?></td>
 			</tr>
 			<?php if (is_dir(filename: BASE_DIR . "/.git")) { ?>
 				<tr>
