@@ -22,6 +22,8 @@
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/styles/toolbar.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
+<script defer src="/scripts/engine.js"></script>
+<script defer src="/scripts/toolbar.js"></script>
 
 <div class="tempora_toolbar">
 	<?php include Path::COMPONENT_TOOLBAR->value . "/toolbar_title.php"; ?>

@@ -32,6 +32,7 @@
 
 	"LOGIN_RESET_TITLE": "Reset password",
 	"LOGIN_RESET_PASSWORD": "Send email",
+	"LOGIN_RESET_SEND": "An email has just been sent!",
 
 	"RESET_TITLE": "Reset password",
 

@@ -32,6 +32,7 @@
 
 	"LOGIN_RESET_TITLE": "Réinitialiser le mot de passe",
 	"LOGIN_RESET_PASSWORD": "Envoyer un email",
+	"LOGIN_RESET_SEND": "Un mail vient d'être envoyé !",
 
 	"RESET_TITLE": "Réinitialiser le mot de passe",
 
