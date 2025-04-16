@@ -5,26 +5,32 @@ namespace App\Utils\ElementBuilder;
 class ElementBuilder {
 
 	protected ?string $element = null;
-	private ?string $class = null;
-	private ?string $id = null;
-	private ?string $name = null;
-	private ?string $value = null;
-
+	private array $attributs = [];
 	private ?string $content = null;
 
-	public function render(): void {
+	/**
+	 * Element render
+	 *
+	 * @return string
+	 */
+	public function render(): string {
 		$result = "<" . $this->element;
-		$result .= (isset($this->class) ? " class=\"" . $this->class . "\"" : "");
-		$result .= (isset($this->id) ? " id=\"" . $this->id . "\"" : "");
-		$result .= (isset($this->name) ? " name=\"" . $this->name . "\"" : "");
-		$result .= (isset($this->value) ? " value=\"" . $this->value . "\"" : "");
+
+		foreach ($this->attributs as $key => $value) {
+			if ($value != "") {
+				$result .= " " . $key . "=\"" . $value . "\"";
+			} else {
+				$result .= " " . $key;
+			}
+		}
+
 		$result .= ">";
 
 		$result .= $this->content;
 
 		$result .= "</" . $this->element . ">";
 
-		echo $result;
+		return $result;
 	}
 
 	/**
@@ -50,94 +56,6 @@ class ElementBuilder {
 	}
 
 	/**
-	 * Get the value of class
-	 *
-	 * @return string
-	 */
-	public function getClass(): string {
-		return $this->class;
-	}
-
-	/**
-	 * Set the value of class
-	 *
-	 * @param string $class
-	 *
-	 * @return self
-	 */
-	public function setClass(string $class): self {
-		$this->class = $class;
-
-		return $this;
-	}
-
-	/**
-	 * Get the value of id
-	 *
-	 * @return string
-	 */
-	public function getId(): string {
-		return $this->id;
-	}
-
-	/**
-	 * Set the value of id
-	 *
-	 * @param string $id
-	 *
-	 * @return self
-	 */
-	public function setId(string $id): self {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
-	 * Get the value of name
-	 *
-	 * @return string
-	 */
-	public function getName(): string {
-		return $this->name;
-	}
-
-	/**
-	 * Set the value of name
-	 *
-	 * @param string $name
-	 *
-	 * @return self
-	 */
-	public function setName(string $name): self {
-		$this->name = $name;
-
-		return $this;
-	}
-
-	/**
-	 * Get the value of value
-	 *
-	 * @return string
-	 */
-	public function getValue(): string {
-		return $this->value;
-	}
-
-	/**
-	 * Set the value of value
-	 *
-	 * @param string $value
-	 *
-	 * @return self
-	 */
-	public function setValue(string $value): self {
-		$this->value = $value;
-
-		return $this;
-	}
-
-	/**
 	 * Get the value of content
 	 *
 	 * @return string
@@ -155,6 +73,28 @@ class ElementBuilder {
 	 */
 	public function setContent(string $content): self {
 		$this->content = $content;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of attributs
+	 *
+	 * @return array
+	 */
+	public function getAttributs(): array {
+		return $this->attributs;
+	}
+
+	/**
+	 * Add attributs
+	 *
+	 * @param array $attributs
+	 *
+	 * @return self
+	 */
+	public function setAttributs(array $attributs): self {
+		$this->attributs = $attributs;
 
 		return $this;
 	}

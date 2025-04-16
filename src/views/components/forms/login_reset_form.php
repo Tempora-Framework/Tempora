@@ -1,21 +1,48 @@
 <?php
+	use App\Utils\ElementBuilder\ElementBuilder;
+	use App\Utils\ElementBuilder\Form;
 	use App\Utils\Lang;
-	use App\Utils\System;
 ?>
 
-<form method="POST">
-	<?= System::createCSRF() ?>
+<?php
+	$form = new Form;
+	$form
+		->setAttributs(
+			attributs: [
+				"method" => "POST",
+				"class"	=> "login_reset"
+			]
+		)
+		->setCsrf(csrf: true)
+	;
 
-	<h1><?= Lang::translate(key: "LOGIN_RESET_TITLE") ?></h1>
+	$input = new ElementBuilder;
+	$input
+		->setElement(element: "input")
+		->setAttributs(
+			attributs: [
+				"type" => "text",
+				"name" => "email",
+				"value" => $pageData["form_email"] ?? "",
+				"placeholder" => Lang::translate(key: "MAIN_EMAIL"),
+				"required" => "",
+				"autofocus" => ""
+			]
+		)
+	;
+	$form->addInput(input: $input);
 
-	<input
-		type="text"
-		name="email"
-		value="<?= $pageData["form_email"] ?? "" ?>"
-		placeholder="<?= Lang::translate(key: "MAIN_EMAIL") ?>"
-		required
-		autofocus
-	>
+	$submit = new ElementBuilder;
+	$submit
+		->setElement(element: "button")
+		->setAttributs(
+			attributs: [
+				"type" => "submit"
+			]
+		)
+		->setContent(content: Lang::translate(key: "LOGIN_RESET_PASSWORD"))
+	;
+	$form->addInput(input: $submit);
 
-	<button type="submit"><?= Lang::translate(key: "LOGIN_RESET_PASSWORD") ?></button>
-</form>
+	echo $form->build();
+?>

@@ -19,7 +19,7 @@ class Select extends ElementBuilder {
 	 *
 	 * @return void
 	 */
-	public function build(): void {
+	public function build(): string {
 		$content = "";
 
 		foreach ($this->options as $key => $value) {
@@ -28,7 +28,7 @@ class Select extends ElementBuilder {
 
 		$this->setContent(content: $content);
 
-		parent::render();
+		return parent::render();
 	}
 
 	/**

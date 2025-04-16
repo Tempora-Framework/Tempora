@@ -1,28 +1,63 @@
 <?php
+	use App\Utils\ElementBuilder\ElementBuilder;
+	use App\Utils\ElementBuilder\Form;
 	use App\Utils\Lang;
-	use App\Utils\System;
 ?>
 
-<form method="POST">
-	<?= System::createCSRF() ?>
+<?php
+	$form = new Form;
+	$form
+		->setAttributs(
+			attributs: [
+				"method" => "POST",
+				"class"	=> "login"
+			]
+		)
+		->setCsrf(csrf: true)
+	;
 
-	<h1><?= Lang::translate(key: "LOGIN_TITLE") ?></h1>
+	$input = new ElementBuilder;
+	$input
+		->setElement(element: "input")
+		->setAttributs(
+			attributs: [
+				"type" => "text",
+				"name" => "email",
+				"value" => $pageData["form_email"] ?? "",
+				"placeholder" => Lang::translate(key: "MAIN_EMAIL"),
+				"required" => "",
+				"autofocus" => ""
+			]
+		)
+	;
+	$form->addInput(input: $input);
 
-	<input
-		type="text"
-		name="email"
-		value="<?= $pageData["form_email"] ?? "" ?>"
-		placeholder="<?= Lang::translate(key: "MAIN_EMAIL") ?>"
-		required
-		autofocus
-	>
-	<input
-		type="password"
-		name="password"
-		value="<?= $pageData["form_password"] ?? "" ?>"
-		placeholder="<?= Lang::translate(key: "MAIN_PASSWORD") ?>"
-		required
-	>
+	$input = new ElementBuilder;
+	$input
+		->setElement(element: "input")
+		->setAttributs(
+			attributs: [
+				"type" => "password",
+				"name" => "password",
+				"value" => $pageData["page_password"] ?? "",
+				"placeholder" => Lang::translate(key: "MAIN_PASSWORD"),
+				"required" => ""
+			]
+		)
+	;
+	$form->addInput(input: $input);
 
-	<button type="submit"><?= Lang::translate(key: "LOGIN_SUBMIT") ?></button>
-</form>
+	$submit = new ElementBuilder;
+	$submit
+		->setElement(element: "button")
+		->setAttributs(
+			attributs: [
+				"type" => "submit"
+			]
+		)
+		->setContent(content: Lang::translate(key: "LOGIN_SUBMIT"))
+	;
+	$form->addInput(input: $submit);
+
+	echo $form->build();
+?>

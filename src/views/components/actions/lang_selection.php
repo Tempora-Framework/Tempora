@@ -14,12 +14,16 @@
 
 	$select = new Select;
 	$select
-		->setClass(class: "lang_selection")
-		->setId(id: "lang_selection")
-
+		->setAttributs(
+			attributs: [
+				"class" => "lang_selection",
+				"id" => "lang_selection"
+			]
+		)
 		->setOptions(options: $options)
 		->setSelected(selected: $_COOKIE["LANG"])
 		->setTranslate(translate: false)
 	;
-	$select->build();
 ?>
+
+<?= $select->build() ?>

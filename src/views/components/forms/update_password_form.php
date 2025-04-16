@@ -1,31 +1,76 @@
 <?php
-	use App\Utils\System;
+	use App\Utils\ElementBuilder\ElementBuilder;
+	use App\Utils\ElementBuilder\Form;
 	use App\Utils\Lang;
 ?>
 
-<form class="account" method="POST">
-	<?= System::createCSRF() ?>
+<?php
+	$form = new Form();
+	$form
+		->setAttributs(
+			attributs: [
+				"method" => "POST",
+				"class"	=> "account"
+			]
+		)
+		->setCsrf(csrf: true)
+	;
 
-	<?php if (!isset($oldPassword) || $oldPassword != false) { ?>
-	<input
-		type="password"
-		name="old_password"
-		value="<?= $pageData["form_update_old_password"] ?? "" ?>"
-		placeholder="<?= Lang::translate(key: "MAIN_OLD_PASSWORD") ?>"
-	>
-	<?php } ?>
-	<input
-		type="password"
-		name="new_password"
-		value="<?= $pageData["form_update_new_password"] ?? "" ?>"
-		placeholder="<?= Lang::translate(key: "MAIN_NEW_PASSWORD") ?>"
-	>
-	<input
-		type="password"
-		name="new_password_confirm"
-		value="<?= $pageData["form_update_new_password_confirm"] ?? "" ?>"
-		placeholder="<?= Lang::translate(key: "MAIN_CONFIRM") ?>"
-	>
+	if (!isset($oldPassword) || $oldPassword != false) {
+		$input = new ElementBuilder;
+		$input
+			->setElement(element: "input")
+			->setAttributs(
+				attributs: [
+					"type" => "password",
+					"name" => "old_password",
+					"value" => $pageData["form_update_old_password"] ?? "",
+					"placeholder" => Lang::translate(key: "MAIN_OLD_PASSWORD")
+				]
+			)
+		;
+		$form->addInput(input: $input);
+	}
 
-	<button type="submit"><?= Lang::translate(key: "MAIN_SAVE") ?></button>
-</form>
+	$input = new ElementBuilder;
+	$input
+		->setElement(element: "input")
+		->setAttributs(
+			attributs: [
+				"type" => "password",
+				"name" => "new_password",
+				"value" => $pageData["form_update_new_password"] ?? "",
+				"placeholder" => Lang::translate(key: "MAIN_NEW_PASSWORD")
+			]
+		)
+	;
+	$form->addInput(input: $input);
+
+	$input = new ElementBuilder;
+	$input
+		->setElement(element: "input")
+		->setAttributs(
+			attributs: [
+				"type" => "password",
+				"name" => "new_password_confirm",
+				"value" => $pageData["form_update_new_password_confirm"] ?? "",
+				"placeholder" => Lang::translate(key: "MAIN_CONFIRM")
+			]
+		)
+	;
+	$form->addInput(input: $input);
+
+	$submit = new ElementBuilder;
+	$submit
+		->setElement(element: "button")
+		->setAttributs(
+			attributs: [
+				"type" => "submit"
+			]
+		)
+		->setContent(content: Lang::translate(key: "MAIN_SAVE"))
+	;
+	$form->addInput(input: $submit);
+
+	echo $form->build();
+?>

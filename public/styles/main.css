@@ -119,14 +119,23 @@ nav {
 /* Login/Register/Account page
    ============================================== */
 
-.login,
-.register,
-.account {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+.login_container,
+.register_container,
+.account_container,
+.login_reset_container,
+.reset_password_container {
 	width: fit-content;
 	padding: 20px;
 	background-color: var(--form-background-color);
 	border-radius: var(--border-radius);
+}
+
+.login,
+.register,
+.account,
+.login_reset,
+.reset_password {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
