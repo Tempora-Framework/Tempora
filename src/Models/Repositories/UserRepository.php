@@ -29,7 +29,7 @@ class UserRepository extends User {
 					"surname" => $this->getSurname(),
 					"email" => $this->getEmail(),
 					"password" => $passwordHash,
-					"toModify" => (int)$this->getToModify()
+					"toModify" => (int)$this->isToModify()
 				]
 			);
 		} catch (Exception $exception) {

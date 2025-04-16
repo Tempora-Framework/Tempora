@@ -7,7 +7,7 @@ use App\Utils\Lang;
 class Select extends ElementBuilder {
 
 	private array $options = [];
-	private mixed $selected;
+	private mixed $selected = "";
 	private bool $translate = false;
 
 	public function __construct() {
