@@ -10,7 +10,7 @@ class GETController {
 		header(header: "Content-Type: application/json");
 
 		$data["name"] = APP_NAME;
-		$data["version"] = "1.0.0";
+		$data["version"] = TEMPORA_VERSION;
 
 		$api = new APIService;
 		echo $api(data: $data);

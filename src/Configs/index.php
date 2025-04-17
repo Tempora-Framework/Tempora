@@ -9,7 +9,7 @@ use App\Utils\System;
 use Dotenv\Dotenv;
 
 // Version
-define(constant_name: "TEMPORA_VERSION", value: "1.0.0");
+define(constant_name: "TEMPORA_VERSION", value: "1.0.1");
 
 // Paths
 define(constant_name: "BASE_DIR", value: __DIR__ . "/../..");

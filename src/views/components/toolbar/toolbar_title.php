@@ -23,7 +23,7 @@
 			<?php } ?>
 			<tr>
 				<td>Memory usage</td>
-				<td><?= round(num: memory_get_usage() / 1048576, precision: 2) ?>M</td>
+				<td><?= round(num: memory_get_peak_usage() / 1048576, precision: 2) ?>M</td>
 			</tr>
 			<tr>
 				<td>Memory limit</td>
