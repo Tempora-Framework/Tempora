@@ -7,4 +7,5 @@ enum Path: string {
 	case LAYOUT = BASE_DIR . "/src/views/layouts";
 	case COMPONENT_ACTIONS = BASE_DIR . "/src/views/components/actions";
 	case COMPONENT_FORMS = BASE_DIR . "/src/views/components/forms";
+	case COMPONENT_TOOLBAR = BASE_DIR . "/src/views/components/toolbar";
 }

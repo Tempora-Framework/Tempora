@@ -29,6 +29,19 @@ class ApplicationData {
 			}
 		}
 
+		if (DEBUG == 1) {
+			$GLOBALS["toolbar"]["sql_count"]++;
+			$queryLog = $query;
+
+			if ($data) {
+				foreach ($data as $key => $value) {
+					$queryLog = str_replace(search: ":" . $key, replace: $value, subject: $queryLog);
+				}
+			}
+
+			array_push($GLOBALS["toolbar"]["sql_query"], [debug_backtrace()[1]["class"] . "::" . debug_backtrace()[1]["function"] . "()" . "<br>Line " . debug_backtrace()[0]["line"] => $queryLog]);
+		}
+
 		$stmt->execute();
 
 		if ($returnType) {

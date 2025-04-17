@@ -43,6 +43,8 @@ class MailService extends PHPMailer {
 
 	/**
 	 * Get the value of receiver
+	 *
+	 * @return string
 	 */
 	public function getReceiver(): string {
 		return $this->receiver;
@@ -50,6 +52,10 @@ class MailService extends PHPMailer {
 
 	/**
 	 * Set the value of receiver
+	 *
+	 * @param string $receiver
+	 *
+	 * @return self
 	 */
 	public function setReceiver(string $receiver): self {
 		$this->receiver = $receiver;
@@ -59,6 +65,8 @@ class MailService extends PHPMailer {
 
 	/**
 	 * Get the value of body
+	 *
+	 * @return string
 	 */
 	public function getBody(): string {
 		return $this->body;
@@ -66,6 +74,10 @@ class MailService extends PHPMailer {
 
 	/**
 	 * Set the value of body
+	 *
+	 * @param string $body
+	 *
+	 * @return self
 	 */
 	public function setBody(string $body): self {
 		$this->body = $body;
@@ -75,6 +87,8 @@ class MailService extends PHPMailer {
 
 	/**
 	 * Get the value of object
+	 *
+	 * @return string
 	 */
 	public function getObject(): string {
 		return $this->object;
@@ -82,6 +96,10 @@ class MailService extends PHPMailer {
 
 	/**
 	 * Set the value of object
+	 *
+	 * @param string $object
+	 *
+	 * @return self
 	 */
 	public function setObject(string $object): self {
 		$this->object = $object;

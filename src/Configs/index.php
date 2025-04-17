@@ -8,6 +8,9 @@ use App\Utils\Lang;
 use App\Utils\System;
 use Dotenv\Dotenv;
 
+// Version
+define(constant_name: "TEMPORA_VERSION", value: "1.0.0");
+
 // Paths
 define(constant_name: "BASE_DIR", value: __DIR__ . "/../..");
 
@@ -27,10 +30,26 @@ require $autoload;
 
 // Configurations
 session_name(name: "TEMPORA");
+ini_set(option: "session.gc_maxlifetime", value: 3600);
 session_start();
 Dotenv::createImmutable(paths: BASE_DIR)->load();
 date_default_timezone_set(timezoneId: $_ENV["TIMEZONE"]);
 define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
+
+// Debug
+define(constant_name: "DEBUG", value: $_ENV["DEBUG"]);
+
+if (DEBUG == 1) {
+	$toolbar = [];
+	global $toolbar;
+
+	$GLOBALS["toolbar"]["ms_count"] = microtime(as_float: true);
+	$GLOBALS["toolbar"]["sql_count"] = 0;
+	$GLOBALS["toolbar"]["sql_query"] = [];
+	$GLOBALS["toolbar"]["langs"] = [];
+	$GLOBALS["toolbar"]["lang_count"] = 0;
+	$GLOBALS["toolbar"]["lang_error_count"] = 0;
+}
 
 // Languages
 setcookie(name: "LANG", value: $_COOKIE["LANG"] ?? $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
@@ -41,7 +60,7 @@ if (!in_array($_COOKIE["LANG"] . ".json", System::getFiles(path: Path::PUBLIC->v
 }
 
 // Errors
-if ($_ENV["DEBUG"] == 1) {
+if (DEBUG == 1) {
 	ini_set(option: "display_errors", value: 1);
 	ini_set(option: "display_startup_errors", value: 1);
 	error_reporting(error_level: E_ALL);
@@ -53,7 +72,7 @@ if ($_ENV["DEBUG"] == 1) {
 	register_shutdown_function(callback: [ErrorService::class, "shutdown"]);
 }
 
-//Database
+// Database
 $database = new Database;
 define(constant_name: "DATABASE", value: $database());
 

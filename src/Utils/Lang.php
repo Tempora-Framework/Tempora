@@ -16,9 +16,15 @@ class Lang {
 		$file = file_get_contents(filename: BASE_DIR . "/public/langs/" . $_COOKIE["LANG"] . ".json");
 		$json = json_decode(json: $file);
 
+		if (DEBUG == 1)
+			$GLOBALS["toolbar"]["lang_count"]++;
+
 		if (isset($json->$key)) {
 			$result = $json->$key;
 		} else {
+			if (DEBUG == 1)
+				$GLOBALS["toolbar"]["lang_error_count"]++;
+
 			$result = "Missing entry";
 		}
 
@@ -27,6 +33,9 @@ class Lang {
 				$result = str_replace(search: "$[" . $index . "]", replace: $option, subject: $result);
 			}
 		}
+
+		if (DEBUG == 1)
+			$GLOBALS["toolbar"]["langs"][$key] = $result;
 
 		return $result;
 	}

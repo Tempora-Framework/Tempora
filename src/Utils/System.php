@@ -2,6 +2,7 @@
 
 namespace App\Utils;
 
+use App\Utils\ElementBuilder\ElementBuilder;
 use PDO;
 
 class System {
@@ -22,14 +23,36 @@ class System {
 		exit;
 	}
 
+	/**
+	 * CSRF token generation
+	 *
+	 * @return string
+	 */
 	public static function createCSRF(): string {
 		if (!isset($_SESSION["csrf"])) {
 			$_SESSION["csrf"] = bin2hex(string: random_bytes(length: 50));
 		}
 
-		return "<input type=\"hidden\" name=\"page_csrf\" value=\"" . $_SESSION["csrf"] . "\">";
+		$input = new ElementBuilder;
+		$input
+			->setElement(element: "input")
+			->setAttributs(
+				attributs: [
+					"type" => "hidden",
+					"name" => "page_csrf",
+					"value" => $_SESSION["csrf"]
+				]
+			)
+		;
+
+		return $input->render();
 	}
 
+	/**
+	 * CSRF token verification
+	 *
+	 * @return bool
+	 */
 	public static function checkCSRF(): bool {
 		if (!isset($_SESSION["csrf"]) || !isset($_POST["page_csrf"]))
 			return false;

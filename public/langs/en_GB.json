@@ -3,6 +3,7 @@
 	"MAIN_NAME": "Name",
 	"MAIN_SURNAME": "Surname",
 	"MAIN_EMAIL": "Email",
+	"MAIN_ROLE": "Role",
 	"MAIN_PASSWORD": "Password",
 	"MAIN_ERROR": "Error",
 	"MAIN_THEME_LIGHT": "Switch to light theme",
@@ -29,6 +30,12 @@
 	"LOGIN_SUBMIT": "Login",
 	"LOGIN_WRONG_CREDENTIALS": "Incorrect identifiant or password.",
 
+	"LOGIN_RESET_TITLE": "Reset password",
+	"LOGIN_RESET_PASSWORD": "Send email",
+	"LOGIN_RESET_SEND": "An email has just been sent!",
+
+	"RESET_TITLE": "Reset password",
+
 	"REGISTER_TITLE": "Register",
 	"REGISTER_PASSWORD_CONFIRM": "Confirm password",
 	"REGISTER_SUBMIT": "Create account",
@@ -42,5 +49,16 @@
 	"ERROR_SERVER": "Server error.",
 	"ERROR_DATABASE": "Database error.",
 	"ERROR_404": "Unknown pages.",
-	"ERROR_403": "Unauthorised access."
+	"ERROR_403": "Unauthorised access.",
+
+	"TOOLBAR_TITLE": "Debug mode",
+	"TOOLBAR_LANG_TITLE": "Languages",
+	"TOOLBAR_MS_TITLE": "Loading time",
+	"TOOLBAR_PAGEDATA_TITLE": "Page data",
+	"TOOLBAR_POST_TITLE": "POST",
+	"TOOLBAR_GET_TITLE": "GET",
+	"TOOLBAR_COOKIE_TITLE": "Cookies",
+	"TOOLBAR_SQL_TITLE": "SQL queries",
+	"TOOLBAR_USER_TITLE": "User",
+	"TOOLBAR_HTTP_CODE_TITLE": "HTTP code"
 }
