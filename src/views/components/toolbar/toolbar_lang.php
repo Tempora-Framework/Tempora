@@ -10,6 +10,7 @@
 
 	<p class="tempora_toolbar_drop_hover_element" <?= (($total - $rest) > 0) ? " style='color:red'" : "" ?> title="<?= Lang::translate(key: "TOOLBAR_LANG_TITLE") ?>"><i class="ri-global-line"></i> <?= $rest ?>/<?= $total ?></p>
 	<div class="tempora_toolbar_drop_element">
+		<h1><?= Lang::translate(key: "TOOLBAR_LANG_TITLE") ?></h1>
 		<table>
 			<?php
 				ksort($GLOBALS["toolbar"]["langs"]);

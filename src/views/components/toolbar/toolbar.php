@@ -31,6 +31,7 @@
 	<?php include Path::COMPONENT_TOOLBAR->value . "/toolbar_httpcode.php"; ?>
 	<?php include Path::COMPONENT_TOOLBAR->value . "/toolbar_user.php"; ?>
 	<?php include Path::COMPONENT_TOOLBAR->value . "/toolbar_sql.php"; ?>
+	<?php include Path::COMPONENT_TOOLBAR->value . "/toolbar_session.php"; ?>
 	<?php include Path::COMPONENT_TOOLBAR->value . "/toolbar_pagedata.php"; ?>
 	<?php include Path::COMPONENT_TOOLBAR->value . "/toolbar_get.php"; ?>
 	<?php include Path::COMPONENT_TOOLBAR->value . "/toolbar_post.php"; ?>

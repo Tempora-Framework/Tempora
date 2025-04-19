@@ -6,6 +6,7 @@
 <div class="tempora_toolbar_drop_container">
 	<p class="tempora_toolbar_drop_hover_element" style="font-weight:bold;" title="<?= Lang::translate(key: "TOOLBAR_TITLE") ?>"><?= Lang::translate(key: "TOOLBAR_TITLE") ?></p>
 	<div class="tempora_toolbar_drop_element">
+		<h1><?= Lang::translate(key: "TOOLBAR_TITLE") ?></h1>
 		<table>
 			<tr>
 				<td><i class="ri-time-line"></i> Tempora</td>
@@ -13,11 +14,11 @@
 			</tr>
 			<?php if (is_dir(filename: BASE_DIR . "/.git")) { ?>
 				<tr>
-					<td>Git branch</td>
+					<td><?= APP_NAME ?> Git branch</td>
 					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= GitHub::getBranch() ?>" target="_blank"><?= GitHub::getBranch() ?> <i class="ri-external-link-line"></i></a></td>
 				</tr>
 				<tr>
-					<td>Git commit</td>
+					<td><?= APP_NAME ?> Git commit</td>
 					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= GitHub::getCommit() ?>" target="_blank"><?= GitHub::getCommit() ?> <i class="ri-external-link-line"></i></a></td>
 				</tr>
 			<?php } ?>
