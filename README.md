@@ -6,22 +6,30 @@
 
 ```html
 <VirtualHost *:80>
-        ServerName tempora.local
-        DocumentRoot /var/www/Tempora/public
+    ServerName tempora.local
+    DocumentRoot /var/www/Tempora/public
 
-        <Directory /var/www/Tempora/public>
-                DirectoryIndex /index.php
-                FallbackResource /index.php
-        </Directory>
+    <Directory /var/www/Tempora/public>
+        DirectoryIndex /index.php
+        FallbackResource /index.php
+    </Directory>
 </VirtualHost>
 ```
 
 ### Nginx minimal configuration
 
 ```nginx
-server_name tempora.local;
+server {
+    server_name tempora.local;
+    root /var/www/Tempora/public;
+    index /index.php;
 
-root /var/www/Tempora/public;
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
 
-index /index.php;
+    location ~ \.php$ {
+        <!-- System PHP configuration -->
+    }
+}
 ```
