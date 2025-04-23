@@ -4,6 +4,7 @@ namespace App\Controllers\Accounts;
 
 use App\Models\Repositories\ResetPasswordRepository;
 use App\Models\Repositories\UserRepository;
+use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 
@@ -32,7 +33,12 @@ class ResetEventController {
 
 				System::redirect(url: "/");
 			} else {
-				setcookie("NOTIFICATION", Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD"), time() + 60*60*24*30);
+				$notificationCookie = new Cookie;
+				$notificationCookie
+					->setName(name: "NOTIFICATION")
+					->setValue(value: Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD"))
+				;
+				$notificationCookie->send();
 			}
 		}
 

@@ -4,6 +4,7 @@ namespace App\Controllers\Accounts;
 
 use App\Models\Repositories\ResetPasswordRepository;
 use App\Models\Repositories\UserRepository;
+use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 
@@ -28,7 +29,12 @@ class LoginResetEventController {
 			$resetRepo->generateResetLink();
 		}
 
-		setcookie("NOTIFICATION", Lang::translate(key: "LOGIN_RESET_SEND"), time() + 60*60*24*30);
+		$notificationCookie = new Cookie;
+		$notificationCookie
+			->setName(name: "NOTIFICATION")
+			->setValue(value: Lang::translate(key: "LOGIN_RESET_SEND"))
+		;
+		$notificationCookie->send();
 
 		System::redirect(url: "/login");
 	}

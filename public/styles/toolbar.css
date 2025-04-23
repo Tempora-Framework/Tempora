@@ -69,9 +69,14 @@ footer {
 		padding: 10px;
 		border-radius: 9px 9px 0 0;
 
+		h1 {
+			font-size: 18px;
+		}
+
 		p,
 		td,
-		a {
+		a,
+		h1 {
 			user-select: text;
 			text-decoration: none;
 			color: var(--toolbar-text-color);

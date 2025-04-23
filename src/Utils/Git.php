@@ -2,7 +2,7 @@
 
 namespace App\Utils;
 
-class GitHub {
+class Git {
 
 	/**
 	 * Get current git branch
@@ -10,6 +10,9 @@ class GitHub {
 	 * @return string
 	 */
 	public static function getBranch(): string {
+		if (!is_dir(filename: BASE_DIR . "/.git/"))
+			return "";
+
 		$fname = sprintf(format: BASE_DIR . "/.git/HEAD");
 		$data = file_get_contents(filename: $fname);
 		$ar = explode(separator: "/", string: $data);
@@ -24,6 +27,9 @@ class GitHub {
 	 * @return string
 	 */
 	public static function getCommit(): string {
+		if (!is_dir(filename: BASE_DIR . "/.git/"))
+			return "";
+
 		$path = sprintf(format: BASE_DIR . "/.git/");
 		$head = trim(string: substr(string: file_get_contents(filename: $path . "HEAD"), offset: 4));
 		$hash = trim(string: file_get_contents(filename: sprintf(format: $path . $head)));

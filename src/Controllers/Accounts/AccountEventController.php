@@ -4,6 +4,7 @@ namespace App\Controllers\Accounts;
 
 use App\Models\Entities\User;
 use App\Models\Repositories\UserRepository;
+use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 use Exception;
@@ -23,7 +24,12 @@ class AccountEventController {
 			;
 
 			if ($userRepo->verifyPassword() instanceof Exception) {
-				setcookie("NOTIFICATION", Lang::translate(key: "LOGIN_WRONG_CREDENTIALS"), time() + 60*60*24*30);
+				$notificationCookie = new Cookie;
+				$notificationCookie
+					->setName(name: "NOTIFICATION")
+					->setValue(value: Lang::translate(key: "LOGIN_WRONG_CREDENTIALS"))
+				;
+				$notificationCookie->send();
 				System::redirect();
 			}
 
@@ -38,7 +44,12 @@ class AccountEventController {
 
 				System::redirect(url: "/");
 			} else {
-				setcookie("NOTIFICATION", Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD"), time() + 60*60*24*30);
+				$notificationCookie = new Cookie;
+				$notificationCookie
+					->setName(name: "NOTIFICATION")
+					->setValue(value: Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD"))
+				;
+				$notificationCookie->send();
 			}
 		}
 
