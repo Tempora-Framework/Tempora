@@ -3,6 +3,7 @@
 namespace App\Controllers\Accounts;
 
 use App\Models\Repositories\UserRepository;
+use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 use Exception;
@@ -17,6 +18,9 @@ class RegisterEventController {
 			&& isset($_POST["password"])
 			&& isset($_POST["password_confirm"])
 		) {
+			$notificationCookie = new Cookie;
+			$notificationCookie->setName(name: "NOTIFICATION");
+
 			if ($_POST["password"] === $_POST["password_confirm"]) {
 				$userRepo = new UserRepository;
 				$userRepo
@@ -29,13 +33,15 @@ class RegisterEventController {
 				$uid = $userRepo->create();
 
 				if ($uid instanceof Exception) {
-					setcookie("NOTIFICATION", Lang::translate(key: "REGISTER_ALREADY_EXIST", options: ["email" => htmlspecialchars(string: $_POST["email"])]), time() + 60*60*24*30);
+					$notificationCookie->setValue(value: Lang::translate(key: "REGISTER_ALREADY_EXIST", options: ["email" => htmlspecialchars(string: $_POST["email"])]));
+					$notificationCookie->send();
 				} else {
 					$_SESSION["user"]["uid"] = $uid;
 					System::redirect(url: "/");
 				}
 			} else {
-				setcookie("NOTIFICATION", Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD"), time() + 60*60*24*30);
+				$notificationCookie->setValue(value: Lang::translate(key: "REGISTER_UNIDENTICAL_PASSWORD"));
+				$notificationCookie->send();
 			}
 
 			$_SESSION["page_data"] = [

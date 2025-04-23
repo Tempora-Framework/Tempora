@@ -3,6 +3,7 @@
 namespace App\Controllers\Accounts;
 
 use App\Models\Repositories\UserRepository;
+use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 use Exception;
@@ -23,7 +24,12 @@ class LoginEventController {
 			$uid = $userRepo->verifyPassword();
 
 			if ($uid instanceof Exception) {
-				setcookie("NOTIFICATION", Lang::translate(key: "LOGIN_WRONG_CREDENTIALS"), time() + 60*60*24*30);
+				$notificationCookie = new Cookie;
+				$notificationCookie
+					->setName(name: "NOTIFICATION")
+					->setValue(value: Lang::translate(key: "LOGIN_WRONG_CREDENTIALS"))
+				;
+				$notificationCookie->send();
 
 				$_SESSION["page_data"] = [
 					"form_email" => $_POST["email"],

@@ -9,7 +9,8 @@
 		<table>
 			<?php foreach ($_POST as $key => $value) { ?>
 				<tr>
-					<td><?= $key ?></td><td><?php print_r(value: $value); ?></td>
+					<td><?= $key ?></td>
+					<td><?php print_r(value: $value); ?></td>
 				</tr>
 			<?php } ?>
 		</table>

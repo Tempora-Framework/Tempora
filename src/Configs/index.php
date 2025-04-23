@@ -4,12 +4,13 @@ use App\Enums\Path;
 use App\Controllers\ErrorController;
 use App\Models\Database;
 use App\Models\Services\ErrorService;
+use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 use Dotenv\Dotenv;
 
 // Version
-define(constant_name: "TEMPORA_VERSION", value: "1.0.1");
+define(constant_name: "TEMPORA_VERSION", value: "1.0.2");
 
 // Paths
 define(constant_name: "BASE_DIR", value: __DIR__ . "/../..");
@@ -51,14 +52,6 @@ if (DEBUG == 1) {
 	$GLOBALS["toolbar"]["lang_error_count"] = 0;
 }
 
-// Languages
-setcookie(name: "LANG", value: $_COOKIE["LANG"] ?? $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
-
-if (!in_array($_COOKIE["LANG"] . ".json", System::getFiles(path: Path::PUBLIC->value . "/langs"))) {
-	setcookie(name: "LANG", value: $_ENV["DEFAULT_LANG"], expires_or_options: time() + 60*60*24*30, path: "/");
-	System::redirect();
-}
-
 // Errors
 if (DEBUG == 1) {
 	ini_set(option: "display_errors", value: 1);
@@ -70,6 +63,20 @@ if (DEBUG == 1) {
 	});
 	set_exception_handler(callback: [ErrorService::class, "handle"]);
 	register_shutdown_function(callback: [ErrorService::class, "shutdown"]);
+}
+
+// Languages
+$langCookie = new Cookie;
+$langCookie
+	->setName(name: "LANG")
+	->setValue(value: $_COOKIE["LANG"] ?? $_ENV["DEFAULT_LANG"])
+;
+$langCookie->send();
+
+if (!in_array(needle: $_COOKIE["LANG"] . ".json", haystack: System::getFiles(path: Path::PUBLIC->value . "/langs"))) {
+	$langCookie->setValue(value: $_ENV["DEFAULT_LANG"]);
+	$langCookie->send();
+	System::redirect();
 }
 
 // Database

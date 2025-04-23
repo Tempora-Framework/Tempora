@@ -2,7 +2,7 @@
 
 namespace App\Utils;
 
-class GitHub {
+class Git {
 
 	/**
 	 * Get current git branch

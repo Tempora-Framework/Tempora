@@ -1,5 +1,5 @@
 <?php
-	use App\Utils\GitHub;
+	use App\Utils\Git;
 	use App\Utils\Lang;
 ?>
 
@@ -12,24 +12,32 @@
 				<td><i class="ri-time-line"></i> Tempora</td>
 				<td>v<?= TEMPORA_VERSION ?></td>
 			</tr>
-			<?php if (is_dir(filename: BASE_DIR . "/.git")) { ?>
-				<tr>
-					<td><?= APP_NAME ?> Git branch</td>
-					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= GitHub::getBranch() ?>" target="_blank"><?= GitHub::getBranch() ?> <i class="ri-external-link-line"></i></a></td>
-				</tr>
-				<tr>
-					<td><?= APP_NAME ?> Git commit</td>
-					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= GitHub::getCommit() ?>" target="_blank"><?= GitHub::getCommit() ?> <i class="ri-external-link-line"></i></a></td>
-				</tr>
-			<?php } ?>
 			<tr>
-				<td>Memory usage</td>
-				<td><?= round(num: memory_get_peak_usage() / 1048576, precision: 2) ?>M</td>
+				<td>PHP</td>
+				<td>v<?= PHP_VERSION ?></td>
+			</tr>
+			<tr>
+				<td>Server</td>
+				<td><?= PHP_OS ?> <?= $_SERVER["SERVER_SOFTWARE"] ?></td>
 			</tr>
 			<tr>
 				<td>Memory limit</td>
 				<td><?= ini_get(option: "memory_limit") ?></td>
 			</tr>
+			<tr>
+				<td>Memory usage</td>
+				<td><?= round(num: memory_get_peak_usage() / 1048576, precision: 2) ?>M</td>
+			</tr>
+			<?php if (is_dir(filename: BASE_DIR . "/.git")) { ?>
+				<tr>
+					<td><?= APP_NAME ?> Git branch</td>
+					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= Git::getBranch() ?>" target="_blank"><?= Git::getBranch() ?> <i class="ri-external-link-line"></i></a></td>
+				</tr>
+				<tr>
+					<td><?= APP_NAME ?> Git commit</td>
+					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= Git::getCommit() ?>" target="_blank"><?= Git::getCommit() ?> <i class="ri-external-link-line"></i></a></td>
+				</tr>
+			<?php } ?>
 		</table>
 	</div>
 </div>

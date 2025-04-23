@@ -9,7 +9,8 @@
 		<table>
 			<?php foreach ($_COOKIE as $key => $value) { ?>
 				<tr>
-					<td><?= $key ?></td><td><?= $value ?></td>
+					<td><?= $key ?></td>
+					<td><?= $value ?></td>
 				</tr>
 			<?php } ?>
 		</table>
