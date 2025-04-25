@@ -10,7 +10,7 @@ use App\Utils\System;
 use Dotenv\Dotenv;
 
 // Version
-define(constant_name: "TEMPORA_VERSION", value: "1.0.2");
+define(constant_name: "TEMPORA_VERSION", value: "1.1.0");
 
 // Paths
 define(constant_name: "BASE_DIR", value: __DIR__ . "/../..");
@@ -84,14 +84,13 @@ $database = new Database;
 define(constant_name: "DATABASE", value: $database());
 
 if (DATABASE instanceof Exception) {
-	$controller = new ErrorController();
-	$controller->render(
+	new ErrorController()->setPageData(
 		pageData: [
 			"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
 			"error_code" => 500,
 			"error_message" => Lang::translate(key: "ERROR_DATABASE")
 		]
-	);
+	)();
 
 	exit;
 }

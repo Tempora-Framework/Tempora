@@ -2,11 +2,14 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Controllers\Controller;
 use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
-class LoginResetController {
-	public function render(array $pageData): void {
+class LoginResetController extends Controller {
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		$scripts = [
 			"/scripts/engine.js",
 			"/scripts/theme.js"

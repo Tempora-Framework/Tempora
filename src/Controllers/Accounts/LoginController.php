@@ -2,11 +2,14 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Controllers\Controller;
 use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
-class LoginController {
-	public function render(array $pageData): void {
+class LoginController extends Controller {
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		if (isset($pageData["form_email"])) {
 			$_SESSION["page_data"] = [
 				"form_email" => $pageData["form_email"]

@@ -2,14 +2,15 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Controllers\Controller;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 use Exception;
 
-class RegisterEventController {
-	public function render(array $pageData): void {
+class RegisterEventController extends Controller {
+	public function __invoke(): void {
 		if (
 			System::checkCSRF()
 			&& isset($_POST["name"])

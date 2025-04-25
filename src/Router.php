@@ -88,7 +88,7 @@ class Router {
 			$pageData["page_title"] = APP_NAME;
 		}
 
-		(new ($this->controllersPath . $controller))->render(pageData: $pageData);
+		(new ($this->controllersPath . $controller))->setPageData(pageData: $pageData)();
 
 		if (DEBUG == 1) {
 			if (!in_array(needle: "Content-Type: application/json", haystack: headers_list())) {
@@ -100,7 +100,7 @@ class Router {
 	}
 
 	public function error(array $pageData): void {
-		(new ($this->controllersPath . "ErrorController"))->render(pageData: $pageData);
+		(new ($this->controllersPath . "ErrorController"))->setPageData(pageData: $pageData)();
 
 		if (DEBUG == 1)
 			include Path::COMPONENT_TOOLBAR->value . "/toolbar.php";

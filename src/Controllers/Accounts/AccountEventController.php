@@ -2,15 +2,15 @@
 
 namespace App\Controllers\Accounts;
 
-use App\Models\Entities\User;
+use App\Controllers\Controller;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 use Exception;
 
-class AccountEventController {
-	public function render(array $pageData): void {
+class AccountEventController extends Controller {
+	public function __invoke(): void {
 		if (
 			System::checkCSRF()
 			&& isset($_POST["old_password"])

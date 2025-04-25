@@ -2,14 +2,17 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Controllers\Controller;
 use App\Models\Repositories\ResetPasswordRepository;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 
-class ResetEventController {
-	public function render(array $pageData): void {
+class ResetEventController extends Controller {
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		if (
 			System::checkCSRF()
 			&& isset($_POST["new_password"])

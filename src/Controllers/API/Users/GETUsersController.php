@@ -2,11 +2,12 @@
 
 namespace App\Controllers\API\Users;
 
+use App\Controllers\Controller;
 use App\Models\Services\APIService;
 use App\Utils\ApplicationData;
 
-class GETUsersController {
-	public function render(array $pageData): void {
+class GETUsersController extends Controller {
+	public function __invoke(): void {
 		header(header: "Content-Type: application/json");
 
 		$data = [];

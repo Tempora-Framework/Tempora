@@ -5,8 +5,10 @@ namespace App\Controllers;
 use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
-class IndexController {
-	public function render(array $pageData): void {
+class IndexController extends Controller {
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		$scripts = [
 			"/scripts/engine.js",
 			"/scripts/theme.js"

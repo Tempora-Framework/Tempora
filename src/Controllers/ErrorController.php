@@ -4,8 +4,10 @@ namespace App\Controllers;
 
 use App\Enums\Path;
 
-class ErrorController {
-	public function render(array $pageData): void {
+class ErrorController extends Controller {
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		http_response_code(response_code: $pageData["error_code"]);
 
 		require Path::LAYOUT->value . "/header.php";

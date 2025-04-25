@@ -2,11 +2,14 @@
 
 namespace App\Controllers\Dashboard;
 
+use App\Controllers\Controller;
 use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
-class DashboardController {
-	public function render(array $pageData): void {
+class DashboardController extends Controller {
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		$scripts = [
 			"/scripts/engine.js",
 			"/scripts/theme.js"

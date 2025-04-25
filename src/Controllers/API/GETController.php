@@ -2,11 +2,11 @@
 
 namespace App\Controllers\API;
 
-use App\Models\Entities\API;
+use App\Controllers\Controller;
 use App\Models\Services\APIService;
 
-class GETController {
-	public function render(array $pageData): void {
+class GETController extends Controller {
+	public function __invoke(): void {
 		header(header: "Content-Type: application/json");
 
 		$data["name"] = APP_NAME;
