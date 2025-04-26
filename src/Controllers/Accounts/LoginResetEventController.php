@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Attributes\RouteAttribute;
 use App\Controllers\Controller;
 use App\Models\Repositories\ResetPasswordRepository;
 use App\Models\Repositories\UserRepository;
@@ -10,6 +11,7 @@ use App\Utils\Lang;
 use App\Utils\System;
 
 class LoginResetEventController extends Controller {
+	#[RouteAttribute(path: "/login/reset", method: "POST")]
 	public function __invoke(): void {
 		if (
 			System::checkCSRF()

@@ -107,4 +107,26 @@ class System {
 	public static function getFiles(string $path): array {
 		return array_diff(scandir(directory: $path), array(".", ".."));
 	}
+
+	/**
+	 * Get all files in a directory
+	 *
+	 * @param string $path Directory path
+	 * @param array<string> $array
+	 *
+	 * @return array<string>
+	 */
+	public static function getAllFiles(string $path, array $array = []): array {
+		$pathFiles = @scandir($path . "/");
+		if ($pathFiles) {
+			foreach (array_diff($pathFiles, array('.', '..')) as $element) {
+				if (is_file($path . "/" . $element)) {
+					array_push($array, $path . "/" . $element);
+				} elseif (is_dir($path . "/" . $element)) {
+					$array = self::getAllFiles($path . "/" . $element, $array);
+				}
+			}
+		}
+		return $array;
+	}
 }

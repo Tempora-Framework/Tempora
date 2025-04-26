@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Attributes\RouteAttribute;
 use App\Controllers\Controller;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Cookie;
@@ -10,6 +11,7 @@ use App\Utils\System;
 use Exception;
 
 class RegisterEventController extends Controller {
+	#[RouteAttribute(path: "/register", method: "POST")]
 	public function __invoke(): void {
 		if (
 			System::checkCSRF()

@@ -6,7 +6,7 @@ use App\Enums\Path;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Lang;
 use App\Utils\Roles;
-
+use App\Controllers\Controller;
 class Router {
 	private $clientUrl;
 	private	$controllersPath = "App\Controllers\\";
@@ -19,13 +19,13 @@ class Router {
 	 * Add new route
 	 *
 	 * @param string $url
-	 * @param string $controller
+	 * @param Controller $controller
 	 * @param string $method
 	 * @param array $pageData
 	 *
 	 * @return void
 	 */
-	public function check(string $url, string $controller, string $method = "GET", array $pageData = []): void {
+	public function check(string $url, Controller $controller, string $method = "GET", array $pageData = []): void {
 		if ($_SERVER["REQUEST_METHOD"] == $method) {
 			$this->render(url: $url, controller: $controller, pageData: $pageData);
 		}
@@ -35,12 +35,12 @@ class Router {
 	 * Render view
 	 *
 	 * @param string $url
-	 * @param string $controller
+	 * @param Controller $controller
 	 * @param array $pageData
 	 *
 	 * @return void
 	 */
-	private function render(string $url, string $controller, array $pageData): void {
+	private function render(string $url, Controller $controller, array $pageData): void {
 		while (mb_substr(string: $this->clientUrl, start: -1) === "/") {
 			$this->clientUrl = mb_substr(string: $this->clientUrl, start: 0, length: -1);
 		}
@@ -88,7 +88,7 @@ class Router {
 			$pageData["page_title"] = APP_NAME;
 		}
 
-		(new ($this->controllersPath . $controller))->setPageData(pageData: $pageData)();
+		$controller->setPageData(pageData: $pageData)();
 
 		if (DEBUG == 1) {
 			if (!in_array(needle: "Content-Type: application/json", haystack: headers_list())) {

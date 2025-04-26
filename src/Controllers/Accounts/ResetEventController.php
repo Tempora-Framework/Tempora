@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Attributes\RouteAttribute;
 use App\Controllers\Controller;
 use App\Models\Repositories\ResetPasswordRepository;
 use App\Models\Repositories\UserRepository;
@@ -10,6 +11,7 @@ use App\Utils\Lang;
 use App\Utils\System;
 
 class ResetEventController extends Controller {
+	#[RouteAttribute(path: '/reset/$link', method: "POST")]
 	public function __invoke(): void {
 		$pageData = $this->getPageData();
 
