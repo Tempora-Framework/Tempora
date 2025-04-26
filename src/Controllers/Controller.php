@@ -8,7 +8,7 @@ class Controller {
 	/**
 	 * Get the value of pageData
 	 *
-	 * @return array
+	 * @return array<mixed>
 	 */
 	public function getPageData(): array {
 		return $this->pageData;

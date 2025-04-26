@@ -80,7 +80,7 @@ class ElementBuilder {
 	/**
 	 * Get the value of attributs
 	 *
-	 * @return array
+	 * @return array<mixed>
 	 */
 	public function getAttributs(): array {
 		return $this->attributs;

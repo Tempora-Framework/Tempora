@@ -102,7 +102,7 @@ class System {
 	 *
 	 * @param string $path Directory path
 	 *
-	 * @return array
+	 * @return array<string>
 	 */
 	public static function getFiles(string $path): array {
 		return array_diff(scandir(directory: $path), array(".", ".."));
