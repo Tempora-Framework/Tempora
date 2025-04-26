@@ -2,35 +2,36 @@
 
 namespace App\Factories;
 
+use App\Attributes\RouteAttribute;
 use App\Router;
 use App\Utils\Lang;
-use App\Utils\Roles;
+use App\Utils\System;
+use ReflectionObject;
 
 class RouterFactory extends Router {
-	private $data;
-
 	public function __construct(string $url) {
 		parent::__construct(url: $url);
 
-		$this->data = json_decode(json: file_get_contents(filename: BASE_DIR . "/src/Configs/routes.json"), associative: true);
+		$controllers = System::getAllFiles(path: BASE_DIR . "/src/Controllers");
 
-		foreach ($this->data as $routeKey => $route) {
-			foreach ($route as $methodKey => $method) {
-				if (isset($method["title"])) {
-					$pageData["page_title"] = $method["title"];
-				}
+		foreach ($controllers as $controller) {
+			$controller = str_replace(search: BASE_DIR . "/src/Controllers/", replace: "", subject: $controller);
+			$controller = str_replace(search: ".php", replace: "", subject: $controller);
+			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
+			$controller = new ("App\\Controllers\\" . $controller);
 
-				$pageData["page_needLoginToBe"] = $method["needLoginToBe"] ?? null;
+			$reflection = new ReflectionObject($controller);
+			$routeAttributes = $reflection->getMethods()[0]->getAttributes(RouteAttribute::class);
 
-				if (isset($method["accessRoles"])) {
-					$pageData["page_accessRoles"] = [];
-
-					foreach ($method["accessRoles"] as $role) {
-						array_push($pageData["page_accessRoles"], Roles::getRoleByName(name: $role));
-					}
-				}
-
-				parent::check(url: $routeKey, controller: str_replace(search: "/", replace: "\\", subject: $method["controller"]), method: $methodKey, pageData: $pageData);
+			if (count($routeAttributes) > 0) {
+				$routeAttribute = $routeAttributes[0]->newInstance();
+				parent::check(url: $routeAttribute->path, controller: $controller, method: $routeAttribute->method, pageData: [
+					"page_title" => $routeAttribute->title,
+					"page_needLoginToBe" => $routeAttribute->needLoginToBe,
+					"page_accessRoles" => $routeAttribute->accessRoles ? array_map(function($role) {
+						return $role->value;
+					}, $routeAttribute->accessRoles) : null
+				]);
 			}
 		}
 

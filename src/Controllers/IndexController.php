@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Attributes\RouteAttribute;
 use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
 class IndexController extends Controller {
+	#[RouteAttribute(path: "", method: "GET")]
 	public function __invoke(): void {
 		$pageData = $this->getPageData();
 

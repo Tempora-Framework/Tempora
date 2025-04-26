@@ -2,11 +2,13 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Attributes\RouteAttribute;
 use App\Controllers\Controller;
 use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
 class LoginResetController extends Controller {
+	#[RouteAttribute(path: "/login/reset", method: "GET", title: "LOGIN_RESET_TITLE", needLoginToBe: false)]
 	public function __invoke(): void {
 		$pageData = $this->getPageData();
 
