@@ -15,18 +15,18 @@ use ErrorException;
 
 class Tempora {
 	public function __construct() {
-		// Configurations
-		session_name(name: "TEMPORA");
-		ini_set(option: "session.gc_maxlifetime", value: 3600);
-		session_start();
-		date_default_timezone_set(timezoneId: $_ENV["TIMEZONE"]);
-
 		// Dotenv
 		if (!is_file(filename: BASE_DIR . "/.env")) {
 			echo "Please create .env file from .env.example at application root.";
 			exit;
 		}
 		Dotenv::createImmutable(paths: BASE_DIR)->load();
+
+		// Configurations
+		session_name(name: "TEMPORA");
+		ini_set(option: "session.gc_maxlifetime", value: 3600);
+		session_start();
+		date_default_timezone_set(timezoneId: $_ENV["TIMEZONE"]);
 
 		// Constants
 		$this->const();
