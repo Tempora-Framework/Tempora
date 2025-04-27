@@ -11,7 +11,11 @@ use App\Utils\System;
 use Exception;
 
 class AccountEventController extends Controller {
-	#[RouteAttribute(path: "/account", method: "POST")]
+	#[RouteAttribute(
+		path: "/account",
+		method: "POST"
+	)]
+
 	public function __invoke(): void {
 		if (
 			System::checkCSRF()

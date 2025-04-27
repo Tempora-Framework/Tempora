@@ -7,6 +7,7 @@ use App\Models\Repositories\UserRepository;
 use App\Utils\Lang;
 use App\Utils\Roles;
 use App\Controllers\Controller;
+
 class Router {
 	private $clientUrl;
 	private	$controllersPath = "App\Controllers\\";

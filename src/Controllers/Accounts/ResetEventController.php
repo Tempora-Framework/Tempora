@@ -11,7 +11,11 @@ use App\Utils\Lang;
 use App\Utils\System;
 
 class ResetEventController extends Controller {
-	#[RouteAttribute(path: '/reset/$link', method: "POST")]
+	#[RouteAttribute(
+		path: '/reset/$link',
+		method: "POST"
+	)]
+
 	public function __invoke(): void {
 		$pageData = $this->getPageData();
 

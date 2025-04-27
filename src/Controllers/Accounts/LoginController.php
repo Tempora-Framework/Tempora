@@ -8,7 +8,13 @@ use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
 class LoginController extends Controller {
-	#[RouteAttribute(path: "/login", method: "GET", title: "LOGIN_TITLE", needLoginToBe: false)]
+	#[RouteAttribute(
+		path: "/login",
+		method: "GET",
+		title: "LOGIN_TITLE",
+		needLoginToBe: false
+	)]
+
 	public function __invoke(): void {
 		$pageData = $this->getPageData();
 

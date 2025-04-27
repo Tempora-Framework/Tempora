@@ -9,7 +9,16 @@ use App\Enums\Role;
 use App\Factories\NavbarFactory;
 
 class DashboardController extends Controller {
-	#[RouteAttribute(path: "/dashboard", method: "GET", title: "DASHBOARD_TITLE", needLoginToBe: true, accessRoles: [Role::ADMINISTRATOR])]
+	#[RouteAttribute(
+		path: "/dashboard",
+		method: "GET",
+		title: "DASHBOARD_TITLE",
+		needLoginToBe: true,
+		accessRoles: [
+			Role::ADMINISTRATOR
+		]
+	)]
+
 	public function __invoke(): void {
 		$pageData = $this->getPageData();
 

@@ -117,13 +117,13 @@ class System {
 	 * @return array<string>
 	 */
 	public static function getAllFiles(string $path, array $array = []): array {
-		$pathFiles = @scandir($path . "/");
+		$pathFiles = @scandir(directory: $path . "/");
 		if ($pathFiles) {
 			foreach (array_diff($pathFiles, array('.', '..')) as $element) {
-				if (is_file($path . "/" . $element)) {
+				if (is_file(filename: $path . "/" . $element)) {
 					array_push($array, $path . "/" . $element);
-				} elseif (is_dir($path . "/" . $element)) {
-					$array = self::getAllFiles($path . "/" . $element, $array);
+				} elseif (is_dir(filename: $path . "/" . $element)) {
+					$array = self::getAllFiles(path: $path . "/" . $element, array: $array);
 				}
 			}
 		}

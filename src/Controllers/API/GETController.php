@@ -7,7 +7,11 @@ use App\Controllers\Controller;
 use App\Models\Services\APIService;
 
 class GETController extends Controller {
-	#[RouteAttribute(path: "/api", method: "GET")]
+	#[RouteAttribute(
+		path: "/api",
+		method: "GET"
+	)]
+
 	public function __invoke(): void {
 		header(header: "Content-Type: application/json");
 

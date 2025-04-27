@@ -8,7 +8,13 @@ use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
 class LoginResetController extends Controller {
-	#[RouteAttribute(path: "/login/reset", method: "GET", title: "LOGIN_RESET_TITLE", needLoginToBe: false)]
+	#[RouteAttribute(
+		path: "/login/reset",
+		method: "GET",
+		title: "LOGIN_RESET_TITLE",
+		needLoginToBe: false
+	)]
+
 	public function __invoke(): void {
 		$pageData = $this->getPageData();
 

@@ -20,10 +20,10 @@ class RouterFactory extends Router {
 			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
 			$controller = new ("App\\Controllers\\" . $controller);
 
-			$reflection = new ReflectionObject($controller);
-			$routeAttributes = $reflection->getMethods()[0]->getAttributes(RouteAttribute::class);
+			$reflection = new ReflectionObject(object: $controller);
+			$routeAttributes = $reflection->getMethods()[0]->getAttributes(name: RouteAttribute::class);
 
-			if (count($routeAttributes) > 0) {
+			if (count(value: $routeAttributes) > 0) {
 				$routeAttribute = $routeAttributes[0]->newInstance();
 				parent::check(url: $routeAttribute->path, controller: $controller, method: $routeAttribute->method, pageData: [
 					"page_title" => $routeAttribute->title,

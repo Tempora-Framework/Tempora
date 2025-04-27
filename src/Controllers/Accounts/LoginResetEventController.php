@@ -11,7 +11,11 @@ use App\Utils\Lang;
 use App\Utils\System;
 
 class LoginResetEventController extends Controller {
-	#[RouteAttribute(path: "/login/reset", method: "POST")]
+	#[RouteAttribute(
+		path: "/login/reset",
+		method: "POST"
+	)]
+
 	public function __invoke(): void {
 		if (
 			System::checkCSRF()

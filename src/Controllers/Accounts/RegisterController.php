@@ -8,7 +8,13 @@ use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
 class RegisterController extends Controller {
-	#[RouteAttribute(path: "/register", method: "GET", title: "REGISTER_TITLE", needLoginToBe: false)]
+	#[RouteAttribute(
+		path: "/register",
+		method: "GET",
+		title: "REGISTER_TITLE",
+		needLoginToBe: false
+	)]
+
 	public function __invoke(): void {
 		$pageData = $this->getPageData();
 

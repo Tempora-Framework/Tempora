@@ -11,7 +11,11 @@ use App\Utils\System;
 use Exception;
 
 class LoginEventController extends Controller {
-	#[RouteAttribute(path: "/login", method: "POST")]
+	#[RouteAttribute(
+		path: "/login",
+		method: "POST"
+	)]
+
 	public function __invoke(): void {
 		if (
 			System::checkCSRF()
