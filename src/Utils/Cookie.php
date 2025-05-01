@@ -10,10 +10,13 @@ class Cookie {
 
 	public function send(): void {
 		setcookie(
-			name: $this->name,
-			value: $this->value,
-			expires_or_options: time() + $this->expire,
-			path: $this->path
+			$this->name,
+			$this->value,
+			[
+				"samesite" => "Strict",
+				"expires" => time() + $this->expire,
+				"path" => $this->path,
+			]
 		);
 	}
 

@@ -22,8 +22,19 @@ class Tempora {
 		}
 		Dotenv::createImmutable(paths: BASE_DIR)->load();
 
+		// Headers
+		header_remove(name: "X-Powered-By");
+		header(header: "Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
+
 		// Configurations
 		session_name(name: "TEMPORA");
+		session_set_cookie_params(
+			lifetime_or_options: [
+				"httpOnly" => true,
+				"path" => "/",
+				"samesite" => "Strict"
+			]
+		);
 		ini_set(option: "session.gc_maxlifetime", value: 3600);
 		session_start();
 		date_default_timezone_set(timezoneId: $_ENV["TIMEZONE"]);
@@ -106,10 +117,15 @@ class Tempora {
 		;
 		$langCookie->send();
 
-		if (!in_array(needle: $_COOKIE["LANG"] . ".json", haystack: System::getFiles(path: Path::PUBLIC->value . "/langs"))) {
-			$langCookie->setValue(value: $_ENV["DEFAULT_LANG"]);
-			$langCookie->send();
+		if (!isset($_COOKIE["LANG"])) {
 			System::redirect();
+		} else {
+			if (!in_array(needle: $_COOKIE["LANG"] . ".json", haystack: System::getFiles(path: Path::PUBLIC->value . "/langs"))) {
+				$langCookie->setValue(value: $_ENV["DEFAULT_LANG"]);
+				$langCookie->send();
+
+				System::redirect();
+			}
 		}
 	}
 
