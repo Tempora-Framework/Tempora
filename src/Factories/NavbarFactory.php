@@ -3,19 +3,20 @@
 namespace App\Factories;
 
 use App\Enums\Role;
+use App\Utils\Cache\Route;
 use App\Utils\Navbar;
 
 class NavbarFactory extends Navbar {
 	public function __construct() {
 		parent::add(
 			title: "NAVBAR_HOME",
-			url: "/",
+			url: Route::getPath(name: "app_home_get"),
 			icon: "ri-home-2-line",
 			class: "button button_secondary"
 		);
 		parent::add(
 			title: "NAVBAR_DASHBOARD",
-			url: "/dashboard",
+			url: Route::getPath(name: "app_dashboard_get"),
 			class: "button button_secondary",
 			needLoginToBe: true,
 			accessRoles: [
@@ -25,25 +26,25 @@ class NavbarFactory extends Navbar {
 
 		parent::add(
 			title: "NAVBAR_LOGIN",
-			url: "/login",
+			url: Route::getPath(name: "app_account_login_get"),
 			class: "button",
 			needLoginToBe: false,
 		);
 		parent::add(
 			title: "NAVBAR_REGISTER",
-			url: "/register",
+			url: Route::getPath(name: "app_account_register_get"),
 			class: "button",
 			needLoginToBe: false,
 		);
 		parent::add(
 			title: "NAVBAR_ACCOUNT",
-			url: "/account",
+			url: Route::getPath(name: "app_account_get"),
 			class: "button",
 			needLoginToBe: true,
 		);
 		parent::add(
 			title: "NAVBAR_DISCONNECT",
-			url: "/disconnect",
+			url: Route::getPath(name: "app_account_disconnect_get"),
 			class: "button",
 			needLoginToBe: true,
 		);

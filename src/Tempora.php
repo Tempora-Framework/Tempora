@@ -22,10 +22,6 @@ class Tempora {
 		}
 		Dotenv::createImmutable(paths: BASE_DIR)->load();
 
-		// Headers
-		header_remove(name: "X-Powered-By");
-		header(header: "Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
-
 		// Configurations
 		session_name(name: "TEMPORA");
 		session_set_cookie_params(
@@ -41,6 +37,10 @@ class Tempora {
 
 		// Constants
 		$this->const();
+
+		// Headers
+		header(header: "X-Powered-By: Tempora v" . TEMPORA_VERSION, replace: true);
+		header(header: "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
 
 		// Errors
 		$this->errorHandler();
