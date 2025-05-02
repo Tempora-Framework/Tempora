@@ -9,6 +9,7 @@ use App\Models\Services\APIService;
 class GETController extends Controller {
 	#[RouteAttribute(
 		path: "/api",
+		name: "app_api_index_get",
 		method: "GET"
 	)]
 

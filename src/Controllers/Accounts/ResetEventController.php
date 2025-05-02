@@ -13,6 +13,7 @@ use App\Utils\System;
 class ResetEventController extends Controller {
 	#[RouteAttribute(
 		path: '/reset/$link',
+		name: 'app_account_reset_post',
 		method: "POST"
 	)]
 

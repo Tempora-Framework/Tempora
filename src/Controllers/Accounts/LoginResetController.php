@@ -10,6 +10,7 @@ use App\Factories\NavbarFactory;
 class LoginResetController extends Controller {
 	#[RouteAttribute(
 		path: "/login/reset",
+		name: "app_account_login_reset_get",
 		method: "GET",
 		title: "LOGIN_RESET_TITLE",
 		needLoginToBe: false

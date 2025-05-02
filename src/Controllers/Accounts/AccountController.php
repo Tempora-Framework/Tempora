@@ -10,6 +10,7 @@ use App\Factories\NavbarFactory;
 class AccountController extends Controller {
 	#[RouteAttribute(
 		path: "/account",
+		name: "app_account_get",
 		method: "GET",
 		title: "ACCOUNT_TITLE",
 		needLoginToBe: true

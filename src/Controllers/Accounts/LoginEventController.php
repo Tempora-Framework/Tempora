@@ -13,6 +13,7 @@ use Exception;
 class LoginEventController extends Controller {
 	#[RouteAttribute(
 		path: "/login",
+		name: "app_account_login_post",
 		method: "POST"
 	)]
 

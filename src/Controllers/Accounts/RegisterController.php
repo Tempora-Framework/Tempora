@@ -10,6 +10,7 @@ use App\Factories\NavbarFactory;
 class RegisterController extends Controller {
 	#[RouteAttribute(
 		path: "/register",
+		name: "app_account_register_get",
 		method: "GET",
 		title: "REGISTER_TITLE",
 		needLoginToBe: false

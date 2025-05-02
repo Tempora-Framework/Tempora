@@ -13,6 +13,7 @@ use Exception;
 class RegisterEventController extends Controller {
 	#[RouteAttribute(
 		path: "/register",
+		name: "app_account_register_post",
 		method: "POST"
 	)]
 

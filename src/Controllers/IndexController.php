@@ -9,6 +9,7 @@ use App\Factories\NavbarFactory;
 class IndexController extends Controller {
 	#[RouteAttribute(
 		path: "",
+		name: "app_index_get",
 		method: "GET"
 	)]
 

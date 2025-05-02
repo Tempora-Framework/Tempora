@@ -13,6 +13,7 @@ use App\Utils\System;
 class LoginResetEventController extends Controller {
 	#[RouteAttribute(
 		path: "/login/reset",
+		name: "app_account_login_reset_post",
 		method: "POST"
 	)]
 

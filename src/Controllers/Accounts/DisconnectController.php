@@ -9,6 +9,7 @@ use App\Utils\System;
 class DisconnectController extends Controller {
 	#[RouteAttribute(
 		path: "/disconnect",
+		name: "app_account_disconnect_get",
 		method: "GET"
 	)]
 

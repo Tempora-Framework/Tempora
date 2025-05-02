@@ -12,6 +12,7 @@ use App\Utils\System;
 class ResetController extends Controller {
 	#[RouteAttribute(
 		path: '/reset/$link',
+		name: 'app_account_reset_get',
 		method: "GET",
 		title: "RESET_TITLE",
 		needLoginToBe: false

@@ -11,6 +11,7 @@ use App\Factories\NavbarFactory;
 class DashboardController extends Controller {
 	#[RouteAttribute(
 		path: "/dashboard",
+		name: "app_dashboard_get",
 		method: "GET",
 		title: "DASHBOARD_TITLE",
 		needLoginToBe: true,
