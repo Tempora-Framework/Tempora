@@ -1,16 +1,16 @@
 <?php
 
-namespace App;
+namespace Tempora;
 
-use App\Enums\Path;
-use App\Models\Repositories\UserRepository;
-use App\Utils\Lang;
-use App\Utils\Roles;
-use App\Controllers\Controller;
+use Tempora\Enums\Path;
+use Tempora\Models\Repositories\UserRepository;
+use Tempora\Utils\Lang;
+use Tempora\Utils\Roles;
+use Tempora\Controllers\Controller;
 
 class Router {
 	private $clientUrl;
-	private	$controllersPath = "App\Controllers\\";
+	private	$controllersPath = "Tempora\Controllers\\";
 
 	public function __construct(string $url) {
 		$this->clientUrl = $url;

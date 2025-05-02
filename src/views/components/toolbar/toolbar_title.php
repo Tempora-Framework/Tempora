@@ -1,6 +1,6 @@
 <?php
-	use App\Utils\Git;
-	use App\Utils\Lang;
+	use Tempora\Utils\Git;
+	use Tempora\Utils\Lang;
 ?>
 
 <div class="tempora_toolbar_drop_container">

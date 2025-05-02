@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Repositories;
+namespace Tempora\Models\Repositories;
 
-use App\Enums\Table;
-use App\Models\Entities\User;
-use App\Utils\ApplicationData;
-use App\Utils\System;
+use Tempora\Enums\Table;
+use Tempora\Models\Entities\User;
+use Tempora\Utils\ApplicationData;
+use Tempora\Utils\System;
 use Exception;
 use PDO;
 

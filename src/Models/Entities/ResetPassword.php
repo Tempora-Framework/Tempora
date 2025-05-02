@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Entities;
+namespace Tempora\Models\Entities;
 
-use App\Enums\Table;
-use App\Utils\ApplicationData;
+use Tempora\Enums\Table;
+use Tempora\Utils\ApplicationData;
 use PDO;
 
 class ResetPassword {

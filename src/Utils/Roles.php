@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Utils;
+namespace Tempora\Utils;
 
-use App\Enums\Role;
+use Tempora\Enums\Role;
 
 class Roles {
 	/**

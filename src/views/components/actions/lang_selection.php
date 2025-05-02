@@ -1,8 +1,8 @@
 <?php
-	use App\Enums\Path;
-	use App\Utils\ElementBuilder\Select;
-	use App\Utils\Lang;
-	use App\Utils\System;
+	use Tempora\Enums\Path;
+	use Tempora\Utils\ElementBuilder\Select;
+	use Tempora\Utils\Lang;
+	use Tempora\Utils\System;
 ?>
 
 <?php

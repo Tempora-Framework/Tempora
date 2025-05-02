@@ -1,6 +1,6 @@
 <?php
-	use App\Enums\Path;
-	use App\Utils\Cache\Route;
+	use Tempora\Enums\Path;
+	use Tempora\Utils\Cache\Route;
 ?>
 
 <h1><?= $pageData["error_code"] ?></h1>

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controllers\Accounts;
+namespace Tempora\Controllers\Accounts;
 
-use App\Attributes\RouteAttribute;
-use App\Controllers\Controller;
-use App\Models\Repositories\ResetPasswordRepository;
-use App\Models\Repositories\UserRepository;
-use App\Utils\Cookie;
-use App\Utils\Lang;
-use App\Utils\System;
+use Tempora\Attributes\RouteAttribute;
+use Tempora\Controllers\Controller;
+use Tempora\Models\Repositories\ResetPasswordRepository;
+use Tempora\Models\Repositories\UserRepository;
+use Tempora\Utils\Cookie;
+use Tempora\Utils\Lang;
+use Tempora\Utils\System;
 
 class ResetEventController extends Controller {
 	#[RouteAttribute(

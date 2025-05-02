@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers\Accounts;
+namespace Tempora\Controllers\Accounts;
 
-use App\Attributes\RouteAttribute;
-use App\Controllers\Controller;
-use App\Enums\Path;
-use App\Factories\NavbarFactory;
+use Tempora\Attributes\RouteAttribute;
+use Tempora\Controllers\Controller;
+use Tempora\Enums\Path;
+use Tempora\Factories\NavbarFactory;
 
 class AccountController extends Controller {
 	#[RouteAttribute(

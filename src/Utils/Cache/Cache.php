@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Utils\Cache;
+namespace Tempora\Utils\Cache;
 
-use App\Enums\Path;
+use Tempora\Enums\Path;
 
 class Cache {
 	private string $file;

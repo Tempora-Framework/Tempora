@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers\Accounts;
+namespace Tempora\Controllers\Accounts;
 
-use App\Attributes\RouteAttribute;
-use App\Controllers\Controller;
-use App\Utils\System;
+use Tempora\Attributes\RouteAttribute;
+use Tempora\Controllers\Controller;
+use Tempora\Utils\System;
 
 class DisconnectController extends Controller {
 	#[RouteAttribute(

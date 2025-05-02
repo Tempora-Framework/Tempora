@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Utils\ElementBuilder;
+namespace Tempora\Utils\ElementBuilder;
 
-use App\Utils\Lang;
+use Tempora\Utils\Lang;
 
 class Select extends ElementBuilder {
 

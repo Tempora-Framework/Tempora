@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace Tempora\Controllers;
 
-use App\Enums\Path;
+use Tempora\Enums\Path;
 
 class ErrorController extends Controller {
 	public function __invoke(): void {

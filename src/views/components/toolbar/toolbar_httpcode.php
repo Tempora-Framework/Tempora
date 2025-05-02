@@ -1,5 +1,5 @@
 <?php
-	use App\Utils\Lang;
+	use Tempora\Utils\Lang;
 
 	$httpCodeType = substr(http_response_code(), 0, 1);
 	$httpCodeClass = "";

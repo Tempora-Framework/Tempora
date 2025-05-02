@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Services;
+namespace Tempora\Models\Services;
 
 class APIService {
 	/**

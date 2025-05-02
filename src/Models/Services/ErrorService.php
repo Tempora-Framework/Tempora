@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Services;
+namespace Tempora\Models\Services;
 
-use App\Controllers\ErrorController;
-use App\Utils\Lang;
+use Tempora\Controllers\ErrorController;
+use Tempora\Utils\Lang;
 use ErrorException;
 use Throwable;
 

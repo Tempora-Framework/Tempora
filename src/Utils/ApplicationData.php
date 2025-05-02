@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Utils;
+namespace Tempora\Utils;
 
-use App\Enums\Table;
+use Tempora\Enums\Table;
 use PDO;
 
 class ApplicationData {

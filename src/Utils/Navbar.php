@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Utils;
+namespace Tempora\Utils;
 
-use App\Enums\Path;
-use App\Models\Repositories\UserRepository;
+use Tempora\Enums\Path;
+use Tempora\Models\Repositories\UserRepository;
 
 class Navbar {
 	private $navbar = [];

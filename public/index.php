@@ -1,6 +1,6 @@
 <?php
 
-use App\Tempora;
+use Tempora\Tempora;
 
 // Paths
 define(constant_name: "BASE_DIR", value: __DIR__ . "/..");

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils;
+namespace Tempora\Utils;
 
 class Cookie {
 	private string $name;

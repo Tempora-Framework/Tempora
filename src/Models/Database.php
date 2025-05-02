@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Tempora\Models;
 
 use Exception;
 use PDO;

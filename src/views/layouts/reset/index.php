@@ -1,5 +1,5 @@
 <?php
-	use App\Enums\Path;
+	use Tempora\Enums\Path;
 ?>
 
 <div class="reset_password_container">

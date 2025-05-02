@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controllers\Dashboard;
+namespace Tempora\Controllers\Dashboard;
 
-use App\Attributes\RouteAttribute;
-use App\Controllers\Controller;
-use App\Enums\Path;
-use App\Enums\Role;
-use App\Factories\NavbarFactory;
+use Tempora\Attributes\RouteAttribute;
+use Tempora\Controllers\Controller;
+use Tempora\Enums\Path;
+use Tempora\Enums\Role;
+use Tempora\Factories\NavbarFactory;
 
 class DashboardController extends Controller {
 	#[RouteAttribute(

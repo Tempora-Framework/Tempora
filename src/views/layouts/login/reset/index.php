@@ -1,6 +1,6 @@
 <?php
-	use App\Enums\Path;
-	use App\Utils\Lang;
+	use Tempora\Enums\Path;
+	use Tempora\Utils\Lang;
 ?>
 
 <div class="login_reset_container">

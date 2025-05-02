@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Attributes;
+namespace Tempora\Attributes;
 
 use Attribute;
 

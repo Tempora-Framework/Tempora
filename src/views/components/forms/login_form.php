@@ -1,7 +1,7 @@
 <?php
-	use App\Utils\ElementBuilder\ElementBuilder;
-	use App\Utils\ElementBuilder\Form;
-	use App\Utils\Lang;
+	use Tempora\Utils\ElementBuilder\ElementBuilder;
+	use Tempora\Utils\ElementBuilder\Form;
+	use Tempora\Utils\Lang;
 ?>
 
 <?php

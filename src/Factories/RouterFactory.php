@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Factories;
+namespace Tempora\Factories;
 
-use App\Attributes\RouteAttribute;
-use App\Router;
-use App\Utils\Cache\Cache;
-use App\Utils\Lang;
-use App\Utils\System;
+use Tempora\Attributes\RouteAttribute;
+use Tempora\Router;
+use Tempora\Utils\Cache\Cache;
+use Tempora\Utils\Lang;
+use Tempora\Utils\System;
 use ReflectionObject;
 
 class RouterFactory extends Router {
@@ -24,7 +24,7 @@ class RouterFactory extends Router {
 			$controller = str_replace(search: BASE_DIR . "/src/Controllers/", replace: "", subject: $controller);
 			$controller = str_replace(search: ".php", replace: "", subject: $controller);
 			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
-			$controller = new ("App\\Controllers\\" . $controller);
+			$controller = new ("Tempora\\Controllers\\" . $controller);
 
 			$reflection = new ReflectionObject(object: $controller);
 			$routeAttributes = $reflection->getMethods()[0]->getAttributes(name: RouteAttribute::class);
@@ -41,7 +41,7 @@ class RouterFactory extends Router {
 			$controller = str_replace(search: BASE_DIR . "/src/Controllers/", replace: "", subject: $controller);
 			$controller = str_replace(search: ".php", replace: "", subject: $controller);
 			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
-			$controller = new ("App\\Controllers\\" . $controller);
+			$controller = new ("Tempora\\Controllers\\" . $controller);
 
 			$reflection = new ReflectionObject(object: $controller);
 			$routeAttributes = $reflection->getMethods()[0]->getAttributes(name: RouteAttribute::class);

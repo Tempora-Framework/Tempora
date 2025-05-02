@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers\API;
+namespace Tempora\Controllers\API;
 
-use App\Attributes\RouteAttribute;
-use App\Controllers\Controller;
-use App\Models\Services\APIService;
+use Tempora\Attributes\RouteAttribute;
+use Tempora\Controllers\Controller;
+use Tempora\Models\Services\APIService;
 
 class GETController extends Controller {
 	#[RouteAttribute(

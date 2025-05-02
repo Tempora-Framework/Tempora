@@ -1,5 +1,5 @@
 <?php
-	use App\Utils\Git;
+	use Tempora\Utils\Git;
 ?>
 
 	</main>

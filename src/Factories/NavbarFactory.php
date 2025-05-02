@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Factories;
+namespace Tempora\Factories;
 
-use App\Enums\Role;
-use App\Utils\Cache\Route;
-use App\Utils\Navbar;
+use Tempora\Enums\Role;
+use Tempora\Utils\Cache\Route;
+use Tempora\Utils\Navbar;
 
 class NavbarFactory extends Navbar {
 	public function __construct() {

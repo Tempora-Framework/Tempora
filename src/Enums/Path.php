@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums;
+namespace Tempora\Enums;
 
 enum Path: string {
 	case CACHE = BASE_DIR . "/src/cache";

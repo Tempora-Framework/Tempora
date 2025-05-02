@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace Tempora\Controllers;
 
-use App\Attributes\RouteAttribute;
-use App\Enums\Path;
-use App\Factories\NavbarFactory;
+use Tempora\Attributes\RouteAttribute;
+use Tempora\Enums\Path;
+use Tempora\Factories\NavbarFactory;
 
 class IndexController extends Controller {
 	#[RouteAttribute(

@@ -1,7 +1,7 @@
 <?php
-	use App\Enums\Path;
-	use App\Enums\Role;
-	use App\Models\Repositories\UserRepository;
+	use Tempora\Enums\Path;
+	use Tempora\Enums\Role;
+	use Tempora\Models\Repositories\UserRepository;
 
 	$toolbarSQLCount = 0;
 	if (isset($_SESSION["user"]["uid"])) {

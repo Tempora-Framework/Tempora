@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Entities;
+namespace Tempora\Models\Entities;
 
 class User {
 	private ?string $uid;

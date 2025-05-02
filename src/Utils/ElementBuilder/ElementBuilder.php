@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\ElementBuilder;
+namespace Tempora\Utils\ElementBuilder;
 
 class ElementBuilder {
 

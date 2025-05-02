@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers\API\Users;
+namespace Tempora\Controllers\API\Users;
 
-use App\Attributes\RouteAttribute;
-use App\Controllers\Controller;
-use App\Models\Services\APIService;
-use App\Utils\ApplicationData;
+use Tempora\Attributes\RouteAttribute;
+use Tempora\Controllers\Controller;
+use Tempora\Models\Services\APIService;
+use Tempora\Utils\ApplicationData;
 
 class GETUsersController extends Controller {
 	#[RouteAttribute(
