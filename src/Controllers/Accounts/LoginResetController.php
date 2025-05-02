@@ -12,6 +12,7 @@ class LoginResetController extends Controller {
 		path: "/login/reset",
 		name: "app_account_login_reset_get",
 		method: "GET",
+		description: "Login reset page",
 		title: "LOGIN_RESET_TITLE",
 		needLoginToBe: false
 	)]

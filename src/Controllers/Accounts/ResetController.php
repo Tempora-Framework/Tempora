@@ -14,6 +14,7 @@ class ResetController extends Controller {
 		path: '/reset/$link',
 		name: 'app_account_reset_get',
 		method: "GET",
+		description: "Reset password page",
 		title: "RESET_TITLE",
 		needLoginToBe: false
 	)]

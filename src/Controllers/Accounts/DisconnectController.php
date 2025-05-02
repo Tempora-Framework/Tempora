@@ -10,7 +10,8 @@ class DisconnectController extends Controller {
 	#[RouteAttribute(
 		path: "/disconnect",
 		name: "app_account_disconnect_get",
-		method: "GET"
+		method: "GET",
+		description: "Disconnect page",
 	)]
 
 	public function __invoke(): void {

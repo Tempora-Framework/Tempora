@@ -7,6 +7,7 @@ class ElementBuilder {
 	protected ?string $element = null;
 	private array $attributs = [];
 	private ?string $content = null;
+	private bool $accessibility = false;
 
 	/**
 	 * Element render
@@ -15,6 +16,10 @@ class ElementBuilder {
 	 */
 	public function render(): string {
 		$result = "<" . $this->element;
+
+		if ($this->accessibility) {
+			$result .= " aria-label=\"" . $this->attributs["label"] . "\"";
+		}
 
 		foreach ($this->attributs as $key => $value) {
 			if ($value != "") {
@@ -95,6 +100,28 @@ class ElementBuilder {
 	 */
 	public function setAttributs(array $attributs): self {
 		$this->attributs = $attributs;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of accessibility
+	 *
+	 * @return bool
+	 */
+	public function isAccessibility(): bool {
+		return $this->accessibility;
+	}
+
+	/**
+	 * Set the value of accessibility
+	 *
+	 * @param bool $accessibility
+	 *
+	 * @return self
+	 */
+	public function setAccessibility(bool $accessibility): self {
+		$this->accessibility = $accessibility;
 
 		return $this;
 	}

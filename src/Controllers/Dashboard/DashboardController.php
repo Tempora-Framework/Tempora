@@ -13,6 +13,7 @@ class DashboardController extends Controller {
 		path: "/dashboard",
 		name: "app_dashboard_get",
 		method: "GET",
+		description: "Dashboard page",
 		title: "DASHBOARD_TITLE",
 		needLoginToBe: true,
 		accessRoles: [

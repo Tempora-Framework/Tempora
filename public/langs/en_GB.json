@@ -47,6 +47,8 @@
 
 	"DASHBOARD_TITLE": "Dashboard",
 
+	"ACCESSIBILITY_LANG": "Languages",
+
 	"ERROR_SERVER": "Server error.",
 	"ERROR_DATABASE": "Database error.",
 	"ERROR_404": "Unknown pages.",

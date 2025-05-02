@@ -14,7 +14,8 @@ class AccountEventController extends Controller {
 	#[RouteAttribute(
 		path: "/account",
 		name: "app_account_post",
-		method: "POST"
+		method: "POST",
+		description: "Account event page",
 	)]
 
 	public function __invoke(): void {

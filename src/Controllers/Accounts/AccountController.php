@@ -12,6 +12,7 @@ class AccountController extends Controller {
 		path: "/account",
 		name: "app_account_get",
 		method: "GET",
+		description: "Account page",
 		title: "ACCOUNT_TITLE",
 		needLoginToBe: true
 	)]

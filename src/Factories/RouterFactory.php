@@ -55,6 +55,7 @@ class RouterFactory extends Router {
 					pageData: [
 						"page_name" => $routeAttribute->name,
 						"page_title" => $routeAttribute->title,
+						"page_description" => $routeAttribute->description,
 						"page_needLoginToBe" => $routeAttribute->needLoginToBe,
 						"page_accessRoles" => $routeAttribute->accessRoles ? array_map(
 							callback: function($role): mixed {

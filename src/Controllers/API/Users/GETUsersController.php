@@ -11,7 +11,8 @@ class GETUsersController extends Controller {
 	#[RouteAttribute(
 		path: "/api/users",
 		name: "app_api_users_get",
-		method: "GET"
+		method: "GET",
+		description: "API users page",
 	)]
 
 	public function __invoke(): void {

@@ -17,9 +17,11 @@
 		->setAttributs(
 			attributs: [
 				"class" => "lang_selection",
-				"id" => "lang_selection"
+				"id" => "lang_selection",
+				"label" => Lang::translate(key: "ACCESSIBILITY_LANG"),
 			]
 		)
+		->setAccessibility(accessibility: true)
 		->setOptions(options: $options)
 		->setSelected(selected: $_COOKIE["LANG"])
 		->setTranslate(translate: false)

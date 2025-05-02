@@ -12,6 +12,7 @@ class LoginController extends Controller {
 		path: "/login",
 		name: "app_account_login_get",
 		method: "GET",
+		description: "Login page",
 		title: "LOGIN_TITLE",
 		needLoginToBe: false
 	)]

@@ -10,7 +10,8 @@ class IndexController extends Controller {
 	#[RouteAttribute(
 		path: "",
 		name: "app_index_get",
-		method: "GET"
+		method: "GET",
+		description: "Index page",
 	)]
 
 	public function __invoke(): void {

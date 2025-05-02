@@ -12,6 +12,7 @@ class RegisterController extends Controller {
 		path: "/register",
 		name: "app_account_register_get",
 		method: "GET",
+		description: "Register page",
 		title: "REGISTER_TITLE",
 		needLoginToBe: false
 	)]

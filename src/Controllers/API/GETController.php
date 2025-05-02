@@ -10,7 +10,8 @@ class GETController extends Controller {
 	#[RouteAttribute(
 		path: "/api",
 		name: "app_api_index_get",
-		method: "GET"
+		method: "GET",
+		description: "API index page",
 	)]
 
 	public function __invoke(): void {

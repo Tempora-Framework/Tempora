@@ -47,6 +47,8 @@
 
 	"DASHBOARD_TITLE": "Tableau de bord",
 
+	"ACCESSIBILITY_LANG": "Langues",
+
 	"ERROR_SERVER": "Erreur serveur.",
 	"ERROR_DATABASE": "Erreur de base de donnée.",
 	"ERROR_404": "Page inconnue.",
