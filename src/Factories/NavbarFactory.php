@@ -3,19 +3,18 @@
 namespace App\Factories;
 
 use App\Enums\Role;
-use App\Utils\Lang;
 use App\Utils\Navbar;
 
 class NavbarFactory extends Navbar {
 	public function __construct() {
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_HOME"),
+			title: "NAVBAR_HOME",
 			url: "/",
 			icon: "ri-home-2-line",
 			class: "button button_secondary"
 		);
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_DASHBOARD"),
+			title: "NAVBAR_DASHBOARD",
 			url: "/dashboard",
 			class: "button button_secondary",
 			needLoginToBe: true,
@@ -25,25 +24,25 @@ class NavbarFactory extends Navbar {
 		);
 
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_LOGIN"),
+			title: "NAVBAR_LOGIN",
 			url: "/login",
 			class: "button",
 			needLoginToBe: false,
 		);
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_REGISTER"),
+			title: "NAVBAR_REGISTER",
 			url: "/register",
 			class: "button",
 			needLoginToBe: false,
 		);
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_ACCOUNT"),
+			title: "NAVBAR_ACCOUNT",
 			url: "/account",
 			class: "button",
 			needLoginToBe: true,
 		);
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_DISCONNECT"),
+			title: "NAVBAR_DISCONNECT",
 			url: "/disconnect",
 			class: "button",
 			needLoginToBe: true,
