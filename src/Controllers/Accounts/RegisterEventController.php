@@ -2,14 +2,22 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Attributes\RouteAttribute;
+use App\Controllers\Controller;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 use Exception;
 
-class RegisterEventController {
-	public function render(array $pageData): void {
+class RegisterEventController extends Controller {
+	#[RouteAttribute(
+		path: "/register",
+		name: "app_account_register_post",
+		method: "POST"
+	)]
+
+	public function __invoke(): void {
 		if (
 			System::checkCSRF()
 			&& isset($_POST["name"])

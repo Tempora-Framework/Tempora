@@ -2,11 +2,19 @@
 
 namespace App\Controllers\API;
 
-use App\Models\Entities\API;
+use App\Attributes\RouteAttribute;
+use App\Controllers\Controller;
 use App\Models\Services\APIService;
 
-class GETController {
-	public function render(array $pageData): void {
+class GETController extends Controller {
+	#[RouteAttribute(
+		path: "/api",
+		name: "app_api_index_get",
+		method: "GET",
+		description: "API index page",
+	)]
+
+	public function __invoke(): void {
 		header(header: "Content-Type: application/json");
 
 		$data["name"] = APP_NAME;

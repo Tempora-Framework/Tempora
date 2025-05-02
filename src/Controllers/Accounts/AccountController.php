@@ -2,11 +2,24 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Attributes\RouteAttribute;
+use App\Controllers\Controller;
 use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
-class AccountController {
-	public function render(array $pageData): void {
+class AccountController extends Controller {
+	#[RouteAttribute(
+		path: "/account",
+		name: "app_account_get",
+		method: "GET",
+		description: "Account page",
+		title: "ACCOUNT_TITLE",
+		needLoginToBe: true
+	)]
+
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		$scripts = [
 			"/scripts/engine.js",
 			"/scripts/theme.js"

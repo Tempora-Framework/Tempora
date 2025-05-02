@@ -4,7 +4,7 @@
 ?>
 
 <div class="tempora_toolbar_drop_container">
-	<p class="tempora_toolbar_drop_hover_element" style="font-weight:bold;" title="<?= Lang::translate(key: "TOOLBAR_TITLE") ?>"><?= Lang::translate(key: "TOOLBAR_TITLE") ?></p>
+	<p class="tempora_toolbar_drop_hover_element bold" title="<?= Lang::translate(key: "TOOLBAR_TITLE") ?>"><?= Lang::translate(key: "TOOLBAR_TITLE") ?></p>
 	<div class="tempora_toolbar_drop_element">
 		<h1><?= Lang::translate(key: "TOOLBAR_TITLE") ?></h1>
 		<table>
@@ -31,11 +31,11 @@
 			<?php if (is_dir(filename: BASE_DIR . "/.git")) { ?>
 				<tr>
 					<td><?= APP_NAME ?> Git branch</td>
-					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= Git::getBranch() ?>" target="_blank"><?= Git::getBranch() ?> <i class="ri-external-link-line"></i></a></td>
+					<td><a href="<?= Git::getRepoUrl() ?>/tree/<?= Git::getBranch() ?>" target="_blank"><?= Git::getBranch() ?> <i class="ri-external-link-line"></i></a></td>
 				</tr>
 				<tr>
 					<td><?= APP_NAME ?> Git commit</td>
-					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= Git::getCommit() ?>" target="_blank"><?= Git::getCommit() ?> <i class="ri-external-link-line"></i></a></td>
+					<td><a href="<?= Git::getRepoUrl() ?>/tree/<?= Git::getCommit() ?>" target="_blank"><?= Git::getCommit() ?> <i class="ri-external-link-line"></i></a></td>
 				</tr>
 			<?php } ?>
 		</table>

@@ -15,6 +15,7 @@
 	"MAIN_NEW_PASSWORD": "Nouveau mot de passe",
 	"MAIN_PASSWORD_FORGOT": "Mot de passe oublié ?",
 	"MAIN_CONFIRM": "Confirmer",
+	"MAIN_NAME_OBJECT": "Nom",
 
 	"NAVBAR_HOME": "Accueil",
 	"NAVBAR_DASHBOARD": "Tableau de bord",
@@ -45,6 +46,8 @@
 	"ACCOUNT_TITLE": "Compte",
 
 	"DASHBOARD_TITLE": "Tableau de bord",
+
+	"ACCESSIBILITY_LANG": "Langues",
 
 	"ERROR_SERVER": "Erreur serveur.",
 	"ERROR_DATABASE": "Erreur de base de donnée.",

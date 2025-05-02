@@ -2,11 +2,20 @@
 
 namespace App\Controllers\API\Users;
 
+use App\Attributes\RouteAttribute;
+use App\Controllers\Controller;
 use App\Models\Services\APIService;
 use App\Utils\ApplicationData;
 
-class GETUsersController {
-	public function render(array $pageData): void {
+class GETUsersController extends Controller {
+	#[RouteAttribute(
+		path: "/api/users",
+		name: "app_api_users_get",
+		method: "GET",
+		description: "API users page",
+	)]
+
+	public function __invoke(): void {
 		header(header: "Content-Type: application/json");
 
 		$data = [];

@@ -2,11 +2,24 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Attributes\RouteAttribute;
+use App\Controllers\Controller;
 use App\Enums\Path;
 use App\Factories\NavbarFactory;
 
-class RegisterController {
-	public function render(array $pageData): void {
+class RegisterController extends Controller {
+	#[RouteAttribute(
+		path: "/register",
+		name: "app_account_register_get",
+		method: "GET",
+		description: "Register page",
+		title: "REGISTER_TITLE",
+		needLoginToBe: false
+	)]
+
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		$scripts = [
 			"/scripts/engine.js",
 			"/scripts/theme.js"

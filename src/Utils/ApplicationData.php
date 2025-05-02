@@ -54,7 +54,7 @@ class ApplicationData {
 	/**
 	 * Return every users uid
 	 *
-	 * @return array
+	 * @return array<string>
 	 */
 	public static function getUsers(): array {
 		return ApplicationData::request(

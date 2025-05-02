@@ -94,4 +94,24 @@ footer {
 	.tempora_toolbar_drop_container:hover .tempora_toolbar_drop_element {
 		display: block;
 	}
+
+	.red {
+		color: red !important;
+	}
+
+	.green {
+		color: lightgreen;
+	}
+
+	.yellow {
+		color: yellow;
+	}
+
+	.bold {
+		font-weight: bold;
+	}
+
+	.italic {
+		font-style: italic;
+	}
 }

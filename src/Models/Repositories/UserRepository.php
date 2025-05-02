@@ -123,7 +123,7 @@ class UserRepository extends User {
 	 *
 	 * @param string $uid User's UID
 	 *
-	 * @return array
+	 * @return array<int>
 	 */
 	public static function getRoles(string $uid): array {
 		return ApplicationData::request(

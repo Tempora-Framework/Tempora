@@ -1,7 +1,17 @@
 <?php
 
-use App\Factories\RouterFactory;
+use App\Tempora;
 
-require $_SERVER["DOCUMENT_ROOT"] . "/../src/Configs/index.php";
+// Paths
+define(constant_name: "BASE_DIR", value: __DIR__ . "/..");
 
-$routerFactory = new RouterFactory(url: strtok(string: $_SERVER["REQUEST_URI"], token: "?"));
+// Composer
+$autoload = BASE_DIR . "/vendor/autoload.php";
+if (!is_file(filename: $autoload)) {
+	echo "Please run composer install before starting the application.";
+	exit;
+}
+require $autoload;
+
+// Tempora's kernel
+new Tempora;

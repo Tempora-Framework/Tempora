@@ -2,14 +2,24 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Attributes\RouteAttribute;
+use App\Controllers\Controller;
 use App\Models\Repositories\ResetPasswordRepository;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 
-class ResetEventController {
-	public function render(array $pageData): void {
+class ResetEventController extends Controller {
+	#[RouteAttribute(
+		path: '/reset/$link',
+		name: 'app_account_reset_post',
+		method: "POST"
+	)]
+
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		if (
 			System::checkCSRF()
 			&& isset($_POST["new_password"])

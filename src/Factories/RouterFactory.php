@@ -2,36 +2,72 @@
 
 namespace App\Factories;
 
+use App\Attributes\RouteAttribute;
 use App\Router;
+use App\Utils\Cache\Cache;
 use App\Utils\Lang;
-use App\Utils\Roles;
+use App\Utils\System;
+use ReflectionObject;
 
 class RouterFactory extends Router {
-	private $data;
+
+	private array $routes = [];
 
 	public function __construct(string $url) {
 		parent::__construct(url: $url);
 
-		$this->data = json_decode(json: file_get_contents(filename: BASE_DIR . "/src/Configs/routes.json"), associative: true);
+		$controllers = System::getAllFiles(path: BASE_DIR . "/src/Controllers");
 
-		foreach ($this->data as $routeKey => $route) {
-			foreach ($route as $methodKey => $method) {
-				if (isset($method["title"])) {
-					$pageData["page_title"] = $method["title"];
-				}
+		$cache = new Cache(file: "routes.json");
 
-				$pageData["page_needLoginToBe"] = $method["needLoginToBe"] ?? null;
+		foreach ($controllers as $controller) {
+			$controller = str_replace(search: BASE_DIR . "/src/Controllers/", replace: "", subject: $controller);
+			$controller = str_replace(search: ".php", replace: "", subject: $controller);
+			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
+			$controller = new ("App\\Controllers\\" . $controller);
 
-				if (isset($method["accessRoles"])) {
-					$pageData["page_accessRoles"] = [];
+			$reflection = new ReflectionObject(object: $controller);
+			$routeAttributes = $reflection->getMethods()[0]->getAttributes(name: RouteAttribute::class);
 
-					foreach ($method["accessRoles"] as $role) {
-						array_push($pageData["page_accessRoles"], Roles::getRoleByName(name: $role));
-					}
-				}
+			if (count(value: $routeAttributes) > 0)
+				$routeAttribute = $routeAttributes[0]->newInstance();
 
-				parent::check(url: $routeKey, controller: str_replace(search: "/", replace: "\\", subject: $method["controller"]), method: $methodKey, pageData: $pageData);
+			$cache->add(name: $routeAttribute->name, value: $routeAttribute->path);
+		}
+
+		$cache->create();
+
+		foreach ($controllers as $controller) {
+			$controller = str_replace(search: BASE_DIR . "/src/Controllers/", replace: "", subject: $controller);
+			$controller = str_replace(search: ".php", replace: "", subject: $controller);
+			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
+			$controller = new ("App\\Controllers\\" . $controller);
+
+			$reflection = new ReflectionObject(object: $controller);
+			$routeAttributes = $reflection->getMethods()[0]->getAttributes(name: RouteAttribute::class);
+
+			if (count(value: $routeAttributes) > 0) {
+				$routeAttribute = $routeAttributes[0]->newInstance();
+				parent::check(
+					url: $routeAttribute->path,
+					controller: $controller,
+					method: $routeAttribute->method,
+					pageData: [
+						"page_name" => $routeAttribute->name,
+						"page_title" => $routeAttribute->title,
+						"page_description" => $routeAttribute->description,
+						"page_needLoginToBe" => $routeAttribute->needLoginToBe,
+						"page_accessRoles" => $routeAttribute->accessRoles ? array_map(
+							callback: function($role): mixed {
+								return $role->value;
+							},
+							array: $routeAttribute->accessRoles
+						): null
+					]
+				);
 			}
+
+			$cache->add(name: $routeAttribute->name, value: $routeAttribute->path);
 		}
 
 		parent::error(

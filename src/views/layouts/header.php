@@ -2,14 +2,18 @@
 	use App\Utils\Lang;
 ?>
 
+<!DOCTYPE html>
 <html lang="<?= Lang::translate(key: "MAIN_LANG") ?>" data-theme="<?= $_ENV["DEFAULT_THEME"] ?>">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php if (isset($pageData["page_description"])) { ?>
+		<meta name="description" content="<?= $pageData["page_description"] ?>">
+	<?php } ?>
 
 	<title><?= $pageData["page_title"] ?? APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR") ?></title>
 	<link rel="stylesheet" href="/styles/main.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css">
+	<link rel="stylesheet" href="/styles/remixicon.css">
 
 	<?php
 		if (isset($scripts)) {

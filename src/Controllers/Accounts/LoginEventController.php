@@ -2,14 +2,22 @@
 
 namespace App\Controllers\Accounts;
 
+use App\Attributes\RouteAttribute;
+use App\Controllers\Controller;
 use App\Models\Repositories\UserRepository;
 use App\Utils\Cookie;
 use App\Utils\Lang;
 use App\Utils\System;
 use Exception;
 
-class LoginEventController {
-	public function render(array $pageData): void {
+class LoginEventController extends Controller {
+	#[RouteAttribute(
+		path: "/login",
+		name: "app_account_login_post",
+		method: "POST"
+	)]
+
+	public function __invoke(): void {
 		if (
 			System::checkCSRF()
 			&& isset($_POST["email"])

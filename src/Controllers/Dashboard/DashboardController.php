@@ -2,11 +2,28 @@
 
 namespace App\Controllers\Dashboard;
 
+use App\Attributes\RouteAttribute;
+use App\Controllers\Controller;
 use App\Enums\Path;
+use App\Enums\Role;
 use App\Factories\NavbarFactory;
 
-class DashboardController {
-	public function render(array $pageData): void {
+class DashboardController extends Controller {
+	#[RouteAttribute(
+		path: "/dashboard",
+		name: "app_dashboard_get",
+		method: "GET",
+		description: "Dashboard page",
+		title: "DASHBOARD_TITLE",
+		needLoginToBe: true,
+		accessRoles: [
+			Role::ADMINISTRATOR
+		]
+	)]
+
+	public function __invoke(): void {
+		$pageData = $this->getPageData();
+
 		$scripts = [
 			"/scripts/engine.js",
 			"/scripts/theme.js"

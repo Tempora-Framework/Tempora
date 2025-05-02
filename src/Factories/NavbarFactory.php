@@ -3,20 +3,20 @@
 namespace App\Factories;
 
 use App\Enums\Role;
-use App\Utils\Lang;
+use App\Utils\Cache\Route;
 use App\Utils\Navbar;
 
 class NavbarFactory extends Navbar {
 	public function __construct() {
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_HOME"),
-			url: "/",
+			title: "NAVBAR_HOME",
+			url: Route::getPath(name: "app_home_get"),
 			icon: "ri-home-2-line",
 			class: "button button_secondary"
 		);
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_DASHBOARD"),
-			url: "/dashboard",
+			title: "NAVBAR_DASHBOARD",
+			url: Route::getPath(name: "app_dashboard_get"),
 			class: "button button_secondary",
 			needLoginToBe: true,
 			accessRoles: [
@@ -25,26 +25,26 @@ class NavbarFactory extends Navbar {
 		);
 
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_LOGIN"),
-			url: "/login",
+			title: "NAVBAR_LOGIN",
+			url: Route::getPath(name: "app_account_login_get"),
 			class: "button",
 			needLoginToBe: false,
 		);
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_REGISTER"),
-			url: "/register",
+			title: "NAVBAR_REGISTER",
+			url: Route::getPath(name: "app_account_register_get"),
 			class: "button",
 			needLoginToBe: false,
 		);
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_ACCOUNT"),
-			url: "/account",
+			title: "NAVBAR_ACCOUNT",
+			url: Route::getPath(name: "app_account_get"),
 			class: "button",
 			needLoginToBe: true,
 		);
 		parent::add(
-			title: Lang::translate(key: "NAVBAR_DISCONNECT"),
-			url: "/disconnect",
+			title: "NAVBAR_DISCONNECT",
+			url: Route::getPath(name: "app_account_disconnect_get"),
 			class: "button",
 			needLoginToBe: true,
 		);

@@ -42,7 +42,7 @@ class Form extends ElementBuilder {
 	/**
 	 * Get the value of inputs
 	 *
-	 * @return array
+	 * @return array<ElementBuilder>
 	 */
 	public function getInputs(): array {
 		return $this->inputs;
