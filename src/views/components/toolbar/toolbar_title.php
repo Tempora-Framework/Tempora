@@ -31,11 +31,11 @@
 			<?php if (is_dir(filename: BASE_DIR . "/.git")) { ?>
 				<tr>
 					<td><?= APP_NAME ?> Git branch</td>
-					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= Git::getBranch() ?>" target="_blank"><?= Git::getBranch() ?> <i class="ri-external-link-line"></i></a></td>
+					<td><a href="<?= Git::getRepoUrl() ?>/tree/<?= Git::getBranch() ?>" target="_blank"><?= Git::getBranch() ?> <i class="ri-external-link-line"></i></a></td>
 				</tr>
 				<tr>
 					<td><?= APP_NAME ?> Git commit</td>
-					<td><a href="https://github.com/SkyWors/Tempora/tree/<?= Git::getCommit() ?>" target="_blank"><?= Git::getCommit() ?> <i class="ri-external-link-line"></i></a></td>
+					<td><a href="<?= Git::getRepoUrl() ?>/tree/<?= Git::getCommit() ?>" target="_blank"><?= Git::getCommit() ?> <i class="ri-external-link-line"></i></a></td>
 				</tr>
 			<?php } ?>
 		</table>
