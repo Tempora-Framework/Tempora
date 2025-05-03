@@ -3,6 +3,7 @@
 namespace Tempora\Controllers;
 
 class Controller {
+
 	private array $pageData = [];
 
 	/**

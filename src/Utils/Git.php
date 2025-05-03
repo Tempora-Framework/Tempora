@@ -10,7 +10,7 @@ class Git {
 	 * @return string
 	 */
 	public static function getBranch(): string {
-		if (!is_dir(filename: TEMPORA_DIR . "/.git/"))
+		if (!is_dir(filename: APP_DIR . "/.git/"))
 			return "";
 
 		$fname = sprintf(format: TEMPORA_DIR . "/.git/HEAD");
@@ -27,10 +27,10 @@ class Git {
 	 * @return string
 	 */
 	public static function getCommit(): string {
-		if (!is_dir(filename: TEMPORA_DIR . "/.git/"))
+		if (!is_dir(filename: APP_DIR . "/.git/"))
 			return "";
 
-		$path = sprintf(format: TEMPORA_DIR . "/.git/");
+		$path = sprintf(format: APP_DIR . "/.git/");
 		$head = trim(string: substr(string: file_get_contents(filename: $path . "HEAD"), offset: 4));
 		$hash = trim(string: file_get_contents(filename: sprintf(format: $path . $head)));
 
@@ -43,10 +43,10 @@ class Git {
 	 * @return string
 	 */
 	public static function getRemoteUrl(): string {
-		if (!is_dir(filename: TEMPORA_DIR . "/.git/"))
+		if (!is_dir(filename: APP_DIR . "/.git/"))
 			return "";
 
-		$config = file_get_contents(filename: TEMPORA_DIR . "/.git/config");
+		$config = file_get_contents(filename: APP_DIR . "/.git/config");
 		preg_match(pattern: '/\[remote "origin"\]\s*url = (.+)/', subject: $config, matches: $matches);
 
 		return $matches[1] ?? "";

@@ -13,11 +13,11 @@ class Toolbar {
 	public function __invoke(array $pageData): void {
 		$toolbarSQLCount = 0;
 		if (isset($_SESSION["user"]["uid"])) {
-			$toolbarSQLCount = 2;
+			$toolbarSQLCount = 1;
 			$userInfo = $this::getInformations(uid: $_SESSION["user"]["uid"]);
 
 			$roleFormat = [];
-			foreach ($this::getRoles(uid: $_SESSION["user"]["uid"]) as $role) {
+			foreach (USER_ROLES as $role) {
 				array_push($roleFormat, Role::from(value: $role)->name);
 			}
 
