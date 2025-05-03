@@ -28,7 +28,7 @@
 				<td>Memory usage</td>
 				<td><?= round(num: memory_get_peak_usage() / 1048576, precision: 2) ?>M</td>
 			</tr>
-			<?php if (is_dir(filename: BASE_DIR . "/.git")) { ?>
+			<?php if (is_dir(filename: APP_DIR . "/.git")) { ?>
 				<tr>
 					<td><?= APP_NAME ?> Git branch</td>
 					<td><a href="<?= Git::getRepoUrl() ?>/tree/<?= Git::getBranch() ?>" target="_blank"><?= Git::getBranch() ?> <i class="ri-external-link-line"></i></a></td>

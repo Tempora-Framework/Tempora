@@ -16,15 +16,15 @@ class RouterFactory extends Router {
 	public function __construct(string $url) {
 		parent::__construct(url: $url);
 
-		$controllers = System::getAllFiles(path: BASE_DIR . "/src/Controllers");
+		$controllers = System::getAllFiles(path: APP_DIR . "/src/Controllers");
 
 		$cache = new Cache(file: "routes.json");
 
 		foreach ($controllers as $controller) {
-			$controller = str_replace(search: BASE_DIR . "/src/Controllers/", replace: "", subject: $controller);
+			$controller = str_replace(search: APP_DIR . "/src/Controllers/", replace: "", subject: $controller);
 			$controller = str_replace(search: ".php", replace: "", subject: $controller);
 			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
-			$controller = new ("Tempora\\Controllers\\" . $controller);
+			$controller = new ("App\\Controllers\\" . $controller);
 
 			$reflection = new ReflectionObject(object: $controller);
 			$routeAttributes = $reflection->getMethods()[0]->getAttributes(name: RouteAttribute::class);
@@ -38,10 +38,10 @@ class RouterFactory extends Router {
 		$cache->create();
 
 		foreach ($controllers as $controller) {
-			$controller = str_replace(search: BASE_DIR . "/src/Controllers/", replace: "", subject: $controller);
+			$controller = str_replace(search: APP_DIR . "/src/Controllers/", replace: "", subject: $controller);
 			$controller = str_replace(search: ".php", replace: "", subject: $controller);
 			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
-			$controller = new ("Tempora\\Controllers\\" . $controller);
+			$controller = new ("App\\Controllers\\" . $controller);
 
 			$reflection = new ReflectionObject(object: $controller);
 			$routeAttributes = $reflection->getMethods()[0]->getAttributes(name: RouteAttribute::class);

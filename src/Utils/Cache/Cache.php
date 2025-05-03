@@ -18,6 +18,9 @@ class Cache {
 	 * @return array<mixed>
 	 */
 	public function get(): array {
+		if (!is_file(filename: Path::CACHE->value . "/" . $this->file))
+			return [];
+
 		return json_decode(json: file_get_contents(filename: Path::CACHE->value . "/" . $this->file), associative: true);
 	}
 

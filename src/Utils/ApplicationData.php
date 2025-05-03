@@ -2,9 +2,6 @@
 
 namespace Tempora\Utils;
 
-use Tempora\Enums\Table;
-use PDO;
-
 class ApplicationData {
 
 	/**
@@ -49,17 +46,5 @@ class ApplicationData {
 		}
 
 		return 0;
-	}
-
-	/**
-	 * Return every users uid
-	 *
-	 * @return array<string>
-	 */
-	public static function getUsers(): array {
-		return ApplicationData::request(
-			query: "SELECT uid FROM " . Table::USERS->value,
-			returnType: PDO::FETCH_COLUMN
-		);
 	}
 }

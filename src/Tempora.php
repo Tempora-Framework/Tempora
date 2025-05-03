@@ -3,7 +3,7 @@
 namespace Tempora;
 
 use Tempora\Enums\Path;
-use Tempora\Controllers\ErrorController;
+use App\Controllers\ErrorController;
 use Tempora\Factories\RouterFactory;
 use Tempora\Models\Database;
 use Tempora\Models\Services\ErrorService;
@@ -15,12 +15,18 @@ use ErrorException;
 
 class Tempora {
 	public function __construct() {
+		// Paths
+		define(constant_name: "TEMPORA_DIR", value: __DIR__ . "/..");
+		if (!defined(constant_name: "APP_DIR")) {
+			define(constant_name: "APP_DIR", value: $_SERVER["DOCUMENT_ROOT"] . "/..");
+		}
+
 		// Dotenv
-		if (!is_file(filename: BASE_DIR . "/.env")) {
+		if (!is_file(filename: APP_DIR . "/.env")) {
 			echo "Please create .env file from .env.example at application root.";
 			exit;
 		}
-		Dotenv::createImmutable(paths: BASE_DIR)->load();
+		Dotenv::createImmutable(paths: APP_DIR)->load();
 
 		// Configurations
 		session_name(name: "TEMPORA");

@@ -5,6 +5,7 @@ namespace Tempora\Utils;
 use Tempora\Enums\Role;
 
 class Roles {
+
 	/**
 	 * Check for permissions
 	 *
