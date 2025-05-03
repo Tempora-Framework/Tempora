@@ -10,11 +10,11 @@
 		<table>
 			<tr>
 				<td><i class="ri-time-line"></i> Tempora</td>
-				<td>v<?= TEMPORA_VERSION ?></td>
+				<td><?= TEMPORA_VERSION ?></td>
 			</tr>
 			<tr>
 				<td>PHP</td>
-				<td>v<?= PHP_VERSION ?></td>
+				<td><?= PHP_VERSION ?></td>
 			</tr>
 			<tr>
 				<td>Server</td>

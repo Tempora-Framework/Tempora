@@ -2,6 +2,7 @@
 
 namespace Tempora;
 
+use Composer\InstalledVersions;
 use Tempora\Enums\Path;
 use App\Controllers\ErrorController;
 use Tempora\Factories\RouterFactory;
@@ -69,7 +70,7 @@ class Tempora {
 	 * @return void
 	 */
 	public function const(): void {
-		define(constant_name: "TEMPORA_VERSION", value: "1.2.2");
+		define(constant_name: "TEMPORA_VERSION", value: InstalledVersions::getPrettyVersion(packageName: "tempora-framework/tempora"));
 		define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
 		define(constant_name: "DEBUG", value: $_ENV["DEBUG"]);
 	}
