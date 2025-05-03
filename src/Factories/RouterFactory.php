@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Factories;
+namespace Tempora\Factories;
 
-use App\Attributes\RouteAttribute;
-use App\Router;
-use App\Utils\Cache\Cache;
-use App\Utils\Lang;
-use App\Utils\System;
+use Tempora\Attributes\RouteAttribute;
+use Tempora\Router;
+use Tempora\Utils\Cache\Cache;
+use Tempora\Utils\Lang;
+use Tempora\Utils\System;
 use ReflectionObject;
 
 class RouterFactory extends Router {
@@ -16,12 +16,12 @@ class RouterFactory extends Router {
 	public function __construct(string $url) {
 		parent::__construct(url: $url);
 
-		$controllers = System::getAllFiles(path: BASE_DIR . "/src/Controllers");
+		$controllers = System::getAllFiles(path: APP_DIR . "/src/Controllers");
 
 		$cache = new Cache(file: "routes.json");
 
 		foreach ($controllers as $controller) {
-			$controller = str_replace(search: BASE_DIR . "/src/Controllers/", replace: "", subject: $controller);
+			$controller = str_replace(search: APP_DIR . "/src/Controllers/", replace: "", subject: $controller);
 			$controller = str_replace(search: ".php", replace: "", subject: $controller);
 			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
 			$controller = new ("App\\Controllers\\" . $controller);
@@ -38,7 +38,7 @@ class RouterFactory extends Router {
 		$cache->create();
 
 		foreach ($controllers as $controller) {
-			$controller = str_replace(search: BASE_DIR . "/src/Controllers/", replace: "", subject: $controller);
+			$controller = str_replace(search: APP_DIR . "/src/Controllers/", replace: "", subject: $controller);
 			$controller = str_replace(search: ".php", replace: "", subject: $controller);
 			$controller = str_replace(search: "/", replace: "\\", subject: $controller);
 			$controller = new ("App\\Controllers\\" . $controller);

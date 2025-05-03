@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums;
+namespace Tempora\Enums;
 
 enum Role: int {
 	case USER = 1;

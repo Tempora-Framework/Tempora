@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Utils;
+namespace Tempora\Utils;
 
-use App\Utils\ElementBuilder\ElementBuilder;
+use Tempora\Utils\ElementBuilder\ElementBuilder;
 use PDO;
 
 class System {

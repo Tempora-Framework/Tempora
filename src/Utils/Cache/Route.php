@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\Cache;
+namespace Tempora\Utils\Cache;
 
 class Route extends Cache {
 	public static function getPath(string $name, array $options = null): string {

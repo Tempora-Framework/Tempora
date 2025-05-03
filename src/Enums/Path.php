@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Enums;
+namespace Tempora\Enums;
 
 enum Path: string {
-	case CACHE = BASE_DIR . "/src/cache";
-	case PUBLIC = BASE_DIR . "/public";
-	case LAYOUT = BASE_DIR . "/src/views/layouts";
-	case COMPONENT_ACTIONS = BASE_DIR . "/src/views/components/actions";
-	case COMPONENT_FORMS = BASE_DIR . "/src/views/components/forms";
-	case COMPONENT_TOOLBAR = BASE_DIR . "/src/views/components/toolbar";
+	case CACHE = APP_DIR . "/src/cache";
+	case PUBLIC = APP_DIR . "/public";
+	case COMPONENT_ACTIONS = APP_DIR . "/src/views/components/actions";
+	case COMPONENT_TOOLBAR = TEMPORA_DIR . "/src/views/components/toolbar";
 }

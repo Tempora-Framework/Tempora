@@ -1,26 +1,32 @@
 <?php
 
-namespace App;
+namespace Tempora;
 
-use App\Enums\Path;
+use Tempora\Enums\Path;
 use App\Controllers\ErrorController;
-use App\Factories\RouterFactory;
-use App\Models\Database;
-use App\Models\Services\ErrorService;
-use App\Utils\Cookie;
-use App\Utils\Lang;
-use App\Utils\System;
+use Tempora\Factories\RouterFactory;
+use Tempora\Models\Database;
+use Tempora\Models\Services\ErrorService;
+use Tempora\Utils\Cookie;
+use Tempora\Utils\Lang;
+use Tempora\Utils\System;
 use Dotenv\Dotenv;
 use ErrorException;
 
 class Tempora {
 	public function __construct() {
+		// Paths
+		define(constant_name: "TEMPORA_DIR", value: __DIR__ . "/..");
+		if (!defined(constant_name: "APP_DIR")) {
+			define(constant_name: "APP_DIR", value: $_SERVER["DOCUMENT_ROOT"] . "/..");
+		}
+
 		// Dotenv
-		if (!is_file(filename: BASE_DIR . "/.env")) {
+		if (!is_file(filename: APP_DIR . "/.env")) {
 			echo "Please create .env file from .env.example at application root.";
 			exit;
 		}
-		Dotenv::createImmutable(paths: BASE_DIR)->load();
+		Dotenv::createImmutable(paths: APP_DIR)->load();
 
 		// Configurations
 		session_name(name: "TEMPORA");
@@ -63,7 +69,7 @@ class Tempora {
 	 * @return void
 	 */
 	public function const(): void {
-		define(constant_name: "TEMPORA_VERSION", value: "1.1.0");
+		define(constant_name: "TEMPORA_VERSION", value: "1.2.0");
 		define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
 		define(constant_name: "DEBUG", value: $_ENV["DEBUG"]);
 	}

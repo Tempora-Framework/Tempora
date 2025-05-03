@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils;
+namespace Tempora\Utils;
 
 class Git {
 
@@ -10,10 +10,10 @@ class Git {
 	 * @return string
 	 */
 	public static function getBranch(): string {
-		if (!is_dir(filename: BASE_DIR . "/.git/"))
+		if (!is_dir(filename: TEMPORA_DIR . "/.git/"))
 			return "";
 
-		$fname = sprintf(format: BASE_DIR . "/.git/HEAD");
+		$fname = sprintf(format: TEMPORA_DIR . "/.git/HEAD");
 		$data = file_get_contents(filename: $fname);
 		$ar = explode(separator: "/", string: $data);
 		$ar = array_reverse(array: $ar);
@@ -27,10 +27,10 @@ class Git {
 	 * @return string
 	 */
 	public static function getCommit(): string {
-		if (!is_dir(filename: BASE_DIR . "/.git/"))
+		if (!is_dir(filename: TEMPORA_DIR . "/.git/"))
 			return "";
 
-		$path = sprintf(format: BASE_DIR . "/.git/");
+		$path = sprintf(format: TEMPORA_DIR . "/.git/");
 		$head = trim(string: substr(string: file_get_contents(filename: $path . "HEAD"), offset: 4));
 		$hash = trim(string: file_get_contents(filename: sprintf(format: $path . $head)));
 
@@ -43,10 +43,10 @@ class Git {
 	 * @return string
 	 */
 	public static function getRemoteUrl(): string {
-		if (!is_dir(filename: BASE_DIR . "/.git/"))
+		if (!is_dir(filename: TEMPORA_DIR . "/.git/"))
 			return "";
 
-		$config = file_get_contents(filename: BASE_DIR . "/.git/config");
+		$config = file_get_contents(filename: TEMPORA_DIR . "/.git/config");
 		preg_match(pattern: '/\[remote "origin"\]\s*url = (.+)/', subject: $config, matches: $matches);
 
 		return $matches[1] ?? "";

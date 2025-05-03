@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace Tempora\Controllers;
 
 class Controller {
 	private array $pageData = [];

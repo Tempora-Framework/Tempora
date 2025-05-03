@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Services;
+namespace Tempora\Models\Services;
 
 use App\Controllers\ErrorController;
-use App\Utils\Lang;
+use Tempora\Utils\Lang;
 use ErrorException;
 use Throwable;
 
@@ -17,7 +17,7 @@ class ErrorService {
 	 * @return void
 	 */
 	public static function handle(Throwable $exception): void {
-		$errorFolder = BASE_DIR . "/logs";
+		$errorFolder = APP_DIR . "/logs";
 		$logFile = $errorFolder . "/" . date(format: "Y-m-d") . ".log";
 
 		if (!file_exists(filename: $errorFolder . "/")) {

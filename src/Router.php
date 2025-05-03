@@ -1,16 +1,19 @@
 <?php
 
-namespace App;
+namespace Tempora;
 
-use App\Enums\Path;
-use App\Models\Repositories\UserRepository;
-use App\Utils\Lang;
-use App\Utils\Roles;
-use App\Controllers\Controller;
+use Tempora\Enums\Path;
+use App\Controllers\ErrorController;
+use Tempora\Traits\UserTrait;
+use Tempora\Utils\Lang;
+use Tempora\Utils\Roles;
+use Tempora\Controllers\Controller;
 
 class Router {
+
+	use UserTrait;
+
 	private $clientUrl;
-	private	$controllersPath = "App\Controllers\\";
 
 	public function __construct(string $url) {
 		$this->clientUrl = $url;
@@ -61,7 +64,7 @@ class Router {
 		if (
 			isset($pageData["page_accessRoles"])
 			&& $pageData["page_needLoginToBe"] === true
-			&& !Roles::check(userRoles: UserRepository::getRoles(uid: $_SESSION["user"]["uid"]), allowRoles: $pageData["page_accessRoles"])
+			&& !Roles::check(userRoles: $this::getRoles(uid: $_SESSION["user"]["uid"]), allowRoles: $pageData["page_accessRoles"])
 		)
 			return;
 
@@ -101,7 +104,7 @@ class Router {
 	}
 
 	public function error(array $pageData): void {
-		(new ($this->controllersPath . "ErrorController"))->setPageData(pageData: $pageData)();
+		(new ErrorController)->setPageData(pageData: $pageData)();
 
 		if (DEBUG == 1)
 			include Path::COMPONENT_TOOLBAR->value . "/toolbar.php";
