@@ -1,6 +1,12 @@
 {
 	"name": "tempora-framework/tempora",
-
+	"description": "A PHP MVC framework",
+	"keywords": [
+		"php",
+		"mvc",
+		"framework"
+	],
+	"license": "CC-BY-4.0",
 	"authors": [
 		{
 			"name": "Erick Paoletti",
@@ -9,6 +15,7 @@
 			"role": "CEO"
 		}
 	],
+	"homepage": "https://github.com/tempora-framework/tempora",
 
 	"require": {
 		"php": "^8.3 <8.4",
