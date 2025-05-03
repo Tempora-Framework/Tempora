@@ -8,6 +8,7 @@ use App\Controllers\ErrorController;
 use Tempora\Factories\RouterFactory;
 use Tempora\Models\Database;
 use Tempora\Models\Services\ErrorService;
+use Tempora\Traits\UserTrait;
 use Tempora\Utils\Cookie;
 use Tempora\Utils\Lang;
 use Tempora\Utils\System;
@@ -15,6 +16,9 @@ use Dotenv\Dotenv;
 use ErrorException;
 
 class Tempora {
+
+	use UserTrait;
+
 	public function __construct() {
 		// Paths
 		define(constant_name: "TEMPORA_DIR", value: __DIR__ . "/..");
@@ -57,6 +61,10 @@ class Tempora {
 
 		// Database
 		$this->database();
+
+		if (isset($_SESSION["user"]["uid"])) {
+			define(constant_name: "USER_ROLES", value: $this::getRoles(uid: $_SESSION["user"]["uid"]));
+		}
 
 		// Languages
 		$this->lang();

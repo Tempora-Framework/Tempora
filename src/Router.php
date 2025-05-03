@@ -64,7 +64,7 @@ class Router {
 		if (
 			isset($pageData["page_accessRoles"])
 			&& $pageData["page_needLoginToBe"] === true
-			&& !Roles::check(userRoles: $this::getRoles(uid: $_SESSION["user"]["uid"]), allowRoles: $pageData["page_accessRoles"])
+			&& !Roles::check(userRoles: USER_ROLES, allowRoles: $pageData["page_accessRoles"])
 		)
 			return;
 

@@ -3,11 +3,8 @@
 namespace Tempora\Utils;
 
 use Tempora\Enums\Path;
-use Tempora\Traits\UserTrait;
 
 class Navbar {
-
-	use UserTrait;
 
 	private $navbar = [];
 
@@ -52,7 +49,7 @@ class Navbar {
 				if ($element["needLoginToBe"] === true and isset($_SESSION["user"])) {
 					if (
 						$element["accessRoles"] === []
-						|| Roles::check(userRoles: $this::getRoles(uid: $_SESSION["user"]["uid"]), allowRoles: $element["accessRoles"])
+						|| Roles::check(userRoles: USER_ROLES, allowRoles: $element["accessRoles"])
 					) {
 						include Path::COMPONENT_ACTIONS->value . "/navbar_item.php";
 					}
