@@ -69,7 +69,7 @@ class Tempora {
 	 * @return void
 	 */
 	public function const(): void {
-		define(constant_name: "TEMPORA_VERSION", value: "1.2.0");
+		define(constant_name: "TEMPORA_VERSION", value: "1.2.1");
 		define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
 		define(constant_name: "DEBUG", value: $_ENV["DEBUG"]);
 	}
