@@ -7,6 +7,7 @@ use Tempora\Enums\Path;
 class Navbar {
 
 	private $navbar = [];
+	private $class = "";
 
 	/**
 	 * Add navbar element
@@ -40,7 +41,7 @@ class Navbar {
 	 * @return void
 	 */
 	public function render(): void {
-		echo "<nav>";
+		echo "<nav" . ($this->class != "" ? " class=\"" . $this->class . "\"" : "") . ">";
 
 		foreach ($this->navbar as $element) {
 			if ($element["needLoginToBe"] === null) {
@@ -64,5 +65,27 @@ class Navbar {
 		include Path::COMPONENT_ACTIONS->value . "/lang_selection.php";
 
 		echo "</nav>";
+	}
+
+	/**
+	 * Get the value of class
+	 *
+	 * @return mixed
+	 */
+	public function getClass(): mixed {
+		return $this->class;
+	}
+
+	/**
+	 * Set the value of class
+	 *
+	 * @param mixed $class
+	 *
+	 * @return self
+	 */
+	public function setClass($class): self {
+		$this->class = $class;
+
+		return $this;
 	}
 }
