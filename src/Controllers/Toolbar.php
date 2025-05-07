@@ -18,7 +18,11 @@ class Toolbar {
 
 			$roleFormat = [];
 			foreach (USER_ROLES as $role) {
-				array_push($roleFormat, Role::from(value: $role)->name);
+				if (Role::tryFrom(value: $role) !== null) {
+					array_push($roleFormat, Role::from(value: $role)->name);
+				} else {
+					array_push($roleFormat, $role);
+				}
 			}
 
 			for ($i = 0; $i < $toolbarSQLCount; $i++) {

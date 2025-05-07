@@ -13,7 +13,7 @@ class Git {
 		if (!is_dir(filename: APP_DIR . "/.git/"))
 			return "";
 
-		$fname = sprintf(format: TEMPORA_DIR . "/.git/HEAD");
+		$fname = sprintf(format: APP_DIR . "/.git/HEAD");
 		$data = file_get_contents(filename: $fname);
 		$ar = explode(separator: "/", string: $data);
 		$ar = array_reverse(array: $ar);
