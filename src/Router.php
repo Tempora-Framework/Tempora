@@ -53,6 +53,14 @@ class Router {
 		$clientUrlParts = explode(separator: "/", string: $this->clientUrl);
 
 		// Safe gates
+		if (DEBUG == 1) {
+			if (str_contains(haystack: $this->clientUrl, needle: "/vendor/tempora-framework/tempora/assets/")) {
+				header(header: "Content-type: text/css");
+				include TEMPORA_DIR . str_replace(search: "/vendor/tempora-framework/tempora", replace: "", subject: $this->clientUrl);
+				exit;
+			}
+		}
+
 		if (count(value: $urlParts) != count(value: $clientUrlParts))
 			return;
 		if (isset($pageData["page_needLoginToBe"])) {
