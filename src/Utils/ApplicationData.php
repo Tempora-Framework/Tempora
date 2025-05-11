@@ -44,13 +44,17 @@ class ApplicationData {
 			array_push(
 				$GLOBALS["toolbar"]["sql_query"],
 				[
-					"[" . round(num: (microtime(as_float: true) - $tempSQLms) *1000, precision: 3) . "ms] " . debug_backtrace()[1]["class"] . "::" . debug_backtrace()[1]["function"] . "()" . "<br>Line " . debug_backtrace()[0]["line"] => $queryLog
+					"class" => debug_backtrace()[1]["class"],
+					"function" => debug_backtrace()[1]["function"],
+					"line" => debug_backtrace()[0]["line"],
+					"time" => round(num: (microtime(as_float: true) - $tempSQLms) *1000, precision: 3),
+					"query" => $queryLog
 				]
 			);
 		}
 
 		if ($returnType) {
-			return $singleValue ? $stmt->fetchAll($returnType)[0] ?? null : $stmt->fetchAll($returnType) ?? null;
+			return $singleValue ? $stmt->fetchAll(mode: $returnType)[0] ?? null : $stmt->fetchAll(mode: $returnType) ?? null;
 		}
 
 		return 0;

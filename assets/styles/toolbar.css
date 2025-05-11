@@ -35,6 +35,16 @@ footer {
 
 	.tempora_toolbar_drop_container {
 		display: inline-block;
+
+		.toolbar_sql {
+			table-layout: auto;
+
+			.min_col {
+				min-width: min-content;
+				white-space: nowrap;
+				width: min-content;
+			}
+		}
 	}
 
 	p {
