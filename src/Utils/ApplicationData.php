@@ -15,6 +15,9 @@ class ApplicationData {
 	 * @return mixed
 	 */
 	public static function request(string $query, array $data = null, int $returnType = null, bool $singleValue = false): mixed {
+		if (DEBUG == 1)
+			$tempSQLms = microtime(as_float: true);
+
 		$stmt = DATABASE->prepare(query: $query);
 
 		if ($data) {
@@ -26,6 +29,8 @@ class ApplicationData {
 			}
 		}
 
+		$stmt->execute();
+
 		if (DEBUG == 1) {
 			$GLOBALS["toolbar"]["sql_count"]++;
 			$queryLog = $query;
@@ -36,10 +41,13 @@ class ApplicationData {
 				}
 			}
 
-			array_push($GLOBALS["toolbar"]["sql_query"], [debug_backtrace()[1]["class"] . "::" . debug_backtrace()[1]["function"] . "()" . "<br>Line " . debug_backtrace()[0]["line"] => $queryLog]);
+			array_push(
+				$GLOBALS["toolbar"]["sql_query"],
+				[
+					"[" . round(num: (microtime(as_float: true) - $tempSQLms) *1000, precision: 3) . "ms] " . debug_backtrace()[1]["class"] . "::" . debug_backtrace()[1]["function"] . "()" . "<br>Line " . debug_backtrace()[0]["line"] => $queryLog
+				]
+			);
 		}
-
-		$stmt->execute();
 
 		if ($returnType) {
 			return $singleValue ? $stmt->fetchAll($returnType)[0] ?? null : $stmt->fetchAll($returnType) ?? null;

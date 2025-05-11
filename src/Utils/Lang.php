@@ -25,7 +25,7 @@ class Lang {
 			if (DEBUG == 1)
 				$GLOBALS["toolbar"]["lang_error_count"]++;
 
-			$result = "Missing entry";
+			$result = $key;
 		}
 
 		if (isset($options)) {
