@@ -10,6 +10,7 @@ use Tempora\Models\Database;
 use Tempora\Models\Services\ErrorService;
 use Tempora\Traits\UserTrait;
 use Tempora\Utils\Cookie;
+use Tempora\Utils\JWT;
 use Tempora\Utils\Lang;
 use Tempora\Utils\System;
 use Dotenv\Dotenv;
@@ -62,6 +63,28 @@ class Tempora {
 		// Database
 		$this->database();
 
+		// Token
+		if (isset($_COOKIE["JWT"])) {
+			$jwt = new JWT;
+			$jwtUid = $jwt->getUserUid(token: $_COOKIE["JWT"]);
+			if ($jwtUid) {
+				$_SESSION["user"]["uid"] = $jwtUid;
+			} else {
+				$jwtCookie = new Cookie;
+				$jwtCookie
+					->setName(name: "JWT")
+					->setValue(value: "")
+					->setExpire(expire: 0)
+				;
+				$jwtCookie->send();
+
+				unset($_SESSION["user"]);
+
+				System::redirect();
+			}
+		}
+
+		// User
 		if (isset($_SESSION["user"]["uid"])) {
 			define(constant_name: "USER_ROLES", value: $this::getRoles(uid: $_SESSION["user"]["uid"]));
 		}
