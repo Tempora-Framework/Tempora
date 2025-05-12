@@ -58,7 +58,7 @@ class Tempora {
 		$this->errorHandler();
 
 		if (DEBUG == 1)
-			$this->toolbar();
+			$this->chronos();
 
 		// Database
 		$this->database();
@@ -107,20 +107,20 @@ class Tempora {
 	}
 
 	/**
-	 * Toolbar
+	 * Chronos
 	 *
 	 * @return void
 	 */
-	public function toolbar(): void {
-		$toolbar = [];
-		global $toolbar;
+	public function chronos(): void {
+		$chronos = [];
+		global $chronos;
 
-		$GLOBALS["toolbar"]["ms_count"] = microtime(as_float: true);
-		$GLOBALS["toolbar"]["sql_count"] = 0;
-		$GLOBALS["toolbar"]["sql_query"] = [];
-		$GLOBALS["toolbar"]["langs"] = [];
-		$GLOBALS["toolbar"]["lang_count"] = 0;
-		$GLOBALS["toolbar"]["lang_error_count"] = 0;
+		$GLOBALS["chronos"]["ms_count"] = microtime(as_float: true);
+		$GLOBALS["chronos"]["sql_count"] = 0;
+		$GLOBALS["chronos"]["sql_query"] = [];
+		$GLOBALS["chronos"]["langs"] = [];
+		$GLOBALS["chronos"]["lang_count"] = 0;
+		$GLOBALS["chronos"]["lang_error_count"] = 0;
 	}
 
 	/**

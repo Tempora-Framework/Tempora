@@ -17,13 +17,13 @@ class Lang {
 		$json = json_decode(json: $file);
 
 		if (DEBUG == 1)
-			$GLOBALS["toolbar"]["lang_count"]++;
+			$GLOBALS["chronos"]["lang_count"]++;
 
 		if (isset($json->$key)) {
 			$result = $json->$key;
 		} else {
 			if (DEBUG == 1)
-				$GLOBALS["toolbar"]["lang_error_count"]++;
+				$GLOBALS["chronos"]["lang_error_count"]++;
 
 			$result = $key;
 		}
@@ -35,7 +35,7 @@ class Lang {
 		}
 
 		if (DEBUG == 1)
-			$GLOBALS["toolbar"]["langs"][$key] = $result;
+			$GLOBALS["chronos"]["langs"][$key] = $result;
 
 		return $result;
 	}

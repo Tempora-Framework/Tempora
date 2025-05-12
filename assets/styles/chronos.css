@@ -3,40 +3,40 @@
    ============================================== */
 
 :root {
-	--toolbar-background-color: #464646;
-	--toolbar-background-hover-color: #353535;
-	--toolbar-text-color: #ffffff;
+	--chronos-background-color: #464646;
+	--chronos-background-hover-color: #353535;
+	--chronos-text-color: #ffffff;
 }
 
 footer {
 	margin-bottom: 28px;
 }
 
-.tempora_toolbar {
+.tempora_chronos {
 	width: -webkit-fill-available;
 	width: -moz-available;
-	background-color: var(--toolbar-background-color);
+	background-color: var(--chronos-background-color);
 	position: fixed;
 	bottom: 0;
 	left: 0;
 	padding: 0 10px;
 	display: flex;
 	flex-direction: row;
-	color: var(--toolbar-text-color);
+	color: var(--chronos-text-color);
 	border-left: solid 4px red;
 	font-size: 14px;
 	z-index: 9999;
 	font-family: Arial, Helvetica, sans-serif;
 	user-select: none;
 
-	.tempora_toolbar_title {
+	.tempora_chronos_title {
 		font-weight: bold;
 	}
 
-	.tempora_toolbar_drop_container {
+	.tempora_chronos_drop_container {
 		display: inline-block;
 
-		.toolbar_sql {
+		.chronos_sql {
 			table-layout: auto;
 
 			.min_col {
@@ -58,24 +58,25 @@ footer {
 		table-layout: fixed;
 		width: 100%;
 		word-wrap: break-word;
+		table-layout: auto;
 
 		td {
-			color: var(--toolbar-text-color);
+			color: var(--chronos-text-color);
 			vertical-align: top;
-			border: solid 2px var(--toolbar-background-color);
+			border: solid 2px var(--chronos-background-color);
 			font-size: 14px;
 			padding: 5px;
 		}
 	}
 
-	.tempora_toolbar_drop_element {
+	.tempora_chronos_drop_element {
 		display: none;
 		position: absolute;
 		bottom: 100%;
 		min-width: 300px;
 		width: fit-content;
 		max-width: 600px;
-		background-color: var(--toolbar-background-hover-color);
+		background-color: var(--chronos-background-hover-color);
 		overflow-y: scroll;
 		max-height: 500px;
 		padding: 10px;
@@ -91,7 +92,7 @@ footer {
 		h1 {
 			user-select: text;
 			text-decoration: none;
-			color: var(--toolbar-text-color);
+			color: var(--chronos-text-color);
 		}
 
 		td:hover {
@@ -99,11 +100,11 @@ footer {
 		}
 	}
 
-	.tempora_toolbar_drop_container:hover {
-		background-color: var(--toolbar-background-hover-color);
+	.tempora_chronos_drop_container:hover {
+		background-color: var(--chronos-background-hover-color);
 	}
 
-	.tempora_toolbar_drop_container:hover .tempora_toolbar_drop_element {
+	.tempora_chronos_drop_container:hover .tempora_chronos_drop_element {
 		display: block;
 	}
 

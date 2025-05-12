@@ -32,7 +32,7 @@ class ApplicationData {
 		$stmt->execute();
 
 		if (DEBUG == 1) {
-			$GLOBALS["toolbar"]["sql_count"]++;
+			$GLOBALS["chronos"]["sql_count"]++;
 			$queryLog = $query;
 
 			if ($data) {
@@ -42,7 +42,7 @@ class ApplicationData {
 			}
 
 			array_push(
-				$GLOBALS["toolbar"]["sql_query"],
+				$GLOBALS["chronos"]["sql_query"],
 				[
 					"class" => debug_backtrace()[1]["class"],
 					"function" => debug_backtrace()[1]["function"],
