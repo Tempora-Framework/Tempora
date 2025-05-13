@@ -4,19 +4,25 @@ namespace Tempora\Utils;
 
 class Cookie {
 	private string $name;
-	private string $value;
+	private string $value = "";
 	private int $expire = 60 *60 *24 *30;
 	private string $path = "/";
+	private string $domain = "";
+	private bool $secure = false;
+	private bool $httponly = false;
 
 	public function send(): void {
+		if (!isset($_SERVER['HTTPS']))
+			$this->secure = false;
+
 		setcookie(
-			$this->name,
-			$this->value,
-			[
-				"samesite" => "Strict",
-				"expires" => time() + $this->expire,
-				"path" => $this->path,
-			]
+			name: $this->name,
+			value: $this->value,
+			expires_or_options: time() + $this->expire,
+			path: $this->path,
+			domain: $this->domain,
+			secure: $this->secure,
+			httponly: $this->httponly
 		);
 	}
 
@@ -104,6 +110,72 @@ class Cookie {
 	 */
 	public function setPath(string $path): self {
 		$this->path = $path;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of domain
+	 *
+	 * @return string
+	 */
+	public function getDomain(): string {
+		return $this->domain;
+	}
+
+	/**
+	 * Set the value of domain
+	 *
+	 * @param string $domain
+	 *
+	 * @return self
+	 */
+	public function setDomain(string $domain): self {
+		$this->domain = $domain;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of secure
+	 *
+	 * @return bool
+	 */
+	public function isSecure(): bool {
+		return $this->secure;
+	}
+
+	/**
+	 * Set the value of secure
+	 *
+	 * @param bool $secure
+	 *
+	 * @return self
+	 */
+	public function setSecure(bool $secure): self {
+		$this->secure = $secure;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of httponly
+	 *
+	 * @return bool
+	 */
+	public function isHttponly(): bool {
+		return $this->httponly;
+	}
+
+	/**
+	 * Set the value of httponly
+	 *
+	 * @param bool $httponly
+	 *
+	 * @return self
+	 */
+	public function setHttponly(bool $httponly): self {
+		$this->httponly = $httponly;
 
 		return $this;
 	}

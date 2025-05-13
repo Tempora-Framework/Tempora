@@ -11,10 +11,10 @@
 		$httpCodeClass = "red";
 ?>
 
-<div class="tempora_toolbar_drop_container">
-	<p class="tempora_toolbar_drop_hover_element <?= $httpCodeClass ?> bold" title="<?= Lang::translate(key: "TOOLBAR_HTTP_CODE_TITLE") ?>"><i class="ri-code-line"></i> <?= http_response_code() ?></p>
-	<div class="tempora_toolbar_drop_element">
-		<h1><?= Lang::translate(key: "TOOLBAR_HTTP_CODE_TITLE") ?></h1>
+<div class="tempora_chronos_drop_container">
+	<p class="tempora_chronos_drop_hover_element <?= $httpCodeClass ?> bold" title="<?= Lang::translate(key: "CHRONOS_HTTP_CODE_TITLE") ?>"><i class="ri-code-line"></i> <?= http_response_code() ?></p>
+	<div class="tempora_chronos_drop_element">
+		<h1><?= Lang::translate(key: "CHRONOS_HTTP_CODE_TITLE") ?></h1>
 		<table>
 			<tr>
 				<td>Request method</td>

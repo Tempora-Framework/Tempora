@@ -3,10 +3,10 @@
 	use Tempora\Utils\Lang;
 ?>
 
-<div class="tempora_toolbar_drop_container">
-	<p class="tempora_toolbar_drop_hover_element bold" title="<?= Lang::translate(key: "TOOLBAR_TITLE") ?>"><?= Lang::translate(key: "TOOLBAR_TITLE") ?></p>
-	<div class="tempora_toolbar_drop_element">
-		<h1><?= Lang::translate(key: "TOOLBAR_TITLE") ?></h1>
+<div class="tempora_chronos_drop_container">
+	<p class="tempora_chronos_drop_hover_element bold" title="<?= Lang::translate(key: "CHRONOS_TITLE") ?>"><?= Lang::translate(key: "CHRONOS_TITLE") ?></p>
+	<div class="tempora_chronos_drop_element">
+		<h1><?= Lang::translate(key: "CHRONOS_TITLE") ?></h1>
 		<table>
 			<tr>
 				<td><i class="ri-time-line"></i> Tempora</td>
@@ -14,7 +14,7 @@
 			</tr>
 			<tr>
 				<td>PHP</td>
-				<td><?= PHP_VERSION ?></td>
+				<td>v<?= PHP_VERSION ?></td>
 			</tr>
 			<tr>
 				<td>Server</td>

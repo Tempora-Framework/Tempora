@@ -104,7 +104,7 @@ class Router {
 
 		if (DEBUG == 1) {
 			if (!in_array(needle: "Content-Type: application/json", haystack: headers_list())) {
-				include Path::COMPONENT_TOOLBAR->value . "/toolbar.php";
+				include Path::COMPONENT_CHRONOS->value . "/chronos.php";
 			}
 		}
 
@@ -115,6 +115,6 @@ class Router {
 		(new ErrorController)->setPageData(pageData: $pageData)();
 
 		if (DEBUG == 1)
-			include Path::COMPONENT_TOOLBAR->value . "/toolbar.php";
+			include Path::COMPONENT_CHRONOS->value . "/chronos.php";
 	}
 }
