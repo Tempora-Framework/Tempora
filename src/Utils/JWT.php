@@ -11,7 +11,12 @@ use Tempora\Enums\Table;
 class JWT extends FirebaseJWT {
 	private array $data = [];
 
-	public function create(): string | bool {
+	/**
+	 * Create JWT
+	 *
+	 * @return bool | string
+	 */
+	public function create(): bool | string {
 		if (!isset($_SESSION["user"]["uid"]))
 			return false;
 
@@ -37,7 +42,17 @@ class JWT extends FirebaseJWT {
 		return $jwt;
 	}
 
+	/**
+	 * Return JWT's user UID
+	 *
+	 * @param string $token
+	 *
+	 * @return string | bool
+	 */
 	public function getUserUid(string $token): string | bool {
+		if ($this->decodeData(token: $token) === false)
+			return false;
+
 		$uid = ApplicationData::request(
 			query: "SELECT uid_user FROM " . Table::USER_TOKENS->value . " WHERE token = :token",
 			data: [
@@ -53,6 +68,13 @@ class JWT extends FirebaseJWT {
 		return $uid;
 	}
 
+	/**
+	 * Delete JWT from database
+	 *
+	 * @param string $token
+	 *
+	 * @return void
+	 */
 	public function delete(string $token): void {
 		ApplicationData::request(
 			query: "DELETE FROM " . Table::USER_TOKENS->value . " WHERE token = :token",
@@ -62,6 +84,13 @@ class JWT extends FirebaseJWT {
 		);
 	}
 
+	/**
+	 * Decore JWT data
+	 *
+	 * @param string $token
+	 *
+	 * @return array | bool
+	 */
 	public function decodeData(string $token): array | bool {
 		try {
 			$decoded = $this->decode(
