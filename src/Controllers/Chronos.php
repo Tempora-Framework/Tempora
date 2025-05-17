@@ -10,7 +10,7 @@ class Chronos {
 
 	use UserTrait;
 
-	public function __invoke(array $pageData): void {
+	public function __invoke(array $pageData = []): void {
 		$chronosSQLCount = 0;
 		if (isset($_SESSION["user"]["uid"])) {
 			$chronosSQLCount = 1;
@@ -36,7 +36,9 @@ class Chronos {
 		include Path::COMPONENT_CHRONOS->value . "/chronos_user.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_sql.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_session.php";
-		include Path::COMPONENT_CHRONOS->value . "/chronos_pagedata.php";
+		if ($pageData != []) {
+			include Path::COMPONENT_CHRONOS->value . "/chronos_pagedata.php";
+		}
 		include Path::COMPONENT_CHRONOS->value . "/chronos_get.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_post.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_cookie.php";

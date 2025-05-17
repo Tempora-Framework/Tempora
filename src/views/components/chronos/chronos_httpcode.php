@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<td><?= Lang::translate(key: "MAIN_NAME_OBJECT") ?></td>
-				<td><?= $pageData["page_name"] ?></td>
+				<td><?= $pageData["page_name"] ?? "" ?></td>
 			</tr>
 		</table>
 	</div>

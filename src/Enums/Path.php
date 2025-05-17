@@ -7,4 +7,5 @@ enum Path: string {
 	case PUBLIC = APP_DIR . "/public";
 	case COMPONENT_ACTIONS = APP_DIR . "/src/views/components/actions";
 	case COMPONENT_CHRONOS = TEMPORA_DIR . "/src/views/components/chronos";
+	case LAYOUT = TEMPORA_DIR . "/src/views/layouts";
 }

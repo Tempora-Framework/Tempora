@@ -64,25 +64,7 @@ class Tempora {
 		$this->database();
 
 		// Token
-		if (isset($_COOKIE["JWT"])) {
-			$jwt = new JWT;
-			$jwtUid = $jwt->getUserUid(token: $_COOKIE["JWT"]);
-			if ($jwtUid) {
-				$_SESSION["user"]["uid"] = $jwtUid;
-			} else {
-				$jwtCookie = new Cookie;
-				$jwtCookie
-					->setName(name: "JWT")
-					->setValue(value: "")
-					->setExpire(expire: 0)
-				;
-				$jwtCookie->send();
-
-				unset($_SESSION["user"]);
-
-				System::redirect();
-			}
-		}
+		$this->jwt();
 
 		// User
 		if (isset($_SESSION["user"]["uid"])) {
@@ -129,17 +111,11 @@ class Tempora {
 	 * @return void
 	 */
 	public function errorHandler(): void {
-		if (DEBUG == 1) {
-			ini_set(option: "display_errors", value: 1);
-			ini_set(option: "display_startup_errors", value: 1);
-			error_reporting(error_level: E_ALL);
-		} else {
-			set_error_handler(callback: function($severity, $message, $file, $line): void {
-				throw new ErrorException(message: $message, code: 0, severity: $severity, filename: $file, line: $line);
-			});
-			set_exception_handler(callback: [ErrorService::class, "handle"]);
-			register_shutdown_function(callback: [ErrorService::class, "shutdown"]);
-		}
+		set_error_handler(callback: function($severity, $message, $file, $line): void {
+			throw new ErrorException(message: $message, code: 0, severity: $severity, filename: $file, line: $line);
+		});
+		set_exception_handler(callback: [ErrorService::class, "handle"]);
+		register_shutdown_function(callback: [ErrorService::class, "shutdown"]);
 	}
 
 	/**
@@ -161,6 +137,33 @@ class Tempora {
 			if (!in_array(needle: $_COOKIE["LANG"] . ".json", haystack: System::getFiles(path: Path::PUBLIC->value . "/langs"))) {
 				$langCookie->setValue(value: $_ENV["DEFAULT_LANG"]);
 				$langCookie->send();
+
+				System::redirect();
+			}
+		}
+	}
+
+	/**
+	 * JWT
+	 *
+	 * @return void
+	 */
+	public function jwt(): void {
+		if (isset($_COOKIE["JWT"])) {
+			$jwt = new JWT;
+			$jwtUid = $jwt->getUserUid(token: $_COOKIE["JWT"]);
+			if ($jwtUid) {
+				$_SESSION["user"]["uid"] = $jwtUid;
+			} else {
+				$jwtCookie = new Cookie;
+				$jwtCookie
+					->setName(name: "JWT")
+					->setValue(value: "")
+					->setExpire(expire: 0)
+				;
+				$jwtCookie->send();
+
+				unset($_SESSION["user"]);
 
 				System::redirect();
 			}
