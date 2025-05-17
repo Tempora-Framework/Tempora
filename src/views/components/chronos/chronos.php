@@ -8,5 +8,5 @@
 <script defer src="/vendor/tempora-framework/tempora/assets/scripts/chronos.js"></script>
 
 <div class="tempora_chronos">
-	<?php (new Chronos)(pageData: $pageData); ?>
+	<?php (new Chronos)(pageData: $pageData ?? []); ?>
 </div>

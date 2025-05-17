@@ -6,6 +6,7 @@
 	--chronos-background-color: #464646;
 	--chronos-background-hover-color: #353535;
 	--chronos-text-color: #ffffff;
+	--chronos-red: #c20000;
 }
 
 footer {
@@ -23,7 +24,7 @@ footer {
 	display: flex;
 	flex-direction: row;
 	color: var(--chronos-text-color);
-	border-left: solid 4px red;
+	border-left: solid 4px var(--chronos-red);
 	font-size: 14px;
 	z-index: 9999;
 	font-family: Arial, Helvetica, sans-serif;
@@ -109,7 +110,7 @@ footer {
 	}
 
 	.red {
-		color: red !important;
+		color: var(--chronos-red) !important;
 	}
 
 	.green {

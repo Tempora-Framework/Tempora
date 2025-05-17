@@ -1,0 +1,55 @@
+:root {
+	--chronos-background-header-color: #c20000;
+	--chronos-border-radius: 9px;
+}
+
+.tempora_error_container {
+	width: -webkit-fill-available;
+	width: -moz-available;
+	height: 100vh;
+	backdrop-filter: blur(3px);
+	background-color: #0000003b;
+	position: absolute;
+	top: 0;
+
+	p {
+		user-select: text !important;
+	}
+
+	.tempora_error {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 80%;
+		margin: auto;
+		margin-top: 10vh;
+		gap: 20px;
+		border: solid 1px var(--chronos-background-header-color);
+		border-radius: var(--chronos-border-radius);
+
+		.header {
+			padding: 10px 30px;
+			background-color: var(--chronos-background-header-color);
+			width: -webkit-fill-available;
+			width: -moz-available;
+			text-align: center;
+			border-radius: 6px 6px 0 0;
+
+			.title {
+				font-weight: bold;
+			}
+		}
+
+		.trace_container {
+			margin: 20px;
+			margin-top: 0;
+			width: -webkit-fill-available;
+			width: -moz-available;
+
+			.trace {
+				white-space: break-spaces;
+			}
+		}
+	}
+}
