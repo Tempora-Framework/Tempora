@@ -14,14 +14,18 @@
 }
 
 [class^="ri-"], [class*=" ri-"] {
-  font-family: 'remixicon' !important;
+  font-family: "remixicon" !important;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ri-arrow-down-s-line:before { content: "\ea4e"; }
+.ri-arrow-right-long-line:before { content: "\f5dc"; }
 .ri-arrow-up-double-line:before { content: "\f2eb"; }
+.ri-arrow-up-s-line:before { content: "\ea78"; }
 .ri-cake-3-line:before { content: "\eb1b"; }
+.ri-close-large-line:before { content: "\f4c8"; }
 .ri-code-line:before { content: "\eba9"; }
 .ri-corner-down-left-line:before { content: "\f307"; }
 .ri-database-line:before { content: "\ec18"; }
