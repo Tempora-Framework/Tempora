@@ -9,9 +9,11 @@ use Tempora\Factories\RouterFactory;
 use Tempora\Models\Database;
 use Tempora\Models\Services\ErrorService;
 use Tempora\Traits\UserTrait;
+use Tempora\Utils\Cache\Cache;
 use Tempora\Utils\Cookie;
 use Tempora\Utils\JWT;
 use Tempora\Utils\Lang;
+use Tempora\Utils\Minifier\Minifier;
 use Tempora\Utils\System;
 use Dotenv\Dotenv;
 use ErrorException;
@@ -73,6 +75,9 @@ class Tempora {
 
 		// Languages
 		$this->lang();
+
+		// Minify assets
+		$this->minify();
 
 		new RouterFactory(url: strtok(string: $_SERVER["REQUEST_URI"], token: "?"));
 	}
@@ -141,6 +146,23 @@ class Tempora {
 				System::redirect();
 			}
 		}
+	}
+
+	/**
+	 * Minify assets
+	 *
+	 * @return void
+	 */
+	public function minify(): void {
+		$cache = new Cache(file: "minifier.json");
+		foreach (System::getAllFiles(path: Path::ASSETS->value) as $file) {
+			(new Minifier(file: $file))
+				->create()
+			;
+
+			$cache->add(name: $file, value: filemtime(filename: $file));
+		}
+		$cache->create();
 	}
 
 	/**

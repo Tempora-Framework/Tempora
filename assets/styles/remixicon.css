@@ -9,15 +9,15 @@
 * Date: 2024-12-17
 */
 @font-face {
-  font-family: "remixicon";
-  src: url("/fonts/remixicon.woff2?t=1734404658139") format("woff2"),
+	font-family: "remixicon";
+	src: url("/fonts/remixicon.woff2?t=1734404658139") format("woff2"),
 }
 
 [class^="ri-"], [class*=" ri-"] {
-  font-family: "remixicon" !important;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: "remixicon" !important;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .ri-arrow-down-s-line:before { content: "\ea4e"; }
