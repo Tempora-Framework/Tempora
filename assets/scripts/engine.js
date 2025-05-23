@@ -1,5 +1,5 @@
-let dataLang = [];
-let isDataLangLoaded = false;
+dataLang = [];
+isDataLangLoaded = false;
 
 (async () => {
 	dataLang = await callApi("/langs/" + getCookie("LANG") + ".json");
@@ -134,7 +134,7 @@ if (isElementExist(langSelection)) {
 }
 
 // Notifications
-let notification = decodeURIComponent(getCookie("NOTIFICATION"));
+notification = decodeURIComponent(getCookie("NOTIFICATION"));
 if (notification) {
 	if (notification !== "undefined") {
 		setNotification(notification);
@@ -142,7 +142,7 @@ if (notification) {
 }
 
 setInterval(() => {
-	let DOMnotification = document.getElementById("main_notification");
+	DOMnotification = document.getElementById("main_notification");
 	if (isElementExist(DOMnotification)) {
 		setTimeout(
 			() => {
@@ -152,7 +152,7 @@ setInterval(() => {
 	}
 }, 1000);
 
-const DOMnotification = document.getElementById("main_notification");
+DOMnotification = document.getElementById("main_notification");
 if (isElementExist(DOMnotification)) {
 	DOMnotification.addEventListener("click", () => {
 		DOMnotification.remove();

@@ -23,6 +23,8 @@ class Tempora {
 	use UserTrait;
 
 	public function __construct() {
+		ob_start(callback: "ob_gzhandler");
+
 		// Paths
 		define(constant_name: "TEMPORA_DIR", value: __DIR__ . "/..");
 		if (!defined(constant_name: "APP_DIR")) {
@@ -80,6 +82,8 @@ class Tempora {
 		$this->minify();
 
 		new RouterFactory(url: strtok(string: $_SERVER["REQUEST_URI"], token: "?"));
+
+		ob_end_flush();
 	}
 
 	/**

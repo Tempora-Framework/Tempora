@@ -64,9 +64,7 @@ class Minifier {
 			) {
 				try {
 					mkdir(directory: Path::ASSETS_MIN->value . $this->filePath, recursive: true);
-				} catch (Exception $e) {
-					echo "Error creating directory: " . $e->getMessage();
-				}
+				} catch (Exception $e) {}
 
 				file_put_contents(filename: Path::ASSETS_MIN->value . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension, data: $this->minContent);
 			}
