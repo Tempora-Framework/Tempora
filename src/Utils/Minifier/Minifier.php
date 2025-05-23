@@ -47,14 +47,14 @@ class Minifier {
 	public function create(): void {
 		$file = Path::ASSETS->value . $this->filePath . "/" . $this->fileName . "." . $this->fileExtension;
 
-		if (filemtime(filename: $file) > (new Cache(file: "minifier.json"))->get()[$file]) {
+		if (filemtime(filename: $file) > ((new Cache(file: "minifier.json"))->get()[$file] ?? 0)) {
 			if ($this->fileExtension == "js") {
 				$minify = new JS($file);
 				$this->minContent = $minify->minify();
 			}
 
 			if ($this->fileExtension == "css") {
-				$minify = new CSS(Path::ASSETS->value . "/" . $this->filePath . "/" . $this->fileName . "." . $this->fileExtension);
+				$minify = new CSS($file);
 				$this->minContent = $minify->minify();
 			}
 
@@ -63,11 +63,12 @@ class Minifier {
 				&& self::get() != $this->minContent
 			) {
 				try {
-					mkdir(directory: Path::ASSETS_MIN->value . "/" . $this->filePath, recursive: true);
+					mkdir(directory: Path::ASSETS_MIN->value . $this->filePath, recursive: true);
 				} catch (Exception $e) {
+					echo "Error creating directory: " . $e->getMessage();
 				}
 
-				file_put_contents(filename: Path::ASSETS_MIN->value . "/" . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension, data: $this->minContent);
+				file_put_contents(filename: Path::ASSETS_MIN->value . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension, data: $this->minContent);
 			}
 		}
 	}
