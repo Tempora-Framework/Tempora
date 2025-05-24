@@ -4,7 +4,7 @@
 ?>
 
 <div class="tempora_chronos_drop_container">
-	<p class="tempora_chronos_drop_hover_element bold" title="<?= Lang::translate(key: "CHRONOS_TITLE") ?>"><?= Lang::translate(key: "CHRONOS_TITLE") ?></p>
+	<p class="tempora_chronos_drop_hover_element bold tempora_chronos_title" title="<?= Lang::translate(key: "CHRONOS_TITLE") ?>"><img src="/vendor/tempora-framework/tempora/assets/images/chronos.png"></img></p>
 	<div class="tempora_chronos_drop_element">
 		<h1><?= Lang::translate(key: "CHRONOS_TITLE") ?></h1>
 		<table>
