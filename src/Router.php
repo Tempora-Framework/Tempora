@@ -100,13 +100,39 @@ class Router {
 			$pageData["page_title"] = APP_NAME;
 		}
 
-		$controller->setPageData(pageData: $pageData)();
+		$render = function($controller, $pageData): string {
+			ob_start();
+			$controller->setPageData(pageData: $pageData)();
 
-		if (DEBUG == 1) {
-			if (!in_array(needle: "Content-Type: application/json", haystack: headers_list())) {
-				include Path::COMPONENT_CHRONOS->value . "/chronos.php";
+			if (DEBUG == 1) {
+				if (!in_array(needle: "Content-Type: application/json", haystack: headers_list())) {
+					include Path::COMPONENT_CHRONOS->value . "/chronos.php";
+				}
 			}
-		}
+
+			return ob_get_clean();
+		};
+
+		echo preg_replace(
+			pattern: [
+				'/>\s+</', // Remove whitespace between tags
+				'/^\s+|\s+$/m', // Remove leading/trailing whitespace
+				'/\n\s*\n/', // Remove empty lines
+				'/[ \t]+/', // Collapse spaces
+				'/\n/', // Remove newlines
+			],
+			replacement: [
+				'><',
+				'',
+				"\n",
+				' ',
+				'',
+			],
+			subject: $render(
+				controller: $controller,
+				pageData: $pageData
+			)
+		);
 
 		exit;
 	}

@@ -24,7 +24,10 @@
 					foreach (file(filename: $trace["file"]) as $number => $line) {
 						if ($number < ($trace["line"] -1) +5 && $number > ($trace["line"] -1) -5) {
 				?>
-					<div class="line <?= $key > 0 ? "hidden" : "" ?>"><p class="line_number"><?= ($number + 1) ?></p><p class="code_content <?= ($trace["line"] -1) == $number ? "selected" : "" ?>"><?= htmlspecialchars(string: $line) ?></p></div>
+					<div class="line <?= $key > 0 ? "hidden" : "" ?>">
+						<p class="line_number"><?= ($number + 1) ?></p>
+						<p class="code_content <?= ($trace["line"] -1) == $number ? "selected" : "" ?>"><?= htmlspecialchars(string: $line) ?></p>
+					</div>
 				<?php
 						}
 					}
