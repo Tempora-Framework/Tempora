@@ -18,6 +18,7 @@
 	color: var(--chronos-error-text-color);
 	transition: 200ms;
 	font-family: Arial, Helvetica, sans-serif;
+	z-index: 10000;
 
 	p {
 		user-select: text !important;
