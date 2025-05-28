@@ -37,14 +37,13 @@ class ErrorService {
 
 			file_put_contents(filename: $logFile, data: $errorMessage, flags: FILE_APPEND);
 
-			$controller = new ErrorController();
-			$controller->render(
+			(new ErrorController())->setPageData(
 				pageData: [
 					"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
 					"error_code" => 500,
-					"error_message" => Lang::translate(key: "ERROR_SERVER")
+					"error_message" => Lang::translate(key: "ERROR_DATABASE")
 				]
-			);
+			)();
 		}
 	}
 

@@ -47,7 +47,10 @@ class Navbar {
 			if ($element["needLoginToBe"] === null) {
 				include Path::COMPONENT_ACTIONS->value . "/navbar_item.php";
 			} else {
-				if ($element["needLoginToBe"] === true and isset($_SESSION["user"])) {
+				if (
+					$element["needLoginToBe"] === true
+					&& isset($_SESSION["user"])
+				) {
 					if (
 						$element["accessRoles"] === []
 						|| Roles::check(userRoles: USER_ROLES, allowRoles: $element["accessRoles"])
@@ -55,7 +58,10 @@ class Navbar {
 						include Path::COMPONENT_ACTIONS->value . "/navbar_item.php";
 					}
 				}
-				if ($element["needLoginToBe"] === false and !isset($_SESSION["user"])) {
+				if (
+					$element["needLoginToBe"] === false
+					&& !isset($_SESSION["user"])
+				) {
 					include Path::COMPONENT_ACTIONS->value . "/navbar_item.php";
 				}
 			}

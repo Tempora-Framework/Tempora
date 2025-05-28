@@ -63,6 +63,7 @@
 
 		.header {
 			padding: 10px 30px;
+            padding-right: 45px;
 			background-color: var(--chronos-error-background-header-color);
 			width: -webkit-fill-available;
 			width: -moz-available;
@@ -120,6 +121,7 @@
 					padding: 5px 15px;
 					width: -webkit-fill-available;
 					width: -moz-available;
+					cursor: pointer;
 				}
 
 				.selected {

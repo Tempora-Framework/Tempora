@@ -31,7 +31,14 @@ footer {
 	user-select: none;
 
 	.tempora_chronos_title {
-		font-weight: bold;
+		height: 16px;
+		display: flex;
+		align-items: center;
+
+		img {
+			width: 22px;
+			height: 22px;
+		}
 	}
 
 	.tempora_chronos_drop_container {

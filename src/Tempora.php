@@ -79,7 +79,11 @@ class Tempora {
 		// Minify assets
 		$this->minify();
 
+		ob_start(callback: "ob_gzhandler");
+
 		new RouterFactory(url: strtok(string: $_SERVER["REQUEST_URI"], token: "?"));
+
+		ob_end_flush();
 	}
 
 	/**
