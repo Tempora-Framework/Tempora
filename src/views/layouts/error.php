@@ -10,7 +10,7 @@
 		</div>
 		<div class="trace_container">
 			<?php foreach ($exception->getTrace() as $key => $trace) { ?>
-				<p class="trace">#<?= $key ?>	<?= $trace["file"] ?>(<?= $trace["line"] ?>) <i class="ri-arrow-right-long-line"></i> <?= isset($trace["class"]) ? ($trace["class"] . "::") : "" ?><?= ($trace["function"] . "()" ?? "") ?></p>
+				<p class="trace">#<?= $key ?>	<?= $trace["file"] ?? "" ?>(<?= $trace["line"] ?? "" ?>) <i class="ri-arrow-right-long-line"></i> <?= isset($trace["class"]) ? ($trace["class"] . "::") : "" ?><?= ($trace["function"] . "()" ?? "") ?></p>
 			<?php }	?>
 		</div>
 
@@ -19,16 +19,18 @@
 		<div class="file_code_container">
 			<?php foreach ($exception->getTrace() as $key => $trace) { ?>
 				<code class="file_container">
-					<p class="file"><i class="ri-arrow-<?= $key > 0 ? "down" : "up" ?>-s-line chronos_show_more"></i> <i class="ri-code-line"></i> <?= $trace["file"] ?></p>
+					<p class="file"><i class="ri-arrow-<?= $key > 0 ? "down" : "up" ?>-s-line chronos_show_more"></i> <i class="ri-code-line"></i> <?= $trace["file"] ?? "" ?></p>
 				<?php
-					foreach (file(filename: $trace["file"]) as $number => $line) {
-						if ($number < ($trace["line"] -1) +5 && $number > ($trace["line"] -1) -5) {
+					if (isset($trace["file"])) {
+						foreach (file(filename: $trace["file"]) as $number => $line) {
+							if ($number < ($trace["line"] -1) +5 && $number > ($trace["line"] -1) -5) {
 				?>
 					<div class="line <?= $key > 0 ? "hidden" : "" ?>">
 						<p class="line_number"><?= ($number + 1) ?></p>
 						<p class="code_content <?= ($trace["line"] -1) == $number ? "selected" : "" ?>"><?= htmlspecialchars(string: $line) ?></p>
 					</div>
 				<?php
+							}
 						}
 					}
 				?>

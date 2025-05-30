@@ -15,6 +15,7 @@
 	background-color: #0000003b;
 	position: absolute;
 	top: 0;
+	left: 0;
 	color: var(--chronos-error-text-color);
 	transition: 200ms;
 	font-family: Arial, Helvetica, sans-serif;
