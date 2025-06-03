@@ -1,3 +1,4 @@
+<div "></div>
 <link rel="stylesheet" href="/vendor/tempora-framework/tempora/assets/styles/error.css">
 <script defer src="/vendor/tempora-framework/tempora/assets/scripts/error.js"></script>
 
@@ -17,7 +18,10 @@
 		<div class="separator"></div>
 
 		<div class="file_code_container">
-			<?php foreach ($exception->getTrace() as $key => $trace) { ?>
+			<?php
+				foreach ($exception->getTrace() as $key => $trace) {
+					if (isset($trace["file"])) {
+			?>
 				<code class="file_container">
 					<p class="file"><i class="ri-arrow-<?= $key > 0 ? "down" : "up" ?>-s-line chronos_show_more"></i> <i class="ri-code-line"></i> <?= $trace["file"] ?? "" ?></p>
 				<?php
@@ -35,7 +39,10 @@
 					}
 				?>
 				</code>
-			<?php } ?>
+			<?php
+					}
+				}
+			?>
 		</div>
 	</div>
 </div>
