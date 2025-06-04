@@ -15,9 +15,11 @@
 	background-color: #0000003b;
 	position: absolute;
 	top: 0;
+	left: 0;
 	color: var(--chronos-error-text-color);
 	transition: 200ms;
 	font-family: Arial, Helvetica, sans-serif;
+	z-index: 10000;
 
 	p {
 		user-select: text !important;
@@ -47,12 +49,12 @@
 			cursor: pointer;
 			padding: 4px;
 			transition: 200ms;
-		}
 
-		#close:hover {
-			background-color: var(--chronos-error-background-hover-color);
-			border-radius: 5px;
-			transition: 200ms;
+			&:hover {
+				background-color: var(--chronos-error-background-hover-color);
+				border-radius: 5px;
+				transition: 200ms;
+			}
 		}
 
 		.separator {

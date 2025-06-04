@@ -6,6 +6,7 @@ use Tempora\Enums\Path;
 use App\Controllers\ErrorController;
 use Tempora\Traits\UserTrait;
 use Tempora\Utils\Lang;
+use Tempora\Utils\Render;
 use Tempora\Utils\Roles;
 use Tempora\Controllers\Controller;
 
@@ -113,22 +114,8 @@ class Router {
 			return ob_get_clean();
 		};
 
-		echo preg_replace(
-			pattern: [
-				'/>\s+</', // Remove whitespace between tags
-				'/^\s+|\s+$/m', // Remove leading/trailing whitespace
-				'/\n\s*\n/', // Remove empty lines
-				'/[ \t]+/', // Collapse spaces
-				'/\n/', // Remove newlines
-			],
-			replacement: [
-				'><',
-				'',
-				"\n",
-				' ',
-				'',
-			],
-			subject: $render(
+		echo Render::clean(
+			buffer: $render(
 				controller: $controller,
 				pageData: $pageData
 			)

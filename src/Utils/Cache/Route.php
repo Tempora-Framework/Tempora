@@ -15,10 +15,10 @@ class Route extends Cache {
 					}
 				}
 
-				return $value;
+				return $value == $_SERVER["REQUEST_URI"] ? "#" : $value;
 			}
 		}
 
-		return "/";
+		return $_SERVER["REQUEST_URI"] == "/" ? "#" : "/";
 	}
 }
