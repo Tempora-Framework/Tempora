@@ -1,4 +1,3 @@
-<div "></div>
 <link rel="stylesheet" href="/vendor/tempora-framework/tempora/assets/styles/error.css">
 <script defer src="/vendor/tempora-framework/tempora/assets/scripts/error.js"></script>
 
@@ -19,7 +18,16 @@
 
 		<div class="file_code_container">
 			<?php
-				foreach ($exception->getTrace() as $key => $trace) {
+				$uniqueTraces = [];
+				foreach ($exception->getTrace() as $trace) {
+					$key = ($trace["file"] ?? "") . ":" . ($trace["line"] ?? "");
+					if (!isset($uniqueTraces[$key])) {
+						$uniqueTraces[$key] = $trace;
+					}
+				}
+				$stackTrace = array_values($uniqueTraces);
+
+				foreach ($stackTrace as $key => $trace) {
 					if (isset($trace["file"])) {
 			?>
 				<code class="file_container">

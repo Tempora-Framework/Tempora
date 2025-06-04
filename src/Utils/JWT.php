@@ -32,7 +32,7 @@ class JWT extends FirebaseJWT {
 		ApplicationData::request(
 			query: "INSERT INTO " . Table::USER_TOKENS->value . " (uid, uid_user, ip_address, token) VALUES (:uid, :uid_user, :ip, :token)",
 			data: [
-				"uid" => System::uidGen(size: 16),
+				"uid" => System::uidGen(size: 16, table: Table::USER_TOKENS->value),
 				"uid_user" => $_SESSION["user"]["uid"],
 				"ip" => $_SERVER["REMOTE_ADDR"],
 				"token" => $jwt

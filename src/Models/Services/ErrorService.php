@@ -6,6 +6,7 @@ use App\Controllers\ErrorController;
 use Tempora\Enums\Path;
 use Tempora\Utils\Lang;
 use ErrorException;
+use Tempora\Utils\Render;
 use Throwable;
 
 class ErrorService {
@@ -19,9 +20,28 @@ class ErrorService {
 	 */
 	public static function handle(Throwable $exception): void {
 		if (DEBUG == 1) {
-			include PATH::LAYOUT->value . "/error.php";
+			$buffer = ob_get_contents();
+			ob_end_clean();
 
-			include Path::COMPONENT_CHRONOS->value . "/chronos.php";
+			$render = function($exception): string {
+				ob_start();
+
+				include PATH::LAYOUT->value . "/error.php";
+
+				include Path::COMPONENT_CHRONOS->value . "/chronos.php";
+
+				return ob_get_clean();
+			};
+
+			$errorRender = $render(exception: $exception);
+
+			echo Render::clean(
+				buffer: str_replace(
+					search: "<body>",
+					replace: "<body>" . $errorRender,
+					subject: $buffer
+				)
+			);
 		} else {
 			$errorFolder = APP_DIR . "/logs";
 			$logFile = $errorFolder . "/" . date(format: "Y-m-d") . ".log";
@@ -37,11 +57,13 @@ class ErrorService {
 
 			file_put_contents(filename: $logFile, data: $errorMessage, flags: FILE_APPEND);
 
+			ob_end_clean();
+
 			(new ErrorController())->setPageData(
 				pageData: [
 					"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
 					"error_code" => 500,
-					"error_message" => Lang::translate(key: "ERROR_DATABASE")
+					"error_message" => Lang::translate(key: "ERROR_SERVER")
 				]
 			)();
 		}
