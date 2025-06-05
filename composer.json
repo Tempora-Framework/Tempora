@@ -18,7 +18,7 @@
 	"homepage": "https://github.com/tempora-framework/tempora",
 
 	"require": {
-		"php": "^8.3 <8.4",
+		"php": "^8.3",
 		"vlucas/phpdotenv": "^5.6",
 		"phpmailer/phpmailer": "^6.9",
 		"firebase/php-jwt": "^6.11",

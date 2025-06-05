@@ -14,7 +14,7 @@ class ApplicationData {
 	 *
 	 * @return mixed
 	 */
-	public static function request(string $query, array $data = null, int $returnType = null, bool $singleValue = false): mixed {
+	public static function request(string $query, ?array $data = null, ?int $returnType = null, bool $singleValue = false): mixed {
 		if (DEBUG == 1)
 			$tempSQLms = microtime(as_float: true);
 

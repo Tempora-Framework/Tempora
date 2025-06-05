@@ -12,7 +12,7 @@ class Lang {
 	 *
 	 * @return string
 	 */
-	public static function translate(string $key, array $options = null): string {
+	public static function translate(string $key, ?array $options = null): string {
 		$file = file_get_contents(filename: APP_DIR . "/public/langs/" . $_COOKIE["LANG"] . ".json");
 		$json = json_decode(json: $file);
 
