@@ -7,6 +7,7 @@ use MatthiasMullie\Minify\JS;
 use MatthiasMullie\Minify\CSS;
 use Tempora\Enums\Path;
 use Tempora\Utils\Cache\Cache;
+use function PHPUnit\Framework\fileExists;
 
 class Minifier {
 
@@ -45,16 +46,20 @@ class Minifier {
 	 * @return void
 	 */
 	public function create(): void {
-		$file = Path::ASSETS->value . $this->filePath . "/" . $this->fileName . "." . $this->fileExtension;
+		$filePath = Path::ASSETS->value . $this->filePath . "/" . $this->fileName . "." . $this->fileExtension;
+		$minFilePath = Path::ASSETS_MIN->value . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension;
 
-		if (filemtime(filename: $file) > ((new Cache(file: "minifier.json"))->get()[$file] ?? 0)) {
+		if (
+			!is_file(filename: $minFilePath)
+			|| filemtime(filename: $filePath) > ((new Cache(file: "minifier.json"))->get()[$filePath] ?? 0)
+		) {
 			if ($this->fileExtension == "js") {
-				$minify = new JS($file);
+				$minify = new JS($filePath);
 				$this->minContent = $minify->minify();
 			}
 
 			if ($this->fileExtension == "css") {
-				$minify = new CSS($file);
+				$minify = new CSS($filePath);
 				$this->minContent = $minify->minify();
 			}
 
@@ -66,7 +71,7 @@ class Minifier {
 					mkdir(directory: Path::ASSETS_MIN->value . $this->filePath, recursive: true);
 				} catch (Exception $e) {}
 
-				file_put_contents(filename: Path::ASSETS_MIN->value . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension, data: $this->minContent);
+				file_put_contents(filename: $minFilePath, data: $this->minContent);
 			}
 		}
 	}
