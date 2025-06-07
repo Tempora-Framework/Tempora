@@ -114,12 +114,16 @@ class Router {
 			return ob_get_clean();
 		};
 
-		echo Render::clean(
+		echo (new Render(
 			buffer: $render(
 				controller: $controller,
 				pageData: $pageData
 			)
-		);
+		))
+			->removeComments()
+			->removeWhitespace()
+			->render()
+		;
 
 		exit;
 	}

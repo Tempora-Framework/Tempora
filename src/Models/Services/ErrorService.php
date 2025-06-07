@@ -35,13 +35,17 @@ class ErrorService {
 
 			$errorRender = $render(exception: $exception);
 
-			echo Render::clean(
+			echo (new Render(
 				buffer: str_replace(
 					search: "<body>",
 					replace: "<body>" . $errorRender,
 					subject: $buffer
 				)
-			);
+			))
+				->removeComments()
+				->removeWhitespace()
+				->render()
+			;
 		} else {
 			$errorFolder = APP_DIR . "/logs";
 			$logFile = $errorFolder . "/" . date(format: "Y-m-d") . ".log";
