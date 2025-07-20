@@ -92,6 +92,7 @@ footer {
 
 		h1 {
 			font-size: 18px;
+			user-select: none !important;
 		}
 
 		p,

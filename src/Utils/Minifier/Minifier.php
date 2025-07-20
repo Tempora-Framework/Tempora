@@ -2,12 +2,11 @@
 
 namespace Tempora\Utils\Minifier;
 
-use Exception;
 use MatthiasMullie\Minify\JS;
 use MatthiasMullie\Minify\CSS;
 use Tempora\Enums\Path;
 use Tempora\Utils\Cache\Cache;
-use function PHPUnit\Framework\fileExists;
+use Throwable;
 
 class Minifier {
 
@@ -69,7 +68,7 @@ class Minifier {
 			) {
 				try {
 					mkdir(directory: Path::ASSETS_MIN->value . $this->filePath, recursive: true);
-				} catch (Exception $e) {}
+				} catch (Throwable $e) {}
 
 				file_put_contents(filename: $minFilePath, data: $this->minContent);
 			}

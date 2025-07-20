@@ -35,7 +35,7 @@
 				</tr>
 				<tr>
 					<td><?= APP_NAME ?> Git commit</td>
-					<td><a href="<?= Git::getRepoUrl() ?>/tree/<?= Git::getCommit() ?>" target="_blank"><?= Git::getCommit() ?> <i class="ri-external-link-line"></i></a></td>
+					<td><a href="<?= Git::getRepoUrl() ?>/tree/<?= Git::getCommit() ?>" target="_blank"><?= substr(string: Git::getCommit(), offset: 0, length: 7) ?> <i class="ri-external-link-line"></i></a></td>
 				</tr>
 			<?php } ?>
 		</table>

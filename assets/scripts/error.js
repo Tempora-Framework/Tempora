@@ -1,8 +1,8 @@
-const temporaErrorContainer = document.getElementById("tempora_error_container");
-const TemoraError = document.getElementById("tempora_error");
-const close = document.getElementById("close");
-const showMoreButtons = document.querySelectorAll(".chronos_show_more");
-const showMoreTitles = document.querySelectorAll(".file");
+temporaErrorContainer = document.getElementById("tempora_error_container");
+TemporaError = document.getElementById("tempora_error");
+close = document.getElementById("close");
+showMoreButtons = document.querySelectorAll(".chronos_show_more");
+showMoreTitles = document.querySelectorAll(".file");
 
 temporaErrorContainer.addEventListener("click", (event) => {
 	if (event.target === temporaErrorContainer) {

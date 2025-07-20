@@ -1,5 +1,5 @@
-let chronosUserTitle = document.getElementById("chronos_user_title");
-let chronosMs = document.getElementById("chronos_ms");
+chronosUserTitle = document.getElementById("chronos_user_title");
+chronosMs = document.getElementById("chronos_ms");
 
 if (isElementExist(chronosUserTitle)) {
 	let chronosTimer = setInterval(() => {
