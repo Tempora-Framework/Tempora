@@ -30,11 +30,11 @@ class Form extends ElementBuilder {
 
 		$this->setContent(content: $content);
 
-		return parent::render();
+		return parent::build();
 	}
 
 	public function addInput(ElementBuilder $input): self {
-		array_push($this->inputs, $input->render());
+		array_push($this->inputs, $input->build());
 
 		return $this;
 	}

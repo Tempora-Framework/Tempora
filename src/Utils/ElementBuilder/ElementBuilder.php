@@ -2,40 +2,67 @@
 
 namespace Tempora\Utils\ElementBuilder;
 
+use Tempora\Utils\Roles;
+
 class ElementBuilder {
 
 	protected ?string $element = null;
 	private array $attributs = [];
 	private ?string $content = null;
 	private bool $accessibility = false;
+	private array $accessRoles = [];
+	private ?bool $needLoginToBe = null;
 
 	/**
 	 * Element render
 	 *
 	 * @return string
 	 */
-	public function render(): string {
-		$result = "<" . $this->element;
+	public function build(): string {
+		if (
+			(
+				$this->accessRoles === []
+				|| (
+					isset($_SESSION["user"])
+					&& Roles::check(userRoles: USER_ROLES, allowRoles: $this->accessRoles)
+				)
+			)
+			&& (
+				$this->needLoginToBe === null
+				|| (
+					$this->needLoginToBe === true
+					&& isset($_SESSION["user"])
+				)
+				|| (
+					$this->needLoginToBe === false
+					&& !isset($_SESSION["user"])
+				)
+			)
+		) {
+			$result = "<" . $this->element;
 
-		if ($this->accessibility) {
-			$result .= " aria-label=\"" . $this->attributs["label"] . "\"";
-		}
-
-		foreach ($this->attributs as $key => $value) {
-			if ($value != "") {
-				$result .= " " . $key . "=\"" . $value . "\"";
-			} else {
-				$result .= " " . $key;
+			if ($this->accessibility) {
+				$result .= " aria-label=\"" . $this->attributs["label"] . "\"";
 			}
+
+			foreach ($this->attributs as $key => $value) {
+				if ($value != "") {
+					$result .= " " . $key . "=\"" . $value . "\"";
+				} else {
+					$result .= " " . $key;
+				}
+			}
+
+			$result .= ">";
+
+			$result .= $this->content;
+
+			$result .= "</" . $this->element . ">";
+
+			return $result;
 		}
 
-		$result .= ">";
-
-		$result .= $this->content;
-
-		$result .= "</" . $this->element . ">";
-
-		return $result;
+		return "";
 	}
 
 	/**
@@ -122,6 +149,50 @@ class ElementBuilder {
 	 */
 	public function setAccessibility(bool $accessibility): self {
 		$this->accessibility = $accessibility;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of accessRoles
+	 *
+	 * @return array
+	 */
+	public function getAccessRoles(): array {
+		return $this->accessRoles;
+	}
+
+	/**
+	 * Set the value of accessRoles
+	 *
+	 * @param array $accessRoles
+	 *
+	 * @return self
+	 */
+	public function setAccessRoles(array $accessRoles): self {
+		$this->accessRoles = $accessRoles;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of needLoginToBe
+	 *
+	 * @return bool
+	 */
+	public function isNeedLoginToBe(): bool {
+		return $this->needLoginToBe;
+	}
+
+	/**
+	 * Set the value of needLoginToBe
+	 *
+	 * @param bool $needLoginToBe
+	 *
+	 * @return self
+	 */
+	public function setNeedLoginToBe(bool $needLoginToBe): self {
+		$this->needLoginToBe = $needLoginToBe;
 
 		return $this;
 	}

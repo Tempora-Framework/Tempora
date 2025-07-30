@@ -45,7 +45,7 @@ class System {
 			)
 		;
 
-		return $input->render();
+		return $input->build();
 	}
 
 	/**

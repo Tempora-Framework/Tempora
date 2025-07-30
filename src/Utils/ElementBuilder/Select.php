@@ -28,7 +28,7 @@ class Select extends ElementBuilder {
 
 		$this->setContent(content: $content);
 
-		return parent::render();
+		return parent::build();
 	}
 
 	/**
