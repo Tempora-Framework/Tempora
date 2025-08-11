@@ -12,6 +12,7 @@ class RouteAttribute {
 		public ?string $description = null,
 		public string $method = "GET",
 		public ?string $title = null,
+		public bool $translateTitle = false,
 		public ?bool $needLoginToBe = null,
 		public ?array $accessRoles = null,
 	) {}

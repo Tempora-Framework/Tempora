@@ -54,7 +54,7 @@ class RouterFactory extends Router {
 					method: $routeAttribute->method,
 					pageData: [
 						"page_name" => $routeAttribute->name,
-						"page_title" => $routeAttribute->title,
+						"page_title" => $routeAttribute->translateTitle ? APP_NAME . " - " . Lang::translate(key: $routeAttribute->title) : $routeAttribute->title,
 						"page_description" => $routeAttribute->description,
 						"page_needLoginToBe" => $routeAttribute->needLoginToBe,
 						"page_accessRoles" => $routeAttribute->accessRoles ? array_map(

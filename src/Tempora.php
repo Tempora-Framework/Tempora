@@ -75,6 +75,7 @@ class Tempora {
 
 		// Languages
 		$this->lang();
+		define(constant_name: "LANG_FILE", value: file_get_contents(filename: APP_DIR . "/public/langs/" . $_COOKIE["LANG"] . ".json"));
 
 		// Minify assets
 		$this->minify();
