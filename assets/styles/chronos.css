@@ -3,14 +3,10 @@
    ============================================== */
 
 :root {
-	--chronos-background-color: #464646;
+	--chronos-background-color: #464646a8;
 	--chronos-background-hover-color: #353535;
 	--chronos-text-color: #ffffff;
 	--chronos-red: #c20000;
-}
-
-footer {
-	margin-bottom: 28px;
 }
 
 .tempora_chronos {
@@ -29,6 +25,49 @@ footer {
 	z-index: 9999;
 	font-family: Arial, Helvetica, sans-serif;
 	user-select: none;
+
+	&.hidden {
+		width: fit-content;
+		left: auto;
+		right: 0;
+		padding: 0;
+
+		.tempora_chronos_drop_container,
+		#tempora_chronos_ms {
+			display: none;
+
+			.tempora_chronos_drop_element {
+				display: none;
+			}
+		}
+
+		.title {
+			display: block;
+
+			&:hover {
+				background-color: #00000000;
+				cursor: pointer;
+			}
+		}
+
+		.chronos_close {
+			display: none;
+		}
+	}
+
+	.chronos_close {
+		position: absolute;
+		right: 8px;
+		top: 6px;
+		font-size: 16px;
+		transition: 200ms;
+
+		&:hover {
+			cursor: pointer;
+			color: var(--chronos-red);
+			transition: 200ms;
+		}
+	}
 
 	.tempora_chronos_title {
 		height: 16px;

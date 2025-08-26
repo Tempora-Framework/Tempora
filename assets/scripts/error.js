@@ -31,7 +31,7 @@ showMoreButtons.forEach((button) => {
 showMoreTitles.forEach((title) => {
 	title.addEventListener("click", (event) => {
 		if (event.target === title) {
-		title.firstChild.click();
+			title.firstChild.click();
 		}
 	});
 });

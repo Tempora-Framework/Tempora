@@ -5,7 +5,6 @@ namespace Tempora;
 use Tempora\Enums\Path;
 use App\Controllers\ErrorController;
 use Tempora\Traits\UserTrait;
-use Tempora\Utils\Lang;
 use Tempora\Utils\Render;
 use Tempora\Utils\Roles;
 use Tempora\Controllers\Controller;
