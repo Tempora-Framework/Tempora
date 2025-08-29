@@ -13,6 +13,7 @@
 	width: -webkit-fill-available;
 	width: -moz-available;
 	background-color: var(--chronos-background-color);
+	backdrop-filter: blur(5px);
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -83,7 +84,8 @@
 	.tempora_chronos_drop_container {
 		display: inline-block;
 
-		.chronos_sql {
+		.chronos_sql,
+		.chronos_minifier {
 			table-layout: auto;
 
 			.min_col {

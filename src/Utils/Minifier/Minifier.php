@@ -2,11 +2,13 @@
 
 namespace Tempora\Utils\Minifier;
 
+use Exception;
 use MatthiasMullie\Minify\JS;
 use MatthiasMullie\Minify\CSS;
 use Tempora\Enums\Path;
 use Tempora\Utils\Cache\Cache;
 use Throwable;
+use function PHPUnit\Framework\throwException;
 
 class Minifier {
 
@@ -45,11 +47,17 @@ class Minifier {
 	 * @return void
 	 */
 	public function create(): void {
+		if (DEBUG == 1) {
+			$tempMinifierms = microtime(as_float: true);
+		}
+
 		$filePath = Path::ASSETS->value . $this->filePath . "/" . $this->fileName . "." . $this->fileExtension;
 		$minFilePath = Path::ASSETS_MIN->value . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension;
 
 		if (
+			// If file not in minified asset's folder
 			!is_file(filename: $minFilePath)
+			// If last modified time is newer than the cached one
 			|| filemtime(filename: $filePath) > ((new Cache(file: "minifier.json"))->get()[$filePath] ?? 0)
 		) {
 			if ($this->fileExtension == "js") {
@@ -71,6 +79,16 @@ class Minifier {
 				} catch (Throwable $e) {}
 
 				file_put_contents(filename: $minFilePath, data: $this->minContent);
+
+				if (DEBUG == 1) {
+					array_push(
+						$GLOBALS["chronos"]["minifier"],
+						[
+							"file" => $minFilePath,
+							"time" => round(num: (microtime(as_float: true) - $tempMinifierms) *1000, precision: 3)
+						]
+					);
+				}
 			}
 		}
 	}

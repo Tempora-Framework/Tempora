@@ -110,6 +110,8 @@ class Tempora {
 		$GLOBALS["chronos"]["ms_count"] = microtime(as_float: true);
 		$GLOBALS["chronos"]["sql_count"] = 0;
 		$GLOBALS["chronos"]["sql_query"] = [];
+		$GLOBALS["chronos"]["minifier"] = [];
+		$GLOBALS["chronos"]["images_ms"] = [];
 		$GLOBALS["chronos"]["langs"] = [];
 		$GLOBALS["chronos"]["lang_count"] = 0;
 		$GLOBALS["chronos"]["lang_error_count"] = 0;
