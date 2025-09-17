@@ -5,6 +5,8 @@ chronosUserTitle = document.getElementById("chronos_user_title");
 chronosMs = document.getElementById("chronos_ms");
 chronosElements = document.querySelectorAll(".tempora_chronos_drop_container");
 
+displayChronos(JSON.parse(localStorage.getItem("chronos") || true));
+
 if (isElementExist(chronosUserTitle)) {
 	let chronosTimer = setInterval(() => {
 		let chronosMsValue = document.getElementById("chronos_ms").textContent.replace(" s", "");
@@ -23,12 +25,22 @@ if (isElementExist(chronosUserTitle)) {
 
 if (isElementExist(chronosMain)) {
 	chronosClose.addEventListener("click", () => {
-		chronos.classList.add("hidden");
+		displayChronos(false);
+		localStorage.setItem("chronos", false);
 	});
 }
 
 if (isElementExist(chronosMain)) {
 	chronosMain.addEventListener("click", () => {
-		chronos.classList.remove("hidden");
+		displayChronos(true);
+		localStorage.setItem("chronos", true);
 	});
+}
+
+function displayChronos(state) {
+	if (state) {
+		chronos.classList.remove("hidden");
+	} else {
+		chronos.classList.add("hidden");
+	}
 }
