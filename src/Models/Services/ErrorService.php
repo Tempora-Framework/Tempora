@@ -21,7 +21,11 @@ class ErrorService {
 	public static function handle(Throwable $exception): void {
 		if (DEBUG == 1) {
 			header_remove(name: "Content-Security-Policy");
-			http_response_code(response_code: $exception->getCode());
+			if (is_int($exception->getCode())) {
+				http_response_code(response_code: $exception->getCode());
+			} else {
+				http_response_code(response_code: 500);
+			}
 
 			$buffer = ob_get_contents();
 			ob_end_clean();
@@ -71,7 +75,7 @@ class ErrorService {
 			$logFile = $errorFolder . "/" . date(format: "Y-m-d") . ".log";
 
 			if (!file_exists(filename: $errorFolder . "/")) {
-				mkdir(directory: $errorFolder, permissions: 0770, recursive: true);
+				mkdir(directory: $errorFolder, permissions: 0775, recursive: true);
 			}
 
 			$errorMessage = "[" . date(format: "Y-m-d H:i:s") . "] ";

@@ -155,6 +155,12 @@
 					white-space: pre-wrap;
 					width: calc(100% - 55px);
 					tab-size: 4;
+					cursor: text;
+
+					.tab {
+						display: inline-block;
+						width: 20px;
+					}
 				}
 			}
 		}
