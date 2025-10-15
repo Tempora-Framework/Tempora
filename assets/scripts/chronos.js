@@ -5,6 +5,34 @@ chronosUserTitle = document.getElementById("chronos_user_title");
 chronosMs = document.getElementById("chronos_ms");
 chronosElements = document.querySelectorAll(".tempora_chronos_drop_container");
 
+windowWidth = window.innerWidth;
+
+window.addEventListener('resize', () => {
+	windowWidth = window.innerWidth;
+});
+
+chronosElements.forEach((element) => {
+	element.addEventListener('mouseenter', () => {
+		const dropElement = element.querySelector('.tempora_chronos_drop_element');
+		if (dropElement) {
+			dropElement.style.left = '';
+			dropElement.style.right = '';
+
+			const rect = dropElement.getBoundingClientRect();
+
+			if (rect.right > windowWidth) {
+				dropElement.style.left = 'auto';
+				dropElement.style.right = '0';
+			}
+
+			if (rect.left < 0) {
+				dropElement.style.left = '0';
+				dropElement.style.right = 'auto';
+			}
+		}
+	});
+});
+
 displayChronos(JSON.parse(localStorage.getItem("chronos") || true));
 
 if (isElementExist(chronosUserTitle)) {
