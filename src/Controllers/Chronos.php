@@ -36,7 +36,10 @@ class Chronos {
 		include Path::COMPONENT_CHRONOS->value . "/chronos_httpcode.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_user.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_sql.php";
+		include Path::COMPONENT_CHRONOS->value . "/chronos_dumps.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_session.php";
+		include Path::COMPONENT_CHRONOS->value . "/chronos_server.php";
+		include Path::COMPONENT_CHRONOS->value . "/chronos_env.php";
 		if ($pageData != []) {
 			include Path::COMPONENT_CHRONOS->value . "/chronos_pagedata.php";
 		}

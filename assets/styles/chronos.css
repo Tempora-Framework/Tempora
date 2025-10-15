@@ -84,7 +84,17 @@
 	.tempora_chronos_drop_container {
 		display: inline-block;
 
+		.tab {
+			display: inline-block;
+			width: 20px;
+		}
+
+		.mono {
+			font-family: Consolas, monaco, monospace;
+		}
+
 		.chronos_sql,
+		.chronos_dumps,
 		.chronos_minifier {
 			table-layout: auto;
 

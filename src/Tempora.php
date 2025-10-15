@@ -59,8 +59,11 @@ class Tempora {
 		// Errors
 		$this->errorHandler();
 
-		if (DEBUG == 1)
+		if (DEBUG == 1) {
 			$this->chronos();
+		}
+
+		$this->functions();
 
 		// Database
 		$this->database();
@@ -115,6 +118,18 @@ class Tempora {
 		$GLOBALS["chronos"]["langs"] = [];
 		$GLOBALS["chronos"]["lang_count"] = 0;
 		$GLOBALS["chronos"]["lang_error_count"] = 0;
+		$GLOBALS["chronos"]["dumps"] = [];
+	}
+
+	/**
+	 * Load functions
+	 *
+	 * @return void
+	 */
+	public function functions(): void {
+		foreach (System::getAllFiles(path: TEMPORA_DIR . "/src/functions") as $file) {
+			require_once $file;
+		}
 	}
 
 	/**
