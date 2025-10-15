@@ -44,8 +44,8 @@ class ApplicationData {
 			array_push(
 				$GLOBALS["chronos"]["sql_query"],
 				[
-					"class" => debug_backtrace()[1]["class"],
-					"function" => debug_backtrace()[1]["function"],
+					"class" => debug_backtrace()[1]["class"] ?? null,
+					"function" => debug_backtrace()[1]["function"] ?? null,
 					"line" => debug_backtrace()[0]["line"],
 					"time" => round(num: (microtime(as_float: true) - $tempSQLms) *1000, precision: 3),
 					"query" => $queryLog
