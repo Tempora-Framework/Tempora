@@ -5,6 +5,7 @@ namespace Tempora\Controllers;
 use Tempora\Enums\Path;
 use Tempora\Enums\Role;
 use Tempora\Traits\UserTrait;
+use Tempora\Utils\ElementBuilder\ElementBuilder;
 
 class Chronos {
 
@@ -35,7 +36,10 @@ class Chronos {
 		include Path::COMPONENT_CHRONOS->value . "/chronos_httpcode.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_user.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_sql.php";
+		include Path::COMPONENT_CHRONOS->value . "/chronos_dumps.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_session.php";
+		include Path::COMPONENT_CHRONOS->value . "/chronos_server.php";
+		include Path::COMPONENT_CHRONOS->value . "/chronos_env.php";
 		if ($pageData != []) {
 			include Path::COMPONENT_CHRONOS->value . "/chronos_pagedata.php";
 		}
@@ -43,5 +47,16 @@ class Chronos {
 		include Path::COMPONENT_CHRONOS->value . "/chronos_post.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_cookie.php";
 		include Path::COMPONENT_CHRONOS->value . "/chronos_lang.php";
+
+		echo (new ElementBuilder)
+			->setElement(element: "i")
+			->setAttributs(
+				attributs: [
+					"class" => "ri-close-large-line chronos_close",
+					"id" => "chronos_close"
+				]
+			)
+			->build()
+		;
 	}
 }

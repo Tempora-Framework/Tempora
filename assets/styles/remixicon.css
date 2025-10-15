@@ -36,3 +36,6 @@
 .ri-mail-line:before { content: "\eef6"; }
 .ri-time-line:before { content: "\f20f"; }
 .ri-user-line:before { content: "\f264"; }
+.ri-server-line:before { content: "\f0e0"; }
+.ri-mail-ai-line:before { content: "\f585"; }
+.ri-crosshair-2-line:before { content: "\f3b3"; }

@@ -20,34 +20,62 @@ class ErrorService {
 	 */
 	public static function handle(Throwable $exception): void {
 		if (DEBUG == 1) {
+			header_remove(name: "Content-Security-Policy");
+			if (is_int($exception->getCode())) {
+				http_response_code(response_code: $exception->getCode());
+			} else {
+				http_response_code(response_code: 500);
+			}
+
 			$buffer = ob_get_contents();
 			ob_end_clean();
 
 			$render = function($exception): string {
 				ob_start();
 
+				echo "<style>";
+				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/error.css");
+				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/chronos.css");
+				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/remixicon.css");
+				echo "</style>";
+
 				include PATH::LAYOUT->value . "/error.php";
 
 				include Path::COMPONENT_CHRONOS->value . "/chronos.php";
+
+				echo "<script>";
+				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/engine.js");
+				echo "</script><script>";
+				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/error.js");
+				echo "</script><script>";
+				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/chronos.js");
+				echo "</script>";
 
 				return ob_get_clean();
 			};
 
 			$errorRender = $render(exception: $exception);
 
-			echo Render::clean(
-				buffer: str_replace(
-					search: "<body>",
-					replace: "<body>" . $errorRender,
-					subject: $buffer
-				)
-			);
+			echo (new Render(
+				buffer:
+					str_contains($buffer, "<body>")
+					? str_replace(
+						search: "<body>",
+						replace: "<body>" . $errorRender,
+						subject: $buffer
+					)
+					: $errorRender
+			))
+				->removeComments()
+				->removeWhitespace()
+				->render()
+			;
 		} else {
 			$errorFolder = APP_DIR . "/logs";
 			$logFile = $errorFolder . "/" . date(format: "Y-m-d") . ".log";
 
 			if (!file_exists(filename: $errorFolder . "/")) {
-				mkdir(directory: $errorFolder, permissions: 0770, recursive: true);
+				mkdir(directory: $errorFolder, permissions: 0775, recursive: true);
 			}
 
 			$errorMessage = "[" . date(format: "Y-m-d H:i:s") . "] ";

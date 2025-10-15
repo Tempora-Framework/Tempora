@@ -12,9 +12,8 @@ class Lang {
 	 *
 	 * @return string
 	 */
-	public static function translate(string $key, array $options = null): string {
-		$file = file_get_contents(filename: APP_DIR . "/public/langs/" . $_COOKIE["LANG"] . ".json");
-		$json = json_decode(json: $file);
+	public static function translate(string $key, ?array $options = null): string {
+		$json = json_decode(json: LANG_FILE);
 
 		if (DEBUG == 1)
 			$GLOBALS["chronos"]["lang_count"]++;
@@ -38,23 +37,5 @@ class Lang {
 			$GLOBALS["chronos"]["langs"][$key] = $result;
 
 		return $result;
-	}
-
-	/**
-	 * Format language name
-	 *
-	 * @param string $name Language identifiant
-	 *
-	 * @return string
-	 */
-	public static function nameFormat(string $name): string {
-		switch ($name) {
-			case "fr_FR":
-				return "Français";
-			case "en_GB":
-				return "English";
-			default:
-				return "";
-		}
 	}
 }

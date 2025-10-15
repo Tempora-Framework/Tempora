@@ -17,8 +17,8 @@
 				foreach ($GLOBALS["chronos"]["langs"] as $key => $value) {
 			?>
 				<tr <?= str_contains(haystack: $key, needle: "CHRONOS_") ? "class='italic'" : "" ?>>
-					<td <?= $value === "Missing entry" ? " class='red'" : "" ?>><?= $key ?></td>
-					<td <?= $value === "Missing entry" ? " class='red'" : "" ?>><?= $value ?></td>
+					<td <?= $value === $key ? " class='red'" : "" ?>><?= $key ?></td>
+					<td <?= $value === $key ? " class='red'" : "" ?>><?= $value ?></td>
 				</tr>
 			<?php } ?>
 		</table>

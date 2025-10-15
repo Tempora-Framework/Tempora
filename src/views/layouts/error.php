@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="/vendor/tempora-framework/tempora/assets/styles/error.css">
-<script defer src="/vendor/tempora-framework/tempora/assets/scripts/error.js"></script>
-
 <div class="tempora_error_container" id="tempora_error_container">
 	<div class="tempora_error" id="tempora_error">
 		<i class="ri-close-large-line" id="close"></i>
@@ -39,7 +36,7 @@
 				?>
 					<div class="line <?= $key > 0 ? "hidden" : "" ?>">
 						<p class="line_number"><?= ($number + 1) ?></p>
-						<p class="code_content <?= ($trace["line"] -1) == $number ? "selected" : "" ?>"><?= htmlspecialchars(string: $line) ?></p>
+						<p class="code_content <?= ($trace["line"] -1) == $number ? "selected" : "" ?>"><?= str_replace("\t", "<span class=\"tab\"></span>", htmlspecialchars(string: $line)) ?></p>
 					</div>
 				<?php
 							}

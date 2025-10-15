@@ -7,6 +7,8 @@ use MatthiasMullie\Minify\JS;
 use MatthiasMullie\Minify\CSS;
 use Tempora\Enums\Path;
 use Tempora\Utils\Cache\Cache;
+use Throwable;
+use function PHPUnit\Framework\throwException;
 
 class Minifier {
 
@@ -45,16 +47,26 @@ class Minifier {
 	 * @return void
 	 */
 	public function create(): void {
-		$file = Path::ASSETS->value . $this->filePath . "/" . $this->fileName . "." . $this->fileExtension;
+		if (DEBUG == 1) {
+			$tempMinifierms = microtime(as_float: true);
+		}
 
-		if (filemtime(filename: $file) > ((new Cache(file: "minifier.json"))->get()[$file] ?? 0)) {
+		$filePath = Path::ASSETS->value . $this->filePath . "/" . $this->fileName . "." . $this->fileExtension;
+		$minFilePath = Path::ASSETS_MIN->value . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension;
+
+		if (
+			// If file not in minified asset's folder
+			!is_file(filename: $minFilePath)
+			// If last modified time is newer than the cached one
+			|| filemtime(filename: $filePath) > ((new Cache(file: "minifier.json"))->get()[$filePath] ?? 0)
+		) {
 			if ($this->fileExtension == "js") {
-				$minify = new JS($file);
+				$minify = new JS($filePath);
 				$this->minContent = $minify->minify();
 			}
 
 			if ($this->fileExtension == "css") {
-				$minify = new CSS($file);
+				$minify = new CSS($filePath);
 				$this->minContent = $minify->minify();
 			}
 
@@ -64,9 +76,19 @@ class Minifier {
 			) {
 				try {
 					mkdir(directory: Path::ASSETS_MIN->value . $this->filePath, recursive: true);
-				} catch (Exception $e) {}
+				} catch (Throwable $e) {}
 
-				file_put_contents(filename: Path::ASSETS_MIN->value . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension, data: $this->minContent);
+				file_put_contents(filename: $minFilePath, data: $this->minContent);
+
+				if (DEBUG == 1) {
+					array_push(
+						$GLOBALS["chronos"]["minifier"],
+						[
+							"file" => $minFilePath,
+							"time" => round(num: (microtime(as_float: true) - $tempMinifierms) *1000, precision: 3)
+						]
+					);
+				}
 			}
 		}
 	}

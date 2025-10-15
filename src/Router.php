@@ -5,7 +5,6 @@ namespace Tempora;
 use Tempora\Enums\Path;
 use App\Controllers\ErrorController;
 use Tempora\Traits\UserTrait;
-use Tempora\Utils\Lang;
 use Tempora\Utils\Render;
 use Tempora\Utils\Roles;
 use Tempora\Controllers\Controller;
@@ -95,12 +94,6 @@ class Router {
 			unset($_SESSION["page_data"]);
 		}
 
-		if (isset($pageData["page_title"])) {
-			$pageData["page_title"] = APP_NAME . " - " . Lang::translate(key: $pageData["page_title"]);
-		} else {
-			$pageData["page_title"] = APP_NAME;
-		}
-
 		$render = function($controller, $pageData): string {
 			ob_start();
 			$controller->setPageData(pageData: $pageData)();
@@ -114,12 +107,16 @@ class Router {
 			return ob_get_clean();
 		};
 
-		echo Render::clean(
+		echo (new Render(
 			buffer: $render(
 				controller: $controller,
 				pageData: $pageData
 			)
-		);
+		))
+			->removeComments()
+			->removeWhitespace()
+			->render()
+		;
 
 		exit;
 	}

@@ -24,8 +24,7 @@
 			?>
 				<tr>
 					<td class="min_col"><?= $value["time"] ?>ms</td>
-					<td class="min_col"><?= $value["class"] ?></td>
-					<td class="min_col"><?= $value["function"] ?>()</td>
+					<td class="min_col"><?= $value["class"] ?? "" ?></td>
 					<td class="min_col">Line <?= $value["line"] ?></td>
 					<td><?= $value["query"] ?></td>
 				</tr>
