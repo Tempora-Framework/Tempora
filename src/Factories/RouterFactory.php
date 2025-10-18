@@ -13,8 +13,8 @@ class RouterFactory extends Router {
 
 	private array $routes = [];
 
-	public function __construct(string $url) {
-		parent::__construct(url: $url);
+	public function __construct(string $url, array $options = []) {
+		parent::__construct(url: $url, options: $options);
 
 		$controllers = System::getAllFiles(path: APP_DIR . "/src/Controllers");
 

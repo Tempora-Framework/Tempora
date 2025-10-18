@@ -14,22 +14,50 @@ class Render {
 		return $this->buffer;
 	}
 
-	public function removeWhitespace(): self {
+	public function removeWhitespaceBetweenTags(): self {
 		$this->buffer = preg_replace(
-			pattern: [
-				'/>\s+</', // Remove whitespace between tags
-				'/^\s+|\s+$/m', // Remove leading/trailing whitespace
-				'/\n\s*\n/', // Remove empty lines
-				'/[ \t]+/', // Collapse spaces
-				'/\n/', // Remove newlines
-			],
-			replacement: [
-				'><',
-				'',
-				"\n",
-				' ',
-				'',
-			],
+			pattern: '/>\s+</',
+			replacement: '><',
+			subject: $this->buffer
+		);
+
+		return $this;
+	}
+
+	public function removeTrailingWhitespace(): self {
+		$this->buffer = preg_replace(
+			pattern: '/^\s+|\s+$/m',
+			replacement: '',
+			subject: $this->buffer
+		);
+
+		return $this;
+	}
+
+	public function removeEmptyLines(): self {
+		$this->buffer = preg_replace(
+			pattern: '/\n\s*\n/',
+			replacement: "\n",
+			subject: $this->buffer
+		);
+
+		return $this;
+	}
+
+	public function collapseSpaces(): self {
+		$this->buffer = preg_replace(
+			pattern: '/[ \t]+/',
+			replacement: ' ',
+			subject: $this->buffer
+		);
+
+		return $this;
+	}
+
+	public function removeNewlines(): self {
+		$this->buffer = preg_replace(
+			pattern: '/\n/',
+			replacement: '',
 			subject: $this->buffer
 		);
 

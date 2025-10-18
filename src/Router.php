@@ -13,10 +13,12 @@ class Router {
 
 	use UserTrait;
 
-	private $clientUrl;
+	private string $clientUrl;
+	private array $options = [];
 
-	public function __construct(string $url) {
+	public function __construct(string $url, array $options = []) {
 		$this->clientUrl = $url;
+		$this->options = $options;
 	}
 
 	/**
@@ -107,16 +109,38 @@ class Router {
 			return ob_get_clean();
 		};
 
-		echo (new Render(
+		$webpageRender = new Render(
 			buffer: $render(
 				controller: $controller,
 				pageData: $pageData
 			)
-		))
-			->removeComments()
-			->removeWhitespace()
-			->render()
-		;
+		);
+
+		if (in_array("remove_whitespace_between_tags", $this->options)) {
+			$webpageRender = $webpageRender->removeWhitespaceBetweenTags();
+		}
+
+		if (in_array("remove_trailing_whitespace", $this->options)) {
+			$webpageRender = $webpageRender->removeTrailingWhitespace();
+		}
+
+		if (in_array("remove_empty_lines", $this->options)) {
+			$webpageRender = $webpageRender->removeEmptyLines();
+		}
+
+		if (in_array("remove_new_lines", $this->options)) {
+			$webpageRender = $webpageRender->removeNewLines();
+		}
+
+		if (in_array("remove_comments", $this->options)) {
+			$webpageRender = $webpageRender->removeComments();
+		}
+
+		if (in_array("collapse_spaces", $this->options)) {
+			$webpageRender = $webpageRender->collapseSpaces();
+		}
+
+		echo $webpageRender->render();
 
 		exit;
 	}

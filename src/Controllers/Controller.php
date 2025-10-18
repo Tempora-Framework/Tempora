@@ -11,10 +11,18 @@ class Controller {
 
 	public function includeAssets(): void {
 		foreach ($this->styles as $style) {
-			echo "<link rel=\"stylesheet\" href=\"" . str_replace(search: ".css", replace: ".min.css", subject: $style) . "\">";
+			if (str_starts_with(haystack: $style, needle: "/assets/")) {
+				echo "<link rel=\"stylesheet\" href=\"" . str_replace(search: ".css", replace: ".min.css", subject: $style) . "\">";
+			} else {
+				echo "<link rel=\"stylesheet\" href=\"" . $style . "\">";
+			}
 		}
 		foreach ($this->scripts as $script) {
-			echo "<script defer src=\"" . str_replace(search: ".js", replace: ".min.js", subject: $script) . "\"></script>";
+			if (str_starts_with(haystack: $script, needle: "/assets/")) {
+				echo "<script defer src=\"" . str_replace(search: ".js", replace: ".min.js", subject: $script) . "\"></script>";
+			} else {
+				echo "<script defer src=\"" . $script . "\"></script>";
+			}
 		}
 	}
 

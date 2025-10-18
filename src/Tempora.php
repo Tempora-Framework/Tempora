@@ -22,7 +22,7 @@ class Tempora {
 
 	use UserTrait;
 
-	public function __construct() {
+	public function __construct(array $options = []) {
 		// Paths
 		define(constant_name: "TEMPORA_DIR", value: __DIR__ . "/..");
 		if (!defined(constant_name: "APP_DIR")) {
@@ -85,7 +85,7 @@ class Tempora {
 
 		ob_start(callback: "ob_gzhandler");
 
-		new RouterFactory(url: strtok(string: $_SERVER["REQUEST_URI"], token: "?"));
+		new RouterFactory(url: strtok(string: $_SERVER["REQUEST_URI"], token: "?"), options: $options);
 
 		ob_end_flush();
 	}
