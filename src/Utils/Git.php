@@ -31,7 +31,15 @@ class Git {
 			return "";
 
 		$path = sprintf(format: APP_DIR . "/.git/");
+
+		if (!file_exists(filename: $path . "HEAD"))
+			return "";
+
 		$head = trim(string: substr(string: file_get_contents(filename: $path . "HEAD"), offset: 4));
+
+		if (!file_exists(filename: $path . $head))
+			return "";
+
 		$hash = trim(string: file_get_contents(filename: sprintf(format: $path . $head)));
 
 		return $hash;
