@@ -66,8 +66,6 @@ class ErrorService {
 					)
 					: $errorRender
 			))
-				->removeComments()
-				->removeWhitespace()
 				->render()
 			;
 		} else {
