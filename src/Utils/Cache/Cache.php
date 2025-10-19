@@ -27,9 +27,9 @@ class Cache {
 	/**
 	 * Add cache content
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function add(string $name, mixed $value): self {
+	public function add(string $name, mixed $value): static {
 		$this->content[$name] = $value;
 
 		return $this;

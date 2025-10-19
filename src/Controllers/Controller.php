@@ -51,9 +51,9 @@ class Controller {
 	 *
 	 * @param array $pageData
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setPageData(array $pageData): self {
+	public function setPageData(array $pageData): static {
 		$this->pageData = $pageData;
 
 		return $this;
@@ -73,9 +73,9 @@ class Controller {
 	 *
 	 * @param array $styles
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setStyles(array $styles): self {
+	public function setStyles(array $styles): static {
 		$this->styles = $styles;
 
 		return $this;
@@ -95,9 +95,9 @@ class Controller {
 	 *
 	 * @param array $scripts
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setScripts(array $scripts): self {
+	public function setScripts(array $scripts): static {
 		$this->scripts = $scripts;
 
 		return $this;
@@ -117,9 +117,9 @@ class Controller {
 	 *
 	 * @param array $payloads
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setPayloads(array $payloads): self {
+	public function setPayloads(array $payloads): static {
 		$this->payloads = $payloads;
 
 		return $this;

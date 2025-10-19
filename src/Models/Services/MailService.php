@@ -55,9 +55,9 @@ class MailService extends PHPMailer {
 	 *
 	 * @param string $receiver
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setReceiver(string $receiver): self {
+	public function setReceiver(string $receiver): static {
 		$this->receiver = $receiver;
 
 		return $this;
@@ -77,9 +77,9 @@ class MailService extends PHPMailer {
 	 *
 	 * @param string $body
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setBody(string $body): self {
+	public function setBody(string $body): static {
 		$this->body = $body;
 
 		return $this;
@@ -99,9 +99,9 @@ class MailService extends PHPMailer {
 	 *
 	 * @param string $object
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setObject(string $object): self {
+	public function setObject(string $object): static {
 		$this->object = $object;
 
 		return $this;

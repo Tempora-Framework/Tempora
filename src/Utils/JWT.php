@@ -121,9 +121,9 @@ class JWT extends FirebaseJWT {
 	 *
 	 * @param array $data
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setData(array $data): self {
+	public function setData(array $data): static {
 		$this->data = $data;
 
 		return $this;

@@ -36,9 +36,9 @@ class Select extends ElementBuilder {
 	 *
 	 * @param array $options
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setOptions(array $options): self {
+	public function setOptions(array $options): static {
 		$this->options = $options;
 
 		return $this;
@@ -49,9 +49,9 @@ class Select extends ElementBuilder {
 	 *
 	 * @param mixed $selected
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setSelected($selected): self {
+	public function setSelected($selected): static {
 		$this->selected = $selected;
 
 		return $this;
@@ -62,9 +62,9 @@ class Select extends ElementBuilder {
 	 *
 	 * @param bool $translate
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setTranslate(bool $translate): self {
+	public function setTranslate(bool $translate): static {
 		$this->translate = $translate;
 
 		return $this;

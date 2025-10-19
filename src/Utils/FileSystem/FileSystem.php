@@ -79,9 +79,9 @@ class FileSystem {
 	 *
 	 * @param string $fileName
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setFileName(string $fileName): self {
+	public function setFileName(string $fileName): static {
 		$this->fileName = $fileName;
 
 		return $this;
@@ -101,9 +101,9 @@ class FileSystem {
 	 *
 	 * @param string $fileExtension
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setFileExtension(string $fileExtension): self {
+	public function setFileExtension(string $fileExtension): static {
 		$this->fileExtension = $fileExtension;
 
 		return $this;
@@ -123,9 +123,9 @@ class FileSystem {
 	 *
 	 * @param string $filePath
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setFilePath(string $filePath): self {
+	public function setFilePath(string $filePath): static {
 		$this->filePath = $filePath;
 
 		return $this;
@@ -145,9 +145,9 @@ class FileSystem {
 	 *
 	 * @param int $filePermissions
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setFilePermissions(int $filePermissions): self {
+	public function setFilePermissions(int $filePermissions): static {
 		$this->filePermissions = $filePermissions;
 
 		return $this;
@@ -158,9 +158,9 @@ class FileSystem {
 	 *
 	 * @param string $fileContent
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setFileContent(string $fileContent): self {
+	public function setFileContent(string $fileContent): static {
 		$this->fileContent = $fileContent;
 
 		return $this;

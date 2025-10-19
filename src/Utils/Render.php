@@ -14,7 +14,7 @@ class Render {
 		return $this->buffer;
 	}
 
-	public function removeWhitespaceBetweenTags(): self {
+	public function removeWhitespaceBetweenTags(): static {
 		$this->buffer = preg_replace(
 			pattern: '/>\s+</',
 			replacement: '><',
@@ -24,7 +24,7 @@ class Render {
 		return $this;
 	}
 
-	public function removeTrailingWhitespace(): self {
+	public function removeTrailingWhitespace(): static {
 		$this->buffer = preg_replace(
 			pattern: '/^\s+|\s+$/m',
 			replacement: '',
@@ -34,7 +34,7 @@ class Render {
 		return $this;
 	}
 
-	public function removeEmptyLines(): self {
+	public function removeEmptyLines(): static {
 		$this->buffer = preg_replace(
 			pattern: '/\n\s*\n/',
 			replacement: "\n",
@@ -44,7 +44,7 @@ class Render {
 		return $this;
 	}
 
-	public function collapseSpaces(): self {
+	public function collapseSpaces(): static {
 		$this->buffer = preg_replace(
 			pattern: '/[ \t]+/',
 			replacement: ' ',
@@ -54,7 +54,7 @@ class Render {
 		return $this;
 	}
 
-	public function removeNewlines(): self {
+	public function removeNewlines(): static {
 		$this->buffer = preg_replace(
 			pattern: '/\n/',
 			replacement: '',
@@ -64,7 +64,7 @@ class Render {
 		return $this;
 	}
 
-	public function removeComments(): self {
+	public function removeComments(): static {
 		$this->buffer = preg_replace(
 			pattern: '/<!--(?!<!)[^\[>].*?-->/s',
 			replacement: '',
