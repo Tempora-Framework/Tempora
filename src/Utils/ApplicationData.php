@@ -37,7 +37,7 @@ class ApplicationData {
 
 			if ($data) {
 				foreach ($data as $key => $value) {
-					$queryLog = str_replace(search: ":" . $key, replace: $value, subject: $queryLog);
+					$queryLog = str_replace(search: ":" . $key, replace: $value ?? "", subject: $queryLog);
 				}
 			}
 
