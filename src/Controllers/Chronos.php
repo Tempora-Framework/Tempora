@@ -15,7 +15,7 @@ class Chronos {
 		$chronosSQLCount = 0;
 		if (isset($_SESSION["user"]["uid"])) {
 			$chronosSQLCount = 1;
-			$userInfo = $this::getInformations(uid: $_SESSION["user"]["uid"]);
+			$userInfo = $this::getInformation(uid: $_SESSION["user"]["uid"]);
 
 			$roleFormat = [];
 			foreach (USER_ROLES as $role) {

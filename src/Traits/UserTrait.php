@@ -26,13 +26,13 @@ trait UserTrait {
 	}
 
 	/**
-	 * Get user's informations
+	 * Get user's information
 	 *
 	 * @param string $uid
 	 *
 	 * @return null | array
 	 */
-	public static function getInformations(string $uid): null | array {
+	public static function getInformation(string $uid): null | array {
 		return ApplicationData::request(
 			query: "SELECT * FROM " . Table::USERS->value . " WHERE uid = :uid",
 			data: [
