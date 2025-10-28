@@ -8,7 +8,7 @@ use Tempora\Utils\Cache\Cache;
 
 class Image {
 	public static function import(string $image): string {
-		if (DEBUG == 1) {
+		if (DEBUG) {
 			$tempImagems = microtime(as_float: true);
 		}
 
@@ -35,7 +35,7 @@ class Image {
 					to: Path::ASSETS_MIN->value . "/images/" . $image
 				);
 
-				if (DEBUG == 1) {
+				if (DEBUG) {
 					array_push(
 						$GLOBALS["chronos"]["images_ms"],
 						[
@@ -60,7 +60,7 @@ class Image {
 					quality: 100
 				);
 
-				if (DEBUG == 1) {
+				if (DEBUG) {
 					array_push(
 						$GLOBALS["chronos"]["images_ms"],
 						[

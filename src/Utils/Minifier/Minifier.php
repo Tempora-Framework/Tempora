@@ -47,7 +47,7 @@ class Minifier {
 	 * @return void
 	 */
 	public function create(): void {
-		if (DEBUG == 1) {
+		if (DEBUG) {
 			$tempMinifierms = microtime(as_float: true);
 		}
 
@@ -80,7 +80,7 @@ class Minifier {
 
 				file_put_contents(filename: $minFilePath, data: $this->minContent);
 
-				if (DEBUG == 1) {
+				if (DEBUG) {
 					array_push(
 						$GLOBALS["chronos"]["minifier"],
 						[

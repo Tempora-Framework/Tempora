@@ -5,6 +5,7 @@
 <?php
 	$tempSQL = [];
 	$tempSQLCount = 0;
+
 	foreach ($GLOBALS["chronos"]["sql_query"] as $value) {
 		if (in_array(needle: $value["query"], haystack: $tempSQL)) {
 			$tempSQLCount++;

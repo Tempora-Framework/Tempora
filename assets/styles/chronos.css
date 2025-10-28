@@ -32,6 +32,8 @@
 		left: auto;
 		right: 0;
 		padding: 0;
+		background-color: #00000000;
+		border: none;
 
 		.tempora_chronos_drop_container,
 		#tempora_chronos_ms {

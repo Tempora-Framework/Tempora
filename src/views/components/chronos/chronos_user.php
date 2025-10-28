@@ -4,7 +4,7 @@
 
 <?php if (isset($_SESSION["user"]["uid"])) { ?>
 	<div class="tempora_chronos_drop_container">
-		<p class="tempora_chronos_drop_hover_element" id="chronos_user_title" title="<?= Lang::translate(key: "CHRONOS_USER_TITLE") ?>"><i class="ri-user-line"></i> <?= $userInfo["email"] ?></p>
+		<p class="tempora_chronos_drop_hover_element" id="chronos_user_title" title="<?= Lang::translate(key: "CHRONOS_USER_TITLE") ?>"><i class="ri-user-line"></i></p>
 		<div class="tempora_chronos_drop_element">
 			<h1><?= Lang::translate(key: "CHRONOS_USER_TITLE") ?></h1>
 			<table>
