@@ -19,13 +19,9 @@ class ErrorService {
 	 * @return void
 	 */
 	public static function handle(Throwable $exception): void {
-		if (DEBUG == 1) {
+		if (DEBUG) {
 			header_remove(name: "Content-Security-Policy");
-			if (is_int($exception->getCode())) {
-				http_response_code(response_code: $exception->getCode());
-			} else {
-				http_response_code(response_code: 500);
-			}
+			http_response_code(response_code: is_int(value: $exception->getCode()) ? $exception->getCode() : 500);
 
 			$buffer = ob_get_contents();
 			ob_end_clean();
@@ -45,9 +41,7 @@ class ErrorService {
 
 				echo "<script>";
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/engine.js");
-				echo "</script><script>";
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/error.js");
-				echo "</script><script>";
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/chronos.js");
 				echo "</script>";
 
@@ -58,7 +52,7 @@ class ErrorService {
 
 			echo (new Render(
 				buffer:
-					str_contains($buffer, "<body>")
+					str_contains(haystack: $buffer, needle: "<body>")
 					? str_replace(
 						search: "<body>",
 						replace: "<body>" . $errorRender,
