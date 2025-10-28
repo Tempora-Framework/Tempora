@@ -2,6 +2,8 @@
 
 namespace Tempora\Utils;
 
+use PDO;
+
 class ApplicationData {
 
 	/**
@@ -15,23 +17,25 @@ class ApplicationData {
 	 * @return mixed
 	 */
 	public static function request(string $query, ?array $data = null, ?int $returnType = null, bool $singleValue = false): mixed {
-		if (DEBUG == 1)
+		if (DEBUG) {
 			$tempSQLms = microtime(as_float: true);
+		}
 
 		$stmt = DATABASE->prepare(query: $query);
 
 		if ($data) {
-			foreach (array_keys($data) as $key) {
-				$stmt->bindParam(
-					param: $key,
-					var: $data[$key]
+			foreach ($data as $key => $value) {
+				$stmt->bindValue(
+					param: ":" . $key,
+					value: $value,
+					type: is_bool(value: $value) ? PDO::PARAM_BOOL : PDO::PARAM_STR
 				);
 			}
 		}
 
 		$stmt->execute();
 
-		if (DEBUG == 1) {
+		if (DEBUG) {
 			$GLOBALS["chronos"]["sql_count"]++;
 			$queryLog = $query;
 
@@ -54,7 +58,9 @@ class ApplicationData {
 		}
 
 		if ($returnType) {
-			return $singleValue ? $stmt->fetchAll(mode: $returnType)[0] ?? null : $stmt->fetchAll(mode: $returnType) ?? null;
+			$fetchResult = $stmt->fetchAll(mode: $returnType);
+
+			return ($singleValue ? $fetchResult[0] : $fetchResult) ?? null;
 		}
 
 		return 0;
