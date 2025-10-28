@@ -55,7 +55,7 @@ class Router {
 		$clientUrlParts = explode(separator: "/", string: $this->clientUrl);
 
 		// Safe gates
-		if (DEBUG == 1) {
+		if (DEBUG) {
 			if (str_contains(haystack: $this->clientUrl, needle: "/vendor/tempora-framework/tempora/assets/")) {
 				header(header: "Content-type: text/css");
 				include TEMPORA_DIR . str_replace(search: "/vendor/tempora-framework/tempora", replace: "", subject: $this->clientUrl);
@@ -98,9 +98,13 @@ class Router {
 
 		$render = function($controller, $pageData): string {
 			ob_start();
-			$controller->setPageData(pageData: $pageData)();
 
-			if (DEBUG == 1) {
+			$controller
+				->setPageData(pageData: $pageData)
+				->render()
+			;
+
+			if (DEBUG) {
 				if (!in_array(needle: "Content-Type: application/json", haystack: headers_list())) {
 					include Path::COMPONENT_CHRONOS->value . "/chronos.php";
 				}
@@ -148,7 +152,8 @@ class Router {
 	public function error(array $pageData): void {
 		(new ErrorController)->setPageData(pageData: $pageData)();
 
-		if (DEBUG == 1)
+		if (DEBUG) {
 			include Path::COMPONENT_CHRONOS->value . "/chronos.php";
+		}
 	}
 }

@@ -51,7 +51,7 @@ class RouterFactory extends Router {
 								return $role->value;
 							},
 							array: $routeAttribute->accessRoles
-						): null
+						) : null
 					]
 				);
 			}
