@@ -3,7 +3,6 @@
 namespace Tempora\Controllers;
 
 class Controller {
-
 	private array $pageData = [];
 	private array $styles = [];
 	private array $scripts = [];
@@ -12,27 +11,28 @@ class Controller {
 	public function includeAssets(): void {
 		foreach ($this->styles as $style) {
 			if (str_starts_with(haystack: $style, needle: "/assets/")) {
-				echo "<link rel=\"stylesheet\" href=\"" . str_replace(search: ".css", replace: ".min.css", subject: $style) . "\">";
+				echo '<link rel="stylesheet" href="' . str_replace(search: ".css", replace: ".min.css", subject: $style) . '">';
 			} else {
-				echo "<link rel=\"stylesheet\" href=\"" . $style . "\">";
+				echo '<link rel="stylesheet" href="' . $style . '">';
 			}
 		}
 		foreach ($this->scripts as $script) {
 			if (str_starts_with(haystack: $script, needle: "/assets/")) {
-				echo "<script defer src=\"" . str_replace(search: ".js", replace: ".min.js", subject: $script) . "\"></script>";
+				echo '<script defer src="' . str_replace(search: ".js", replace: ".min.js", subject: $script) . '"></script>';
 			} else {
-				echo "<script defer src=\"" . $script . "\"></script>";
+				echo '<script defer src="' . $script . '"></script>';
 			}
 		}
 	}
 
 	public function includePayloads(): void {
-		if (empty($this->payloads))
+		if (empty($this->payloads)) {
 			return;
+		}
 
-		echo "<div id=\"payloads\" class=\"hidden\">";
+		echo '<div id="payloads" class="hidden">';
 		foreach ($this->payloads as $key => $payload) {
-			echo "<div data-payload-" . $key . "=\"" . htmlspecialchars(string: $payload) . "\"></div>";
+			echo "<div data-payload-" . $key . '="' . htmlspecialchars(string: $payload) . '"></div>';
 		}
 		echo "</div>";
 	}

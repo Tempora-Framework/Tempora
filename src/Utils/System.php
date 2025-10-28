@@ -2,11 +2,10 @@
 
 namespace Tempora\Utils;
 
-use Tempora\Utils\ElementBuilder\ElementBuilder;
 use PDO;
+use Tempora\Utils\ElementBuilder\ElementBuilder;
 
 class System {
-
 	/**
 	 * Header rewrite function
 	 *
@@ -54,10 +53,12 @@ class System {
 	 * @return bool
 	 */
 	public static function checkCSRF(): bool {
-		if (!isset($_SESSION["csrf"]) || !isset($_POST["page_csrf"]))
+		if (!isset($_SESSION["csrf"]) || !isset($_POST["page_csrf"])) {
 			return false;
-		if ($_SESSION["csrf"] != $_POST["page_csrf"])
+		}
+		if ($_SESSION["csrf"] != $_POST["page_csrf"]) {
 			return false;
+		}
 
 		return true;
 	}
@@ -65,7 +66,7 @@ class System {
 	/**
 	 * UID function generator
 	 *
-	 * @param int $size UID length
+	 * @param int    $size  UID length
 	 * @param string $table Database table to check for existing UID
 	 *
 	 * @return string
@@ -105,13 +106,13 @@ class System {
 	 * @return array<string>
 	 */
 	public static function getFiles(string $path): array {
-		return array_diff(scandir(directory: $path), array(".", ".."));
+		return array_diff(scandir(directory: $path), [".", ".."]);
 	}
 
 	/**
 	 * Get all files in a directory
 	 *
-	 * @param string $path Directory path
+	 * @param string        $path  Directory path
 	 * @param array<string> $array
 	 *
 	 * @return array<string>
@@ -119,7 +120,7 @@ class System {
 	public static function getAllFiles(string $path, array $array = []): array {
 		$pathFiles = @scandir(directory: $path . "/");
 		if ($pathFiles) {
-			foreach (array_diff($pathFiles, array('.', '..')) as $element) {
+			foreach (array_diff($pathFiles, [".", ".."]) as $element) {
 				if (is_file(filename: $path . "/" . $element)) {
 					array_push($array, $path . "/" . $element);
 				} elseif (is_dir(filename: $path . "/" . $element)) {
@@ -127,6 +128,7 @@ class System {
 				}
 			}
 		}
+
 		return $array;
 	}
 }

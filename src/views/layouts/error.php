@@ -16,37 +16,37 @@
 		<div class="file_code_container">
 			<?php
 				$uniqueTraces = [];
-				foreach ($exception->getTrace() as $trace) {
-					$key = ($trace["file"] ?? "") . ":" . ($trace["line"] ?? "");
-					if (!isset($uniqueTraces[$key])) {
-						$uniqueTraces[$key] = $trace;
-					}
+			foreach ($exception->getTrace() as $trace) {
+				$key = ($trace["file"] ?? "") . ":" . ($trace["line"] ?? "");
+				if (!isset($uniqueTraces[$key])) {
+					$uniqueTraces[$key] = $trace;
 				}
-				$stackTrace = array_values($uniqueTraces);
+			}
+			$stackTrace = array_values($uniqueTraces);
 
-				foreach ($stackTrace as $key => $trace) {
-					if (isset($trace["file"])) {
-			?>
+			foreach ($stackTrace as $key => $trace) {
+				if (isset($trace["file"])) {
+					?>
 				<code class="file_container">
 					<p class="file"><i class="ri-arrow-<?= $key > 0 ? "down" : "up" ?>-s-line chronos_show_more"></i> <i class="ri-code-line"></i> <?= $trace["file"] ?? "" ?></p>
 				<?php
-					if (isset($trace["file"])) {
-						foreach (file(filename: $trace["file"]) as $number => $line) {
-							if ($number < ($trace["line"] -1) +5 && $number > ($trace["line"] -1) -5) {
-				?>
+							if (isset($trace["file"])) {
+								foreach (file(filename: $trace["file"]) as $number => $line) {
+									if ($number < ($trace["line"] - 1) + 5 && $number > ($trace["line"] - 1) - 5) {
+										?>
 					<div class="line <?= $key > 0 ? "hidden" : "" ?>">
 						<p class="line_number"><?= ($number + 1) ?></p>
-						<p class="code_content <?= ($trace["line"] -1) == $number ? "selected" : "" ?>"><?= str_replace(search: "\t", replace: "<span class=\"tab\"></span>", subject: htmlspecialchars(string: $line)) ?></p>
+						<p class="code_content <?= ($trace["line"] - 1) == $number ? "selected" : "" ?>"><?= str_replace(search: "\t", replace: '<span class="tab"></span>', subject: htmlspecialchars(string: $line)) ?></p>
 					</div>
 				<?php
+									}
+								}
 							}
-						}
-					}
-				?>
+					?>
 				</code>
 			<?php
-					}
 				}
+			}
 			?>
 		</div>
 	</div>

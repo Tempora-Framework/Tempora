@@ -5,7 +5,6 @@ namespace Tempora\Models\Services;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class MailService extends PHPMailer {
-
 	private string $receiver;
 	private string $body;
 	private string $object;

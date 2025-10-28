@@ -2,15 +2,14 @@
 
 namespace Tempora;
 
-use Tempora\Enums\Path;
 use App\Controllers\ErrorController;
+use Tempora\Controllers\Controller;
+use Tempora\Enums\Path;
 use Tempora\Traits\UserTrait;
 use Tempora\Utils\Render;
 use Tempora\Utils\Roles;
-use Tempora\Controllers\Controller;
 
 class Router {
-
 	use UserTrait;
 
 	private string $clientUrl;
@@ -24,10 +23,10 @@ class Router {
 	/**
 	 * Add new route
 	 *
-	 * @param string $url
+	 * @param string     $url
 	 * @param Controller $controller
-	 * @param string $method
-	 * @param array $pageData
+	 * @param string     $method
+	 * @param array      $pageData
 	 *
 	 * @return void
 	 */
@@ -40,9 +39,9 @@ class Router {
 	/**
 	 * Render view
 	 *
-	 * @param string $url
+	 * @param string     $url
 	 * @param Controller $controller
-	 * @param array $pageData
+	 * @param array      $pageData
 	 *
 	 * @return void
 	 */
@@ -63,28 +62,32 @@ class Router {
 			}
 		}
 
-		if (count(value: $urlParts) != count(value: $clientUrlParts))
+		if (count(value: $urlParts) != count(value: $clientUrlParts)) {
 			return;
+		}
 		if (isset($pageData["page_needLoginToBe"])) {
-			if (isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === false)
+			if (isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === false) {
 				return;
-			if (!isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === true)
+			}
+			if (!isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === true) {
 				return;
+			}
 		}
 		if (
 			isset($pageData["page_accessRoles"])
 			&& $pageData["page_needLoginToBe"] === true
 			&& !Roles::check(userRoles: USER_ROLES, allowRoles: $pageData["page_accessRoles"])
-		)
+		) {
 			return;
+		}
 
 		for ($i = 0; $i < count(value: $clientUrlParts); $i++) {
-			if (mb_substr(string: $urlParts[$i], start: 0, length: 1) != "$") {
+			if (mb_substr(string: $urlParts[$i], start: 0, length: 1) != "\$") {
 				if ($urlParts[$i] != $clientUrlParts[$i]) {
 					return;
 				}
 			} else {
-				$pageData[ltrim(string: $urlParts[$i], characters: "$")] = $clientUrlParts[$i];
+				$pageData[ltrim(string: $urlParts[$i], characters: "\$")] = $clientUrlParts[$i];
 			}
 		}
 
@@ -96,7 +99,7 @@ class Router {
 			unset($_SESSION["page_data"]);
 		}
 
-		$render = function($controller, $pageData): string {
+		$render = function ($controller, $pageData): string {
 			ob_start();
 
 			$controller
@@ -150,7 +153,7 @@ class Router {
 	}
 
 	public function error(array $pageData): void {
-		(new ErrorController)->setPageData(pageData: $pageData)();
+		(new ErrorController)->setPageData(pageData: $pageData)->render();
 
 		if (DEBUG) {
 			include Path::COMPONENT_CHRONOS->value . "/chronos.php";

@@ -1,5 +1,6 @@
 <?php
-	use Tempora\Utils\Lang;
+use Tempora\Utils\Lang;
+
 ?>
 
 <?php if (isset($_SESSION["user"]["uid"])) { ?>

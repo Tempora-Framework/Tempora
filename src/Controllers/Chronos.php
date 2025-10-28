@@ -8,7 +8,6 @@ use Tempora\Traits\UserTrait;
 use Tempora\Utils\ElementBuilder\ElementBuilder;
 
 class Chronos {
-
 	use UserTrait;
 
 	public function __invoke(array $pageData = []): void {

@@ -1,13 +1,13 @@
 <?php
-	use Tempora\Utils\Lang;
+use Tempora\Utils\Lang;
 
-	$httpCodeType = substr(string: http_response_code(), offset: 0, length: 1);
-	$httpCodeClass = match ($httpCodeType) {
-		"1" => "blue",
-		"2" => "green",
-		"3" => "yellow",
-		"4", "5" => "red"
-	};
+$httpCodeType = substr(string: http_response_code(), offset: 0, length: 1);
+$httpCodeClass = match ($httpCodeType) {
+	"1" => "blue",
+	"2" => "green",
+	"3" => "yellow",
+	"4", "5" => "red"
+};
 ?>
 
 <div class="tempora_chronos_drop_container">

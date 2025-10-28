@@ -2,9 +2,11 @@
 
 namespace Tempora;
 
-use Composer\InstalledVersions;
-use Tempora\Enums\Path;
 use App\Controllers\ErrorController;
+use Composer\InstalledVersions;
+use Dotenv\Dotenv;
+use ErrorException;
+use Tempora\Enums\Path;
 use Tempora\Factories\RouterFactory;
 use Tempora\Models\Database;
 use Tempora\Models\Services\ErrorService;
@@ -15,11 +17,8 @@ use Tempora\Utils\JWT;
 use Tempora\Utils\Lang;
 use Tempora\Utils\Minifier\Minifier;
 use Tempora\Utils\System;
-use Dotenv\Dotenv;
-use ErrorException;
 
 class Tempora {
-
 	use UserTrait;
 
 	public function __construct(array $options = []) {
@@ -135,7 +134,7 @@ class Tempora {
 	 * @return void
 	 */
 	public function errorHandler(): void {
-		set_error_handler(callback: function($severity, $message, $file, $line): void {
+		set_error_handler(callback: function ($severity, $message, $file, $line): void {
 			throw new ErrorException(message: $message, code: 0, severity: $severity, filename: $file, line: $line);
 		});
 		set_exception_handler(callback: [ErrorService::class, "handle"]);
@@ -221,13 +220,16 @@ class Tempora {
 		define(constant_name: "DATABASE", value: $database());
 
 		if (DATABASE instanceof Exception) {
-			(new ErrorController())->setPageData(
-				pageData: [
-					"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
-					"error_code" => 500,
-					"error_message" => Lang::translate(key: "ERROR_DATABASE")
-				]
-			)();
+			(new ErrorController)
+				->setPageData(
+					pageData: [
+						"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
+						"error_code" => 500,
+						"error_message" => Lang::translate(key: "ERROR_DATABASE")
+					]
+				)
+				->render()
+			;
 
 			exit;
 		}

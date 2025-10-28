@@ -1,7 +1,7 @@
 <?php
-	use Tempora\Utils\Lang;
+use Tempora\Utils\Lang;
 
-	$time = round(num: (microtime(as_float: true) - $GLOBALS["chronos"]["ms_count"]) * 1000, precision: 2);
+$time = round(num: (microtime(as_float: true) - $GLOBALS["chronos"]["ms_count"]) * 1000, precision: 2);
 ?>
 
 <div class="tempora_chronos_drop_container">
@@ -19,14 +19,14 @@
 		<table class="chronos_minifier" cellpadding="0" cellspacing="0">
 			<?php
 				foreach ($GLOBALS["chronos"]["minifier"] as $value) {
-			?>
+					?>
 				<tr>
 					<td class="min_col"><?= $value["file"] ?></td>
 					<td class="min_col"><?= $value["time"] ?>ms</td>
 				</tr>
 			<?php
 				}
-			?>
+?>
 			<tr>
 				<td class="min_col"><?= Lang::translate(key: "MAIN_TOTAL") ?></td>
 				<td class="min_col"><?= array_sum(array_column(array: $GLOBALS["chronos"]["minifier"], column_key: "time")) ?>ms</td>
@@ -36,15 +36,15 @@
 		<h1><?= Lang::translate(key: "CHRONOS_IMAGES_MS_TITLE") ?></h1>
 		<table class="chronos_minifier" cellpadding="0" cellspacing="0">
 			<?php
-				foreach ($GLOBALS["chronos"]["images_ms"] as $value) {
-			?>
+	foreach ($GLOBALS["chronos"]["images_ms"] as $value) {
+		?>
 				<tr>
 					<td class="min_col"><?= $value["file"] ?></td>
 					<td class="min_col"><?= $value["time"] ?>ms</td>
 				</tr>
 			<?php
-				}
-			?>
+	}
+?>
 			<tr>
 				<td class="min_col"><?= Lang::translate(key: "MAIN_TOTAL") ?></td>
 				<td class="min_col"><?= array_sum(array_column(array: $GLOBALS["chronos"]["images_ms"], column_key: "time")) ?>ms</td>

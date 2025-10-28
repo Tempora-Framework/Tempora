@@ -14,11 +14,12 @@ class JWT extends FirebaseJWT {
 	/**
 	 * Create JWT
 	 *
-	 * @return bool | string
+	 * @return bool|string
 	 */
 	public function create(): bool | string {
-		if (!isset($_SESSION["user"]["uid"]))
+		if (!isset($_SESSION["user"]["uid"])) {
 			return false;
+		}
 
 		$jwt = $this->encode(
 			payload: [
@@ -47,11 +48,12 @@ class JWT extends FirebaseJWT {
 	 *
 	 * @param string $token
 	 *
-	 * @return string | bool
+	 * @return bool|string
 	 */
 	public function getUserUid(string $token): string | bool {
-		if ($this->decodeData(token: $token) === false)
+		if ($this->decodeData(token: $token) === false) {
 			return false;
+		}
 
 		$uid = ApplicationData::request(
 			query: "SELECT uid_user FROM " . Table::USER_TOKENS->value . " WHERE token = :token",
@@ -62,8 +64,9 @@ class JWT extends FirebaseJWT {
 			singleValue: true
 		);
 
-		if (!$uid)
+		if (!$uid) {
 			return false;
+		}
 
 		return $uid;
 	}
@@ -89,7 +92,7 @@ class JWT extends FirebaseJWT {
 	 *
 	 * @param string $token
 	 *
-	 * @return array | bool
+	 * @return array|bool
 	 */
 	public function decodeData(string $token): array | bool {
 		try {
@@ -98,8 +101,9 @@ class JWT extends FirebaseJWT {
 				keyOrKeyArray: new Key(keyMaterial: $_ENV["JWT_PRIVATE_KEY"], algorithm: "HS256")
 			);
 
-			if ($decoded->exp <= time())
+			if ($decoded->exp <= time()) {
 				return false;
+			}
 
 			return json_decode(json: $decoded->data, associative: true);
 		} catch (Exception $e) {

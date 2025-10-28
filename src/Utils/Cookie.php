@@ -5,15 +5,16 @@ namespace Tempora\Utils;
 class Cookie {
 	private string $name;
 	private string $value = "";
-	private int $expire = 60 *60 *24 *30;
+	private int $expire = 60 * 60 * 24 * 30;
 	private string $path = "/";
 	private string $domain = "";
 	private bool $secure = false;
 	private bool $httponly = false;
 
 	public function send(): void {
-		if (!isset($_SERVER['HTTPS']))
+		if (!isset($_SERVER["HTTPS"])) {
 			$this->secure = false;
+		}
 
 		setcookie(
 			name: $this->name,

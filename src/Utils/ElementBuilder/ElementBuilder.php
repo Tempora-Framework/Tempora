@@ -5,7 +5,6 @@ namespace Tempora\Utils\ElementBuilder;
 use Tempora\Utils\Roles;
 
 class ElementBuilder {
-
 	protected ?string $element = null;
 	private array $attributs = [];
 	private ?string $content = null;
@@ -42,7 +41,7 @@ class ElementBuilder {
 
 			foreach ($this->attributs as $key => $value) {
 				if ($value != "") {
-					$result .= " " . $key . "=\"" . $value . "\"";
+					$result .= " " . $key . '="' . $value . '"';
 				} else {
 					$result .= " " . $key;
 				}

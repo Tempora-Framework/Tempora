@@ -5,7 +5,6 @@ namespace Tempora\Utils;
 use Tempora\Enums\Role;
 
 class Roles {
-
 	/**
 	 * Check for permissions
 	 *
@@ -18,6 +17,7 @@ class Roles {
 		if (!empty(array_intersect($userRoles, $allowRoles))) {
 			return true;
 		}
+
 		return false;
 	}
 

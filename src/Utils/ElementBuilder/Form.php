@@ -5,9 +5,7 @@ namespace Tempora\Utils\ElementBuilder;
 use Tempora\Utils\System;
 
 class Form extends ElementBuilder {
-
 	private array $inputs = [];
-
 	private bool $csrf = true;
 
 	public function __construct() {

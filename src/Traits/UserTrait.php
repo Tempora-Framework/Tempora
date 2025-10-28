@@ -7,7 +7,6 @@ use Tempora\Enums\Table;
 use Tempora\Utils\ApplicationData;
 
 trait UserTrait {
-
 	/**
 	 * Get user's role(s)
 	 *
@@ -30,9 +29,9 @@ trait UserTrait {
 	 *
 	 * @param string $uid
 	 *
-	 * @return null | array
+	 * @return array|null
 	 */
-	public static function getInformation(string $uid): null | array {
+	public static function getInformation(string $uid): ?array {
 		return ApplicationData::request(
 			query: "SELECT * FROM " . Table::USERS->value . " WHERE uid = :uid",
 			data: [

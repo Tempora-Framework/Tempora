@@ -5,7 +5,6 @@ namespace Tempora\Utils\ElementBuilder;
 use Tempora\Utils\Lang;
 
 class Select extends ElementBuilder {
-
 	private array $options = [];
 	private mixed $selected = "";
 	private bool $translate = false;
@@ -23,7 +22,7 @@ class Select extends ElementBuilder {
 		$content = "";
 
 		foreach ($this->options as $key => $value) {
-			$content .= "<option value=\"" . $key . "\"" . ($key == $this->selected ? " selected" : "") . ">" . ($this->translate ? Lang::translate(key: $value) : $value) . "</option>";
+			$content .= '<option value="' . $key . '"' . ($key == $this->selected ? " selected" : "") . ">" . ($this->translate ? Lang::translate(key: $value) : $value) . "</option>";
 		}
 
 		$this->setContent(content: $content);

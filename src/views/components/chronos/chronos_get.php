@@ -1,5 +1,6 @@
 <?php
-	use Tempora\Utils\Lang;
+use Tempora\Utils\Lang;
+
 ?>
 
 <div class="tempora_chronos_drop_container">

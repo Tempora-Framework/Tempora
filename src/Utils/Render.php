@@ -3,7 +3,6 @@
 namespace Tempora\Utils;
 
 class Render {
-
 	private string $buffer;
 
 	public function __construct(string $buffer) {
@@ -16,8 +15,8 @@ class Render {
 
 	public function removeWhitespaceBetweenTags(): static {
 		$this->buffer = preg_replace(
-			pattern: '/>\s+</',
-			replacement: '><',
+			pattern: "/>\\s+</",
+			replacement: "><",
 			subject: $this->buffer
 		);
 
@@ -26,8 +25,8 @@ class Render {
 
 	public function removeTrailingWhitespace(): static {
 		$this->buffer = preg_replace(
-			pattern: '/^\s+|\s+$/m',
-			replacement: '',
+			pattern: "/^\\s+|\\s+\$/m",
+			replacement: "",
 			subject: $this->buffer
 		);
 
@@ -36,7 +35,7 @@ class Render {
 
 	public function removeEmptyLines(): static {
 		$this->buffer = preg_replace(
-			pattern: '/\n\s*\n/',
+			pattern: "/\\n\\s*\\n/",
 			replacement: "\n",
 			subject: $this->buffer
 		);
@@ -46,8 +45,8 @@ class Render {
 
 	public function collapseSpaces(): static {
 		$this->buffer = preg_replace(
-			pattern: '/[ \t]+/',
-			replacement: ' ',
+			pattern: "/[ \\t]+/",
+			replacement: " ",
 			subject: $this->buffer
 		);
 
@@ -56,8 +55,8 @@ class Render {
 
 	public function removeNewlines(): static {
 		$this->buffer = preg_replace(
-			pattern: '/\n/',
-			replacement: '',
+			pattern: "/\\n/",
+			replacement: "",
 			subject: $this->buffer
 		);
 
@@ -66,8 +65,8 @@ class Render {
 
 	public function removeComments(): static {
 		$this->buffer = preg_replace(
-			pattern: '/<!--(?!<!)[^\[>].*?-->/s',
-			replacement: '',
+			pattern: "/<!--(?!<!)[^\\[>].*?-->/s",
+			replacement: "",
 			subject: $this->buffer
 		);
 

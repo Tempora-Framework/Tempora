@@ -2,16 +2,15 @@
 
 namespace Tempora\Factories;
 
+use ReflectionObject;
 use Tempora\Attributes\RouteAttribute;
 use Tempora\Controllers\Controller;
 use Tempora\Router;
 use Tempora\Utils\Cache\Cache;
 use Tempora\Utils\Lang;
 use Tempora\Utils\System;
-use ReflectionObject;
 
 class RouterFactory extends Router {
-
 	public function __construct(string $url, array $options = []) {
 		parent::__construct(url: $url, options: $options);
 
@@ -23,8 +22,9 @@ class RouterFactory extends Router {
 			$controller = $this->getController(controller: $controller);
 			$routeAttributes = $this->getAttributes(controller: $controller);
 
-			if (count(value: $routeAttributes) > 0)
+			if (count(value: $routeAttributes) > 0) {
 				$routeAttribute = $routeAttributes[0]->newInstance();
+			}
 
 			$cache->add(name: $routeAttribute->name, value: $routeAttribute->path);
 		}
@@ -47,7 +47,7 @@ class RouterFactory extends Router {
 						"page_description" => $routeAttribute->description,
 						"page_needLoginToBe" => $routeAttribute->needLoginToBe,
 						"page_accessRoles" => $routeAttribute->accessRoles ? array_map(
-							callback: function($role): mixed {
+							callback: function ($role): mixed {
 								return $role->value;
 							},
 							array: $routeAttribute->accessRoles

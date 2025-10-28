@@ -5,14 +5,13 @@ namespace Tempora\Utils\FileSystem;
 use Exception;
 
 class FileSystem {
-
 	private string $fileName;
 	private string $fileExtension;
 	private string $filePath;
 	private int $filePermissions = 0777;
 	private string $fileContent;
 
-	public function __construct(string $filename = null) {
+	public function __construct(?string $filename = null) {
 		if ($filename) {
 			$this->fileName = pathinfo(path: $filename, flags: PATHINFO_FILENAME);
 			$this->fileExtension = pathinfo(path: $filename, flags: PATHINFO_EXTENSION);
@@ -21,18 +20,19 @@ class FileSystem {
 	}
 
 	public function getHumanRedeablePermissions(): string {
-		return substr(string: sprintf('%o', $this->filePermissions), offset: -4);
+		return substr(string: sprintf("%o", $this->filePermissions), offset: -4);
 	}
 
 	public function getFullPath(): string {
-		return $this->filePath . DIRECTORY_SEPARATOR . $this->fileName . '.' . $this->fileExtension;
+		return $this->filePath . DIRECTORY_SEPARATOR . $this->fileName . "." . $this->fileExtension;
 	}
 
 	public function createFile(): void {
 		$fullPath = $this->getFullPath();
 
-		if (file_exists(filename: $fullPath))
+		if (file_exists(filename: $fullPath)) {
 			throw new Exception(message: "File already exists: $fullPath");
+		}
 
 		if (!is_dir(filename: $this->filePath)) {
 			try {
@@ -42,12 +42,15 @@ class FileSystem {
 			}
 		}
 
-		if (!is_writable(filename: $this->filePath))
+		if (!is_writable(filename: $this->filePath)) {
 			throw new Exception(message: "Directory not writable: {$this->filePath}");
-		if (!is_readable(filename: $this->filePath))
+		}
+		if (!is_readable(filename: $this->filePath)) {
 			throw new Exception(message: "Directory not readable: {$this->filePath}");
-		if (!is_dir(filename: $this->filePath))
+		}
+		if (!is_dir(filename: $this->filePath)) {
 			throw new Exception(message: "Path is not a directory: {$this->filePath}");
+		}
 
 		file_put_contents(filename: $fullPath, data: $this->fileContent ?? "");
 		chmod(filename: $fullPath, permissions: $this->filePermissions ?? 0777);
@@ -59,8 +62,9 @@ class FileSystem {
 
 	public function getFileSize(): int {
 		$filename = $this->getFullPath();
-		if (!file_exists(filename: $filename))
+		if (!file_exists(filename: $filename)) {
 			throw new Exception(message: "File does not exist: $filename");
+		}
 
 		return filesize(filename: $filename);
 	}

@@ -1,12 +1,12 @@
 <?php
-	use Tempora\Utils\ElementBuilder\ElementBuilder;
-	use Tempora\Utils\Lang;
+use Tempora\Utils\ElementBuilder\ElementBuilder;
+use Tempora\Utils\Lang;
 
-	$tab = (new ElementBuilder())
-		->setElement(element: "span")
-		->setAttributs(attributs: ["class" => "tab"])
-		->build()
-	;
+$tab = (new ElementBuilder)
+	->setElement(element: "span")
+	->setAttributs(attributs: ["class" => "tab"])
+	->build()
+;
 ?>
 
 <?php if ($GLOBALS["chronos"]["dumps"] != []) { ?>
@@ -27,14 +27,12 @@
 						} else {
 							$result = $value["variable"];
 						}
-				?>
+						?>
 					<tr>
 						<td class="min_col"><?= $value["trace"] ?></td>
 						<td class="min_col mono"><?= print_r($result, true) ?></td>
 					</tr>
-				<?php
-					}
-				?>
+				<?php } ?>
 			</table>
 		</div>
 	</div>

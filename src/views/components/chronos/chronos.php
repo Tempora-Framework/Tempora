@@ -1,5 +1,6 @@
 <?php
-	use Tempora\Controllers\Chronos;
+use Tempora\Controllers\Chronos;
+
 ?>
 
 <link rel="stylesheet" href="/vendor/tempora-framework/tempora/assets/styles/chronos.css">

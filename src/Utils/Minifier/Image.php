@@ -40,15 +40,16 @@ class Image {
 						$GLOBALS["chronos"]["images_ms"],
 						[
 							"file" => $imagePath,
-							"time" => round(num: (microtime(as_float: true) - $tempImagems) *1000, precision: 3)
+							"time" => round(num: (microtime(as_float: true) - $tempImagems) * 1000, precision: 3)
 						]
 					);
 				}
 			} else {
 				$webpPath = Path::ASSETS_MIN->value . "/images/" . pathinfo(path: $image, flags: PATHINFO_FILENAME) . ".webp";
 
-				if (!is_file(filename: $imagePath))
+				if (!is_file(filename: $imagePath)) {
 					throw new Exception(message: "Image file not found: " . $imagePath);
+				}
 
 				imagewebp(
 					image: imagecreatefromstring(
@@ -65,7 +66,7 @@ class Image {
 						$GLOBALS["chronos"]["images_ms"],
 						[
 							"file" => $webpPath,
-							"time" => round(num: (microtime(as_float: true) - $tempImagems) *1000, precision: 3)
+							"time" => round(num: (microtime(as_float: true) - $tempImagems) * 1000, precision: 3)
 						]
 					);
 				}

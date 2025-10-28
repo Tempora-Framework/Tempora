@@ -2,16 +2,13 @@
 
 namespace Tempora\Utils\Minifier;
 
-use Exception;
-use MatthiasMullie\Minify\JS;
 use MatthiasMullie\Minify\CSS;
+use MatthiasMullie\Minify\JS;
 use Tempora\Enums\Path;
 use Tempora\Utils\Cache\Cache;
 use Throwable;
-use function PHPUnit\Framework\throwException;
 
 class Minifier {
-
 	private string $fileName;
 	private string $fileExtension;
 	private string $filePath;
@@ -35,8 +32,9 @@ class Minifier {
 	 * @return string
 	 */
 	public function get(): string {
-		if (!is_file(filename: Path::ASSETS_MIN->value . "/" . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension))
+		if (!is_file(filename: Path::ASSETS_MIN->value . "/" . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension)) {
 			return "";
+		}
 
 		return file_get_contents(filename: Path::ASSETS_MIN->value . "/" . $this->filePath . "/" . $this->fileName . ".min." . $this->fileExtension);
 	}
@@ -76,7 +74,8 @@ class Minifier {
 			) {
 				try {
 					mkdir(directory: Path::ASSETS_MIN->value . $this->filePath, recursive: true);
-				} catch (Throwable $e) {}
+				} catch (Throwable $e) {
+				}
 
 				file_put_contents(filename: $minFilePath, data: $this->minContent);
 
@@ -85,7 +84,7 @@ class Minifier {
 						$GLOBALS["chronos"]["minifier"],
 						[
 							"file" => $minFilePath,
-							"time" => round(num: (microtime(as_float: true) - $tempMinifierms) *1000, precision: 3)
+							"time" => round(num: (microtime(as_float: true) - $tempMinifierms) * 1000, precision: 3)
 						]
 					);
 				}
