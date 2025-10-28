@@ -59,7 +59,7 @@ class Tempora {
 		// Errors
 		$this->errorHandler();
 
-		if (DEBUG == 1) {
+		if (DEBUG) {
 			$this->chronos();
 		}
 
@@ -78,7 +78,7 @@ class Tempora {
 
 		// Languages
 		$this->lang();
-		define(constant_name: "LANG_FILE", value: file_get_contents(filename: APP_DIR . "/public/langs/" . $_COOKIE["LANG"] . ".json"));
+		define(constant_name: "LANG_FILE", value: json_decode(json: file_get_contents(filename: APP_DIR . "/public/langs/" . $_COOKIE["LANG"] . ".json")));
 
 		// Minify assets
 		$this->minify();
@@ -98,7 +98,7 @@ class Tempora {
 	public function const(): void {
 		define(constant_name: "TEMPORA_VERSION", value: InstalledVersions::getPrettyVersion(packageName: "tempora-framework/tempora"));
 		define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
-		define(constant_name: "DEBUG", value: $_ENV["DEBUG"]);
+		define(constant_name: "DEBUG", value: $_ENV["DEBUG"] == 1);
 	}
 
 	/**
@@ -107,9 +107,6 @@ class Tempora {
 	 * @return void
 	 */
 	public function chronos(): void {
-		$chronos = [];
-		global $chronos;
-
 		$GLOBALS["chronos"]["ms_count"] = microtime(as_float: true);
 		$GLOBALS["chronos"]["sql_count"] = 0;
 		$GLOBALS["chronos"]["sql_query"] = [];
