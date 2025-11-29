@@ -25,7 +25,7 @@ class ErrorService {
 			$buffer = ob_get_contents();
 			ob_end_clean();
 
-			$render = function ($exception): string {
+			$render = function (Throwable $exception): string {
 				ob_start();
 
 				echo "<style>";

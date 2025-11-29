@@ -2,7 +2,7 @@
 	<div class="tempora_error" id="tempora_error">
 		<i class="ri-close-large-line" id="close"></i>
 		<div class="header">
-			<p class="title"><?= $exception->getMessage() ?></p>
+			<p class="title"><?= substr(string: $exception->getMessage(), offset: 0, length: strpos(haystack: $exception->getMessage(), needle: "Stack trace:")) ?></p>
 			<p><?= $exception->getFile() ?> Line <?= $exception->getLine() ?></p>
 		</div>
 		<div class="trace_container">
@@ -43,6 +43,12 @@
 								}
 							}
 					?>
+				</code>
+			<?php
+				} else {
+					?>
+				<code class="file_container">
+					<p class="trace_info">No file information available.</p>
 				</code>
 			<?php
 				}
