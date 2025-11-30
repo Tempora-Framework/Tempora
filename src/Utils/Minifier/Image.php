@@ -16,11 +16,11 @@ class Image {
 			throw new Exception(message: "Image format not supported: " . $image);
 		}
 
-		if (!is_dir(filename: Path::ASSETS_MIN->value . "/images")) {
-			mkdir(directory: Path::ASSETS_MIN->value . "/images", recursive: true);
+		if (!is_dir(filename: Path::APP_ASSETS_MIN->value . "/images")) {
+			mkdir(directory: Path::APP_ASSETS_MIN->value . "/images", recursive: true);
 		}
 
-		$imagePath = Path::ASSETS->value . "/images/" . $image;
+		$imagePath = Path::APP_ASSETS->value . "/images/" . $image;
 		$cache = new Cache(file: "images.json");
 
 		if (filemtime(filename: $imagePath) > ($cache->get()[$imagePath] ?? 0)) {
@@ -32,7 +32,7 @@ class Image {
 			if (in_array(needle: pathinfo(path: $image, flags: PATHINFO_EXTENSION), haystack: ["svg", "gif", "webp"])) {
 				copy(
 					from: $imagePath,
-					to: Path::ASSETS_MIN->value . "/images/" . $image
+					to: Path::APP_ASSETS_MIN->value . "/images/" . $image
 				);
 
 				if (DEBUG) {
@@ -45,7 +45,7 @@ class Image {
 					);
 				}
 			} else {
-				$webpPath = Path::ASSETS_MIN->value . "/images/" . pathinfo(path: $image, flags: PATHINFO_FILENAME) . ".webp";
+				$webpPath = Path::APP_ASSETS_MIN->value . "/images/" . pathinfo(path: $image, flags: PATHINFO_FILENAME) . ".webp";
 
 				if (!is_file(filename: $imagePath)) {
 					throw new Exception(message: "Image file not found: " . $imagePath);

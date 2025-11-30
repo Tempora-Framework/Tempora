@@ -172,15 +172,11 @@ class Tempora {
 	 * @return void
 	 */
 	public function minify(): void {
-		$cache = new Cache(file: "minifier.json");
-		foreach (System::getAllFiles(path: Path::ASSETS->value) as $file) {
-			(new Minifier(file: $file))
-				->create()
-			;
-
-			$cache->add(name: $file, value: filemtime(filename: $file));
+		foreach (System::getAllFiles(path: Path::APP_ASSETS->value) as $file) {
+			(new Minifier(file: $file))->create();
 		}
-		$cache->create();
+
+		Minifier::cleanOldFiles();
 	}
 
 	/**
