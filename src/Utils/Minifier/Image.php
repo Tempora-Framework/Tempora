@@ -4,7 +4,6 @@ namespace Tempora\Utils\Minifier;
 
 use Exception;
 use Tempora\Enums\Path;
-use Tempora\Utils\Cache\Cache;
 
 class Image {
 	public static function import(string $image): string {
@@ -21,14 +20,15 @@ class Image {
 		}
 
 		$imagePath = Path::APP_ASSETS->value . "/images/" . $image;
-		$cache = new Cache(file: "images.json");
 
-		if (filemtime(filename: $imagePath) > ($cache->get()[$imagePath] ?? 0)) {
-			foreach ($cache->get() as $cachedImage => $time) {
-				$cache->add(name: $cachedImage, value: $time);
-			}
-			$cache->add(name: $imagePath, value: filemtime(filename: $imagePath));
+		$minFileTimestamp = 0;
 
+		try {
+			$minFileTimestamp = filemtime(filename: Path::APP_ASSETS_MIN->value . "/images/" . pathinfo(path: $image, flags: PATHINFO_FILENAME) . (in_array(needle: pathinfo(path: $image, flags: PATHINFO_EXTENSION), haystack: ["svg", "gif", "webp"]) ? "." . pathinfo(path: $image, flags: PATHINFO_EXTENSION) : ".webp"));
+		} catch (Exception $e) {
+		}
+
+		if (filemtime(filename: $imagePath) > $minFileTimestamp) {
 			if (in_array(needle: pathinfo(path: $image, flags: PATHINFO_EXTENSION), haystack: ["svg", "gif", "webp"])) {
 				copy(
 					from: $imagePath,
@@ -71,7 +71,6 @@ class Image {
 					);
 				}
 			}
-			$cache->create();
 		}
 
 		return "/assets/images/" . (in_array(needle: pathinfo(path: $image, flags: PATHINFO_EXTENSION), haystack: ["svg", "gif", "webp"]) ? $image : pathinfo(path: $image, flags: PATHINFO_FILENAME) . ".webp");
