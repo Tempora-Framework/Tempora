@@ -47,19 +47,23 @@ class Minifier {
 				case "js":
 					$minify = new JS($filePath);
 					$this->minContent = $minify->minify();
+
 					break;
 				case "css":
 					$minify = new CSS($filePath);
 					$this->minContent = $minify->minify();
+
 					break;
 				case "json":
-					$this->processJson($filePath);
+					$this->processJson(filePath: $filePath);
+
 					break;
 			}
 
 			try {
 				mkdir(directory: Path::APP_ASSETS_MIN->value . $this->filePath, recursive: true);
-			} catch (Throwable $e) {}
+			} catch (Throwable $e) {
+			}
 
 			file_put_contents(filename: $minFilePath, data: $this->minContent);
 
@@ -76,8 +80,15 @@ class Minifier {
 	}
 
 	public static function cleanOldFiles(): void {
-		$files = System::getAllFiles(path: Path::APP_ASSETS->value);
-		$minFiles = System::getAllFiles(path: Path::APP_ASSETS_MIN->value);
+		$files = array_diff(
+			System::getAllFiles(path: Path::APP_ASSETS->value),
+			System::getAllFiles(path: Path::APP_ASSETS->value . "/images")
+		);
+		$minFiles = array_diff(
+			System::getAllFiles(path: Path::APP_ASSETS_MIN->value),
+			System::getAllFiles(path: Path::APP_ASSETS_MIN->value . "/images")
+		);
+
 		foreach ($minFiles as $minFile) {
 			if (
 				!in_array(
