@@ -78,12 +78,13 @@ class ErrorService {
 
 			ob_end_clean();
 
+			$lang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
 			(new ErrorController)
 				->setPageData(
 					pageData: [
-						"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
+						"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
 						"error_code" => 500,
-						"error_message" => Lang::translate(key: "ERROR_SERVER")
+						"error_message" => $lang->translate(key: "ERROR_SERVER")
 					]
 				)
 				->render()

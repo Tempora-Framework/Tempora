@@ -6,12 +6,12 @@ use App\Controllers\ErrorController;
 use Composer\InstalledVersions;
 use Dotenv\Dotenv;
 use ErrorException;
+use Exception;
 use Tempora\Enums\Path;
 use Tempora\Factories\RouterFactory;
 use Tempora\Models\Database;
 use Tempora\Models\Services\ErrorService;
 use Tempora\Traits\UserTrait;
-use Tempora\Utils\Cache\Cache;
 use Tempora\Utils\Cookie;
 use Tempora\Utils\JWT;
 use Tempora\Utils\Lang;
@@ -75,12 +75,11 @@ class Tempora {
 			define(constant_name: "USER_ROLES", value: $this::getRoles(uid: $_SESSION["user"]["uid"]));
 		}
 
-		// Languages
-		$this->lang();
-		define(constant_name: "LANG_FILE", value: json_decode(json: file_get_contents(filename: APP_DIR . "/public/langs/" . $_COOKIE["LANG"] . ".json")));
-
 		// Minify assets
 		$this->minify();
+
+		// Languages
+		$this->lang();
 
 		ob_start(callback: "ob_gzhandler");
 
@@ -156,14 +155,9 @@ class Tempora {
 
 		if (!isset($_COOKIE["LANG"])) {
 			System::redirect();
-		} else {
-			if (!in_array(needle: $_COOKIE["LANG"] . ".json", haystack: System::getFiles(path: Path::PUBLIC->value . "/langs"))) {
-				$langCookie->setValue(value: $_ENV["DEFAULT_LANG"]);
-				$langCookie->send();
-
-				System::redirect();
-			}
 		}
+
+		define(constant_name: "MAIN_LANG", value: $_COOKIE["LANG"]);
 	}
 
 	/**
@@ -172,7 +166,12 @@ class Tempora {
 	 * @return void
 	 */
 	public function minify(): void {
-		foreach (System::getAllFiles(path: Path::APP_ASSETS->value) as $file) {
+		// Take all assets files except "images" folder
+		$files = array_diff(
+			System::getAllFiles(path: Path::APP_ASSETS->value),
+			System::getAllFiles(path: Path::APP_ASSETS->value . "/images")
+		);
+		foreach ($files as $file) {
 			(new Minifier(file: $file))->create();
 		}
 
@@ -216,12 +215,13 @@ class Tempora {
 		define(constant_name: "DATABASE", value: $database());
 
 		if (DATABASE instanceof Exception) {
+			$lang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
 			(new ErrorController)
 				->setPageData(
 					pageData: [
-						"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
+						"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
 						"error_code" => 500,
-						"error_message" => Lang::translate(key: "ERROR_DATABASE")
+						"error_message" => $lang->translate(key: "ERROR_DATABASE")
 					]
 				)
 				->render()

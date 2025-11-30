@@ -37,13 +37,14 @@ class RouterFactory extends Router {
 
 			if (count(value: $routeAttributes) > 0) {
 				$routeAttribute = $routeAttributes[0]->newInstance();
+
 				parent::check(
 					url: $routeAttribute->path,
 					controller: $controller,
 					method: $routeAttribute->method,
 					pageData: [
 						"page_name" => $routeAttribute->name,
-						"page_title" => $routeAttribute->translateTitle ? APP_NAME . " - " . Lang::translate(key: $routeAttribute->title) : $routeAttribute->title,
+						"page_title" => ($routeAttribute->translateTitle && $routeAttribute->translateFile) ? APP_NAME . " - " . (new Lang(filePath: $routeAttribute->translateFile))->translate(key: $routeAttribute->title) : $routeAttribute->title,
 						"page_description" => $routeAttribute->description,
 						"page_needLoginToBe" => $routeAttribute->needLoginToBe,
 						"page_accessRoles" => $routeAttribute->accessRoles ? array_map(
@@ -59,11 +60,12 @@ class RouterFactory extends Router {
 			$cache->add(name: $routeAttribute->name, value: $routeAttribute->path);
 		}
 
+		$lang = new Lang(filePath: "main/main", source: TEMPORA_DIR . "/src/assets");
 		parent::error(
 			pageData: [
-				"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
+				"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
 				"error_code" => 404,
-				"error_message" => Lang::translate(key: "ERROR_404")
+				"error_message" => $lang->translate(key: "ERROR_404")
 			]
 		);
 	}

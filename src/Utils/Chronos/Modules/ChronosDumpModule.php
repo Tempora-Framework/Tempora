@@ -7,9 +7,11 @@ use Tempora\Utils\ElementBuilder\ElementBuilder;
 use Tempora\Utils\Lang;
 
 class ChronosDumpModule extends ChronosModule {
+	private Lang $lang;
 	private string $tab;
 
 	public function __construct() {
+		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		if ($GLOBALS["chronos"]["dumps"] == []) {
 			$this->enabled = false;
 
@@ -22,7 +24,7 @@ class ChronosDumpModule extends ChronosModule {
 			->build()
 		;
 
-		$this->title = Lang::translate(key: "CHRONOS_DUMPS_TITLE");
+		$this->title = $this->lang->translate(key: "CHRONOS_DUMPS_TITLE");
 		$this->icon = "ri-crosshair-2-line";
 		$this->additionalClass = "yellow";
 	}

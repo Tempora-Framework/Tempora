@@ -7,14 +7,16 @@ use Tempora\Utils\ElementBuilder\ElementBuilder;
 use Tempora\Utils\Lang;
 
 class ChronosLangModule extends ChronosModule {
+	private Lang $lang;
 	private int $total;
 	private int $rest;
 
 	public function __construct() {
-		$this->total = $GLOBALS["chronos"]["lang_count"] + 1;
+		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
+		$this->total = $GLOBALS["chronos"]["lang_count"];
 		$this->rest = $this->total - $GLOBALS["chronos"]["lang_error_count"];
 
-		$this->title = Lang::translate(key: "CHRONOS_LANG_TITLE");
+		$this->title = $this->lang->translate(key: "CHRONOS_LANG_TITLE");
 		$this->icon = "ri-global-line";
 		$this->additionalClass = $this->total - $this->rest > 0 ? "red" : "";
 	}
@@ -30,7 +32,7 @@ class ChronosLangModule extends ChronosModule {
 
 						$tableContent = "";
 						foreach ($GLOBALS["chronos"]["langs"] as $key => $value) {
-							$tableContent .= "<tr " . (str_contains(haystack: $key, needle: "CHRONOS_") ? "class='italic'" : "") . ">
+							$tableContent .= "<tr>
 								<td " . ($value === $key ? " class='red'" : "") . ">" . $key . "</td>
 								<td " . ($value === $key ? " class='red'" : "") . ">" . $value . "</td>
 							</tr>";

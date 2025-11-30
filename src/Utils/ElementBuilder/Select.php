@@ -8,6 +8,7 @@ class Select extends ElementBuilder {
 	private array $options = [];
 	private mixed $selected = "";
 	private bool $translate = false;
+	private ?string $translateFile = null;
 
 	public function __construct() {
 		$this->setElement(element: "select");
@@ -22,7 +23,7 @@ class Select extends ElementBuilder {
 		$content = "";
 
 		foreach ($this->options as $key => $value) {
-			$content .= '<option value="' . $key . '"' . ($key == $this->selected ? " selected" : "") . ">" . ($this->translate ? Lang::translate(key: $value) : $value) . "</option>";
+			$content .= '<option value="' . $key . '"' . ($key == $this->selected ? " selected" : "") . ">" . (($this->translate && $this->translateFile) ? (new Lang(filePath: $this->translateFile))->translate(key: $value) : $value) . "</option>";
 		}
 
 		$this->setContent(content: $content);
@@ -65,6 +66,28 @@ class Select extends ElementBuilder {
 	 */
 	public function setTranslate(bool $translate): static {
 		$this->translate = $translate;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of translateFile
+	 *
+	 * @return string
+	 */
+	public function getTranslateFile(): string {
+		return $this->translateFile;
+	}
+
+	/**
+	 * Set the value of translateFile
+	 *
+	 * @param string $translateFile
+	 *
+	 * @return self
+	 */
+	public function setTranslateFile(string $translateFile): self {
+		$this->translateFile = $translateFile;
 
 		return $this;
 	}

@@ -7,10 +7,13 @@ use Tempora\Utils\ElementBuilder\ElementBuilder;
 use Tempora\Utils\Lang;
 
 class ChronosSQLModule extends ChronosModule {
+	private Lang $lang;
 	private int $tempSQLCount = 0;
 	private int $chronosSQLCount;
 
 	public function __construct() {
+		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
+
 		$this->chronosSQLCount = 0;
 		if (isset($_SESSION["user"]["uid"])) {
 			$this->chronosSQLCount = 1;
@@ -30,7 +33,7 @@ class ChronosSQLModule extends ChronosModule {
 			}
 		}
 
-		$this->title = Lang::translate(key: "CHRONOS_SQL_TITLE");
+		$this->title = $this->lang->translate(key: "CHRONOS_SQL_TITLE");
 		$this->icon = "ri-database-2-line";
 		$this->additionalClass = ($this->tempSQLCount > 0 ? " yellow" : "");
 	}

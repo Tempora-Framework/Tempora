@@ -2,7 +2,25 @@
 
 namespace Tempora\Utils;
 
+use Tempora\Enums\Path;
+
 class Lang {
+	private string $langKey;
+	private array $langs = [];
+	private string $source;
+
+	public function __construct(string $filePath, ?string $source = null) {
+		$this->source = ($source ?? Path::APP_ASSETS_MIN->value) . "/langs";
+
+		$this->langKey = MAIN_LANG ?? "en_GB";
+
+		if (!in_array(needle: $this->langKey, haystack: System::getFiles(path: $this->source))) {
+			$this->langKey = "en_GB";
+		}
+
+		$this->langs = json_decode(json: file_get_contents(filename: $this->source . "/" . $this->langKey . "/" . $filePath . (isset($source) ? "" : ".min") . ".json"), associative: true);
+	}
+
 	/**
 	 * Lang function
 	 *
@@ -11,9 +29,9 @@ class Lang {
 	 *
 	 * @return string
 	 */
-	public static function translate(string $key, ?array $data = null): string {
-		if (isset(LANG_FILE->{$key})) {
-			$result = LANG_FILE->{$key};
+	public function translate(string $key, ?array $data = null): string {
+		if (isset($this->langs[$key])) {
+			$result = $this->langs[$key];
 		} else {
 			if (DEBUG) {
 				$GLOBALS["chronos"]["lang_error_count"]++;
@@ -28,7 +46,10 @@ class Lang {
 			}
 		}
 
-		if (DEBUG) {
+		if (
+			DEBUG
+			&& $this->source == (Path::APP_ASSETS_MIN->value . "/langs")
+		) {
 			$GLOBALS["chronos"]["langs"][$key] = $result;
 			$GLOBALS["chronos"]["lang_count"]++;
 		}

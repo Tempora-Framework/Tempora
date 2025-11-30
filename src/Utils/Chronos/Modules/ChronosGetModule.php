@@ -7,8 +7,11 @@ use Tempora\Utils\ElementBuilder\ElementBuilder;
 use Tempora\Utils\Lang;
 
 class ChronosGetModule extends ChronosModule {
+	private Lang $lang;
+
 	public function __construct() {
-		$this->title = Lang::translate(key: "CHRONOS_GET_TITLE");
+		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
+		$this->title = $this->lang->translate(key: "CHRONOS_GET_TITLE");
 		$this->icon = "ri-corner-down-left-line";
 	}
 

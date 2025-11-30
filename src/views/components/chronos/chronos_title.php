@@ -2,12 +2,14 @@
 use Tempora\Utils\Git;
 use Tempora\Utils\Lang;
 
+$lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
+
 ?>
 
 <div class="tempora_chronos_drop_container title" id="tempora_chronos_title">
-	<p class="tempora_chronos_drop_hover_element bold tempora_chronos_title" title="<?= Lang::translate(key: "CHRONOS_TITLE") ?>"><img src="/vendor/tempora-framework/tempora/assets/images/chronos.png"></img></p>
+	<p class="tempora_chronos_drop_hover_element bold tempora_chronos_title" title="<?= $lang->translate(key: "CHRONOS_TITLE") ?>"><img src="/vendor/tempora-framework/tempora/assets/images/chronos.png"></img></p>
 	<div class="tempora_chronos_drop_element">
-		<h1><?= Lang::translate(key: "CHRONOS_TITLE") ?></h1>
+		<h1><?= $lang->translate(key: "CHRONOS_TITLE") ?></h1>
 		<table>
 			<tr>
 				<td><i class="ri-time-line"></i> Tempora</td>

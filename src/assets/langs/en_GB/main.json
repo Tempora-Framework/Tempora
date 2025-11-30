@@ -1,0 +1,13 @@
+{
+	"MAIN_NAME": "Name",
+	"MAIN_SURNAME": "Surname",
+	"MAIN_EMAIL": "Email",
+	"MAIN_ROLE": "Role",
+	"MAIN_NAME_OBJECT": "Name",
+	"MAIN_TOTAL": "Total",
+	"MAIN_ERROR": "Error",
+
+	"ERROR_SERVER": "Internal Server Error.",
+	"ERROR_DATABASE": "Database Error.",
+	"ERROR_404": "Unknown pages."
+}

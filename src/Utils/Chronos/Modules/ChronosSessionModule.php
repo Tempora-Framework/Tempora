@@ -7,8 +7,11 @@ use Tempora\Utils\ElementBuilder\ElementBuilder;
 use Tempora\Utils\Lang;
 
 class ChronosSessionModule extends ChronosModule {
+	private Lang $lang;
+
 	public function __construct() {
-		$this->title = Lang::translate(key: "CHRONOS_SESSION_TITLE");
+		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
+		$this->title = $this->lang->translate(key: "CHRONOS_SESSION_TITLE");
 		$this->icon = "ri-database-line";
 	}
 

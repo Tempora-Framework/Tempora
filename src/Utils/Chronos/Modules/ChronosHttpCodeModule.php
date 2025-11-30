@@ -7,7 +7,13 @@ use Tempora\Utils\ElementBuilder\ElementBuilder;
 use Tempora\Utils\Lang;
 
 class ChronosHttpCodeModule extends ChronosModule {
+	private Lang $lang;
+	private Lang $mainLang;
+
 	public function __construct($httpCode) {
+		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
+		$this->mainLang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
+
 		$httpCodeType = substr(string: $httpCode, offset: 0, length: 1);
 		$httpCodeClass = match ($httpCodeType) {
 			"1" => "blue",
@@ -16,7 +22,7 @@ class ChronosHttpCodeModule extends ChronosModule {
 			"4", "5" => "red"
 		};
 
-		$this->title = Lang::translate(key: "CHRONOS_HTTP_CODE_TITLE");
+		$this->title = $this->lang->translate(key: "CHRONOS_HTTP_CODE_TITLE");
 		$this->icon = "ri-code-line";
 		$this->displayValue = $httpCode;
 		$this->additionalClass = $httpCodeClass . " bold";
@@ -39,7 +45,7 @@ class ChronosHttpCodeModule extends ChronosModule {
 								<td>" . $_SERVER["REQUEST_URI"] . "</td>
 							</tr>
 							<tr>
-								<td>" . Lang::translate(key: "MAIN_NAME_OBJECT") . "</td>
+								<td>" . $this->mainLang->translate(key: "MAIN_NAME_OBJECT") . "</td>
 								<td>" . ($this->pageData["page_name"] ?? "") . "</td>
 							</tr>
 						</table>";
