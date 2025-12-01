@@ -5,7 +5,6 @@ namespace Tempora\Utils\ElementBuilder;
 use Tempora\Utils\Roles;
 
 class ElementBuilder {
-
 	protected ?string $element = null;
 	private array $attributs = [];
 	private ?string $content = null;
@@ -42,7 +41,7 @@ class ElementBuilder {
 
 			foreach ($this->attributs as $key => $value) {
 				if ($value != "") {
-					$result .= " " . $key . "=\"" . $value . "\"";
+					$result .= " " . $key . '="' . $value . '"';
 				} else {
 					$result .= " " . $key;
 				}
@@ -74,9 +73,9 @@ class ElementBuilder {
 	 *
 	 * @param string $element
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setElement(string $element): self {
+	public function setElement(string $element): static {
 		$this->element = $element;
 
 		return $this;
@@ -96,9 +95,9 @@ class ElementBuilder {
 	 *
 	 * @param string $content
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setContent(string $content): self {
+	public function setContent(string $content): static {
 		$this->content = $content;
 
 		return $this;
@@ -118,9 +117,9 @@ class ElementBuilder {
 	 *
 	 * @param array $attributs
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setAttributs(array $attributs): self {
+	public function setAttributs(array $attributs): static {
 		$this->attributs = $attributs;
 
 		return $this;
@@ -140,9 +139,9 @@ class ElementBuilder {
 	 *
 	 * @param array $accessRoles
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setAccessRoles(array $accessRoles): self {
+	public function setAccessRoles(array $accessRoles): static {
 		$this->accessRoles = $accessRoles;
 
 		return $this;
@@ -162,9 +161,9 @@ class ElementBuilder {
 	 *
 	 * @param bool $needLoginToBe
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setNeedLoginToBe(bool $needLoginToBe): self {
+	public function setNeedLoginToBe(bool $needLoginToBe): static {
 		$this->needLoginToBe = $needLoginToBe;
 
 		return $this;

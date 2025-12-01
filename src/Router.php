@@ -2,30 +2,31 @@
 
 namespace Tempora;
 
-use Tempora\Enums\Path;
 use App\Controllers\ErrorController;
+use Tempora\Controllers\Controller;
+use Tempora\Enums\Path;
 use Tempora\Traits\UserTrait;
 use Tempora\Utils\Render;
 use Tempora\Utils\Roles;
-use Tempora\Controllers\Controller;
 
 class Router {
-
 	use UserTrait;
 
-	private $clientUrl;
+	private string $clientUrl;
+	private array $options = [];
 
-	public function __construct(string $url) {
+	public function __construct(string $url, array $options = []) {
 		$this->clientUrl = $url;
+		$this->options = $options;
 	}
 
 	/**
 	 * Add new route
 	 *
-	 * @param string $url
+	 * @param string     $url
 	 * @param Controller $controller
-	 * @param string $method
-	 * @param array $pageData
+	 * @param string     $method
+	 * @param array      $pageData
 	 *
 	 * @return void
 	 */
@@ -38,9 +39,9 @@ class Router {
 	/**
 	 * Render view
 	 *
-	 * @param string $url
+	 * @param string     $url
 	 * @param Controller $controller
-	 * @param array $pageData
+	 * @param array      $pageData
 	 *
 	 * @return void
 	 */
@@ -53,7 +54,7 @@ class Router {
 		$clientUrlParts = explode(separator: "/", string: $this->clientUrl);
 
 		// Safe gates
-		if (DEBUG == 1) {
+		if (DEBUG) {
 			if (str_contains(haystack: $this->clientUrl, needle: "/vendor/tempora-framework/tempora/assets/")) {
 				header(header: "Content-type: text/css");
 				include TEMPORA_DIR . str_replace(search: "/vendor/tempora-framework/tempora", replace: "", subject: $this->clientUrl);
@@ -61,28 +62,32 @@ class Router {
 			}
 		}
 
-		if (count(value: $urlParts) != count(value: $clientUrlParts))
+		if (count(value: $urlParts) != count(value: $clientUrlParts)) {
 			return;
+		}
 		if (isset($pageData["page_needLoginToBe"])) {
-			if (isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === false)
+			if (isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === false) {
 				return;
-			if (!isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === true)
+			}
+			if (!isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === true) {
 				return;
+			}
 		}
 		if (
 			isset($pageData["page_accessRoles"])
 			&& $pageData["page_needLoginToBe"] === true
 			&& !Roles::check(userRoles: USER_ROLES, allowRoles: $pageData["page_accessRoles"])
-		)
+		) {
 			return;
+		}
 
 		for ($i = 0; $i < count(value: $clientUrlParts); $i++) {
-			if (mb_substr(string: $urlParts[$i], start: 0, length: 1) != "$") {
+			if (mb_substr(string: $urlParts[$i], start: 0, length: 1) != "\$") {
 				if ($urlParts[$i] != $clientUrlParts[$i]) {
 					return;
 				}
 			} else {
-				$pageData[ltrim(string: $urlParts[$i], characters: "$")] = $clientUrlParts[$i];
+				$pageData[ltrim(string: $urlParts[$i], characters: "\$")] = $clientUrlParts[$i];
 			}
 		}
 
@@ -94,11 +99,15 @@ class Router {
 			unset($_SESSION["page_data"]);
 		}
 
-		$render = function($controller, $pageData): string {
+		$render = function ($controller, $pageData): string {
 			ob_start();
-			$controller->setPageData(pageData: $pageData)();
 
-			if (DEBUG == 1) {
+			$controller
+				->setPageData(pageData: $pageData)
+				->render()
+			;
+
+			if (DEBUG) {
 				if (!in_array(needle: "Content-Type: application/json", haystack: headers_list())) {
 					include Path::COMPONENT_CHRONOS->value . "/chronos.php";
 				}
@@ -107,24 +116,47 @@ class Router {
 			return ob_get_clean();
 		};
 
-		echo (new Render(
+		$webpageRender = new Render(
 			buffer: $render(
 				controller: $controller,
 				pageData: $pageData
 			)
-		))
-			->removeComments()
-			->removeWhitespace()
-			->render()
-		;
+		);
+
+		if (in_array("remove_whitespace_between_tags", $this->options)) {
+			$webpageRender = $webpageRender->removeWhitespaceBetweenTags();
+		}
+
+		if (in_array("remove_trailing_whitespace", $this->options)) {
+			$webpageRender = $webpageRender->removeTrailingWhitespace();
+		}
+
+		if (in_array("remove_empty_lines", $this->options)) {
+			$webpageRender = $webpageRender->removeEmptyLines();
+		}
+
+		if (in_array("remove_new_lines", $this->options)) {
+			$webpageRender = $webpageRender->removeNewLines();
+		}
+
+		if (in_array("remove_comments", $this->options)) {
+			$webpageRender = $webpageRender->removeComments();
+		}
+
+		if (in_array("collapse_spaces", $this->options)) {
+			$webpageRender = $webpageRender->collapseSpaces();
+		}
+
+		echo $webpageRender->render();
 
 		exit;
 	}
 
 	public function error(array $pageData): void {
-		(new ErrorController)->setPageData(pageData: $pageData)();
+		(new ErrorController)->setPageData(pageData: $pageData)->render();
 
-		if (DEBUG == 1)
+		if (DEBUG) {
 			include Path::COMPONENT_CHRONOS->value . "/chronos.php";
+		}
 	}
 }

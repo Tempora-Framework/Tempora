@@ -9,7 +9,7 @@ class Database {
 	/**
 	 * Create connection
 	 *
-	 * @return PDO | Exception
+	 * @return Exception|PDO
 	 */
 	public function __invoke(): PDO | Exception {
 		$hostname = $_ENV["DATABASE_HOST"];

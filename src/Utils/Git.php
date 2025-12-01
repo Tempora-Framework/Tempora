@@ -3,15 +3,15 @@
 namespace Tempora\Utils;
 
 class Git {
-
 	/**
 	 * Get current git branch
 	 *
 	 * @return string
 	 */
 	public static function getBranch(): string {
-		if (!is_dir(filename: APP_DIR . "/.git/"))
+		if (!is_dir(filename: APP_DIR . "/.git/")) {
 			return "";
+		}
 
 		$fname = sprintf(format: APP_DIR . "/.git/HEAD");
 		$data = file_get_contents(filename: $fname);
@@ -27,14 +27,23 @@ class Git {
 	 * @return string
 	 */
 	public static function getCommit(): string {
-		if (!is_dir(filename: APP_DIR . "/.git/"))
+		if (!is_dir(filename: APP_DIR . "/.git/")) {
 			return "";
+		}
 
 		$path = sprintf(format: APP_DIR . "/.git/");
-		$head = trim(string: substr(string: file_get_contents(filename: $path . "HEAD"), offset: 4));
-		$hash = trim(string: file_get_contents(filename: sprintf(format: $path . $head)));
 
-		return $hash;
+		if (!file_exists(filename: $path . "HEAD")) {
+			return "";
+		}
+
+		$head = trim(string: substr(string: file_get_contents(filename: $path . "HEAD"), offset: 4));
+
+		if (!file_exists(filename: $path . $head)) {
+			return "";
+		}
+
+		return trim(string: file_get_contents(filename: sprintf(format: $path . $head)));
 	}
 
 	/**
@@ -43,8 +52,9 @@ class Git {
 	 * @return string
 	 */
 	public static function getRemoteUrl(): string {
-		if (!is_dir(filename: APP_DIR . "/.git/"))
+		if (!is_dir(filename: APP_DIR . "/.git/")) {
 			return "";
+		}
 
 		$config = file_get_contents(filename: APP_DIR . "/.git/config");
 		preg_match(pattern: '/\[remote "origin"\]\s*url = (.+)/', subject: $config, matches: $matches);
@@ -61,15 +71,14 @@ class Git {
 		$remoteUrl = self::getRemoteUrl();
 		$branch = self::getBranch();
 
-		if (empty($remoteUrl) || empty($branch))
+		if (empty($remoteUrl) || empty($branch)) {
 			return "";
+		}
 
-		if (preg_match(pattern: '/^git@(.+):(.+)\/(.+)\.git$/', subject: $remoteUrl, matches: $matches)) {
+		if (preg_match(pattern: "/^git@(.+):(.+)\\/(.+)\\.git\$/", subject: $remoteUrl, matches: $matches)) {
 			$remoteUrl = "https://" . $matches[1] . "/" . $matches[2] . "/" . $matches[3];
 		}
 
-		$remoteUrl = preg_replace(pattern: '/\.git$/', replacement: '', subject: $remoteUrl);
-
-		return $remoteUrl;
+		return preg_replace(pattern: "/\\.git\$/", replacement: "", subject: $remoteUrl);
 	}
 }

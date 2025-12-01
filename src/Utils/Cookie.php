@@ -5,15 +5,16 @@ namespace Tempora\Utils;
 class Cookie {
 	private string $name;
 	private string $value = "";
-	private int $expire = 60 *60 *24 *30;
+	private int $expire = 60 * 60 * 24 * 30;
 	private string $path = "/";
 	private string $domain = "";
 	private bool $secure = false;
 	private bool $httponly = false;
 
 	public function send(): void {
-		if (!isset($_SERVER['HTTPS']))
+		if (!isset($_SERVER["HTTPS"])) {
 			$this->secure = false;
+		}
 
 		setcookie(
 			name: $this->name,
@@ -40,9 +41,9 @@ class Cookie {
 	 *
 	 * @param string $name
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setName(string $name): self {
+	public function setName(string $name): static {
 		$this->name = $name;
 
 		return $this;
@@ -62,9 +63,9 @@ class Cookie {
 	 *
 	 * @param string $value
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setValue(string $value): self {
+	public function setValue(string $value): static {
 		$this->value = $value;
 
 		return $this;
@@ -84,9 +85,9 @@ class Cookie {
 	 *
 	 * @param int $expire
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setExpire(int $expire): self {
+	public function setExpire(int $expire): static {
 		$this->expire = $expire;
 
 		return $this;
@@ -106,9 +107,9 @@ class Cookie {
 	 *
 	 * @param string $path
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setPath(string $path): self {
+	public function setPath(string $path): static {
 		$this->path = $path;
 
 		return $this;
@@ -128,9 +129,9 @@ class Cookie {
 	 *
 	 * @param string $domain
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setDomain(string $domain): self {
+	public function setDomain(string $domain): static {
 		$this->domain = $domain;
 
 		return $this;
@@ -150,9 +151,9 @@ class Cookie {
 	 *
 	 * @param bool $secure
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setSecure(bool $secure): self {
+	public function setSecure(bool $secure): static {
 		$this->secure = $secure;
 
 		return $this;
@@ -172,9 +173,9 @@ class Cookie {
 	 *
 	 * @param bool $httponly
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function setHttponly(bool $httponly): self {
+	public function setHttponly(bool $httponly): static {
 		$this->httponly = $httponly;
 
 		return $this;

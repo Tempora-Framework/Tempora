@@ -11,7 +11,7 @@ class Route extends Cache {
 			if ($key == $name) {
 				if (isset($options)) {
 					foreach ($options as $option => $optionValue) {
-						$value = str_replace(search: "$" . $option, replace: $optionValue, subject: $value);
+						$value = str_replace(search: "\$" . $option, replace: $optionValue, subject: $value);
 					}
 				}
 

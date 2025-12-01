@@ -2,27 +2,26 @@
 
 namespace Tempora;
 
-use Composer\InstalledVersions;
-use Tempora\Enums\Path;
 use App\Controllers\ErrorController;
+use Composer\InstalledVersions;
+use Dotenv\Dotenv;
+use ErrorException;
+use Exception;
+use Tempora\Enums\Path;
 use Tempora\Factories\RouterFactory;
 use Tempora\Models\Database;
 use Tempora\Models\Services\ErrorService;
 use Tempora\Traits\UserTrait;
-use Tempora\Utils\Cache\Cache;
 use Tempora\Utils\Cookie;
 use Tempora\Utils\JWT;
 use Tempora\Utils\Lang;
 use Tempora\Utils\Minifier\Minifier;
 use Tempora\Utils\System;
-use Dotenv\Dotenv;
-use ErrorException;
 
 class Tempora {
-
 	use UserTrait;
 
-	public function __construct() {
+	public function __construct(array $options = []) {
 		// Paths
 		define(constant_name: "TEMPORA_DIR", value: __DIR__ . "/..");
 		if (!defined(constant_name: "APP_DIR")) {
@@ -59,7 +58,7 @@ class Tempora {
 		// Errors
 		$this->errorHandler();
 
-		if (DEBUG == 1) {
+		if (DEBUG) {
 			$this->chronos();
 		}
 
@@ -76,16 +75,15 @@ class Tempora {
 			define(constant_name: "USER_ROLES", value: $this::getRoles(uid: $_SESSION["user"]["uid"]));
 		}
 
-		// Languages
-		$this->lang();
-		define(constant_name: "LANG_FILE", value: file_get_contents(filename: APP_DIR . "/public/langs/" . $_COOKIE["LANG"] . ".json"));
-
 		// Minify assets
 		$this->minify();
 
+		// Languages
+		$this->lang();
+
 		ob_start(callback: "ob_gzhandler");
 
-		new RouterFactory(url: strtok(string: $_SERVER["REQUEST_URI"], token: "?"));
+		new RouterFactory(url: strtok(string: $_SERVER["REQUEST_URI"], token: "?"), options: $options);
 
 		ob_end_flush();
 	}
@@ -98,7 +96,7 @@ class Tempora {
 	public function const(): void {
 		define(constant_name: "TEMPORA_VERSION", value: InstalledVersions::getPrettyVersion(packageName: "tempora-framework/tempora"));
 		define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
-		define(constant_name: "DEBUG", value: $_ENV["DEBUG"]);
+		define(constant_name: "DEBUG", value: $_ENV["DEBUG"] == 1);
 	}
 
 	/**
@@ -107,9 +105,6 @@ class Tempora {
 	 * @return void
 	 */
 	public function chronos(): void {
-		$chronos = [];
-		global $chronos;
-
 		$GLOBALS["chronos"]["ms_count"] = microtime(as_float: true);
 		$GLOBALS["chronos"]["sql_count"] = 0;
 		$GLOBALS["chronos"]["sql_query"] = [];
@@ -138,7 +133,7 @@ class Tempora {
 	 * @return void
 	 */
 	public function errorHandler(): void {
-		set_error_handler(callback: function($severity, $message, $file, $line): void {
+		set_error_handler(callback: function ($severity, $message, $file, $line): void {
 			throw new ErrorException(message: $message, code: 0, severity: $severity, filename: $file, line: $line);
 		});
 		set_exception_handler(callback: [ErrorService::class, "handle"]);
@@ -160,14 +155,9 @@ class Tempora {
 
 		if (!isset($_COOKIE["LANG"])) {
 			System::redirect();
-		} else {
-			if (!in_array(needle: $_COOKIE["LANG"] . ".json", haystack: System::getFiles(path: Path::PUBLIC->value . "/langs"))) {
-				$langCookie->setValue(value: $_ENV["DEFAULT_LANG"]);
-				$langCookie->send();
-
-				System::redirect();
-			}
 		}
+
+		define(constant_name: "MAIN_LANG", value: $_COOKIE["LANG"]);
 	}
 
 	/**
@@ -176,15 +166,16 @@ class Tempora {
 	 * @return void
 	 */
 	public function minify(): void {
-		$cache = new Cache(file: "minifier.json");
-		foreach (System::getAllFiles(path: Path::ASSETS->value) as $file) {
-			(new Minifier(file: $file))
-				->create()
-			;
-
-			$cache->add(name: $file, value: filemtime(filename: $file));
+		// Take all assets files except "images" folder
+		$files = array_diff(
+			System::getAllFiles(path: Path::APP_ASSETS->value),
+			System::getAllFiles(path: Path::APP_ASSETS->value . "/images")
+		);
+		foreach ($files as $file) {
+			(new Minifier(file: $file))->create();
 		}
-		$cache->create();
+
+		Minifier::cleanOldFiles();
 	}
 
 	/**
@@ -224,13 +215,17 @@ class Tempora {
 		define(constant_name: "DATABASE", value: $database());
 
 		if (DATABASE instanceof Exception) {
-			(new ErrorController())->setPageData(
-				pageData: [
-					"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
-					"error_code" => 500,
-					"error_message" => Lang::translate(key: "ERROR_DATABASE")
-				]
-			)();
+			$lang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
+			(new ErrorController)
+				->setPageData(
+					pageData: [
+						"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
+						"error_code" => 500,
+						"error_message" => $lang->translate(key: "ERROR_DATABASE")
+					]
+				)
+				->render()
+			;
 
 			exit;
 		}

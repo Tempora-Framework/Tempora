@@ -3,14 +3,13 @@
 namespace Tempora\Models\Services;
 
 use App\Controllers\ErrorController;
+use ErrorException;
 use Tempora\Enums\Path;
 use Tempora\Utils\Lang;
-use ErrorException;
 use Tempora\Utils\Render;
 use Throwable;
 
 class ErrorService {
-
 	/**
 	 * Catch and store exception
 	 *
@@ -19,18 +18,14 @@ class ErrorService {
 	 * @return void
 	 */
 	public static function handle(Throwable $exception): void {
-		if (DEBUG == 1) {
+		if (DEBUG) {
 			header_remove(name: "Content-Security-Policy");
-			if (is_int($exception->getCode())) {
-				http_response_code(response_code: $exception->getCode());
-			} else {
-				http_response_code(response_code: 500);
-			}
+			http_response_code(response_code: is_int(value: $exception->getCode()) ? $exception->getCode() : 500);
 
 			$buffer = ob_get_contents();
 			ob_end_clean();
 
-			$render = function($exception): string {
+			$render = function (Throwable $exception): string {
 				ob_start();
 
 				echo "<style>";
@@ -39,15 +34,13 @@ class ErrorService {
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/remixicon.css");
 				echo "</style>";
 
-				include PATH::LAYOUT->value . "/error.php";
+				include Path::LAYOUT->value . "/error.php";
 
 				include Path::COMPONENT_CHRONOS->value . "/chronos.php";
 
 				echo "<script>";
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/engine.js");
-				echo "</script><script>";
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/error.js");
-				echo "</script><script>";
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/chronos.js");
 				echo "</script>";
 
@@ -58,7 +51,7 @@ class ErrorService {
 
 			echo (new Render(
 				buffer:
-					str_contains($buffer, "<body>")
+					str_contains(haystack: $buffer, needle: "<body>")
 					? str_replace(
 						search: "<body>",
 						replace: "<body>" . $errorRender,
@@ -66,8 +59,6 @@ class ErrorService {
 					)
 					: $errorRender
 			))
-				->removeComments()
-				->removeWhitespace()
 				->render()
 			;
 		} else {
@@ -87,13 +78,17 @@ class ErrorService {
 
 			ob_end_clean();
 
-			(new ErrorController())->setPageData(
-				pageData: [
-					"page_title" => APP_NAME . " - " . Lang::translate(key: "MAIN_ERROR"),
-					"error_code" => 500,
-					"error_message" => Lang::translate(key: "ERROR_SERVER")
-				]
-			)();
+			$lang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
+			(new ErrorController)
+				->setPageData(
+					pageData: [
+						"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
+						"error_code" => 500,
+						"error_message" => $lang->translate(key: "ERROR_SERVER")
+					]
+				)
+				->render()
+			;
 		}
 	}
 
@@ -104,7 +99,7 @@ class ErrorService {
 	 */
 	public static function shutdown(): void {
 		$error = error_get_last();
-		if ($error != NULL) {
+		if ($error != null) {
 			$exception = new ErrorException(message: $error["message"], code: 0, severity: $error["type"], filename: $error["file"], line: $error["line"]);
 			self::handle(exception: $exception);
 		}

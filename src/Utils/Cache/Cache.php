@@ -18,8 +18,9 @@ class Cache {
 	 * @return array<mixed>
 	 */
 	public function get(): array {
-		if (!is_file(filename: Path::CACHE->value . "/" . $this->file))
+		if (!is_file(filename: Path::CACHE->value . "/" . $this->file)) {
 			return [];
+		}
 
 		return json_decode(json: file_get_contents(filename: Path::CACHE->value . "/" . $this->file), associative: true);
 	}
@@ -27,9 +28,9 @@ class Cache {
 	/**
 	 * Add cache content
 	 *
-	 * @return self
+	 * @return static
 	 */
-	public function add(string $name, mixed $value): self {
+	public function add(string $name, mixed $value): static {
 		$this->content[$name] = $value;
 
 		return $this;
