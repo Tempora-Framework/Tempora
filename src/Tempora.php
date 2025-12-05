@@ -2,19 +2,16 @@
 
 namespace Tempora;
 
-use App\Controllers\ErrorController;
 use Composer\InstalledVersions;
 use Dotenv\Dotenv;
-use ErrorException;
-use Exception;
 use Tempora\Enums\Path;
+use Tempora\Exceptions\TemporaException;
 use Tempora\Factories\RouterFactory;
 use Tempora\Models\Database;
 use Tempora\Models\Services\ErrorService;
 use Tempora\Traits\UserTrait;
 use Tempora\Utils\Cookie;
 use Tempora\Utils\JWT;
-use Tempora\Utils\Lang;
 use Tempora\Utils\Minifier\Minifier;
 use Tempora\Utils\System;
 
@@ -64,6 +61,12 @@ class Tempora {
 
 		$this->functions();
 
+		// Minify assets
+		$this->minify();
+
+		// Languages
+		$this->lang();
+
 		// Database
 		$this->database();
 
@@ -74,12 +77,6 @@ class Tempora {
 		if (isset($_SESSION["user"]["uid"])) {
 			define(constant_name: "USER_ROLES", value: $this::getRoles(uid: $_SESSION["user"]["uid"]));
 		}
-
-		// Minify assets
-		$this->minify();
-
-		// Languages
-		$this->lang();
 
 		ob_start(callback: "ob_gzhandler");
 
@@ -134,7 +131,7 @@ class Tempora {
 	 */
 	public function errorHandler(): void {
 		set_error_handler(callback: function ($severity, $message, $file, $line): void {
-			throw new ErrorException(message: $message, code: 0, severity: $severity, filename: $file, line: $line);
+			throw new TemporaException(message: $message, code: 0, severity: $severity, filename: $file, line: $line);
 		});
 		set_exception_handler(callback: [ErrorService::class, "handle"]);
 		register_shutdown_function(callback: [ErrorService::class, "shutdown"]);
@@ -212,22 +209,6 @@ class Tempora {
 	 */
 	public function database(): void {
 		$database = new Database;
-		define(constant_name: "DATABASE", value: $database());
-
-		if (DATABASE instanceof Exception) {
-			$lang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
-			(new ErrorController)
-				->setPageData(
-					pageData: [
-						"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
-						"error_code" => 500,
-						"error_message" => $lang->translate(key: "ERROR_DATABASE")
-					]
-				)
-				->render()
-			;
-
-			exit;
-		}
+		define(constant_name: "DATABASE", value: $database->getConnection());
 	}
 }

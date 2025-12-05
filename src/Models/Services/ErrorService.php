@@ -3,8 +3,8 @@
 namespace Tempora\Models\Services;
 
 use App\Controllers\ErrorController;
-use ErrorException;
 use Tempora\Enums\Path;
+use Tempora\Exceptions\TemporaException;
 use Tempora\Utils\Lang;
 use Tempora\Utils\Render;
 use Throwable;
@@ -100,7 +100,7 @@ class ErrorService {
 	public static function shutdown(): void {
 		$error = error_get_last();
 		if ($error != null) {
-			$exception = new ErrorException(message: $error["message"], code: 0, severity: $error["type"], filename: $error["file"], line: $error["line"]);
+			$exception = new TemporaException(message: $error["message"], code: 0, severity: $error["type"], filename: $error["file"], line: $error["line"]);
 			self::handle(exception: $exception);
 		}
 	}

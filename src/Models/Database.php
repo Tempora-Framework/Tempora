@@ -4,14 +4,17 @@ namespace Tempora\Models;
 
 use Exception;
 use PDO;
+use Tempora\Exceptions\Database\TemporaDatabaseException;
 
 class Database {
+	private PDO $connection;
+
 	/**
 	 * Create connection
 	 *
-	 * @return Exception|PDO
+	 * @return PDO
 	 */
-	public function __invoke(): PDO | Exception {
+	public function __construct() {
 		$hostname = $_ENV["DATABASE_HOST"];
 		$port = $_ENV["DATABASE_PORT"];
 		$dbname = $_ENV["DATABASE_NAME"];
@@ -21,7 +24,7 @@ class Database {
 		$charset = $_ENV["DATABASE_CHARSET"];
 
 		try {
-			$connection = new PDO(
+			$this->connection = new PDO(
 				dsn:
 				"$driver:dbname=$dbname;
 					host=$hostname;
@@ -30,11 +33,18 @@ class Database {
 				username: $username,
 				password: $password
 			);
-			$connection->exec(statement: "SET NAMES \"$charset\"");
+			$this->connection->exec(statement: "SET NAMES \"$charset\"");
 		} catch (Exception $exception) {
-			return $exception;
+			throw new TemporaDatabaseException(message: "Database connection error: " . $exception->getMessage());
 		}
+	}
 
-		return $connection;
+	/**
+	 * Get the PDO connection
+	 *
+	 * @return PDO
+	 */
+	public function getConnection(): PDO {
+		return $this->connection;
 	}
 }

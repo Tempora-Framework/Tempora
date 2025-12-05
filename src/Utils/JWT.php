@@ -7,6 +7,7 @@ use Firebase\JWT\JWT as FirebaseJWT;
 use Firebase\JWT\Key;
 use PDO;
 use Tempora\Enums\Table;
+use Tempora\Exceptions\Codec\TemporaDecodeException;
 
 class JWT extends FirebaseJWT {
 	private array $data = [];
@@ -106,8 +107,8 @@ class JWT extends FirebaseJWT {
 			}
 
 			return json_decode(json: $decoded->data, associative: true);
-		} catch (Exception $e) {
-			return false;
+		} catch (Exception $exception) {
+			throw new TemporaDecodeException(message: "Failed to decode JWT: " . $exception->getMessage());
 		}
 	}
 

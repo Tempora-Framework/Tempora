@@ -2,8 +2,10 @@
 
 namespace Tempora\Utils\Minifier;
 
-use Exception;
 use Tempora\Enums\Path;
+use Tempora\Exceptions\FileSystem\TemporaExistingFileException;
+use Tempora\Exceptions\FileSystem\TemporaFormatFileException;
+use Throwable;
 
 class Image {
 	public static function import(string $image): string {
@@ -12,7 +14,7 @@ class Image {
 		}
 
 		if (!in_array(needle: pathinfo(path: $image, flags: PATHINFO_EXTENSION), haystack: ["jpg", "jpeg", "png", "svg", "gif", "webp"])) {
-			throw new Exception(message: "Image format not supported: " . $image);
+			throw new TemporaFormatFileException(message: "Image format not supported: " . $image);
 		}
 
 		if (!is_dir(filename: Path::APP_ASSETS_MIN->value . "/images")) {
@@ -25,7 +27,7 @@ class Image {
 
 		try {
 			$minFileTimestamp = filemtime(filename: Path::APP_ASSETS_MIN->value . "/images/" . pathinfo(path: $image, flags: PATHINFO_FILENAME) . (in_array(needle: pathinfo(path: $image, flags: PATHINFO_EXTENSION), haystack: ["svg", "gif", "webp"]) ? "." . pathinfo(path: $image, flags: PATHINFO_EXTENSION) : ".webp"));
-		} catch (Exception $e) {
+		} catch (Throwable $e) {
 		}
 
 		if (filemtime(filename: $imagePath) > $minFileTimestamp) {
@@ -48,7 +50,7 @@ class Image {
 				$webpPath = Path::APP_ASSETS_MIN->value . "/images/" . pathinfo(path: $image, flags: PATHINFO_FILENAME) . ".webp";
 
 				if (!is_file(filename: $imagePath)) {
-					throw new Exception(message: "Image file not found: " . $imagePath);
+					throw new TemporaExistingFileException(message: "Image file not found: " . $imagePath);
 				}
 
 				imagewebp(

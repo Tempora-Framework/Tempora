@@ -3,6 +3,10 @@
 namespace Tempora\Utils\FileSystem;
 
 use Exception;
+use Tempora\Exceptions\FileSystem\TemporaCreateFileException;
+use Tempora\Exceptions\FileSystem\TemporaExistingFileException;
+use Tempora\Exceptions\FileSystem\TemporaNotDirectoryException;
+use Tempora\Exceptions\FileSystem\TemporaWriteFileException;
 
 class FileSystem {
 	private string $fileName;
@@ -31,25 +35,25 @@ class FileSystem {
 		$fullPath = $this->getFullPath();
 
 		if (file_exists(filename: $fullPath)) {
-			throw new Exception(message: "File already exists: $fullPath");
+			throw new TemporaExistingFileException(message: "File already exists: $fullPath");
 		}
 
 		if (!is_dir(filename: $this->filePath)) {
 			try {
 				mkdir(directory: $this->filePath, permissions: $this->filePermissions, recursive: true);
-			} catch (Exception $e) {
-				throw new Exception(message: "Failed to create directory: {$this->filePath}. Error: " . $e->getMessage());
+			} catch (Exception $esception) {
+				throw new TemporaCreateFileException(message: "Failed to create directory: {$this->filePath}. Error: " . $esception->getMessage());
 			}
 		}
 
 		if (!is_writable(filename: $this->filePath)) {
-			throw new Exception(message: "Directory not writable: {$this->filePath}");
+			throw new TemporaWriteFileException(message: "Directory not writable: {$this->filePath}");
 		}
 		if (!is_readable(filename: $this->filePath)) {
-			throw new Exception(message: "Directory not readable: {$this->filePath}");
+			throw new TemporaWriteFileException(message: "Directory not readable: {$this->filePath}");
 		}
 		if (!is_dir(filename: $this->filePath)) {
-			throw new Exception(message: "Path is not a directory: {$this->filePath}");
+			throw new TemporaNotDirectoryException(message: "Path is not a directory: {$this->filePath}");
 		}
 
 		file_put_contents(filename: $fullPath, data: $this->fileContent ?? "");
@@ -63,7 +67,7 @@ class FileSystem {
 	public function getFileSize(): int {
 		$filename = $this->getFullPath();
 		if (!file_exists(filename: $filename)) {
-			throw new Exception(message: "File does not exist: $filename");
+			throw new TemporaExistingFileException(message: "File does not exist: $filename");
 		}
 
 		return filesize(filename: $filename);
