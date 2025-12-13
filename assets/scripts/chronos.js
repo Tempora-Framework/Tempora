@@ -65,10 +65,26 @@ if (isElementExist(chronosMain)) {
 	});
 }
 
+/**
+ * Show / Hide chronos panel
+ *
+ * @param {*} state
+ */
 function displayChronos(state) {
 	if (state) {
 		chronos.classList.remove("hidden");
 	} else {
 		chronos.classList.add("hidden");
 	}
+}
+
+/**
+ * Check if element already in DOM
+ *
+ * @param {*} element
+ *
+ * @return {boolean}
+ */
+function isElementExist(element) {
+	return element != "undefined" && element != null;
 }

@@ -3,17 +3,19 @@
 namespace Tempora\Utils;
 
 class Git {
+	public const GIT_PATH = APP_DIR . "/.git/";
+
 	/**
 	 * Get current git branch
 	 *
 	 * @return string
 	 */
 	public static function getBranch(): string {
-		if (!is_dir(filename: APP_DIR . "/.git/")) {
+		if (!is_dir(filename: self::GIT_PATH)) {
 			return "";
 		}
 
-		$fname = sprintf(format: APP_DIR . "/.git/HEAD");
+		$fname = sprintf(format: self::GIT_PATH . "HEAD");
 		$data = file_get_contents(filename: $fname);
 		$ar = explode(separator: "/", string: $data);
 		$ar = array_reverse(array: $ar);
@@ -27,11 +29,11 @@ class Git {
 	 * @return string
 	 */
 	public static function getCommit(): string {
-		if (!is_dir(filename: APP_DIR . "/.git/")) {
+		if (!is_dir(filename: self::GIT_PATH)) {
 			return "";
 		}
 
-		$path = sprintf(format: APP_DIR . "/.git/");
+		$path = sprintf(format: self::GIT_PATH);
 
 		if (!file_exists(filename: $path . "HEAD")) {
 			return "";
@@ -52,11 +54,11 @@ class Git {
 	 * @return string
 	 */
 	public static function getRemoteUrl(): string {
-		if (!is_dir(filename: APP_DIR . "/.git/")) {
+		if (!is_dir(filename: self::GIT_PATH)) {
 			return "";
 		}
 
-		$config = file_get_contents(filename: APP_DIR . "/.git/config");
+		$config = file_get_contents(filename: self::GIT_PATH . "config");
 		preg_match(pattern: '/\[remote "origin"\]\s*url = (.+)/', subject: $config, matches: $matches);
 
 		return $matches[1] ?? "";

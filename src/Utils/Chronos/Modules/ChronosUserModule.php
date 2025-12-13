@@ -49,34 +49,40 @@ class ChronosUserModule extends ChronosModule {
 				content:
 					parent::createTitleElement(title: $this->title)->build()
 					. (function (): string {
-						$tableContent = "<table>
-							<tr>
-								<td>UID</td>
-								<td>" . $_SESSION["user"]["uid"] . '</td>
-							</tr>
-							<tr>
-								<td>Session timeout</td>
-								<td id="chronos_ms">' . ini_get(option: "session.gc_maxlifetime") . " s</td>
-							</tr>
-							<tr>
-								<td>" . $this->mainLang->translate(key: "MAIN_EMAIL") . "</td>
-								<td>" . ($this->userInfo["email"] ?? "") . "</td>
-							</tr>
-							<tr>
-								<td>" . $this->mainLang->translate(key: "MAIN_NAME") . "</td>
-								<td>" . ($this->userInfo["name"] ?? "") . "</td>
-							</tr>
-							<tr>
-								<td>" . $this->mainLang->translate(key: "MAIN_SURNAME") . "</td>
-								<td>" . ($this->userInfo["surname"] ?? "") . "</td>
-							</tr>
-							<tr>
-								<td>" . $this->mainLang->translate(key: "MAIN_ROLE") . "</td>
-								<td>" . join(array: $this->roleFormat, separator: ", ") . "</td>
-							</tr>
-						</table>";
-
-						return $tableContent;
+						return "
+							<thead>
+								<tr>
+									<th>" . $this->lang->translate(key: "CHRONOS_NAME") . "</th>
+									<th>" . $this->lang->translate(key: "CHRONOS_VALUE") . "</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>UID</td>
+									<td>" . $_SESSION["user"]["uid"] . '</td>
+								</tr>
+								<tr>
+									<td>Session timeout</td>
+									<td id="chronos_ms">' . ini_get(option: "session.gc_maxlifetime") . " s</td>
+								</tr>
+								<tr>
+									<td>" . $this->mainLang->translate(key: "MAIN_EMAIL") . "</td>
+									<td>" . ($this->userInfo["email"] ?? "") . "</td>
+								</tr>
+								<tr>
+									<td>" . $this->mainLang->translate(key: "MAIN_NAME") . "</td>
+									<td>" . ($this->userInfo["name"] ?? "") . "</td>
+								</tr>
+								<tr>
+									<td>" . $this->mainLang->translate(key: "MAIN_SURNAME") . "</td>
+									<td>" . ($this->userInfo["surname"] ?? "") . "</td>
+								</tr>
+								<tr>
+									<td>" . $this->mainLang->translate(key: "MAIN_ROLE") . "</td>
+									<td>" . join(array: $this->roleFormat, separator: ", ") . "</td>
+								</tr>
+							</tbody>
+						";
 					})()
 			)
 		;

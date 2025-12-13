@@ -11,8 +11,8 @@ use Tempora\Utils\Lang;
 use Tempora\Utils\System;
 
 class RouterFactory extends Router {
-	public function __construct(string $url, array $options = []) {
-		parent::__construct(url: $url, options: $options);
+	public function __construct(string $url, array $modules = []) {
+		parent::__construct(url: $url, modules: $modules);
 
 		$controllers = System::getAllFiles(path: APP_DIR . "/src/Controllers");
 
@@ -60,10 +60,10 @@ class RouterFactory extends Router {
 			$cache->add(name: $routeAttribute->name, value: $routeAttribute->path);
 		}
 
-		$lang = new Lang(filePath: "main/main", source: TEMPORA_DIR . "/src/assets");
+		$lang = new Lang(filePath: "main/error", source: TEMPORA_DIR . "/src/assets");
 		parent::error(
 			pageData: [
-				"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
+				"page_title" => APP_NAME . " - " . $lang->translate(key: "ERROR"),
 				"error_code" => 404,
 				"error_message" => $lang->translate(key: "ERROR_404")
 			]

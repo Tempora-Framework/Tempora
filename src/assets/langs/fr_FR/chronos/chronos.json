@@ -1,4 +1,10 @@
 {
+	"CHRONOS_NAME": "Nom",
+	"CHRONOS_VALUE": "Valeur",
+	"CHRONOS_LOCATION": "Emplacement",
+	"CHRONOS_TIME": "Temps",
+	"CHRONOS_LINE": "Ligne",
+
 	"CHRONOS_TITLE": "Chronos",
 	"CHRONOS_LANG_TITLE": "Langages",
 	"CHRONOS_MS_TITLE": "Temps de chargement",

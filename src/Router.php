@@ -6,18 +6,18 @@ use App\Controllers\ErrorController;
 use Tempora\Controllers\Controller;
 use Tempora\Enums\Path;
 use Tempora\Traits\UserTrait;
-use Tempora\Utils\Render;
+use Tempora\Utils\Render\Render;
 use Tempora\Utils\Roles;
 
 class Router {
 	use UserTrait;
 
 	private string $clientUrl;
-	private array $options = [];
+	private array $modules = [];
 
-	public function __construct(string $url, array $options = []) {
+	public function __construct(string $url, array $modules = []) {
 		$this->clientUrl = $url;
-		$this->options = $options;
+		$this->modules = $modules;
 	}
 
 	/**
@@ -53,44 +53,41 @@ class Router {
 		$urlParts = explode(separator: "/", string: $url);
 		$clientUrlParts = explode(separator: "/", string: $this->clientUrl);
 
-		// Safe gates
-		if (DEBUG) {
-			if (str_contains(haystack: $this->clientUrl, needle: "/vendor/tempora-framework/tempora/assets/")) {
-				header(header: "Content-type: text/css");
-				include TEMPORA_DIR . str_replace(search: "/vendor/tempora-framework/tempora", replace: "", subject: $this->clientUrl);
-				exit;
-			}
+		// Serve Tempora assets in debug mode
+		if (
+			DEBUG
+			&& str_contains(haystack: $this->clientUrl, needle: "/vendor/tempora-framework/tempora/assets/")
+		) {
+			header(header: "Content-type: text/css");
+
+			include TEMPORA_DIR . str_replace(search: "/vendor/tempora-framework/tempora", replace: "", subject: $this->clientUrl);
+
+			exit;
 		}
 
-		if (count(value: $urlParts) != count(value: $clientUrlParts)) {
-			return;
-		}
-		if (isset($pageData["page_needLoginToBe"])) {
-			if (isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === false) {
-				return;
-			}
-			if (!isset($_SESSION["user"]) && $pageData["page_needLoginToBe"] === true) {
-				return;
-			}
-		}
+		// Safeguard checks
 		if (
-			isset($pageData["page_accessRoles"])
-			&& $pageData["page_needLoginToBe"] === true
-			&& !Roles::check(userRoles: USER_ROLES, allowRoles: $pageData["page_accessRoles"])
+			count(value: $urlParts) != count(value: $clientUrlParts)
+			|| !$this->loginStateCheck(needLoginToBe: $pageData["page_needLoginToBe"])
+			|| !$this->accessRolesCheck(accessRoles: $pageData["page_accessRoles"] ?? [])
 		) {
 			return;
 		}
 
+		// Parse URL parameters
 		for ($i = 0; $i < count(value: $clientUrlParts); $i++) {
 			if (mb_substr(string: $urlParts[$i], start: 0, length: 1) != "\$") {
+				// Static part, check equality
 				if ($urlParts[$i] != $clientUrlParts[$i]) {
 					return;
 				}
 			} else {
+				// Dynamic part, save parameter
 				$pageData[ltrim(string: $urlParts[$i], characters: "\$")] = $clientUrlParts[$i];
 			}
 		}
 
+		// Save session page data
 		if (isset($_SESSION["page_data"])) {
 			foreach ($_SESSION["page_data"] as $key => $data) {
 				$pageData[$key] = $data;
@@ -99,61 +96,94 @@ class Router {
 			unset($_SESSION["page_data"]);
 		}
 
-		$render = function ($controller, $pageData): string {
-			ob_start();
-
-			$controller
-				->setPageData(pageData: $pageData)
-				->render()
-			;
-
-			if (DEBUG) {
-				if (!in_array(needle: "Content-Type: application/json", haystack: headers_list())) {
-					include Path::COMPONENT_CHRONOS->value . "/chronos.php";
-				}
-			}
-
-			return ob_get_clean();
-		};
-
+		// Render page
 		$webpageRender = new Render(
-			buffer: $render(
-				controller: $controller,
-				pageData: $pageData
-			)
+			buffer: $this->webpageRender(controller: $controller, pageData: $pageData),
+			modules: $this->modules
 		);
-
-		if (in_array("remove_whitespace_between_tags", $this->options)) {
-			$webpageRender = $webpageRender->removeWhitespaceBetweenTags();
-		}
-
-		if (in_array("remove_trailing_whitespace", $this->options)) {
-			$webpageRender = $webpageRender->removeTrailingWhitespace();
-		}
-
-		if (in_array("remove_empty_lines", $this->options)) {
-			$webpageRender = $webpageRender->removeEmptyLines();
-		}
-
-		if (in_array("remove_new_lines", $this->options)) {
-			$webpageRender = $webpageRender->removeNewLines();
-		}
-
-		if (in_array("remove_comments", $this->options)) {
-			$webpageRender = $webpageRender->removeComments();
-		}
-
-		if (in_array("collapse_spaces", $this->options)) {
-			$webpageRender = $webpageRender->collapseSpaces();
-		}
 
 		echo $webpageRender->render();
 
 		exit;
 	}
 
+	/**
+	 * Webpage render
+	 *
+	 * @param Controller $controller
+	 * @param array      $pageData
+	 *
+	 * @return string
+	 */
+	private function webpageRender(Controller $controller, array $pageData): string {
+		ob_start();
+
+		$controller
+			->setPageData(pageData: $pageData)
+			->render()
+		;
+
+		// Import Chronos
+		if (
+			DEBUG
+			&& !in_array(needle: "Content-Type: application/json", haystack: headers_list())
+		) {
+			include Path::COMPONENT_CHRONOS->value . "/chronos.php";
+		}
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Check login state
+	 *
+	 * @param bool|null $needLoginToBe
+	 *
+	 * @return bool
+	 */
+	private function loginStateCheck(?bool $needLoginToBe = null): bool {
+		if (!isset($needLoginToBe)) {
+			return true;
+		}
+
+		if ($needLoginToBe) {
+			return isset($_SESSION["user"]);
+		} else {
+			return !isset($_SESSION["user"]);
+		}
+	}
+
+	/**
+	 * Check access roles
+	 *
+	 * @param array $accessRoles
+	 *
+	 * @return bool
+	 */
+	private function accessRolesCheck(array $accessRoles): bool {
+		if (empty($accessRoles)) {
+			return true;
+		}
+
+		if (!isset($_SESSION["user"])) {
+			return false;
+		}
+
+		return Roles::check(userRoles: USER_ROLES, allowRoles: $accessRoles);
+	}
+
+	/**
+	 * Error page
+	 *
+	 * @param array $pageData
+	 *
+	 * @return void
+	 */
 	public function error(array $pageData): void {
-		(new ErrorController)->setPageData(pageData: $pageData)->render();
+		(new ErrorController)
+			->setPageData(pageData: $pageData)
+			->render()
+		;
 
 		if (DEBUG) {
 			include Path::COMPONENT_CHRONOS->value . "/chronos.php";

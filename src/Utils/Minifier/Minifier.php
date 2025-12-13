@@ -58,6 +58,8 @@ class Minifier {
 					$this->processJson(filePath: $filePath);
 
 					break;
+				default:
+					break;
 			}
 
 			try {

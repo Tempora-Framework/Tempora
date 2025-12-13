@@ -2,11 +2,13 @@
 
 namespace Tempora\Controllers;
 
-class Controller {
+abstract class Controller {
 	private array $pageData = [];
 	private array $styles = [];
 	private array $scripts = [];
 	private array $payloads = [];
+
+	abstract public function render(): void;
 
 	public function includeAssets(): void {
 		foreach ($this->styles as $style) {

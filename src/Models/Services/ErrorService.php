@@ -6,7 +6,7 @@ use App\Controllers\ErrorController;
 use Tempora\Enums\Path;
 use Tempora\Exceptions\TemporaException;
 use Tempora\Utils\Lang;
-use Tempora\Utils\Render;
+use Tempora\Utils\Render\Render;
 use Throwable;
 
 class ErrorService {
@@ -39,7 +39,6 @@ class ErrorService {
 				include Path::COMPONENT_CHRONOS->value . "/chronos.php";
 
 				echo "<script>";
-				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/engine.js");
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/error.js");
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/scripts/chronos.js");
 				echo "</script>";

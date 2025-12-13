@@ -116,10 +116,16 @@
 	table {
 		border-collapse: collapse;
 		border-style: hidden;
-		table-layout: fixed;
 		width: 100%;
 		word-wrap: break-word;
 		table-layout: auto;
+
+		th {
+			text-align: left;
+			padding: 5px;
+			font-weight: bold;
+			font-size: 15px;
+		}
 
 		td {
 			color: var(--chronos-text-color);
@@ -136,6 +142,7 @@
 		bottom: 100%;
 		min-width: 300px;
 		width: fit-content;
+		max-width: -webkit-fill-available;
 		max-width: 600px;
 		background-color: var(--chronos-background-hover-color);
 		overflow-y: scroll;

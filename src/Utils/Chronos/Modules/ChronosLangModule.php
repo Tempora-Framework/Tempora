@@ -30,12 +30,24 @@ class ChronosLangModule extends ChronosModule {
 					. (function (): string {
 						ksort(array: $GLOBALS["chronos"]["langs"]);
 
-						$tableContent = "";
+						$tableContent = "
+							<thead>
+								<tr>
+									<th>" . $this->lang->translate(key: "CHRONOS_NAME") . "</th>
+									<th>" . $this->lang->translate(key: "CHRONOS_VALUE") . "</th>
+								</tr>
+							</thead>
+							<tbody>
+						";
+
 						foreach ($GLOBALS["chronos"]["langs"] as $key => $value) {
-							$tableContent .= "<tr>
-								<td " . ($value === $key ? " class='red'" : "") . ">" . $key . "</td>
-								<td " . ($value === $key ? " class='red'" : "") . ">" . $value . "</td>
-							</tr>";
+							$tableContent .= "
+									<tr>
+										<td " . ($value === $key ? " class='red'" : "") . ">" . $key . "</td>
+										<td " . ($value === $key ? " class='red'" : "") . ">" . $value . "</td>
+									</tr>
+								</tbody>
+							";
 						}
 
 						return $tableContent;

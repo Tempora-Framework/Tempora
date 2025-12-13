@@ -25,58 +25,102 @@ class ChronosMsModule extends ChronosModule {
 			->setElement(element: "table")
 			->setContent(
 				content:
-				parent::createTitleElement(title: $this->title)->build()
-				. (function (): string {
-					return '<table class="chronos_minifier" cellpadding="0" cellspacing="0">
-						<tr>
-							<td class="min_col">' . APP_NAME . '</td>
-							<td class="min_col">' . $this->time . "ms</td>
-						</tr>
-					</table>";
-				})()
-				. parent::createTitleElement(title: $this->lang->translate(key: "CHRONOS_MINIFIER_MS_TITLE"))->build()
-				. (function (): string {
-					$tableContent = '<table class="chronos_minifier" cellpadding="0" cellspacing="0">';
-					foreach ($GLOBALS["chronos"]["minifier"] as $value) {
-						$tableContent .= '<tr>
-							<td class="min_col">' . htmlspecialchars(string: $value["file"]) . '</td>
-							<td class="min_col">' . htmlspecialchars(string: $value["time"]) . "ms</td>
-						</tr>";
-					}
-					$tableContent .= '<tr>
-							<td class="min_col">' . $this->mainLang->translate(key: "MAIN_TOTAL") . '</td>
-							<td class="min_col">' . array_sum(array_column(array: $GLOBALS["chronos"]["minifier"], column_key: "time")) . "ms</td>
-						</tr>";
-					$tableContent .= "</table>";
+					parent::createTitleElement(title: $this->title)->build()
 
-					return $tableContent;
-				})()
-				. parent::createTitleElement(title: $this->lang->translate(key: "CHRONOS_IMAGES_MS_TITLE"))->build()
-				. (function (): string {
-					$tableContent = '<table class="chronos_minifier" cellpadding="0" cellspacing="0">';
-					foreach ($GLOBALS["chronos"]["images_ms"] as $value) {
-						$tableContent .= '<tr>
-							<td class="min_col">' . htmlspecialchars(string: $value["file"]) . '</td>
-							<td class="min_col">' . htmlspecialchars(string: $value["time"]) . "ms</td>
-						</tr>";
-					}
-					$tableContent .= '<tr>
-							<td class="min_col">' . $this->mainLang->translate(key: "MAIN_TOTAL") . '</td>
-							<td class="min_col">' . array_sum(array_column(array: $GLOBALS["chronos"]["images_ms"], column_key: "time")) . "ms</td>
-						</tr>";
-					$tableContent .= "</table>";
+					. (function (): string {
+						return '
+							<table class="chronos_minifier" cellpadding="0" cellspacing="0">
+								<thead>
+									<tr>
+										<th>' . $this->lang->translate(key: "CHRONOS_NAME") . "</th>
+										<th>" . $this->lang->translate(key: "CHRONOS_TIME") . '</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="min_col">' . APP_NAME . '</td>
+										<td class="min_col">' . $this->time . "ms</td>
+									</tr>
+								</tbody>
+							</table>";
+					})()
 
-					return $tableContent;
-				})()
-				. parent::createTitleElement(title: $this->lang->translate(key: "CHRONOS_SQL_TITLE"))->build()
-				. (function (): string {
-					return '<table class="chronos_minifier" cellpadding="0" cellspacing="0">
-						<tr>
-							<td>' . $this->mainLang->translate(key: "MAIN_TOTAL") . "</td>
-							<td>" . array_sum(array_column(array: $GLOBALS["chronos"]["sql_query"], column_key: "time")) . "ms</td>
-						</tr>
-					</table>";
-				})()
+					. parent::createTitleElement(title: $this->lang->translate(key: "CHRONOS_MINIFIER_MS_TITLE"))->build()
+
+					. (function (): string {
+						$tableContent = '
+							<table class="chronos_minifier" cellpadding="0" cellspacing="0">
+								<thead>
+									<tr>
+										<th>' . $this->lang->translate(key: "CHRONOS_NAME") . "</th>
+										<th>" . $this->lang->translate(key: "CHRONOS_TIME") . "</th>
+									</tr>
+								</thead>
+								<tbody>
+						";
+						foreach ($GLOBALS["chronos"]["minifier"] as $value) {
+							$tableContent .= '<tr>
+								<td class="min_col">' . htmlspecialchars(string: $value["file"]) . '</td>
+								<td class="min_col">' . htmlspecialchars(string: $value["time"]) . "ms</td>
+							</tr>";
+						}
+						$tableContent .= '<tr>
+								<td class="min_col">' . $this->mainLang->translate(key: "MAIN_TOTAL") . '</td>
+								<td class="min_col">' . array_sum(array_column(array: $GLOBALS["chronos"]["minifier"], column_key: "time")) . "ms</td>
+							</tr>";
+						$tableContent .= "</tbody></table>";
+
+						return $tableContent;
+					})()
+
+					. parent::createTitleElement(title: $this->lang->translate(key: "CHRONOS_IMAGES_MS_TITLE"))->build()
+
+					. (function (): string {
+						$tableContent = '
+							<table class="chronos_minifier" cellpadding="0" cellspacing="0">
+								<thead>
+									<tr>
+										<th>' . $this->lang->translate(key: "CHRONOS_NAME") . "</th>
+										<th>" . $this->lang->translate(key: "CHRONOS_TIME") . "</th>
+									</tr>
+								</thead>
+								<tbody>
+						";
+						foreach ($GLOBALS["chronos"]["images_ms"] as $value) {
+							$tableContent .= '<tr>
+								<td class="min_col">' . htmlspecialchars(string: $value["file"]) . '</td>
+								<td class="min_col">' . htmlspecialchars(string: $value["time"]) . "ms</td>
+							</tr>";
+						}
+						$tableContent .= '<tr>
+								<td class="min_col">' . $this->mainLang->translate(key: "MAIN_TOTAL") . '</td>
+								<td class="min_col">' . array_sum(array_column(array: $GLOBALS["chronos"]["images_ms"], column_key: "time")) . "ms</td>
+							</tr>";
+						$tableContent .= "</tbody></table>";
+
+						return $tableContent;
+					})()
+
+					. parent::createTitleElement(title: $this->lang->translate(key: "CHRONOS_SQL_TITLE"))->build()
+
+					. (function (): string {
+						return '
+							<table class="chronos_minifier" cellpadding="0" cellspacing="0">
+								<thead>
+									<tr>
+										<th>' . $this->lang->translate(key: "CHRONOS_NAME") . "</th>
+										<th>" . $this->lang->translate(key: "CHRONOS_TIME") . "</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>" . $this->mainLang->translate(key: "MAIN_TOTAL") . "</td>
+										<td>" . array_sum(array_column(array: $GLOBALS["chronos"]["sql_query"], column_key: "time")) . "ms</td>
+									</tr>
+								</tbody>
+							</table>
+						";
+					})()
 			)
 		;
 	}

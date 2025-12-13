@@ -35,22 +35,28 @@ class ChronosHttpCodeModule extends ChronosModule {
 				content:
 					parent::createTitleElement(title: $this->title)->build()
 					. (function (): string {
-						$tableContent = "<table>
-							<tr>
-								<td>Request method</td>
-								<td>" . $_SERVER["REQUEST_METHOD"] . "</td>
-							</tr>
-							<tr>
-								<td>Request URI</td>
-								<td>" . $_SERVER["REQUEST_URI"] . "</td>
-							</tr>
-							<tr>
-								<td>" . $this->mainLang->translate(key: "MAIN_NAME_OBJECT") . "</td>
-								<td>" . ($this->pageData["page_name"] ?? "") . "</td>
-							</tr>
-						</table>";
-
-						return $tableContent;
+						return "
+							<thead>
+								<tr>
+									<th>" . $this->lang->translate(key: "CHRONOS_NAME") . "</th>
+									<th>" . $this->lang->translate(key: "CHRONOS_VALUE") . "</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Request method</td>
+									<td>" . $_SERVER["REQUEST_METHOD"] . "</td>
+								</tr>
+								<tr>
+									<td>Request URI</td>
+									<td>" . $_SERVER["REQUEST_URI"] . "</td>
+								</tr>
+								<tr>
+									<td>" . $this->mainLang->translate(key: "MAIN_NAME_OBJECT") . "</td>
+									<td>" . ($this->pageData["page_name"] ?? "") . "</td>
+								</tr>
+							</tbody>
+						";
 					})()
 			)
 		;

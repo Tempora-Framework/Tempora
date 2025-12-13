@@ -36,7 +36,16 @@ class ChronosDumpModule extends ChronosModule {
 				content:
 					parent::createTitleElement(title: $this->title)->build()
 					. (function (): string {
-						$tableContent = "";
+						$tableContent = "
+							<thead>
+								<tr>
+									<th>" . $this->lang->translate(key: "CHRONOS_LOCATION") . "</th>
+									<th>" . $this->lang->translate(key: "CHRONOS_VALUE") . "</th>
+								</tr>
+							</thead>
+							<tbody>
+						";
+
 						foreach ($GLOBALS["chronos"]["dumps"] as $value) {
 							$result = "";
 
@@ -50,10 +59,13 @@ class ChronosDumpModule extends ChronosModule {
 								$result = $value["variable"];
 							}
 
-							$tableContent .= '<tr>
-								<td class="min_col">' . $value["trace"] . '</td>
-								<td class="min_col mono">' . print_r(value: $result, return: true) . "</td>
-							</tr>";
+							$tableContent .= '
+									<tr>
+										<td class="min_col">' . $value["trace"] . '</td>
+										<td class="min_col mono">' . print_r(value: $result, return: true) . "</td>
+									</tr>
+								</tbody>
+							";
 						}
 
 						return $tableContent;

@@ -22,12 +22,24 @@ class ChronosPageDataModule extends ChronosModule {
 				content:
 					parent::createTitleElement(title: $this->title)->build()
 					. (function (): string {
-						$tableContent = "";
+						$tableContent = "
+							<thead>
+								<tr>
+									<th>" . $this->lang->translate(key: "CHRONOS_NAME") . "</th>
+									<th>" . $this->lang->translate(key: "CHRONOS_VALUE") . "</th>
+								</tr>
+							</thead>
+							<tbody>
+						";
+
 						foreach ($this->pageData as $key => $value) {
-							$tableContent .= "<tr>
-								<td>" . $key . "</td>
-								<td>" . htmlspecialchars(string: print_r(value: $value, return: true)) . "</td>
-							</tr>";
+							$tableContent .= "
+									<tr>
+										<td>" . $key . "</td>
+										<td>" . htmlspecialchars(string: print_r(value: $value, return: true)) . "</td>
+									</tr>
+								</tbody>
+							";
 						}
 
 						return $tableContent;

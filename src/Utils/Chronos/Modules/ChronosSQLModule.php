@@ -45,14 +45,28 @@ class ChronosSQLModule extends ChronosModule {
 				content:
 					parent::createTitleElement(title: $this->title)->build()
 					. (function (): string {
-						$tableContent = "";
+						$tableContent = "
+							<thead>
+								<tr>
+									<th>" . $this->lang->translate(key: "CHRONOS_TIME") . "</th>
+									<th>" . $this->lang->translate(key: "CHRONOS_LOCATION") . "</th>
+									<th>" . $this->lang->translate(key: "CHRONOS_LINE") . "</th>
+									<th>" . $this->lang->translate(key: "CHRONOS_VALUE") . "</th>
+								</tr>
+							</thead>
+							<tbody>
+						";
+
 						foreach ($GLOBALS["chronos"]["sql_query"] as $value) {
-							$tableContent .= '<tr>
-								<td class="min_col">' . $value["time"] . "ms</td>
-								<td>" . ($value["class"] ?? "") . '</td>
-								<td class="min_col">Line ' . $value["line"] . '</td>
-								<td class="min_col">' . $value["query"] . "</td>
-							</tr>";
+							$tableContent .= '
+									<tr>
+										<td class="min_col">' . $value["time"] . "ms</td>
+										<td>" . ($value["class"] ?? "") . '</td>
+										<td class="min_col">Line ' . $value["line"] . '</td>
+										<td class="min_col">' . $value["query"] . "</td>
+									</tr>
+								</tbody>
+							";
 						}
 
 						return $tableContent;

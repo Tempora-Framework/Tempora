@@ -12,10 +12,25 @@ abstract class ChronosModule {
 	public ?string $additionalClass;
 	public array $pageData = [];
 
+	/**
+	 * Gets the generated content of Chronos module.
+	 *
+	 * @return ElementBuilder
+	 */
 	abstract public function getContent(): ElementBuilder;
 
+	/**
+	 * Sets the display value for Chronos module.
+	 *
+	 * @return string
+	 */
 	abstract public function setDisplay(): string;
 
+	/**
+	 * Renders the Chronos module.
+	 *
+	 * @return void
+	 */
 	public function render(): void {
 		$this->displayValue = $this->setDisplay();
 
@@ -58,6 +73,11 @@ abstract class ChronosModule {
 		echo $result;
 	}
 
+	/**
+	 * Creates the icon element for Chronos module.
+	 *
+	 * @return ElementBuilder
+	 */
 	public function createIconElement(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "i")
@@ -69,6 +89,13 @@ abstract class ChronosModule {
 		;
 	}
 
+	/**
+	 * Creates the title element for Chronos module.
+	 *
+	 * @param string $title
+	 *
+	 * @return ElementBuilder
+	 */
 	public function createTitleElement(string $title): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "h1")
