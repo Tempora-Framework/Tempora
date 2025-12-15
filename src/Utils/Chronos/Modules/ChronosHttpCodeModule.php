@@ -11,6 +11,7 @@ class ChronosHttpCodeModule extends ChronosModule {
 	private Lang $mainLang;
 
 	public function __construct($httpCode) {
+		$this->id = "chronos_http_code";
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		$this->mainLang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
 
@@ -33,8 +34,7 @@ class ChronosHttpCodeModule extends ChronosModule {
 			->setElement(element: "table")
 			->setContent(
 				content:
-					parent::createTitleElement(title: $this->title)->build()
-					. (function (): string {
+					(function (): string {
 						return "
 							<thead>
 								<tr>

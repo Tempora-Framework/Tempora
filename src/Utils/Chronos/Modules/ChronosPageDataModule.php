@@ -10,6 +10,7 @@ class ChronosPageDataModule extends ChronosModule {
 	private Lang $lang;
 
 	public function __construct() {
+		$this->id = "chronos_page_data";
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		$this->title = $this->lang->translate(key: "CHRONOS_PAGEDATA_TITLE");
 		$this->icon = "ri-folder-2-line";
@@ -20,8 +21,7 @@ class ChronosPageDataModule extends ChronosModule {
 			->setElement(element: "table")
 			->setContent(
 				content:
-					parent::createTitleElement(title: $this->title)->build()
-					. (function (): string {
+					(function (): string {
 						$tableContent = "
 							<thead>
 								<tr>

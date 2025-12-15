@@ -26,6 +26,7 @@ class ChronosUserModule extends ChronosModule {
 			return;
 		}
 
+		$this->id = "chronos_user";
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		$this->mainLang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
 
@@ -47,8 +48,7 @@ class ChronosUserModule extends ChronosModule {
 			->setElement(element: "table")
 			->setContent(
 				content:
-					parent::createTitleElement(title: $this->title)->build()
-					. (function (): string {
+					(function (): string {
 						return "
 							<thead>
 								<tr>

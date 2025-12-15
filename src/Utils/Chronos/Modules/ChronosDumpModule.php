@@ -11,6 +11,7 @@ class ChronosDumpModule extends ChronosModule {
 	private string $tab;
 
 	public function __construct() {
+		$this->id = "chronos_dumps";
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		if ($GLOBALS["chronos"]["dumps"] == []) {
 			$this->enabled = false;
@@ -34,8 +35,7 @@ class ChronosDumpModule extends ChronosModule {
 			->setElement(element: "table")
 			->setContent(
 				content:
-					parent::createTitleElement(title: $this->title)->build()
-					. (function (): string {
+					(function (): string {
 						$tableContent = "
 							<thead>
 								<tr>

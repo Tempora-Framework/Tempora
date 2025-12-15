@@ -6,6 +6,7 @@ use Tempora\Utils\ElementBuilder\ElementBuilder;
 
 abstract class ChronosModule {
 	public bool $enabled = true;
+	public string $id;
 	public string $title;
 	public string $icon;
 	public ?string $displayValue;
@@ -47,7 +48,7 @@ abstract class ChronosModule {
 					->setAttributs(
 						attributs: [
 							"class" => "tempora_chronos_drop_hover_element" . (isset($this->additionalClass) ? (" " . $this->additionalClass) : ""),
-							"title" => htmlspecialchars(string: $this->title)
+							"title" => htmlspecialchars(string: $this->title),
 						]
 					)
 					->setContent(
@@ -59,11 +60,18 @@ abstract class ChronosModule {
 						->setElement(element: "div")
 						->setAttributs(
 							attributs: [
-								"class" => "tempora_chronos_drop_element"
+								"class" => "tempora_chronos_block_content",
+								"data-id" => htmlspecialchars(string: $this->id)
 							]
 						)
 						->setContent(
-							content: $this->getContent()->build()
+							content:
+								"<div class=\"tempora_chronos_drop_element_header\">"
+								. $this->createTitleElement(title: $this->title)->build()
+									. "<i class=\"ri-pushpin-line pin\"></i>
+								</div>"
+
+								. "<div class=\"content\">" . $this->getContent()->build() . "</div>"
 						)
 						->build()
 			)

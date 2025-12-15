@@ -12,6 +12,7 @@ class ChronosMsModule extends ChronosModule {
 	private float $time;
 
 	public function __construct() {
+		$this->id = "chronos_ms";
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		$this->mainLang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
 		$this->time = round(num: (microtime(as_float: true) - $GLOBALS["chronos"]["ms_count"]) * 1000, precision: 2);
@@ -25,9 +26,7 @@ class ChronosMsModule extends ChronosModule {
 			->setElement(element: "table")
 			->setContent(
 				content:
-					parent::createTitleElement(title: $this->title)->build()
-
-					. (function (): string {
+					(function (): string {
 						return '
 							<table class="chronos_minifier" cellpadding="0" cellspacing="0">
 								<thead>
@@ -45,7 +44,10 @@ class ChronosMsModule extends ChronosModule {
 							</table>";
 					})()
 
-					. parent::createTitleElement(title: $this->lang->translate(key: "CHRONOS_MINIFIER_MS_TITLE"))->build()
+					. (new ElementBuilder)
+						->setElement(element: "h2")
+						->setContent(content: $this->lang->translate(key: "CHRONOS_MINIFIER_MS_TITLE"))
+						->build()
 
 					. (function (): string {
 						$tableContent = '
@@ -73,7 +75,10 @@ class ChronosMsModule extends ChronosModule {
 						return $tableContent;
 					})()
 
-					. parent::createTitleElement(title: $this->lang->translate(key: "CHRONOS_IMAGES_MS_TITLE"))->build()
+					. (new ElementBuilder)
+						->setElement(element: "h2")
+						->setContent(content: $this->lang->translate(key: "CHRONOS_IMAGES_MS_TITLE"))
+						->build()
 
 					. (function (): string {
 						$tableContent = '
@@ -101,7 +106,10 @@ class ChronosMsModule extends ChronosModule {
 						return $tableContent;
 					})()
 
-					. parent::createTitleElement(title: $this->lang->translate(key: "CHRONOS_SQL_TITLE"))->build()
+					. (new ElementBuilder)
+						->setElement(element: "h2")
+						->setContent(content: $this->lang->translate(key: "CHRONOS_SQL_TITLE"))
+						->build()
 
 					. (function (): string {
 						return '

@@ -12,6 +12,7 @@ class ChronosLangModule extends ChronosModule {
 	private int $rest;
 
 	public function __construct() {
+		$this->id = "chronos_langs";
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		$this->total = $GLOBALS["chronos"]["lang_count"];
 		$this->rest = $this->total - $GLOBALS["chronos"]["lang_error_count"];
@@ -26,8 +27,7 @@ class ChronosLangModule extends ChronosModule {
 			->setElement(element: "table")
 			->setContent(
 				content:
-					parent::createTitleElement(title: $this->title)->build()
-					. (function (): string {
+					(function (): string {
 						ksort(array: $GLOBALS["chronos"]["langs"]);
 
 						$tableContent = "

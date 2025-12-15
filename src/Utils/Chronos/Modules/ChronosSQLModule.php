@@ -12,6 +12,7 @@ class ChronosSQLModule extends ChronosModule {
 	private int $chronosSQLCount;
 
 	public function __construct() {
+		$this->id = "chronos_sql";
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 
 		$this->chronosSQLCount = 0;
@@ -43,8 +44,7 @@ class ChronosSQLModule extends ChronosModule {
 			->setElement(element: "table")
 			->setContent(
 				content:
-					parent::createTitleElement(title: $this->title)->build()
-					. (function (): string {
+					(function (): string {
 						$tableContent = "
 							<thead>
 								<tr>
