@@ -17,7 +17,7 @@ class ErrorService {
 	 *
 	 * @return void
 	 */
-	public static function handle(Throwable $exception): void {
+	public static function handle(Throwable $exception, array $pageData = []): void {
 		if (DEBUG) {
 			header_remove(name: "Content-Security-Policy");
 			http_response_code(response_code: is_int(value: $exception->getCode()) ? $exception->getCode() : 500);

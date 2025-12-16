@@ -18,21 +18,17 @@
 	width: fit-content;
 	max-width: -webkit-fill-available;
 	max-width: 600px;
-	/* background-color: var(--chronos-background-hover-color); */
 	overflow-y: scroll;
 	max-height: 500px;
 	border-radius: 9px 9px 0 0;
 	z-index: 1100;
-	background: radial-gradient(
-		ellipse at right top,
-		#00458fc4 0%,
-		var(--chronos-background-hover-color) 45%
-	);
 	overflow-x: hidden;
 	overflow-y: hidden;
+	color: var(--chronos-text-color);
+	backdrop-filter: blur(8px);
 
 	h1 {
-		font-size: 18px;
+		font-size: 16px;
 		user-select: none !important;
 		padding-left: 10px;
 	}
@@ -56,6 +52,11 @@
 		text-decoration: none;
 		color: var(--chronos-text-color);
 		margin: 0;
+	}
+
+	i {
+		font-size: 18px;
+		padding-left: 6px;
 	}
 
 	.tab {
@@ -108,9 +109,8 @@
 		left: 0;
 		display: flex;
 		align-items: center;
-		background-color: var(--chronos-background-hover-color);
-		border-bottom: solid 1px var(--chronos-text-color);
-		height: 40px;
+		background-color: #00458f;
+		height: 30px;
 
 		.pin {
 			position: absolute;
@@ -118,12 +118,11 @@
 			cursor: pointer;
 			font-size: 18px;
 			z-index: 1002;
-			padding: 5px;
+			padding: 3px;
 			border-radius: 5px;
 			transition: 200ms;
 
 			&:hover {
-				background-color: var(--chronos-background-color);
 				transition: 200ms;
 			}
 		}
@@ -140,8 +139,6 @@
 		resize: both;
 		max-width: none;
 		max-height: none;
-		background-color: var(--chronos-background-color);
-		backdrop-filter: blur(5px);
 
 		.tempora_chronos_drop_element_header {
 			cursor: move;
@@ -151,7 +148,7 @@
 	.content {
 		overflow-x: scroll;
 		overflow-y: scroll;
-		height: calc(100% - 40px);
+		height: calc(100% - 30px);
 		width: calc(100% - 20px);
 		padding: 0px 10px;
 
@@ -185,7 +182,6 @@
 	width: -webkit-fill-available;
 	width: -moz-available;
 	background-color: var(--chronos-background-color);
-	backdrop-filter: blur(5px);
 	position: fixed;
 	bottom: 0;
 	left: 0;

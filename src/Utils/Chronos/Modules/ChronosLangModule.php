@@ -20,6 +20,7 @@ class ChronosLangModule extends ChronosModule {
 		$this->title = $this->lang->translate(key: "CHRONOS_LANG_TITLE");
 		$this->icon = "ri-global-line";
 		$this->additionalClass = $this->total - $this->rest > 0 ? "red" : "";
+		$this->color = "#6e42c1";
 	}
 
 	public function getContent(): ElementBuilder {

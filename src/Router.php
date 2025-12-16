@@ -4,7 +4,6 @@ namespace Tempora;
 
 use App\Controllers\ErrorController;
 use Tempora\Controllers\Controller;
-use Tempora\Enums\Path;
 use Tempora\Traits\UserTrait;
 use Tempora\Utils\Render\Render;
 use Tempora\Utils\Roles;
@@ -99,7 +98,8 @@ class Router {
 		// Render page
 		$webpageRender = new Render(
 			buffer: $this->webpageRender(controller: $controller, pageData: $pageData),
-			modules: $this->modules
+			modules: $this->modules,
+			pageData: $pageData
 		);
 
 		echo $webpageRender->render();
@@ -122,14 +122,6 @@ class Router {
 			->setPageData(pageData: $pageData)
 			->render()
 		;
-
-		// Import Chronos
-		if (
-			DEBUG
-			&& !in_array(needle: "Content-Type: application/json", haystack: headers_list())
-		) {
-			include Path::COMPONENT_CHRONOS->value . "/chronos.php";
-		}
 
 		return ob_get_clean();
 	}
@@ -184,9 +176,5 @@ class Router {
 			->setPageData(pageData: $pageData)
 			->render()
 		;
-
-		if (DEBUG) {
-			include Path::COMPONENT_CHRONOS->value . "/chronos.php";
-		}
 	}
 }

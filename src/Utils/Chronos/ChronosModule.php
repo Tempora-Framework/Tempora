@@ -9,6 +9,7 @@ abstract class ChronosModule {
 	public string $id;
 	public string $title;
 	public string $icon;
+	public string $color = "#8d1d1d";
 	public ?string $displayValue;
 	public ?string $additionalClass;
 	public array $pageData = [];
@@ -61,17 +62,19 @@ abstract class ChronosModule {
 						->setAttributs(
 							attributs: [
 								"class" => "tempora_chronos_block_content",
-								"data-id" => htmlspecialchars(string: $this->id)
+								"data-id" => htmlspecialchars(string: $this->id),
+								"data-color" => htmlspecialchars(string: $this->color)
 							]
 						)
 						->setContent(
 							content:
-								"<div class=\"tempora_chronos_drop_element_header\">"
-								. $this->createTitleElement(title: $this->title)->build()
-									. "<i class=\"ri-pushpin-line pin\"></i>
-								</div>"
+								'<div class="tempora_chronos_drop_element_header">'
+									. $this->createIconElement()->build()
+									. $this->createTitleElement(title: $this->title)->build()
+									. '<i class="ri-pushpin-line pin"></i>
+								</div>'
 
-								. "<div class=\"content\">" . $this->getContent()->build() . "</div>"
+								. '<div class="content">' . $this->getContent()->build() . "</div>"
 						)
 						->build()
 			)

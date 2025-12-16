@@ -14,6 +14,7 @@ class ChronosPageDataModule extends ChronosModule {
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		$this->title = $this->lang->translate(key: "CHRONOS_PAGEDATA_TITLE");
 		$this->icon = "ri-folder-2-line";
+		$this->color = "#0c631b";
 	}
 
 	public function getContent(): ElementBuilder {

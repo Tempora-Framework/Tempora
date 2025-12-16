@@ -2,10 +2,12 @@
 
 namespace Tempora\Utils\Render;
 
+use Tempora\Enums\Path;
+
 class Render {
 	private string $buffer;
 
-	public function __construct(string $buffer, array $modules = []) {
+	public function __construct(string $buffer, array $modules = [], $pageData = []) {
 		$this->buffer = $buffer;
 
 		foreach ($modules as $module) {
@@ -18,6 +20,28 @@ class Render {
 				$this->buffer = $module->buffer;
 			}
 		}
+
+		if (
+			DEBUG
+			&& !in_array(needle: "Content-Type: application/json", haystack: headers_list())
+		) {
+			$this->injectChronos(pageData: $pageData);
+		}
+	}
+
+	private function injectChronos(array $pageData): void {
+		$chronos = (function (array $pageData): string {
+			ob_start();
+			include Path::COMPONENT_CHRONOS->value . "/chronos.php";
+
+			return ob_get_clean();
+		});
+
+		$this->buffer = str_replace(
+			search: "<body>",
+			replace: "<body>" . $chronos(pageData: $pageData),
+			subject: $this->buffer
+		);
 	}
 
 	/**

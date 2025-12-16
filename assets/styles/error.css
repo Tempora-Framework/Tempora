@@ -11,7 +11,6 @@
 	width: -webkit-fill-available;
 	width: -moz-available;
 	min-height: 100vh;
-	backdrop-filter: blur(3px);
 	background-color: #0000003b;
 	position: absolute;
 	top: 0;
@@ -39,7 +38,7 @@
 		border-radius: var(--chronos-error-border-radius);
 		position: relative;
 		background-color: var(--chronos-error-background-color);
-		backdrop-filter: blur(3px);
+		backdrop-filter: blur(8px);
 		z-index: 10000;
 
 		#close {

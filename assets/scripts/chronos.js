@@ -14,9 +14,12 @@ window.addEventListener('resize', () => {
 	windowWidth = window.innerWidth;
 });
 
+applyChronosColors();
+
 chronosElements.forEach((element) => {
 	element.addEventListener('mouseenter', () => {
 		const dropElement = element.querySelector('.tempora_chronos_block_content');
+
 		if (
 			dropElement
 			&& (!dropElement.classList.contains('windowed'))
@@ -38,6 +41,21 @@ chronosElements.forEach((element) => {
 		}
 	});
 });
+
+/**
+ * Apply colors to chronos elements
+ */
+function applyChronosColors() {
+	chronosDropElements.forEach((dropElement) => {
+		const color = dropElement.dataset.color;
+		const header = dropElement.querySelector('.tempora_chronos_drop_element_header');
+
+		dropElement.style.background = `radial-gradient(ellipse at right center, ${color}e0 0%, #191a1be0 65%)`
+		if (isElementExist(header)) {
+			header.style.backgroundColor = color;
+		}
+	});
+}
 
 displayChronos(JSON.parse(localStorage.getItem("chronos") || true));
 
@@ -81,6 +99,8 @@ if (isElementExist(chronosPins)) {
 
 			windowFocus(document.querySelector(`.tempora_chronos_block_content.windowed[data-id='${pin.parentElement.parentElement.dataset.id}']`));
 		});
+
+		pinHoverListener(pin);
 	});
 
 	// Load saved windowed elements on page load
@@ -93,12 +113,30 @@ if (isElementExist(chronosPins)) {
 			if (value.showed) {
 				chronosDisplayWindowedElement(id);
 			}
-		} else {
-			localStorage.removeItem(key);
 		}
 	});
 }
 
+/**
+ * Handle pin hover effect
+ *
+ * @param {*} pin
+ */
+function pinHoverListener(pin) {
+	const color = pin.parentElement.parentElement.dataset.color;
+	pin.addEventListener('mouseenter', () => {
+		pin.style.backgroundColor = modifyColor(color, 'lighten');
+	});
+	pin.addEventListener('mouseleave', () => {
+		pin.style.backgroundColor = color;
+	});
+}
+
+/**
+ * Display element in windowed mode
+ *
+ * @param {*} id
+ */
 function chronosDisplayWindowedElement(id) {
 	const element = document.querySelector(`.tempora_chronos_block_content[data-id='${id}']`);
 	let value = localStorage.getItem("chronos_windowed_" + id);
@@ -125,6 +163,9 @@ function chronosDisplayWindowedElement(id) {
 
 		const container = element.cloneNode(true);
 		element.style.display = "none";
+		const pin = container.querySelector(".pin");
+		pin.style.backgroundColor = container.dataset.color;
+		pinHoverListener(pin);
 
 		container.style.top = y + "px";
 		container.style.left = x + "px";
@@ -155,7 +196,6 @@ function chronosDisplayWindowedElement(id) {
 			});
 		});
 
-		const pin = container.querySelector(".pin");
 		pin.classList.add("pinned");
 		pin.classList.replace("ri-pushpin-line", "ri-pushpin-fill");
 
@@ -183,6 +223,12 @@ function chronosDisplayWindowedElement(id) {
 	}
 }
 
+/**
+ * Make element draggable
+ *
+ * @param {*} element
+ * @param {*} handle
+ */
 function dragElement(element, handle) {
 	let pos1 = 0;
 	let pos2 = 0;
@@ -191,6 +237,11 @@ function dragElement(element, handle) {
 
 	handle.onmousedown = dragMouseDown;
 
+	/**
+	 * Mouse down event
+	 *
+	 * @param {*} e
+	 */
 	function dragMouseDown(e) {
 		e.preventDefault();
 		pos3 = e.clientX;
@@ -202,6 +253,11 @@ function dragElement(element, handle) {
 		windowFocus(element);
 	}
 
+	/**
+	 * Mouse move event
+	 *
+	 * @param {*} e
+	 */
 	function elementDrag(e) {
 		e.preventDefault();
 
@@ -216,12 +272,20 @@ function dragElement(element, handle) {
 		windowFixedPosition(element);
 	}
 
+	/**
+	 * Mouse up event
+	 */
 	function closeDragElement() {
 		document.onmouseup = null;
 		document.onmousemove = null;
 	}
 }
 
+/**
+ * Fix windowed element position if out of viewport
+ *
+ * @param {*} element
+ */
 function windowFixedPosition(element) {
 	if (isElementExist(element)
 		&& element.classList.contains("windowed")
@@ -257,6 +321,11 @@ function windowFixedPosition(element) {
 	}
 }
 
+/**
+ * Focus windowed element
+ *
+ * @param {*} element
+ */
 function windowFocus(element) {
 	const windowedElements = chronosGetWindowedSavedElements();
 
@@ -297,6 +366,12 @@ function windowFocus(element) {
 	});
 }
 
+/**
+ * Save windowed element state to localStorage
+ *
+ * @param {*} id
+ * @param {*} value
+ */
 function chronosLocalStorageSave(id, value) {
 	localStorage.setItem("chronos_windowed_" + id, JSON.stringify(
 		{
@@ -310,6 +385,11 @@ function chronosLocalStorageSave(id, value) {
 	));
 }
 
+/**
+ * Get all windowed saved elements from localStorage
+ *
+ * @return {Array}
+ */
 function chronosGetWindowedSavedElements() {
 	return Object.keys(localStorage).filter((key) => key.startsWith("chronos_windowed_"));
 }
@@ -336,4 +416,42 @@ function displayChronos(state) {
  */
 function isElementExist(element) {
 	return element != "undefined" && element != null;
+}
+
+/**
+ * Lighten or darken a hex color
+ *
+ * @param {string} hexColor
+ * @param {string} type
+ * @param {number} amount
+ *
+ * @return {string}
+ */
+function modifyColor(hexColor, type = 'lighten', amount = 20) {
+	let usePound = false;
+
+	if (hexColor[0] === "#") {
+		hexColor = hexColor.slice(1);
+		usePound = true;
+	}
+
+	if (hexColor.length === 8) {
+		hexColor = hexColor.slice(0, 6);
+	}
+
+	const num = parseInt(hexColor, 16);
+
+	let r = (num >> 16) + (type === 'lighten' ? amount : -amount);
+	if (r > 255) r = 255;
+	else if (r < 0) r = 0;
+
+	let g = ((num >> 8) & 0x00FF) + (type === 'lighten' ? amount : -amount);
+	if (g > 255) g = 255;
+	else if (g < 0) g = 0;
+
+	let b = (num & 0x0000FF) + (type === 'lighten' ? amount : -amount);
+	if (b > 255) b = 255;
+	else if (b < 0) b = 0;
+
+	return (usePound ? "#" : "") + (r.toString(16).padStart(2, '0')) + (g.toString(16).padStart(2, '0')) + (b.toString(16).padStart(2, '0'));
 }

@@ -12,6 +12,7 @@ use Tempora\Utils\Chronos\Modules\ChronosPostModule;
 use Tempora\Utils\Chronos\Modules\ChronosServerModule;
 use Tempora\Utils\Chronos\Modules\ChronosSessionModule;
 use Tempora\Utils\Chronos\Modules\ChronosSQLModule;
+use Tempora\Utils\Chronos\Modules\ChronosTemporaModule;
 use Tempora\Utils\Chronos\Modules\ChronosUserModule;
 
 ?>
@@ -25,6 +26,7 @@ use Tempora\Utils\Chronos\Modules\ChronosUserModule;
 		(new Chronos(
 			pageData: $pageData ?? [],
 			modules: [
+				new ChronosTemporaModule,
 				new ChronosMsModule,
 				new ChronosHttpCodeModule(httpCode: http_response_code()),
 				new ChronosUserModule,
