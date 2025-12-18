@@ -14,7 +14,7 @@ class ChronosSQLModule extends ChronosModule {
 	public function __construct() {
 		$this->id = "chronos_sql";
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
-		$this->color = "#b87d1e";
+		$this->color = "#c0810bff";
 
 		$this->chronosSQLCount = 0;
 		if (isset($_SESSION["user"]["uid"])) {

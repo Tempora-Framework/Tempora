@@ -14,6 +14,7 @@ class ChronosServerModule extends ChronosModule {
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		$this->title = $this->lang->translate(key: "CHRONOS_SERVER_TITLE");
 		$this->icon = "ri-server-line";
+		$this->color = "#353442ff";
 	}
 
 	public function getContent(): ElementBuilder {

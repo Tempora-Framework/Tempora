@@ -172,9 +172,13 @@ class Router {
 	 * @return void
 	 */
 	public function error(array $pageData): void {
-		(new ErrorController)
-			->setPageData(pageData: $pageData)
-			->render()
-		;
+		if (class_exists(class: ErrorController::class)) {
+			(new ErrorController)
+				->setPageData(pageData: $pageData)
+				->render()
+			;
+		} else {
+			// TODO: Simple system error page
+		}
 	}
 }

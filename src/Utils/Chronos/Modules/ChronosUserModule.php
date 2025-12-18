@@ -41,6 +41,7 @@ class ChronosUserModule extends ChronosModule {
 
 		$this->title = $this->lang->translate(key: "CHRONOS_USER_TITLE");
 		$this->icon = "ri-user-line";
+		$this->color = "#009b6cff";
 	}
 
 	public function getContent(): ElementBuilder {
@@ -59,11 +60,7 @@ class ChronosUserModule extends ChronosModule {
 							<tbody>
 								<tr>
 									<td>UID</td>
-									<td>" . $_SESSION["user"]["uid"] . '</td>
-								</tr>
-								<tr>
-									<td>Session timeout</td>
-									<td id="chronos_ms">' . ini_get(option: "session.gc_maxlifetime") . " s</td>
+									<td>" . $_SESSION["user"]["uid"] . "</td>
 								</tr>
 								<tr>
 									<td>" . $this->mainLang->translate(key: "MAIN_EMAIL") . "</td>

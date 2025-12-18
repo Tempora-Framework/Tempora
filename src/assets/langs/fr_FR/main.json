@@ -1,6 +1,6 @@
 {
-	"MAIN_NAME": "Nom",
-	"MAIN_SURNAME": "Prénom",
+	"MAIN_NAME": "Prénom",
+	"MAIN_SURNAME": "Nom",
 	"MAIN_EMAIL": "Email",
 	"MAIN_ROLE": "Rôle",
 	"MAIN_NAME_OBJECT": "Nom",

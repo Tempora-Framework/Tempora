@@ -19,7 +19,7 @@ class ChronosLangModule extends ChronosModule {
 
 		$this->title = $this->lang->translate(key: "CHRONOS_LANG_TITLE");
 		$this->icon = "ri-global-line";
-		$this->additionalClass = $this->total - $this->rest > 0 ? "red" : "";
+		$this->additionalClass = $this->total - $this->rest > 0 ? "red bold" : "";
 		$this->color = "#6e42c1";
 	}
 
@@ -44,8 +44,8 @@ class ChronosLangModule extends ChronosModule {
 						foreach ($GLOBALS["chronos"]["langs"] as $key => $value) {
 							$tableContent .= "
 									<tr>
-										<td " . ($value === $key ? " class='red'" : "") . ">" . $key . "</td>
-										<td " . ($value === $key ? " class='red'" : "") . ">" . $value . "</td>
+										<td " . ($value === $key ? " class='red bold'" : "") . ">" . $key . "</td>
+										<td " . ($value === $key ? " class='red bold'" : "") . ">" . $value . "</td>
 									</tr>
 								</tbody>
 							";

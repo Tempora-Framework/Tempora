@@ -39,3 +39,6 @@
 .ri-server-line:before { content: "\f0e0"; }
 .ri-mail-ai-line:before { content: "\f585"; }
 .ri-crosshair-2-line:before { content: "\f3b3"; }
+.ri-pushpin-line:before { content: "\f039"; }
+.ri-pushpin-fill:before { content: "\f038"; }
+.ri-git-repository-line:before { content: "\edc7"; }

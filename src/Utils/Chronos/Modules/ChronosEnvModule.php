@@ -14,6 +14,7 @@ class ChronosEnvModule extends ChronosModule {
 		$this->lang = new Lang(filePath: "chronos/chronos", source: TEMPORA_DIR . "/src/assets");
 		$this->title = $this->lang->translate(key: "CHRONOS_ENV_TITLE");
 		$this->icon = "ri-mail-ai-line";
+		$this->color = "#c55818ff";
 	}
 
 	public function getContent(): ElementBuilder {

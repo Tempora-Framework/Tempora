@@ -1,8 +1,6 @@
 chronos = document.querySelector(".tempora_chronos");
 chronosMain = document.getElementById("tempora_chronos_title");
 chronosClose = document.getElementById("chronos_close");
-chronosUserTitle = document.getElementById("chronos_user_title");
-chronosMs = document.getElementById("chronos_ms");
 chronosElements = document.querySelectorAll(".tempora_chronos_drop_container");
 chronosPins = document.querySelectorAll(".tempora_chronos .pin");
 chronosDropElements = document.querySelectorAll(".tempora_chronos_block_content");
@@ -50,7 +48,6 @@ function applyChronosColors() {
 		const color = dropElement.dataset.color;
 		const header = dropElement.querySelector('.tempora_chronos_drop_element_header');
 
-		dropElement.style.background = `radial-gradient(ellipse at right center, ${color}e0 0%, #191a1be0 65%)`
 		if (isElementExist(header)) {
 			header.style.backgroundColor = color;
 		}
@@ -58,22 +55,6 @@ function applyChronosColors() {
 }
 
 displayChronos(JSON.parse(localStorage.getItem("chronos") || true));
-
-if (isElementExist(chronosUserTitle)) {
-	let chronosTimer = setInterval(() => {
-		let chronosMsValue = document.getElementById("chronos_ms").textContent.replace(" s", "");
-
-		if (chronosMsValue <= 0) {
-			chronosUserTitle.style.color = "red";
-			chronosMs.style.color = "red";
-			chronosMs.textContent = "Timed out";
-			window.clearInterval(chronosTimer);
-		} else {
-			chronosMsValue--;
-			chronosMs.textContent = chronosMsValue + " s";
-		}
-	}, 1000);
-}
 
 if (isElementExist(chronosMain)) {
 	chronosClose.addEventListener("click", () => {

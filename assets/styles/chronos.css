@@ -7,6 +7,26 @@
 	--chronos-background-hover-color: #353535;
 	--chronos-text-color: #ffffff;
 	--chronos-red: #c20000;
+
+	--chronos-header-height: 28px;
+
+	--chronos-windowed-text-color: #00021f;
+	--chronos-windowed-background-color: #ffffff9c;
+
+	--dark-chronos-text-color: #ffffff;
+	--dark-chronos-windowed-background-color: #1f1f1f9c;
+}
+
+[data-theme="dark"] {
+	--chronos-windowed-text-color: var(--dark-chronos-text-color);
+	--chronos-windowed-background-color: var(--dark-chronos-windowed-background-color);
+}
+
+[data-theme="system"] {
+	@media (prefers-color-scheme: dark) {
+		--chronos-windowed-text-color: var(--dark-chronos-text-color);
+		--chronos-windowed-background-color: var(--dark-chronos-windowed-background-color);
+	}
 }
 
 .tempora_chronos_block_content {
@@ -24,8 +44,10 @@
 	z-index: 1100;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	color: var(--chronos-text-color);
+	color: var(--chronos-windowed-text-color);
 	backdrop-filter: blur(8px);
+	border: 1px solid #ffffff2e;
+	background-color: var(--chronos-windowed-background-color);
 
 	h1 {
 		font-size: 16px;
@@ -50,7 +72,7 @@
 	h2 {
 		user-select: text;
 		text-decoration: none;
-		color: var(--chronos-text-color);
+		color: var(--chronos-windowed-text-color);
 		margin: 0;
 	}
 
@@ -95,9 +117,9 @@
 		}
 
 		td {
-			color: var(--chronos-text-color);
+			color: var(--chronos-windowed-text-color);
 			vertical-align: top;
-			border: solid 2px var(--chronos-background-color);
+			border: solid 1px var(--chronos-background-color);
 			font-size: 14px;
 			padding: 5px;
 		}
@@ -109,12 +131,16 @@
 		left: 0;
 		display: flex;
 		align-items: center;
-		background-color: #00458f;
-		height: 30px;
+		height: var(--chronos-header-height);
+		color: #ffffff;
+
+		h1 {
+			color: #ffffff;
+		}
 
 		.pin {
 			position: absolute;
-			right: 10px;
+			right: 2px;
 			cursor: pointer;
 			font-size: 18px;
 			z-index: 1002;
@@ -140,7 +166,7 @@
 		max-width: none;
 		max-height: none;
 
-		.tempora_chronos_drop_element_header {
+		.tempora_chronos_drop_element_header:hover {
 			cursor: move;
 		}
 	}
@@ -148,7 +174,7 @@
 	.content {
 		overflow-x: scroll;
 		overflow-y: scroll;
-		height: calc(100% - 30px);
+		height: calc(100% - var(--chronos-header-height));
 		width: calc(100% - 20px);
 		padding: 0px 10px;
 
@@ -162,14 +188,14 @@
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background-color: rgba(120, 120, 120, 0.6);
+			background-color: #78787899;
 			border-radius: 999px;
 			border: 2px solid transparent;
 			background-clip: content-box;
 		}
 
 		&::-webkit-scrollbar-thumb:hover {
-			background-color: rgba(120, 120, 120, 0.8);
+			background-color: #787878cc;
 		}
 
 		&::-webkit-scrollbar-corner {
@@ -181,19 +207,22 @@
 .tempora_chronos {
 	width: -webkit-fill-available;
 	width: -moz-available;
-	background-color: var(--chronos-background-color);
 	position: fixed;
 	bottom: 0;
 	left: 0;
 	padding: 0 10px;
 	display: flex;
 	flex-direction: row;
-	color: var(--chronos-text-color);
+	color: var(--chronos-windowed-text-color);
 	border-left: solid 4px var(--chronos-red);
 	font-size: 14px;
 	z-index: 9999;
 	font-family: Arial, Helvetica, sans-serif;
 	user-select: none;
+	backdrop-filter: blur(8px);
+	border-top: solid 1px #ffffff2e;
+	box-shadow: 0px 0px 38px 5px #00000050;
+	background-color: var(--chronos-windowed-background-color);
 
 	&.hidden {
 		width: fit-content;
@@ -202,6 +231,7 @@
 		padding: 0;
 		background-color: #00000000;
 		border: none;
+		box-shadow: none;
 
 		.tempora_chronos_drop_container,
 		#tempora_chronos_ms {
@@ -267,9 +297,12 @@
 	.tempora_chronos_drop_container:hover .tempora_chronos_block_content {
 		display: block;
 	}
+}
 
+.tempora_chronos,
+.tempora_chronos_block_content {
 	.red {
-		color: var(--chronos-red) !important;
+		color: var(--chronos-red);
 	}
 
 	.green {

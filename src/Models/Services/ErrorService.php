@@ -78,16 +78,20 @@ class ErrorService {
 			ob_end_clean();
 
 			$lang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
-			(new ErrorController)
-				->setPageData(
-					pageData: [
-						"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
-						"error_code" => 500,
-						"error_message" => $lang->translate(key: "ERROR_SERVER")
-					]
-				)
-				->render()
-			;
+			if (class_exists(class: ErrorController::class)) {
+				(new ErrorController)
+					->setPageData(
+						pageData: [
+							"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
+							"error_code" => 500,
+							"error_message" => $lang->translate(key: "ERROR_SERVER")
+						]
+					)
+					->render()
+				;
+			} else {
+				// TODO: Simple system error page
+			}
 		}
 	}
 
