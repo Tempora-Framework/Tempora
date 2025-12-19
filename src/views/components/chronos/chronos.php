@@ -19,6 +19,9 @@ use Tempora\Utils\Chronos\Modules\ChronosUserModule;
 
 <link rel="stylesheet" href="/vendor/tempora-framework/tempora/assets/styles/chronos.css">
 <link rel="stylesheet" href="/vendor/tempora-framework/tempora/assets/styles/remixicon.css">
+<script defer src="/vendor/tempora-framework/tempora/assets/scripts/Chronos/Chronos.js"></script>
+<script defer src="/vendor/tempora-framework/tempora/assets/scripts/Chronos/Utils.js"></script>
+<script defer src="/vendor/tempora-framework/tempora/assets/scripts/Chronos/Windows.js"></script>
 <script defer src="/vendor/tempora-framework/tempora/assets/scripts/chronos.js"></script>
 
 <div class="tempora_chronos">
