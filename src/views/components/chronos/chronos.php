@@ -14,15 +14,43 @@ use Tempora\Utils\Chronos\Modules\ChronosSessionModule;
 use Tempora\Utils\Chronos\Modules\ChronosSQLModule;
 use Tempora\Utils\Chronos\Modules\ChronosTemporaModule;
 use Tempora\Utils\Chronos\Modules\ChronosUserModule;
+use Tempora\Utils\ElementBuilder\ElementBuilder;
 
+$assetsFiles = [
+	"styles/chronos.css",
+	"styles/remixicon.css",
+	"scripts/Chronos/Chronos.js",
+	"scripts/Chronos/Utils.js",
+	"scripts/Chronos/Windows.js",
+	"scripts/chronos.js",
+];
+
+$assets = "";
+foreach ($assetsFiles as $assetFile) {
+	$asset = new ElementBuilder;
+
+	$attributs = [];
+	if (str_ends_with(haystack: $assetFile, needle: ".css")) {
+		$asset->setElement(element: "link");
+		$attributs = [
+			"rel" => "stylesheet",
+			"href" => "/vendor/tempora-framework/tempora/assets/" . $assetFile
+		];
+	} else {
+		$asset->setElement(element: "script");
+		$attributs = [
+			"src" => "/vendor/tempora-framework/tempora/assets/" . $assetFile,
+			"defer" => ""
+		];
+	}
+
+	$asset->setAttributs(attributs: $attributs);
+
+	$assets .= $asset->build();
+}
 ?>
 
-<link rel="stylesheet" href="/vendor/tempora-framework/tempora/assets/styles/chronos.css">
-<link rel="stylesheet" href="/vendor/tempora-framework/tempora/assets/styles/remixicon.css">
-<script defer src="/vendor/tempora-framework/tempora/assets/scripts/Chronos/Chronos.js"></script>
-<script defer src="/vendor/tempora-framework/tempora/assets/scripts/Chronos/Utils.js"></script>
-<script defer src="/vendor/tempora-framework/tempora/assets/scripts/Chronos/Windows.js"></script>
-<script defer src="/vendor/tempora-framework/tempora/assets/scripts/chronos.js"></script>
+<?= $assets ?>
 
 <div class="tempora_chronos">
 	<?php

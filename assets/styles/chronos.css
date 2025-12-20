@@ -3,7 +3,7 @@
    ============================================== */
 
 :root {
-	--chronos-background-color: #464646a8;
+	--chronos-table-border-color: #464646a8;
 	--chronos-background-hover-color: #353535;
 	--chronos-text-color: #ffffff;
 	--chronos-red: #c20000;
@@ -12,20 +12,28 @@
 
 	--chronos-windowed-text-color: #00021f;
 	--chronos-windowed-background-color: #ffffff9c;
+	--chronos-background-color: #ffffff;
+	--chronos-background-hover-color: #e1e1e1;
 
 	--dark-chronos-text-color: #ffffff;
 	--dark-chronos-windowed-background-color: #1f1f1f9c;
+	--dark-chronos-background-color: #1f1f1f;
+	--dark-chronos-background-hover-color: #353535;
 }
 
 [data-theme="dark"] {
 	--chronos-windowed-text-color: var(--dark-chronos-text-color);
 	--chronos-windowed-background-color: var(--dark-chronos-windowed-background-color);
+	--chronos-background-color: var(--dark-chronos-background-color);
+	--chronos-background-hover-color: var(--dark-chronos-background-hover-color);
 }
 
 [data-theme="system"] {
 	@media (prefers-color-scheme: dark) {
 		--chronos-windowed-text-color: var(--dark-chronos-text-color);
 		--chronos-windowed-background-color: var(--dark-chronos-windowed-background-color);
+		--chronos-background-color: var(--dark-chronos-background-color);
+		--chronos-background-hover-color: var(--dark-chronos-background-hover-color);
 	}
 }
 
@@ -48,6 +56,8 @@
 	backdrop-filter: blur(8px);
 	border: 1px solid #ffffff2e;
 	background-color: var(--chronos-windowed-background-color);
+	max-height: calc(500px + 22px);
+	font-family: Arial, Helvetica, sans-serif;
 
 	h1 {
 		font-size: 16px;
@@ -119,7 +129,7 @@
 		td {
 			color: var(--chronos-windowed-text-color);
 			vertical-align: top;
-			border: solid 1px var(--chronos-background-color);
+			border: solid 1px var(--chronos-table-border-color);
 			font-size: 14px;
 			padding: 5px;
 		}
@@ -177,6 +187,7 @@
 		height: calc(100% - var(--chronos-header-height));
 		width: calc(100% - 20px);
 		padding: 0px 10px;
+		max-height: 500px;
 
 		&::-webkit-scrollbar {
 			width: 8px;
@@ -219,10 +230,9 @@
 	z-index: 9999;
 	font-family: Arial, Helvetica, sans-serif;
 	user-select: none;
-	backdrop-filter: blur(8px);
 	border-top: solid 1px #ffffff2e;
 	box-shadow: 0px 0px 38px 5px #00000050;
-	background-color: var(--chronos-windowed-background-color);
+	background-color: var(--chronos-background-color);
 
 	&.hidden {
 		width: fit-content;
@@ -288,14 +298,14 @@
 			margin: 0;
 			padding: 6px 10px;
 		}
-	}
 
-	.tempora_chronos_drop_container:hover {
-		background-color: var(--chronos-background-hover-color);
-	}
+		&:hover {
+			background-color: var(--chronos-background-hover-color);
 
-	.tempora_chronos_drop_container:hover .tempora_chronos_block_content {
-		display: block;
+			.tempora_chronos_block_content {
+				display: block;
+			}
+		}
 	}
 }
 
