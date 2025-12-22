@@ -1,4 +1,7 @@
 {
 	"ERROR": "Error",
-	"ERROR_404": "The page you are looking for could not be found."
+	"ERROR_404": "The page you are looking for could not be found.",
+	"ERROR_DEFAULT_MESSAGE": "The page you are trying to reach does not exist.<br><br>This is Tempora's default error page. Please add a controller as indicated below to customize it.",
+	"BACK": "Back to Home",
+	"DOCUMENTATION": "Documentation"
 }

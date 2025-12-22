@@ -4,6 +4,7 @@ namespace Tempora;
 
 use App\Controllers\ErrorController;
 use Tempora\Controllers\Controller;
+use Tempora\Controllers\ErrorController as TemporaErrorController;
 use Tempora\Traits\UserTrait;
 use Tempora\Utils\Render\Render;
 use Tempora\Utils\Roles;
@@ -178,7 +179,19 @@ class Router {
 				->render()
 			;
 		} else {
-			// TODO: Simple system error page
+			echo (new Render(
+				buffer: (function (array $pageData): string {
+					ob_start();
+
+					(new TemporaErrorController)
+						->setPageData(pageData: $pageData)
+						->render()
+					;
+
+					return ob_get_clean();
+				})(pageData: $pageData),
+				pageData: $pageData
+			))->render();
 		}
 	}
 }

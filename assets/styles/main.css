@@ -1,0 +1,133 @@
+:root {
+	--background-color: #020617;
+	--box-background-color: #0f1729;
+	--title-text-color: #6366f1;
+	--text-color: #cbd5e1;
+	--button-background-color: #6366f1;
+	--button-background-hover-color: #818cf8;
+	--button-text-color: #f1f5f9;
+	--button-secondary-background-color: #00000000;
+	--button-secondary-background-hover-color: #1d2839;
+	--button-secondary-text-color: var(--button-text-color);
+	--button-secondary-border-color: #334155;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	font-family: Arial, Helvetica, sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
+	user-select: none;
+
+	main {
+		background-color: var(--background-color);
+		color: var(--text-color);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		max-width: 500px;
+		margin: auto;
+		gap: 20px;
+
+		h1 {
+			color: var(--title-text-color);
+			font-size: 96px;
+			font-weight: bold;
+			margin: 0;
+		}
+
+		h2 {
+			color: var(--text-color);
+			font-size: 24px;
+			font-weight: bold;
+			margin: 0;
+		}
+
+		p {
+			font-size: 18px;
+			margin: 0;
+		}
+
+		.code_block {
+			text-align: left;
+			tab-size: 4;
+			font-size: 16px;
+			line-height: 20px;
+			margin: 20px 0;
+			user-select: text;
+
+			pre {
+				margin: 0;
+
+				.blue {
+					color: #3b82f6;
+				}
+
+				.brown {
+					color: #ddbf79;
+				}
+
+				.yellow {
+					color: #eab308;
+				}
+
+				.pale_green {
+					color: #6ee7b7;
+				}
+
+				.green {
+					color: #10b94e;
+				}
+			}
+		}
+
+		.controls {
+			display: flex;
+			gap: 20px;
+
+			a {
+				background-color: var(--button-background-color);
+				color: var(--button-text-color);
+				transition: 200ms;
+				font-size: 16px;
+				font-weight: bold;
+				padding: 12px 24px;
+				border: none;
+				border-radius: 12px;
+				cursor: pointer;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+
+				&:hover {
+					background-color: var(--button-background-hover-color);
+					transition: 200ms;
+				}
+
+				&.secondary {
+					background-color: var(--button-secondary-background-color);
+					color: var(--button-secondary-text-color);
+					font-weight: normal;
+					border: solid 1px var(--button-secondary-border-color);
+
+					&:hover {
+						background-color: var(--button-secondary-background-hover-color);
+					}
+				}
+			}
+		}
+	}
+
+	.tile {
+		background-color: var(--box-background-color);
+		border-radius: 12px;
+		padding: 24px;
+	}
+}

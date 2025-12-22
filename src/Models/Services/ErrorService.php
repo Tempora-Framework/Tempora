@@ -3,6 +3,7 @@
 namespace Tempora\Models\Services;
 
 use App\Controllers\ErrorController;
+use Tempora\Controllers\ErrorController as TemporaErrorController;
 use Tempora\Enums\Path;
 use Tempora\Exceptions\TemporaException;
 use Tempora\Utils\Lang;
@@ -90,7 +91,25 @@ class ErrorService {
 					->render()
 				;
 			} else {
-				// TODO: Simple system error page
+				$pageData = [
+					"page_title" => APP_NAME . " - " . $lang->translate(key: "MAIN_ERROR"),
+					"error_code" => 500,
+					"error_message" => $lang->translate(key: "ERROR_SERVER")
+				];
+
+				echo (new Render(
+					buffer: (function (array $pageData): string {
+						ob_start();
+
+						(new TemporaErrorController)
+							->setPageData(pageData: $pageData)
+							->render()
+						;
+
+						return ob_get_clean();
+					})(pageData: $pageData),
+					pageData: $pageData
+				))->render();
 			}
 		}
 	}

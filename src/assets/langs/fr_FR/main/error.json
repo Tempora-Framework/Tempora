@@ -1,4 +1,7 @@
 {
 	"ERROR": "Erreur",
-	"ERROR_404": "La page que vous recherchez est introuvable."
+	"ERROR_404": "Page introuvable.",
+	"ERROR_DEFAULT_MESSAGE": "La page que vous essayez d’atteindre n’existe pas.<br><br>Ceci est la page d’erreur par défaut de Tempora. Merci d'ajouter un controller comme indiqué ci-dessous pour la personnaliser.",
+	"BACK": "Retour à l’accueil",
+	"DOCUMENTATION": "Documentation"
 }
