@@ -8,6 +8,16 @@ use Tempora\Exceptions\FileSystem\TemporaFormatFileException;
 use Throwable;
 
 class Image {
+	/**
+	 * Import and minify image from image's filename
+	 *
+	 * @param string $image
+	 *
+	 * @throws TemporaFormatFileException
+	 * @throws TemporaExistingFileException
+	 *
+	 * @return string
+	 */
 	public static function import(string $image): string {
 		if (DEBUG) {
 			$tempImagems = microtime(as_float: true);

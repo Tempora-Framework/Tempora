@@ -16,6 +16,11 @@ class ChronosSessionModule extends ChronosModule {
 		$this->icon = "ri-database-line";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -48,6 +53,11 @@ class ChronosSessionModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return int
+	 */
 	public function setDisplay(): string {
 		return count(value: $_SESSION);
 	}

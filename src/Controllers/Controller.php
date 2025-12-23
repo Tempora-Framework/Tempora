@@ -8,8 +8,18 @@ abstract class Controller {
 	private array $scripts = [];
 	private array $payloads = [];
 
+	/**
+	 * Render view
+	 *
+	 * @return void
+	 */
 	abstract public function render(): void;
 
+	/**
+	 * Include assets
+	 *
+	 * @return void
+	 */
 	public function includeAssets(): void {
 		foreach ($this->styles as $style) {
 			if (str_starts_with(haystack: $style, needle: "/assets/")) {
@@ -27,6 +37,11 @@ abstract class Controller {
 		}
 	}
 
+	/**
+	 * Include payloads
+	 *
+	 * @return void
+	 */
 	public function includePayloads(): void {
 		if (empty($this->payloads)) {
 			return;

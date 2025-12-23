@@ -36,6 +36,13 @@ showMoreTitles.forEach((title) => {
 	});
 });
 
+/**
+ * Toggles the visibility of additional lines in code block.
+ *
+ * @param {*} button
+ * 
+ * @returns
+ */
 function showMore(button) {
 	let codeBlock = button.closest(".file_container");
 

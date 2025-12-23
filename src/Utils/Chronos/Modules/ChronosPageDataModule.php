@@ -17,6 +17,11 @@ class ChronosPageDataModule extends ChronosModule {
 		$this->color = "#0c631b";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -49,6 +54,11 @@ class ChronosPageDataModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return int
+	 */
 	public function setDisplay(): string {
 		return count(value: $this->pageData);
 	}

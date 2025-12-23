@@ -16,6 +16,11 @@ class ChronosGetModule extends ChronosModule {
 		$this->icon = "ri-corner-down-left-line";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -47,6 +52,11 @@ class ChronosGetModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return string
+	 */
 	public function setDisplay(): string {
 		return count(value: $_GET);
 	}

@@ -29,6 +29,11 @@ class ChronosHttpCodeModule extends ChronosModule {
 		$this->additionalClass = $httpCodeClass . " bold";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -62,6 +67,11 @@ class ChronosHttpCodeModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return string
+	 */
 	public function setDisplay(): string {
 		return $this->displayValue;
 	}

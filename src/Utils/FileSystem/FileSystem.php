@@ -23,14 +23,29 @@ class FileSystem {
 		}
 	}
 
+	/**
+	 * Get human readable permissions
+	 *
+	 * @return string
+	 */
 	public function getHumanRedeablePermissions(): string {
 		return substr(string: sprintf("%o", $this->filePermissions), offset: -4);
 	}
 
+	/**
+	 * Get full path
+	 *
+	 * @return string
+	 */
 	public function getFullPath(): string {
 		return $this->filePath . DIRECTORY_SEPARATOR . $this->fileName . "." . $this->fileExtension;
 	}
 
+	/**
+	 * Create file
+	 *
+	 * @return void
+	 */
 	public function createFile(): void {
 		$fullPath = $this->getFullPath();
 
@@ -60,10 +75,20 @@ class FileSystem {
 		chmod(filename: $fullPath, permissions: $this->filePermissions ?? 0777);
 	}
 
+	/**
+	 * Get file content
+	 *
+	 * @return string
+	 */
 	public function getFileContent(): string {
 		return file_get_contents(filename: $this->getFullPath());
 	}
 
+	/**
+	 * Get file size
+	 *
+	 * @return int
+	 */
 	public function getFileSize(): int {
 		$filename = $this->getFullPath();
 		if (!file_exists(filename: $filename)) {

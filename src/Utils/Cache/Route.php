@@ -3,6 +3,14 @@
 namespace Tempora\Utils\Cache;
 
 class Route extends Cache {
+	/**
+	 * Get route path by name
+	 *
+	 * @param string $name
+	 * @param mixed  $options
+	 *
+	 * @return string
+	 */
 	public static function getPath(string $name, ?array $options = null): string {
 		$cache = new Cache(file: "routes.json");
 		$cache = $cache->get();

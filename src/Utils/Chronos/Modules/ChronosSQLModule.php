@@ -40,6 +40,11 @@ class ChronosSQLModule extends ChronosModule {
 		$this->additionalClass = ($this->tempSQLCount > 0 ? " yellow" : "");
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -76,6 +81,11 @@ class ChronosSQLModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return string
+	 */
 	public function setDisplay(): string {
 		return $GLOBALS["chronos"]["sql_count"] - $this->chronosSQLCount . " " . ($this->tempSQLCount > 0 ? "(" . $this->tempSQLCount . '<i class="ri-arrow-up-double-line"></i>)' : "");
 	}

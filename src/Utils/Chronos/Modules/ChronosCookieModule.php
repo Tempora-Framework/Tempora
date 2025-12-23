@@ -16,6 +16,11 @@ class ChronosCookieModule extends ChronosModule {
 		$this->icon = "ri-cake-3-line";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -49,6 +54,11 @@ class ChronosCookieModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return int
+	 */
 	public function setDisplay(): string {
 		return count(value: $_COOKIE);
 	}

@@ -23,6 +23,11 @@ class ChronosLangModule extends ChronosModule {
 		$this->color = "#6e42c1";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -57,6 +62,11 @@ class ChronosLangModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return string
+	 */
 	public function setDisplay(): string {
 		return $this->rest . "/" . $this->total;
 	}

@@ -44,6 +44,11 @@ class ChronosUserModule extends ChronosModule {
 		$this->color = "#009b6cff";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -85,6 +90,11 @@ class ChronosUserModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return string
+	 */
 	public function setDisplay(): string {
 		return "";
 	}

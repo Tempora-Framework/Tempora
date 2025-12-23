@@ -70,6 +70,13 @@ class RouterFactory extends Router {
 		);
 	}
 
+	/**
+	 * Get controller instance
+	 *
+	 * @param string $controller
+	 *
+	 * @return object
+	 */
 	private function getController(string $controller): Controller {
 		$controller = str_replace(search: APP_DIR . "/src/Controllers/", replace: "", subject: $controller);
 		$controller = str_replace(search: ".php", replace: "", subject: $controller);
@@ -78,6 +85,13 @@ class RouterFactory extends Router {
 		return new ("App\\Controllers\\" . $controller);
 	}
 
+	/**
+	 * Get controller attributes
+	 *
+	 * @param Controller $controller
+	 *
+	 * @return array
+	 */
 	private function getAttributes(Controller $controller): array {
 		$reflection = new ReflectionObject(object: $controller);
 

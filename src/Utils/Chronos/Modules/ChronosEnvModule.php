@@ -17,6 +17,11 @@ class ChronosEnvModule extends ChronosModule {
 		$this->color = "#c55818ff";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -48,6 +53,11 @@ class ChronosEnvModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return string
+	 */
 	public function setDisplay(): string {
 		return count(value: $_ENV);
 	}

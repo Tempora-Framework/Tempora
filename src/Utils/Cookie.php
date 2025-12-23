@@ -11,6 +11,11 @@ class Cookie {
 	private bool $secure = false;
 	private bool $httponly = false;
 
+	/**
+	 * Send cookie
+	 *
+	 * @return void
+	 */
 	public function send(): void {
 		if (!isset($_SERVER["HTTPS"])) {
 			$this->secure = false;

@@ -21,6 +21,11 @@ class ChronosMsModule extends ChronosModule {
 		$this->icon = "ri-time-line";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -133,6 +138,11 @@ class ChronosMsModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return string
+	 */
 	public function setDisplay(): string {
 		return $this->time . "ms";
 	}

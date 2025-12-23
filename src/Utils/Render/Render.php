@@ -29,6 +29,13 @@ class Render {
 		}
 	}
 
+	/**
+	 * Inject Chronos
+	 *
+	 * @param array $pageData
+	 *
+	 * @return void
+	 */
 	private function injectChronos(array $pageData): void {
 		$chronos = (function (array $pageData): string {
 			ob_start();

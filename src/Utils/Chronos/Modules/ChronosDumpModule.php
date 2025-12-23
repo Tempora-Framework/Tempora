@@ -30,6 +30,11 @@ class ChronosDumpModule extends ChronosModule {
 		$this->additionalClass = "yellow";
 	}
 
+	/**
+	 * Get content
+	 *
+	 * @return ElementBuilder
+	 */
 	public function getContent(): ElementBuilder {
 		return (new ElementBuilder)
 			->setElement(element: "table")
@@ -74,6 +79,11 @@ class ChronosDumpModule extends ChronosModule {
 		;
 	}
 
+	/**
+	 * Set display
+	 *
+	 * @return string
+	 */
 	public function setDisplay(): string {
 		return count(value: $GLOBALS["chronos"]["dumps"]);
 	}

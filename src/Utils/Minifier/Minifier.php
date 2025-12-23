@@ -81,6 +81,11 @@ class Minifier {
 		}
 	}
 
+	/**
+	 * Clean old minified files
+	 *
+	 * @return void
+	 */
 	public static function cleanOldFiles(): void {
 		$files = array_diff(
 			System::getAllFiles(path: Path::APP_ASSETS->value),
@@ -112,6 +117,13 @@ class Minifier {
 		}
 	}
 
+	/**
+	 * Process JSON file
+	 *
+	 * @param string $filePath
+	 *
+	 * @return void
+	 */
 	private function processJson(string $filePath): void {
 		$content = file_get_contents(filename: $filePath);
 		$decoded = json_decode(json: $content, associative: true);
