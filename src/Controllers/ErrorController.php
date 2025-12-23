@@ -12,10 +12,7 @@ class ErrorController extends Controller {
 
 		http_response_code(response_code: $pageData["error_code"]);
 
-		$this->setStyles(styles: [
-			"/vendor/tempora-framework/tempora/assets/styles/main.css",
-			"/vendor/tempora-framework/tempora/assets/styles/remixicon.css"
-		]);
+		$this->setStyles(styles: ["/vendor/tempora-framework/tempora/assets/styles/main.css"]);
 
 		require Path::LAYOUT->value . "/header.php";
 

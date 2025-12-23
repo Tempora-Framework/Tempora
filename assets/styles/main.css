@@ -12,6 +12,15 @@
 	--button-secondary-border-color: #334155;
 }
 
+@keyframes rotation {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -41,6 +50,7 @@ body {
 			font-size: 96px;
 			font-weight: bold;
 			margin: 0;
+			animation: rotation 30s linear infinite;
 		}
 
 		h2 {
