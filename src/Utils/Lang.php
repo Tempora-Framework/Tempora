@@ -24,8 +24,8 @@ class Lang {
 	/**
 	 * Lang function
 	 *
-	 * @param string $key  Language's key out of language's file
-	 * @param array  $data Line replace text
+	 * @param string              $key  Language's key out of language's file
+	 * @param array<string,mixed> $data Line replace text
 	 *
 	 * @return string
 	 */

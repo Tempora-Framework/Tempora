@@ -115,7 +115,7 @@ class ElementBuilder {
 	/**
 	 * Add attributs
 	 *
-	 * @param array $attributs
+	 * @param array<string,mixed> $attributs
 	 *
 	 * @return static
 	 */
@@ -137,7 +137,7 @@ class ElementBuilder {
 	/**
 	 * Set the value of accessRoles
 	 *
-	 * @param array $accessRoles
+	 * @param array<int> $accessRoles
 	 *
 	 * @return static
 	 */

@@ -8,8 +8,8 @@ class Roles {
 	/**
 	 * Check for permissions
 	 *
-	 * @param array $userRoles
-	 * @param array $allowRoles
+	 * @param array<int> $userRoles
+	 * @param array<int> $allowRoles
 	 *
 	 * @return bool
 	 */

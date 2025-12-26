@@ -32,7 +32,7 @@ class Render {
 	/**
 	 * Inject Chronos
 	 *
-	 * @param array $pageData
+	 * @param array<string,mixed> $pageData
 	 *
 	 * @return void
 	 */

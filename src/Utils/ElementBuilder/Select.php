@@ -34,7 +34,7 @@ class Select extends ElementBuilder {
 	/**
 	 * Set the value of options
 	 *
-	 * @param array $options
+	 * @param array<string,mixed> $options
 	 *
 	 * @return static
 	 */

@@ -66,7 +66,7 @@ abstract class Controller {
 	/**
 	 * Set the value of pageData
 	 *
-	 * @param array $pageData
+	 * @param array<string,mixed> $pageData
 	 *
 	 * @return static
 	 */
@@ -88,7 +88,7 @@ abstract class Controller {
 	/**
 	 * Set the value of styles
 	 *
-	 * @param array $styles
+	 * @param array<string> $styles
 	 *
 	 * @return static
 	 */
@@ -110,7 +110,7 @@ abstract class Controller {
 	/**
 	 * Set the value of scripts
 	 *
-	 * @param array $scripts
+	 * @param array<string> $scripts
 	 *
 	 * @return static
 	 */
@@ -132,7 +132,7 @@ abstract class Controller {
 	/**
 	 * Set the value of payloads
 	 *
-	 * @param array $payloads
+	 * @param array<mixed> $payloads
 	 *
 	 * @return static
 	 */

@@ -23,10 +23,10 @@ class Router {
 	/**
 	 * Add new route
 	 *
-	 * @param string     $url
-	 * @param Controller $controller
-	 * @param string     $method
-	 * @param array      $pageData
+	 * @param string              $url
+	 * @param Controller          $controller
+	 * @param string              $method
+	 * @param array<string,mixed> $pageData
 	 *
 	 * @return void
 	 */
@@ -39,9 +39,9 @@ class Router {
 	/**
 	 * Render view
 	 *
-	 * @param string     $url
-	 * @param Controller $controller
-	 * @param array      $pageData
+	 * @param string              $url
+	 * @param Controller          $controller
+	 * @param array<string,mixed> $pageData
 	 *
 	 * @return void
 	 */
@@ -111,8 +111,8 @@ class Router {
 	/**
 	 * Webpage render
 	 *
-	 * @param Controller $controller
-	 * @param array      $pageData
+	 * @param Controller          $controller
+	 * @param array<string,mixed> $pageData
 	 *
 	 * @return string
 	 */
@@ -149,7 +149,7 @@ class Router {
 	/**
 	 * Check access roles
 	 *
-	 * @param array $accessRoles
+	 * @param array<int> $accessRoles
 	 *
 	 * @return bool
 	 */
@@ -168,7 +168,7 @@ class Router {
 	/**
 	 * Error page
 	 *
-	 * @param array $pageData
+	 * @param array<string,mixed> $pageData
 	 *
 	 * @return void
 	 */

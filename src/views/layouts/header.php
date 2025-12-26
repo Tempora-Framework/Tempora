@@ -1,11 +1,11 @@
 <?php
 use Tempora\Utils\Lang;
 
-$lang = new Lang(filePath: "main/main");
+$lang = new Lang(filePath: "main/error", source: TEMPORA_DIR . "/src/assets");
 ?>
 
 <!DOCTYPE html>
-<html lang="<?= $lang->translate(key: "MAIN_LANG") ?>" data-theme="<?= $_ENV["DEFAULT_THEME"] ?>">
+<html lang="<?= $lang->translate(key: "LANG") ?>" data-theme="<?= $_ENV["DEFAULT_THEME"] ?>">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +22,6 @@ $lang = new Lang(filePath: "main/main");
 	<main>
 	<noscript>
 		<div class="no_script">
-			<?= $lang->translate(key: "MAIN_NO_SCRIPT") ?>
+			<?= $lang->translate(key: "NO_SCRIPT") ?>
 		</div>
 	</noscript>
