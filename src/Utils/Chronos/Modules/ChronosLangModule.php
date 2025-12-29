@@ -39,6 +39,7 @@ class ChronosLangModule extends ChronosModule {
 						$tableContent = "
 							<thead>
 								<tr>
+									<th>" . $this->lang->translate(key: "CHRONOS_LOCATION") . "</th>
 									<th>" . $this->lang->translate(key: "CHRONOS_NAME") . "</th>
 									<th>" . $this->lang->translate(key: "CHRONOS_VALUE") . "</th>
 								</tr>
@@ -46,14 +47,17 @@ class ChronosLangModule extends ChronosModule {
 							<tbody>
 						";
 
-						foreach ($GLOBALS["chronos"]["langs"] as $key => $value) {
-							$tableContent .= "
-									<tr>
-										<td " . ($value === $key ? " class='red bold'" : "") . ">" . $key . "</td>
-										<td " . ($value === $key ? " class='red bold'" : "") . ">" . $value . "</td>
-									</tr>
-								</tbody>
-							";
+						foreach ($GLOBALS["chronos"]["langs"] as $value) {
+							foreach ($value as $key => $translation) {
+								$tableContent .= "
+										<tr>
+											<td " . ($key === $translation["translation"] ? " class='red bold'" : "") . ">" . $translation["source"] . "</td>
+											<td " . ($key === $translation["translation"] ? " class='red bold'" : "") . ">" . $key . "</td>
+											<td " . ($key === $translation["translation"] ? " class='red bold'" : "") . ">" . $translation["translation"] . "</td>
+										</tr>
+									</tbody>
+								";
+							}
 						}
 
 						return $tableContent;

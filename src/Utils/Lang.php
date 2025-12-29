@@ -8,8 +8,10 @@ class Lang {
 	private string $langKey;
 	private array $langs = [];
 	private string $source;
+	private string $filePath;
 
 	public function __construct(string $filePath, ?string $source = null) {
+		$this->filePath = $filePath;
 		$this->source = ($source ?? Path::APP_ASSETS_MIN->value) . "/langs";
 
 		$this->langKey = MAIN_LANG ?? "en_GB";
@@ -50,7 +52,10 @@ class Lang {
 			DEBUG
 			&& $this->source == (Path::APP_ASSETS_MIN->value . "/langs")
 		) {
-			$GLOBALS["chronos"]["langs"][$key] = $result;
+			$id = $this->filePath . "_" . $this->langKey;
+
+			$GLOBALS["chronos"]["langs"][$id][$key]["source"] = $this->filePath;
+			$GLOBALS["chronos"]["langs"][$id][$key]["translation"] = $result;
 			$GLOBALS["chronos"]["lang_count"]++;
 		}
 
