@@ -4,6 +4,7 @@ use Tempora\Utils\Chronos\Modules\ChronosCookieModule;
 use Tempora\Utils\Chronos\Modules\ChronosDumpModule;
 use Tempora\Utils\Chronos\Modules\ChronosEnvModule;
 use Tempora\Utils\Chronos\Modules\ChronosGetModule;
+use Tempora\Utils\Chronos\Modules\ChronosHeadersModule;
 use Tempora\Utils\Chronos\Modules\ChronosHttpCodeModule;
 use Tempora\Utils\Chronos\Modules\ChronosLangModule;
 use Tempora\Utils\Chronos\Modules\ChronosMsModule;
@@ -67,6 +68,7 @@ foreach ($assetsFiles as $assetFile) {
 				new ChronosServerModule,
 				new ChronosEnvModule,
 				new ChronosPageDataModule,
+				new ChronosHeadersModule,
 				new ChronosGetModule,
 				new ChronosPostModule,
 				new ChronosCookieModule,

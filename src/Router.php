@@ -124,6 +124,10 @@ class Router {
 			->render()
 		;
 
+		foreach ($controller->getHeaders() as $header) {
+			header(header: $header);
+		}
+
 		return ob_get_clean();
 	}
 

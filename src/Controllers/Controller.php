@@ -4,6 +4,7 @@ namespace Tempora\Controllers;
 
 abstract class Controller {
 	private array $pageData = [];
+	private array $headers = [];
 	private array $styles = [];
 	private array $scripts = [];
 	private array $payloads = [];
@@ -138,6 +139,28 @@ abstract class Controller {
 	 */
 	public function setPayloads(array $payloads): static {
 		$this->payloads = $payloads;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of headers
+	 *
+	 * @return array
+	 */
+	public function getHeaders(): array {
+		return $this->headers;
+	}
+
+	/**
+	 * Set the value of headers
+	 *
+	 * @param array $headers
+	 *
+	 * @return self
+	 */
+	public function setHeaders(array $headers): self {
+		$this->headers = $headers;
 
 		return $this;
 	}

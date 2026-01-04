@@ -38,22 +38,24 @@ class RouterFactory extends Router {
 			if (count(value: $routeAttributes) > 0) {
 				$routeAttribute = $routeAttributes[0]->newInstance();
 
+				$pageData = [
+					"page_name" => $routeAttribute->name,
+					"page_title" => ($routeAttribute->translateTitle && $routeAttribute->translateFile) ? APP_NAME . " - " . (new Lang(filePath: $routeAttribute->translateFile))->translate(key: $routeAttribute->title) : $routeAttribute->title,
+					"page_description" => $routeAttribute->description,
+					"page_needLoginToBe" => $routeAttribute->needLoginToBe,
+					"page_accessRoles" => $routeAttribute->accessRoles ? array_map(
+						callback: function ($role): mixed {
+							return $role->value;
+						},
+						array: $routeAttribute->accessRoles
+					) : null
+				];
+
 				parent::check(
 					url: $routeAttribute->path,
 					controller: $controller,
 					method: $routeAttribute->method,
-					pageData: [
-						"page_name" => $routeAttribute->name,
-						"page_title" => ($routeAttribute->translateTitle && $routeAttribute->translateFile) ? APP_NAME . " - " . (new Lang(filePath: $routeAttribute->translateFile))->translate(key: $routeAttribute->title) : $routeAttribute->title,
-						"page_description" => $routeAttribute->description,
-						"page_needLoginToBe" => $routeAttribute->needLoginToBe,
-						"page_accessRoles" => $routeAttribute->accessRoles ? array_map(
-							callback: function ($role): mixed {
-								return $role->value;
-							},
-							array: $routeAttribute->accessRoles
-						) : null
-					]
+					pageData: $pageData
 				);
 			}
 

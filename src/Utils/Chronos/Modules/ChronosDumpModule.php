@@ -28,6 +28,7 @@ class ChronosDumpModule extends ChronosModule {
 		$this->title = $this->lang->translate(key: "CHRONOS_DUMPS_TITLE");
 		$this->icon = "ri-crosshair-2-line";
 		$this->additionalClass = "yellow";
+		$this->color = "#f2c811ff";
 	}
 
 	/**

@@ -54,7 +54,6 @@ class Tempora {
 
 		// Headers
 		header(header: "X-Powered-By: Tempora v" . TEMPORA_VERSION, replace: true);
-		header(header: "Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
 
 		// Errors
 		$this->errorHandler();
