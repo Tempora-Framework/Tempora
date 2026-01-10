@@ -22,7 +22,8 @@ class Render {
 		}
 
 		if (
-			DEBUG
+			defined(constant_name: "DEBUG")
+			&& DEBUG
 			&& !in_array(needle: "Content-Type: application/json", haystack: headers_list())
 		) {
 			$this->injectChronos(pageData: $pageData);

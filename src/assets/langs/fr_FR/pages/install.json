@@ -1,0 +1,10 @@
+{
+	"INSTALL_TITLE": "Installation",
+	"INSTALL_MISSING_ENV": "Le fichier .env est manquant. Veuillez le créer pour continuer l'installation.",
+	"INSTALL_DATABASE": "Veuillez configurer la connexion à la base de données.",
+	"INSTALL_CACHE_PERMISSIONS": "Le répertoire /src doit être accessible en écriture. Veuillez ajuster les permissions.",
+	"INSTALL_ASSETS_PERMISSIONS": "Le répertoire /public doit être accessible en écriture. Veuillez ajuster les permissions.",
+	"INSTALL_IMAGES_PERMISSIONS": "Le répertoire /public doit être accessible en écriture. Veuillez ajuster les permissions.",
+	"REFRESH": "Rafraîchir",
+	"DOCUMENTATION": "Documentation"
+}

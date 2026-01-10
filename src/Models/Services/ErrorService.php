@@ -30,7 +30,7 @@ class ErrorService {
 				ob_start();
 
 				echo "<style>";
-				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/error.css");
+				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/error_report.css");
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/chronos.css");
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/remixicon.css");
 				echo "</style>";

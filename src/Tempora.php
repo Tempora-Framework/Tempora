@@ -3,11 +3,15 @@
 namespace Tempora;
 
 use Composer\InstalledVersions;
-use Dotenv\Dotenv;
 use Tempora\Enums\Path;
 use Tempora\Exceptions\TemporaException;
 use Tempora\Factories\RouterFactory;
-use Tempora\Models\Database;
+use Tempora\Installation\Installation;
+use Tempora\Installation\Process\InstallationAssetsDirectory;
+use Tempora\Installation\Process\InstallationCacheDirectory;
+use Tempora\Installation\Process\InstallationDatabase;
+use Tempora\Installation\Process\InstallationEnv;
+use Tempora\Installation\Process\InstallationImagesDirectory;
 use Tempora\Models\Services\ErrorService;
 use Tempora\Traits\UserTrait;
 use Tempora\Utils\Cookie;
@@ -18,6 +22,8 @@ use Tempora\Utils\System;
 class Tempora {
 	use UserTrait;
 
+	private array $installSteps = [];
+
 	public function __construct(array $modules = []) {
 		// Paths
 		define(constant_name: "TEMPORA_DIR", value: __DIR__ . "/..");
@@ -25,15 +31,28 @@ class Tempora {
 			define(constant_name: "APP_DIR", value: $_SERVER["DOCUMENT_ROOT"] . "/..");
 		}
 
-		// Dotenv
-		if (!is_file(filename: APP_DIR . "/.env")) {
-			echo "Please create .env file from .env.example at application root.";
-			exit;
-		}
-		Dotenv::createImmutable(paths: APP_DIR)->load();
+		ini_set(option: "display_errors", value: 1);
+		ini_set(option: "display_startup_errors", value: 1);
+		error_reporting(error_level: E_ALL);
+
+		// Install Check
+		new Installation(checks: [
+			// PHP Version
+			new InstallationEnv,
+			new InstallationDatabase,
+			// Create database tables
+			new InstallationCacheDirectory,
+			new InstallationAssetsDirectory,
+			// PHP Extensions
+			new InstallationImagesDirectory,
+			// Create admin user
+		]);
 
 		// Constants
 		$this->const();
+
+		// Load functions
+		$this->functions();
 
 		if (DEBUG) {
 			$this->chronos();
@@ -58,16 +77,11 @@ class Tempora {
 		// Errors
 		$this->errorHandler();
 
-		$this->functions();
-
 		// Minify assets
 		$this->minify();
 
 		// Languages
 		$this->lang();
-
-		// Database
-		$this->database();
 
 		// Token
 		$this->jwt();
@@ -199,15 +213,5 @@ class Tempora {
 				System::redirect();
 			}
 		}
-	}
-
-	/**
-	 * Database
-	 *
-	 * @return void
-	 */
-	public function database(): void {
-		$database = new Database;
-		define(constant_name: "DATABASE", value: $database->getConnection());
 	}
 }

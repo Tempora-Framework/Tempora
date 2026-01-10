@@ -1,6 +1,4 @@
 {
-	"LANG": "fr_FR",
-	"NO_SCRIPT": "JavaScript est désactivé dans votre navigateur. Veuillez activer JavaScript pour une meilleure expérience.",
 	"ERROR": "Erreur",
 	"ERROR_404": "Page introuvable.",
 	"ERROR_DEFAULT_MESSAGE": "La page que vous essayez d’atteindre n’existe pas.<br><br>Ceci est la page d’erreur par défaut de Tempora. Merci d'ajouter un controller comme indiqué ci-dessous pour la personnaliser.",

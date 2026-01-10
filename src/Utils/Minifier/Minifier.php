@@ -18,10 +18,6 @@ class Minifier {
 		$this->fileName = pathinfo(path: $file, flags: PATHINFO_FILENAME);
 		$this->fileExtension = pathinfo(path: $file, flags: PATHINFO_EXTENSION);
 		$this->filePath = str_replace(search: Path::APP_ASSETS->value, replace: "", subject: pathinfo(path: $file, flags: PATHINFO_DIRNAME));
-
-		if (!is_dir(filename: Path::APP_ASSETS->value)) {
-			mkdir(directory: Path::APP_ASSETS->value);
-		}
 	}
 
 	/**

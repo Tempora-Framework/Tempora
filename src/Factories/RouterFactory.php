@@ -63,7 +63,7 @@ class RouterFactory extends Router {
 		}
 
 		$lang = new Lang(filePath: "main/error", source: TEMPORA_DIR . "/src/assets");
-		parent::error(
+		Router::error(
 			pageData: [
 				"page_title" => APP_NAME . " - " . $lang->translate(key: "ERROR"),
 				"error_code" => 404,

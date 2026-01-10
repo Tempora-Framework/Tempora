@@ -18,6 +18,6 @@
 </div>
 
 <div class="controls">
-	<a href="/"><?= $pageLang->translate(key: "BACK") ?></a>
-	<a href="https://tempora.erickpaoletti.fr/documentation" target="_blank" class="secondary"><?= $pageLang->translate(key: "DOCUMENTATION") ?></a>
+	<a href="/"><i class="ri-home-2-line"></i> <?= $pageLang->translate(key: "BACK") ?></a>
+	<a href="https://tempora.erickpaoletti.fr/documentation" target="_blank" class="secondary"><i class="ri-file-search-line"></i> <?= $pageLang->translate(key: "DOCUMENTATION") ?></a>
 </div>

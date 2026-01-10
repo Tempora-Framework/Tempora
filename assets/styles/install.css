@@ -1,24 +1,31 @@
 :root {
-	--background-color: #020617;
-	--box-background-color: #0f1729;
-	--title-text-color: #6366f1;
-	--text-color: #cbd5e1;
-	--button-background-color: #6366f1;
-	--button-background-hover-color: #818cf8;
-	--button-text-color: #f1f5f9;
-	--button-secondary-background-color: #00000000;
-	--button-secondary-background-hover-color: #1d2839;
-	--button-secondary-text-color: var(--button-text-color);
-	--button-secondary-border-color: #334155;
+    --background-color: #020617;
+    --box-background-color: #0f1729;
+    --title-text-color: #6366f1;
+    --text-color: #cbd5e1;
+    --muted-text-color: #94a3b8;
+    --button-background-color: #6366f1;
+    --button-background-hover-color: #818cf8;
+    --button-text-color: #f1f5f9;
+    --button-secondary-background-color: #00000000;
+    --button-secondary-background-hover-color: #1d2839;
+    --button-secondary-text-color: #f1f5f9;
+    --button-secondary-border-color: #334155;
+    --border-color: #1e293b;
+    --failed-color: #ef4444;
+    --failed-dark: #7f1d1d;
 }
 
-@keyframes rotation {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -26,7 +33,7 @@ body {
 	padding: 0;
 	background-color: var(--background-color);
 	color: var(--text-color);
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Inter', sans-serif;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -41,13 +48,13 @@ body {
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		max-width: 500px;
+		max-width: 60%;
 		margin: auto;
 		gap: 20px;
 
 		h1 {
 			color: var(--title-text-color);
-			font-size: 96px;
+			font-size: 56px;
 			font-weight: bold;
 			margin: 0;
 			animation: rotation 30s linear infinite;
@@ -65,35 +72,47 @@ body {
 			margin: 0;
 		}
 
-		.code_block {
+		.steps {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: grid;
+			gap: 1rem;
 			text-align: left;
-			tab-size: 4;
-			font-size: 16px;
-			line-height: 20px;
-			margin: 20px 0;
 			user-select: text;
 
-			pre {
-				margin: 0;
+			.step {
+				display: flex;
+				align-items: center;
+				gap: 20px;
+				padding: 15px 20px;
+				border-radius: 12px;
+				border: 1px solid var(--border-color);
+				background: var(--background-color);
 
-				.blue {
-					color: #3b82f6;
+				.badge {
+					min-width: 28px;
+					min-height: 28px;
+					width: 28px;
+					height: 28px;
+					border-radius: 50%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 18px;
+					font-weight: bold;
+					background: var(--failed-color);
+					color: var(--failed-dark);
 				}
 
-				.brown {
-					color: #ddbf79;
+				h3 {
+					margin: 0 0 0.25rem;
+					font-size: 1.05rem;
 				}
 
-				.yellow {
-					color: #eab308;
-				}
-
-				.pale_green {
-					color: #6ee7b7;
-				}
-
-				.green {
-					color: #10b94e;
+				p {
+					margin: 0;
+					font-size: 0.95rem;
 				}
 			}
 		}
@@ -101,6 +120,10 @@ body {
 		.controls {
 			display: flex;
 			gap: 20px;
+
+			i {
+				margin-right: 8px;
+			}
 
 			a {
 				background-color: var(--button-background-color);
@@ -139,5 +162,7 @@ body {
 		background-color: var(--box-background-color);
 		border-radius: 12px;
 		padding: 24px;
+		margin-top: 20px;
+		margin-bottom: 20px;
 	}
 }

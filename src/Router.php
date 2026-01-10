@@ -176,7 +176,7 @@ class Router {
 	 *
 	 * @return void
 	 */
-	public function error(array $pageData): void {
+	public static function error(array $pageData): void {
 		if (class_exists(class: ErrorController::class)) {
 			(new ErrorController)
 				->setPageData(pageData: $pageData)
