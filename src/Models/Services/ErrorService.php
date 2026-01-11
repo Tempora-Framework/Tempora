@@ -29,10 +29,11 @@ class ErrorService {
 			$render = function (Throwable $exception): string {
 				ob_start();
 
+				echo '<link href="' . TEMPORA_REMIXICON_CSS . '" rel="stylesheet">';
+				echo '<link href="' . TEMPORA_INTER_FONT . '" rel="stylesheet">';
 				echo "<style>";
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/error_report.css");
 				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/chronos.css");
-				echo file_get_contents(filename: TEMPORA_DIR . "/assets/styles/remixicon.css");
 				echo "</style>";
 
 				include Path::LAYOUT->value . "/error.php";

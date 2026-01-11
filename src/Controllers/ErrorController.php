@@ -13,7 +13,8 @@ class ErrorController extends Controller {
 		http_response_code(response_code: $pageData["error_code"]);
 
 		$this->setStyles(styles: [
-			"https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css"
+			TEMPORA_REMIXICON_CSS,
+			TEMPORA_INTER_FONT
 		]);
 
 		echo "<style>";

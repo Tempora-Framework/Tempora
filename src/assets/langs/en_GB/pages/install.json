@@ -1,6 +1,7 @@
 {
 	"INSTALL_TITLE": "Installation",
-	"INSTALL_MISSING_ENV": "The .env file is missing. Please create it to proceed with the installation.",
+	"INSTALL_ENV": "The .env file is missing.",
+	"INSTALL_ENV_MISSING": "The .env file is missing. Please create it to continue the installation.",
 	"INSTALL_DATABASE": "Please set up the database connection.",
 	"INSTALL_CACHE_PERMISSIONS": "/src directory must be writable. Please adjust the permissions.",
 	"INSTALL_ASSETS_PERMISSIONS": "/public directory must be writable. Please adjust the permissions.",

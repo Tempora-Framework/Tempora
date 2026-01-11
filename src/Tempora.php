@@ -30,6 +30,9 @@ class Tempora {
 		if (!defined(constant_name: "APP_DIR")) {
 			define(constant_name: "APP_DIR", value: $_SERVER["DOCUMENT_ROOT"] . "/..");
 		}
+		define(constant_name: "TEMPORA_VERSION", value: InstalledVersions::getPrettyVersion(packageName: "tempora-framework/tempora"));
+		define(constant_name: "TEMPORA_REMIXICON_CSS", value: "https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css");
+		define(constant_name: "TEMPORA_INTER_FONT", value: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 		ini_set(option: "display_errors", value: 1);
 		ini_set(option: "display_startup_errors", value: 1);
@@ -48,8 +51,8 @@ class Tempora {
 			// Create admin user
 		]);
 
-		// Constants
-		$this->const();
+		define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
+		define(constant_name: "DEBUG", value: $_ENV["DEBUG"] == 1);
 
 		// Load functions
 		$this->functions();
@@ -96,17 +99,6 @@ class Tempora {
 		(new RouterFactory(url: strtok(string: $_SERVER["REQUEST_URI"], token: "?"), modules: $modules));
 
 		ob_end_flush();
-	}
-
-	/**
-	 * Constants
-	 *
-	 * @return void
-	 */
-	public function const(): void {
-		define(constant_name: "TEMPORA_VERSION", value: InstalledVersions::getPrettyVersion(packageName: "tempora-framework/tempora"));
-		define(constant_name: "APP_NAME", value: $_ENV["APP_NAME"]);
-		define(constant_name: "DEBUG", value: $_ENV["DEBUG"] == 1);
 	}
 
 	/**

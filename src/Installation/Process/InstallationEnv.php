@@ -9,7 +9,7 @@ use Throwable;
 class InstallationEnv extends InstallationCheck {
 	public string $title = "INSTALL_ENV";
 	public bool $status = true;
-	public string $message = "INSTALL_MISSING_ENV";
+	public string $message = "INSTALL_ENV_MISSING";
 
 	public function __construct() {
 		try {

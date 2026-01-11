@@ -11,7 +11,8 @@ class InstallController extends Controller {
 		$pageLang = new Lang(filePath: "pages/install", source: TEMPORA_DIR . "/src/assets");
 
 		$this->setStyles(styles: [
-			"https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css"
+			TEMPORA_REMIXICON_CSS,
+			TEMPORA_INTER_FONT
 		]);
 
 		echo "<style>";

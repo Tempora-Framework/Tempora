@@ -12,14 +12,6 @@
 	--button-secondary-border-color: #334155;
 }
 
-@font-face {
-	font-family: 'Inter';
-	font-style: normal;
-	font-weight: 100 900;
-	font-display: swap;
-	src: url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-}
-
 @keyframes rotation {
 	from {
 		transform: rotate(0deg);
@@ -34,7 +26,7 @@ body {
 	padding: 0;
 	background-color: var(--background-color);
 	color: var(--text-color);
-	font-family: 'Inter', sans-serif;
+	font-family: "Inter", sans-serif;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

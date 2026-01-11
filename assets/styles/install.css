@@ -14,14 +14,9 @@
     --border-color: #1e293b;
     --failed-color: #ef4444;
     --failed-dark: #7f1d1d;
-}
-
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+	--success-color: #22c55e;
+	--success-dark: #14532d;
+	--text-color-done: #6b7280;
 }
 
 * {
@@ -33,7 +28,7 @@ body {
 	padding: 0;
 	background-color: var(--background-color);
 	color: var(--text-color);
-	font-family: 'Inter', sans-serif;
+	font-family: "Inter", sans-serif;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -103,11 +98,21 @@ body {
 					font-weight: bold;
 					background: var(--failed-color);
 					color: var(--failed-dark);
+
+					&.failed {
+						background: var(--success-color);
+						color: var(--success-dark);
+					}
 				}
 
 				h3 {
 					margin: 0 0 0.25rem;
 					font-size: 1.05rem;
+
+					&.done {
+						font-weight: normal;
+						color: var(--text-color-done);
+					}
 				}
 
 				p {

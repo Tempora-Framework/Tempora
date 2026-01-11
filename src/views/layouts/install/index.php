@@ -9,10 +9,10 @@
 
 	<?php foreach ($pageData["install_needed"] as $step) { ?>
 		<li class="step">
-			<i class="badge ri-close-line"></i>
+			<i class="badge <?= $step["status"] === false ?: "failed" ?> ri-<?= $step["status"] === false ? "close" : "check" ?>-line"></i>
 			<div>
-			<h3><?= $pageLang->translate(key: $step["title"]) ?></h3>
-			<p><?= $pageLang->translate(key: $step["message"]) ?></p>
+				<h3 <?= $step["status"] === false ? "" : 'class="done"' ?>><?= $pageLang->translate(key: $step["title"]) ?></h3>
+				<p><?= $step["status"] === false ? $pageLang->translate(key: $step["message"]) : "" ?></p>
 			</div>
 		</li>
 	<?php } ?>

@@ -19,14 +19,20 @@ class Installation {
 		foreach ($checks as $check) {
 			if ($check->status === false) {
 				$this->steps[] = [
+					"status" => false,
 					"title" => $check->title,
 					"message" => $check->message
+				];
+			} else {
+				$this->steps[] = [
+					"status" => true,
+					"title" => $check->title
 				];
 			}
 		}
 
 		if (
-			!empty($this->steps)
+			!$this->checkInstallation()
 			&& (
 				(
 					!empty($_ENV)
@@ -39,7 +45,7 @@ class Installation {
 		) {
 			$this->render();
 		} else {
-			if (!empty($this->steps)) {
+			if (!$this->checkInstallation()) {
 				Router::error(
 					pageData: [
 						"page_title" => "Tempora - Installation Required",
@@ -51,6 +57,20 @@ class Installation {
 				exit;
 			}
 		}
+	}
+
+	private function checkInstallation(): bool {
+		$status = true;
+
+		foreach ($this->steps as $step) {
+			if ($step["status"] === false) {
+				$status = false;
+
+				break;
+			}
+		}
+
+		return $status;
 	}
 
 	private function render(): void {

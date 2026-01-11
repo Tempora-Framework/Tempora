@@ -19,7 +19,6 @@ use Tempora\Utils\ElementBuilder\ElementBuilder;
 
 $assetsFiles = [
 	"styles/chronos.css",
-	"styles/remixicon.css",
 	"scripts/Chronos/Chronos.js",
 	"scripts/Chronos/Utils.js",
 	"scripts/Chronos/Windows.js",
@@ -52,6 +51,8 @@ foreach ($assetsFiles as $assetFile) {
 ?>
 
 <?= $assets ?>
+<link href="<?= TEMPORA_REMIXICON_CSS ?>" rel="stylesheet">
+<link href="<?= TEMPORA_INTER_FONT ?>" rel="stylesheet">
 
 <div class="tempora_chronos">
 	<?php
