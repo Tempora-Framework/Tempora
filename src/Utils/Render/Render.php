@@ -10,6 +10,14 @@ class Render {
 	public function __construct(string $buffer, array $modules = [], $pageData = []) {
 		$this->buffer = $buffer;
 
+		if (
+			defined(constant_name: "DEBUG")
+			&& DEBUG
+			&& !in_array(needle: "Content-Type: application/json", haystack: headers_list())
+		) {
+			$this->injectChronos(pageData: $pageData);
+		}
+
 		foreach ($modules as $module) {
 			if (
 				$module instanceof RenderModule
@@ -19,14 +27,6 @@ class Render {
 				$module->format();
 				$this->buffer = $module->buffer;
 			}
-		}
-
-		if (
-			defined(constant_name: "DEBUG")
-			&& DEBUG
-			&& !in_array(needle: "Content-Type: application/json", haystack: headers_list())
-		) {
-			$this->injectChronos(pageData: $pageData);
 		}
 	}
 
