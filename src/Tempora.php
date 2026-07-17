@@ -189,6 +189,7 @@ class Tempora {
 		if (isset($_COOKIE["JWT"])) {
 			$jwt = new JWT;
 			$jwtUid = $jwt->getUserUid(token: $_COOKIE["JWT"]);
+
 			if ($jwtUid) {
 				$_SESSION["user"]["uid"] = $jwtUid;
 			} else {

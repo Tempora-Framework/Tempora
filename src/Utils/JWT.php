@@ -108,6 +108,13 @@ class JWT extends FirebaseJWT {
 
 			return json_decode(json: $decoded->data, associative: true);
 		} catch (Exception $exception) {
+			(new Cookie)
+				->setName(name: "JWT")
+				->setValue(value: "")
+				->setExpire(expire: time() - 3600)
+				->send()
+			;
+
 			throw new TemporaDecodeException(message: "Failed to decode JWT: " . $exception->getMessage());
 		}
 	}
