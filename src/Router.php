@@ -178,10 +178,12 @@ class Router {
 	 */
 	public static function error(array $pageData): void {
 		if (class_exists(class: ErrorController::class)) {
-			(new ErrorController)
-				->setPageData(pageData: $pageData)
-				->render()
-			;
+			$controller = (new ErrorController)->setPageData(pageData: $pageData);
+			$controller->render();
+
+			foreach ($controller->getHeaders() as $header) {
+				header(header: $header);
+			}
 		} else {
 			echo (new Render(
 				buffer: (function (array $pageData): string {
