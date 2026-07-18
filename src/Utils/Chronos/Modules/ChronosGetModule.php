@@ -42,9 +42,12 @@ class ChronosGetModule extends ChronosModule {
 										<td>" . $key . "</td>
 										<td>" . htmlspecialchars(string: print_r(value: $value, return: true)) . "</td>
 									</tr>
-								</tbody>
 							";
 						}
+
+						$tableContent .= "
+							</tbody>
+						";
 
 						return $tableContent;
 					})()

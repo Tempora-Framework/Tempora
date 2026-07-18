@@ -44,9 +44,12 @@ class ChronosServerModule extends ChronosModule {
 										<td>" . htmlspecialchars(string: $key) . "</td>
 										<td>" . htmlspecialchars(string: print_r(value: $value, return: true)) . "</td>
 									</tr>
-								</tbody>
 							";
 						}
+
+						$tableContent .= "
+							</tbody>
+						";
 
 						return $tableContent;
 					})()

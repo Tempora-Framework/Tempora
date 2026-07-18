@@ -8,6 +8,8 @@
 	"MAIN_NAME_OBJECT": "Name",
 	"MAIN_TOTAL": "Total",
 	"MAIN_ERROR": "Error",
+	"MAIN_YES": "Yes",
+	"MAIN_NO": "No",
 
 	"ERROR_SERVER": "Internal Server Error.",
 	"ERROR_DATABASE": "Database Error.",

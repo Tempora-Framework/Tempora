@@ -70,9 +70,12 @@ class ChronosDumpModule extends ChronosModule {
 										<td class="min_col">' . $value["trace"] . '</td>
 										<td class="min_col mono">' . print_r(value: $result, return: true) . "</td>
 									</tr>
-								</tbody>
 							";
 						}
+
+						$tableContent .= "
+							</tbody>
+						";
 
 						return $tableContent;
 					})()

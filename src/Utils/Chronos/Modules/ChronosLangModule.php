@@ -55,10 +55,13 @@ class ChronosLangModule extends ChronosModule {
 											<td " . ($key === $translation["translation"] ? " class='red bold'" : "") . ">" . $key . "</td>
 											<td " . ($key === $translation["translation"] ? " class='red bold'" : "") . ">" . $translation["translation"] . "</td>
 										</tr>
-									</tbody>
 								";
 							}
 						}
+
+						$tableContent .= "
+							</tbody>
+						";
 
 						return $tableContent;
 					})()

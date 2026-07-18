@@ -42,9 +42,12 @@ class ChronosHeadersModule extends ChronosModule {
 									<tr>
 										<td>" . htmlspecialchars(string: print_r(value: $value, return: true)) . "</td>
 									</tr>
-								</tbody>
 							";
 						}
+
+						$tableContent .= "
+							</tbody>
+						";
 
 						return $tableContent;
 					})()

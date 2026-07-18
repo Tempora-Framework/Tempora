@@ -2,12 +2,10 @@
 
 namespace Tempora\Factories;
 
-use ReflectionObject;
-use Tempora\Attributes\RouteAttribute;
-use Tempora\Controllers\Controller;
 use Tempora\Router;
 use Tempora\Utils\Cache\Cache;
 use Tempora\Utils\Lang;
+use Tempora\Utils\Route;
 use Tempora\Utils\System;
 
 class RouterFactory extends Router {
@@ -19,8 +17,8 @@ class RouterFactory extends Router {
 		$cache = new Cache(file: "routes.json");
 
 		foreach ($controllers as $controller) {
-			$controller = $this->getController(controller: $controller);
-			$routeAttributes = $this->getAttributes(controller: $controller);
+			$controller = Route::getController(controller: $controller);
+			$routeAttributes = Route::getAttributes(controller: $controller);
 
 			if (count(value: $routeAttributes) > 0) {
 				$routeAttribute = $routeAttributes[0]->newInstance();
@@ -32,8 +30,8 @@ class RouterFactory extends Router {
 		$cache->create();
 
 		foreach ($controllers as $controller) {
-			$controller = $this->getController(controller: $controller);
-			$routeAttributes = $this->getAttributes(controller: $controller);
+			$controller = Route::getController(controller: $controller);
+			$routeAttributes = Route::getAttributes(controller: $controller);
 
 			if (count(value: $routeAttributes) > 0) {
 				$routeAttribute = $routeAttributes[0]->newInstance();
@@ -66,33 +64,5 @@ class RouterFactory extends Router {
 				"error_message" => $lang->translate(key: "ERROR_404")
 			]
 		);
-	}
-
-	/**
-	 * Get controller instance
-	 *
-	 * @param string $controller
-	 *
-	 * @return object
-	 */
-	private function getController(string $controller): Controller {
-		$controller = str_replace(search: APP_DIR . "/src/Controllers/", replace: "", subject: $controller);
-		$controller = str_replace(search: ".php", replace: "", subject: $controller);
-		$controller = str_replace(search: "/", replace: "\\", subject: $controller);
-
-		return new ("App\\Controllers\\" . $controller);
-	}
-
-	/**
-	 * Get controller attributes
-	 *
-	 * @param Controller $controller
-	 *
-	 * @return array
-	 */
-	private function getAttributes(Controller $controller): array {
-		$reflection = new ReflectionObject(object: $controller);
-
-		return $reflection->getMethods()[0]->getAttributes(name: RouteAttribute::class);
 	}
 }

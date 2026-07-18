@@ -71,9 +71,12 @@ class ChronosSQLModule extends ChronosModule {
 										<td class="min_col">Line ' . $value["line"] . '</td>
 										<td class="min_col">' . $value["query"] . "</td>
 									</tr>
-								</tbody>
 							";
 						}
+
+						$tableContent .= "
+							</tbody>
+						";
 
 						return $tableContent;
 					})()

@@ -46,7 +46,9 @@ class ChronosCookieModule extends ChronosModule {
 							";
 						}
 
-						$tableContent .= "</tbody>";
+						$tableContent .= "
+							</tbody>
+						";
 
 						return $tableContent;
 					})()

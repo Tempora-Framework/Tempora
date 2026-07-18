@@ -14,6 +14,7 @@ use Tempora\Utils\Chronos\Modules\ChronosServerModule;
 use Tempora\Utils\Chronos\Modules\ChronosSessionModule;
 use Tempora\Utils\Chronos\Modules\ChronosSQLModule;
 use Tempora\Utils\Chronos\Modules\ChronosTemporaModule;
+use Tempora\Utils\Chronos\Modules\ChronosURLModule;
 use Tempora\Utils\Chronos\Modules\ChronosUserModule;
 use Tempora\Utils\ElementBuilder\ElementBuilder;
 
@@ -62,6 +63,7 @@ foreach ($assetsFiles as $assetFile) {
 				new ChronosTemporaModule,
 				new ChronosMsModule,
 				new ChronosHttpCodeModule(httpCode: http_response_code()),
+				new ChronosURLModule,
 				new ChronosUserModule,
 				new ChronosSQLModule,
 				new ChronosDumpModule,
