@@ -14,11 +14,13 @@
 	--chronos-windowed-background-color: #ffffff9c;
 	--chronos-background-color: #ffffff;
 	--chronos-background-hover-color: #e1e1e1;
+	--chronos-line-background-color: #e1e1e185;
 
 	--dark-chronos-text-color: #ffffff;
 	--dark-chronos-windowed-background-color: #1f1f1f9c;
 	--dark-chronos-background-color: #1f1f1f;
 	--dark-chronos-background-hover-color: #353535;
+	--dark-chronos-line-background-color: #35353576;
 }
 
 [data-theme="dark"] {
@@ -26,6 +28,7 @@
 	--chronos-windowed-background-color: var(--dark-chronos-windowed-background-color);
 	--chronos-background-color: var(--dark-chronos-background-color);
 	--chronos-background-hover-color: var(--dark-chronos-background-hover-color);
+	--chronos-line-background-color: var(--dark-chronos-line-background-color);
 }
 
 [data-theme="system"] {
@@ -34,6 +37,7 @@
 		--chronos-windowed-background-color: var(--dark-chronos-windowed-background-color);
 		--chronos-background-color: var(--dark-chronos-background-color);
 		--chronos-background-hover-color: var(--dark-chronos-background-hover-color);
+		--chronos-line-background-color: var(--dark-chronos-line-background-color);
 	}
 }
 
@@ -134,6 +138,10 @@
 			border: solid 1px var(--chronos-table-border-color);
 			font-size: 14px;
 			padding: 5px;
+		}
+
+		tbody tr:nth-child(odd) {
+			background-color: var(--chronos-line-background-color);
 		}
 	}
 
