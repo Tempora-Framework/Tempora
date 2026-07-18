@@ -25,15 +25,12 @@ class Database {
 
 		try {
 			$this->connection = new PDO(
-				dsn:
-				"$driver:dbname=$dbname;
-					host=$hostname;
-					port=$port;
-					options=\"--client_encoding=$charset\"",
+				dsn: "$driver:dbname=$dbname;host=$hostname;port=$port;",
 				username: $username,
 				password: $password
 			);
-			$this->connection->exec(statement: "SET NAMES \"$charset\"");
+
+			$this->connection->exec(statement: "SET NAMES '$charset'");
 		} catch (Exception $exception) {
 			throw new TemporaDatabaseException(message: "Database connection error: " . $exception->getMessage());
 		}

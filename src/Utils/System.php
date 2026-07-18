@@ -85,7 +85,7 @@ class System {
 
 			if (!empty($table)) {
 				$uidChecked = ApplicationData::request(
-					query: "SELECT uid FROM `" . $table . "` WHERE uid = :uid",
+					query: "SELECT uid FROM " . $table . " WHERE uid = :uid",
 					data: [
 						"uid" => $uid
 					],
