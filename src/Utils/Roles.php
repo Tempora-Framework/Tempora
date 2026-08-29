@@ -37,4 +37,21 @@ class Roles {
 
 		return 0;
 	}
+
+	/**
+	 * Get role name by value
+	 *
+	 * @param int $role
+	 *
+	 * @return string
+	 */
+	public static function getRoleName(int $role): string {
+		foreach (Role::cases() as $case) {
+			if ($case->value === $role) {
+				return $case->name;
+			}
+		}
+
+		return "";
+	}
 }

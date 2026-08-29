@@ -2,17 +2,17 @@
 
 namespace Tempora\Utils\Chronos\Modules;
 
-use Tempora\Enums\Role;
 use Tempora\Utils\Chronos\ChronosModule;
 use Tempora\Utils\ElementBuilder\ElementBuilder;
 use Tempora\Utils\Lang;
+use Tempora\Utils\Roles;
 use Tempora\Utils\Route;
 use Tempora\Utils\System;
 
 class ChronosURLModule extends ChronosModule {
 	private Lang $lang;
 	private Lang $mainLang;
-	private array $controllers;
+	private array $controllers = [];
 
 	public function __construct() {
 		$this->id = "chronos_url";
@@ -22,8 +22,7 @@ class ChronosURLModule extends ChronosModule {
 		$this->icon = "ri-link-m";
 		$this->color = "#ce3769";
 
-		$controllers = System::getAllFiles(path: APP_DIR . "/src/Controllers");
-		foreach ($controllers as $controller) {
+		foreach (System::getAllFiles(path: APP_DIR . "/src/Controllers") as $controller) {
 			$controller = Route::getController(controller: $controller);
 			$routeAttributes = Route::getAttributes(controller: $controller);
 
@@ -31,7 +30,10 @@ class ChronosURLModule extends ChronosModule {
 				$routeAttribute = $routeAttributes[0]->newInstance();
 			}
 
-			$this->controllers[] = $routeAttribute;
+			// Check if not already present, appears sometimes
+			if (!in_array(needle: $routeAttribute, haystack: $this->controllers)) {
+				$this->controllers[] = $routeAttribute;
+			}
 		}
 	}
 
@@ -55,20 +57,29 @@ class ChronosURLModule extends ChronosModule {
 									<th>" . $this->lang->translate(key: "CHRONOS_CONTROLLER_TITLE") . "</th>
 									<th>" . $this->lang->translate(key: "CHRONOS_DESCRIPTION") . "</th>
 									<th>" . $this->lang->translate(key: "CHRONOS_NEEDLOGINTOBE") . "</th>
+									<th>" . $this->lang->translate(key: "CHRONOS_ACCESSROLES") . "</th>
 								</tr>
 							</thead>
 							<tbody>
 						";
 
 						foreach ($this->controllers as $controller) {
+							$accessRoles = $controller->accessRoles ? array_map(
+								callback: function ($role): mixed {
+									return Roles::getRoleName($role->value);
+								},
+								array: $controller->accessRoles
+							) : [];
+
 							$tableContent .= "
-								<tr style='font-weight: " . ($controller->name == $this->pageData['page_name'] ? "bold" : "normal") . ";'>
+								<tr style='font-weight: " . (array_key_exists('page_name', $this->pageData) && $controller->name == $this->pageData['page_name'] ? "bold" : "normal") . ";'>
 									<td>" . $controller->name . "</td>
 									<td>" . $controller->method . "</td>
 									<td>" . ($controller->method === "GET" ? "<a href='" . ($controller->path ? $controller->path : "/") . "' >" : "") . ($controller->path ? $controller->path : "/") . "</a></td>
 									<td>" . $controller->title . "</td>
 									<td>" . $controller->description . "</td>
 									<td>" . ($controller->needLoginToBe ?? false ? $this->mainLang->translate(key: "MAIN_YES") : $this->mainLang->translate(key: "MAIN_NO")) . "</td>
+									<td>" . implode(separator: ", ", array: $accessRoles) . "</td>
 								</tr>
 							";
 						}

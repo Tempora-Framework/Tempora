@@ -2,11 +2,11 @@
 
 namespace Tempora\Utils\Chronos\Modules;
 
-use Tempora\Enums\Role;
 use Tempora\Traits\UserTrait;
 use Tempora\Utils\Chronos\ChronosModule;
 use Tempora\Utils\ElementBuilder\ElementBuilder;
 use Tempora\Utils\Lang;
+use Tempora\Utils\Roles;
 
 class ChronosUserModule extends ChronosModule {
 	use UserTrait;
@@ -31,11 +31,7 @@ class ChronosUserModule extends ChronosModule {
 		$this->mainLang = new Lang(filePath: "main", source: TEMPORA_DIR . "/src/assets");
 
 		foreach (USER_ROLES as $role) {
-			if (Role::tryFrom(value: $role) !== null) {
-				array_push($this->roleFormat, Role::from(value: $role)->name);
-			} else {
-				array_push($this->roleFormat, $role);
-			}
+			$this->roleFormat[] = Roles::getRoleName(role: $role);
 		}
 		$this->userInfo = $this::getInformation(uid: $_SESSION["user"]["uid"]);
 
